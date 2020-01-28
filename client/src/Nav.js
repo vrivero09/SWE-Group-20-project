@@ -55,6 +55,7 @@ const Example = (props) => {
           <NavbarText>
             <ShoppingCartIcon icon="shopping_cart" size={25} />
             </NavbarText>
+          <NavbarText>Cart</NavbarText>
         </Collapse>
       </Navbar>
     </div>
