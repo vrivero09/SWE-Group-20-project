@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Nav.css';
+import ShoppingCartIcon from 'react-google-material-icons';
 import {
   Collapse,
   Navbar,
@@ -51,7 +52,9 @@ const Example = (props) => {
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
-          <NavbarText>Cart</NavbarText>
+          <NavbarText>
+            <ShoppingCartIcon icon="shopping_cart" size={25} />
+            </NavbarText>
         </Collapse>
       </Navbar>
     </div>
