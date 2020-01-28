@@ -19,6 +19,7 @@
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
+    "react-google-material-icons": "^1.0.4",
     "reactstrap": "^8.4.0"
   },
   "devDependencies": {
