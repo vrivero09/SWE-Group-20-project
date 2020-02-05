@@ -13,9 +13,12 @@
   "author": "Vanz Serret",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
     "concurrently": "^5.0.2",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mongoose": "^5.8.11",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
