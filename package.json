@@ -1,5 +1,5 @@
 {
-  "name": "reactexpress",
+  "name": "project",
   "version": "1.0.0",
   "description": "Boilerplate react and express",
   "main": "server.js",
@@ -11,7 +11,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Vanz Serret",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bootstrap": "^4.4.1",
     "concurrently": "^5.0.2",
