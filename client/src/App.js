@@ -5,18 +5,21 @@ import './Nav';
 // import Customers from './component/customers/customers';
 import Nav from './Nav';
 import Card from './card';
+import {BrowserRouter, Route} from 'react-router-dom'
+import Cart from './Cart';
 
 
 class App extends Component {
   render() {
     return(
-      <div className="App">
-      <Nav />
-      <div  className ="example">
-      {/* <Customers /> */}
-      <Card />
-      </div>   
-    </div>
+      <BrowserRouter>
+        <div className="App">
+         <Nav />
+            <Route exact path ="/" component={App} />
+            <Route path ="/Cart" component={Cart}/>
+          <Card/>
+        </div>
+    </BrowserRouter>
    );
   }
 }
