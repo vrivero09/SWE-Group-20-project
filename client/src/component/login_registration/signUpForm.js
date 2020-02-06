@@ -33,6 +33,10 @@ export const SignUpForm = (props) => {
                 <Input type="email" name="email" id="email" placeholder="name@example.com" />
             </FormGroup>
             <FormGroup>
+                <Label for="Username">Username</Label>
+                <Input type="text" name="Username" id="Username" placeholder="Enter username"/>
+            </FormGroup>
+            <FormGroup>
                 <Label for="password">Password</Label>
                 <Input type="password" name="password" id="password" placeholder="Enter password" />
             </FormGroup>
