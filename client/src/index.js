@@ -2,12 +2,12 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import './index.css';
 import App from './App';
-import Home from './component/login_registration/home.js'
+import Landing from './component/login_registration/landing'
 //import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 
 //ReactDOM.render(<App/>, document.getElementById('root'));
-ReactDOM.render(<Home/>, document.getElementById('root'));
+ReactDOM.render(<Landing/>, document.getElementById('root'));
 
 
 // If you want your app to work offline and load faster, you can change

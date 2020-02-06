@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './home.css'
+import './landing.css'
 import {
     Card, CardImg, CardImgOverlay, CardText, CardTitle,
     Row,Col,Button,
@@ -51,7 +51,7 @@ const SignUp = (props) => {
 
 };
 
-const Home = (props) =>{
+const Landing = (props) =>{
     return(
         <div>
             <Card style={{border: "none"}} className="text-center" inverse>
@@ -73,4 +73,4 @@ const Home = (props) =>{
     );
 }
 
-export default Home;
+export default Landing;
