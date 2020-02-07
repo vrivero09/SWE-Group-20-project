@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
+import Card from './card/card';
 
 class Cart extends Component {
     render() {
       return(
       <div className="Add to Cart">
-        
         <div  className ="example">
-        
-            <h1>Why does the cards show up?!?</h1>
+            <h1>Cart Page</h1>
+            <Card />
         </div>
         
       </div>
