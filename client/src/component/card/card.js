@@ -22,7 +22,7 @@ class card extends Component {
           <CardTitle>Card title</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-          <Button>Add to Cart</Button>
+          <Button href="/Cart">Add to Cart</Button>
         </CardBody>
       </Card>
       </Col>
@@ -34,7 +34,7 @@ class card extends Component {
           <CardTitle>Card title</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-          <Button>Add to Cart</Button>
+          <Button href="/Cart">Add to Cart</Button>
         </CardBody>
       </Card>
       </Col>
@@ -46,8 +46,7 @@ class card extends Component {
           <CardTitle>Card title</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-          <Button>Add to Cart</Button>
-          {/* <Button tag={} to="/cart" /> */}
+          <Button href="/Cart">Add to Cart</Button>
         </CardBody>
       </Card>
       </Col>
