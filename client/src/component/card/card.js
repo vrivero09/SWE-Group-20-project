@@ -1,4 +1,3 @@
-import './Nav.css';
 import './card.css';
 import {
   Card, CardImg, CardText, CardBody,
@@ -18,7 +17,7 @@ class card extends Component {
     <Row>
     <Col sm={3}>
       <Card className = "cardSize">
-        <CardImg top width="50%" src={HP1} alt ="HP1" />
+        <CardImg src={HP1} alt ="HP1" />
         <CardBody>
           <CardTitle>Card title</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
@@ -30,20 +29,19 @@ class card extends Component {
 
       <Col sm={3}>
       <Card>
-        <CardImg top width="10%" src={HP2} alt ="HP2" />
+        <CardImg height="50%" src={HP2} alt ="HP2" />
         <CardBody>
           <CardTitle>Card title</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
           <Button>Add to Cart</Button>
-          {/* <Button tag={local} to="/somewhere" /> */}
         </CardBody>
       </Card>
       </Col>
 
       <Col sm={3}>
       <Card>
-        <CardImg top width="10%" src={HP3} alt ="HP3" />
+        <CardImg src={HP3} alt ="HP3" />
         <CardBody>
           <CardTitle>Card title</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>

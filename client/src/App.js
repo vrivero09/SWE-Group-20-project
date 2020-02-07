@@ -1,27 +1,23 @@
-import React, {Component} from 'react';
-//import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
-import './Nav';
-// import Customers from './component/customers/customers';
-import Nav from './Nav';
-import Card from './card';
+import './component/Nav';
+import Nav from './component/Nav';
 import {BrowserRouter, Route} from 'react-router-dom'
-import Cart from './Cart';
+import Home from './component/Home';
+import Cart from './component/Cart';
 
 
-class App extends Component {
+class App extends Component{
   render() {
-    return(
-      <BrowserRouter>
-        <div className="App">
-         <Nav />
-            <Route exact path ="/" component={App} />
-            <Route path ="/Cart" component={Cart}/>
-          <Card/>
-        </div>
+  return (
+    <BrowserRouter>
+    <div className="App">
+      <Nav/>
+      <Route exact path ='/' component={Home} />
+      <Route exact path ='/Cart' component={Cart} />
+    </div>
     </BrowserRouter>
-   );
-  }
+  );
 }
-
+}
 export default App;

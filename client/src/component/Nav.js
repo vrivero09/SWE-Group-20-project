@@ -53,7 +53,7 @@ const Example = (props) => {
             </UncontrolledDropdown>
           </Nav>
           <NavbarText>
-            <NavLink href="/Cart"><ShoppingCartIcon icon="shopping_cart" size={25} /></NavLink>
+            <NavLink href ="/Cart"path="http://localhost:3000/Cart"><ShoppingCartIcon icon="shopping_cart" size={25} /></NavLink>
             </NavbarText>
           <NavbarText></NavbarText>
         </Collapse>
