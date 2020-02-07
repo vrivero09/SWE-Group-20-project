@@ -5,6 +5,7 @@ import Nav from './component/Nav';
 import {BrowserRouter, Route} from 'react-router-dom'
 import Home from './component/Home';
 import Cart from './component/Cart';
+import Product from './component/Product';
 
 
 class App extends Component{
@@ -15,6 +16,8 @@ class App extends Component{
       <Nav/>
       <Route exact path ='/' component={Home} />
       <Route exact path ='/Cart' component={Cart} />
+      <Route exact path ='/Products' component={Product} />
+      
     </div>
     </BrowserRouter>
   );

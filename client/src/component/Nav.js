@@ -29,7 +29,7 @@ const Example = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="/components/">Reviews</NavLink>
+              <NavLink href ="/Products">Products</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="https://github.com/reactstrap/reactstrap">Sign up</NavLink>
