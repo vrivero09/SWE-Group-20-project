@@ -1,5 +1,5 @@
 {
-  "name": "reactexpress",
+  "name": "project",
   "version": "1.0.0",
   "description": "Boilerplate react and express",
   "main": "server.js",
@@ -11,18 +11,16 @@
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Vanz Serret",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "bootstrap": "^4.4.1",
-    "concurrently": "^5.0.2",
-    "cors": "^2.8.5",
+    "concurrently": "^5.1.0",
+    "eslint-plugin-flowtype": "^3.13.0",
     "express": "^4.17.1",
+    "jquery": "^1.9.1",
     "mongoose": "^5.8.11",
-    "react": "^16.12.0",
-    "react-bootstrap": "^1.0.0-beta.16",
-    "react-dom": "^16.12.0",
-    "reactstrap": "^8.4.0"
+    "jsonwebtoken": "^8.4.0",
+    "cors": "^2.8.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
