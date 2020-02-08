@@ -3,14 +3,17 @@
 const express = require('express');
 const app = express();
 const jwt = require('jsonwebtoken');
-const cors = require('jsonwebtoken');
+const cors = require('cors');
 const bodyParser = require ('body-parser')
-const data = require('./data');
-const middleware = require('./middleware');
+const data = require('./client/src/api/data');
+const middleware = require('./client/src/api/middleware');
+const mongoose = require('mongoose');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
+
+const port = 5000; 
 
 app.get('/api/products', (req, res) => { //lists all  available products
     return res.json(data.products);
@@ -77,13 +80,6 @@ app.get('/api/products', (req, res) => { //lists all  available products
 //     res.json(customers);
 // });
 
-app.use(bodyParser.json());
-app.use(cors());
-app.use(
-    bodyParser.urlencoded({
-        extended: false
-    })
-);
 
 const mongoURI = 'mongodb+srv://admin:admin123@cluster0-ywzdx.mongodb.net/test?retryWrites=true&w=majority';
 
