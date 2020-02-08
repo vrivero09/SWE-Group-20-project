@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Nav.css';
+import ShoppingCartIcon from 'react-google-material-icons';
 import {
   Collapse,
   Navbar,
@@ -28,7 +29,7 @@ const Example = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="/components/">Reviews</NavLink>
+              <NavLink href ="/Products">Products</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="https://github.com/reactstrap/reactstrap">Sign up</NavLink>
@@ -51,7 +52,10 @@ const Example = (props) => {
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
-          <NavbarText>Cart</NavbarText>
+          <NavbarText>
+            <NavLink href ="/Cart"path="http://localhost:3000/Cart"><ShoppingCartIcon icon="shopping_cart" size={25} /></NavLink>
+            </NavbarText>
+          <NavbarText></NavbarText>
         </Collapse>
       </Navbar>
     </div>
