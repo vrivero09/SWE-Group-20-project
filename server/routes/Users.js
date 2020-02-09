@@ -8,15 +8,15 @@ users.use(cors());
 
 //endpont to add user to database
 users.get('/signup', (req,res) => {
-    const userData = {
-        _id: req.body.username,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.lastName,
-        nickname: req.body.nickname,
-        password: req.body.password,
-        confirmPassword: req.body.password,
-    };
+    // const userData = {
+    //     _id: req.body.username,
+    //     firstName: req.body.firstName,
+    //     lastName: req.body.lastName,
+    //     email: req.body.lastName,
+    //     nickname: req.body.nickname,
+    //     password: req.body.password,
+    //     confirmPassword: req.body.password,
+    // };
 
     res.send("Testing endpoint");
 
