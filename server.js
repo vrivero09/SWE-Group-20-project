@@ -2,6 +2,9 @@
 
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+
+const port = 5000; 
 
 // app.get('/api/customers', (_req, res) => {
 //     const customers =[
