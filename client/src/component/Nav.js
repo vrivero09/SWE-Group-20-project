@@ -23,8 +23,8 @@ const Example = (props) => {
 
   return (
     <div>
-      <Navbar className = "navbar-dark"color="dark" light expand="md">
-        <NavbarBrand color="#" href="/">Geek Text</NavbarBrand>
+      <Navbar className = "navbar navbar-dark bg-dark"color="dark" light expand="md">
+        <NavbarBrand color="#000000" href="/">Geek Text</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
