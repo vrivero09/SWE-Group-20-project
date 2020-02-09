@@ -15,12 +15,13 @@
   "dependencies": {
     "bootstrap": "^4.4.1",
     "concurrently": "^5.1.0",
+    "cors": "^2.8.5",
     "eslint-plugin-flowtype": "^3.13.0",
     "express": "^4.17.1",
     "jquery": "^3.4.1",
-    "mongoose": "^5.8.11",
     "jsonwebtoken": "^8.4.0",
-    "cors": "^2.8.5"
+    "mongoose": "^5.8.11",
+    "react-scripts": "^3.3.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
