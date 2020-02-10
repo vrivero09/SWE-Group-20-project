@@ -10,7 +10,7 @@ import signUpForm from './component/login_registration/signUpForm';
 import landing from './component/login_registration/landing';
 import LoginForm from './component/login_registration/loginForm';
 //import Forms from './component/Form';
-import { Form } from 'reactstrap';
+import Form from './component/Form';
 
 
 class App extends Component{
