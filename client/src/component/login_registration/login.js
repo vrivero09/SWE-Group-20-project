@@ -4,21 +4,6 @@ import {
     Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 
-// export const LoginForm = (props) => {
-//     return(
-//         <Form>
-//             <FormGroup>
-//                 <Label for="email">Email</Label>
-//                 <Input type="email" name="email" id="email" placeholder="name@example.com" />
-//             </FormGroup>
-//             <FormGroup>
-//                 <Label for="password">Password</Label>
-//                 <Input type="password" name="password" id="password" placeholder="Enter password" />
-//             </FormGroup>
-//         </Form>
-//     );
-// };
-
 class  Login extends Component {
     constructor(){
         super();
@@ -58,7 +43,7 @@ class  Login extends Component {
                 <Button className="w-100" size="md" onClick={()=>this.onToggle()}>Log In</Button>
                 <Form id="loginForm" onSubmit={this.onSubmit}> 
                     <Modal isOpen={this.state.toggle} toggle={()=>this.onToggle()}  centered={true}>
-                        <ModalHeader toggle={()=>this.onToggle()} cssModule={{'modal-title': 'w-100 text-center'}} >Log In</ModalHeader>
+                        <ModalHeader toggle={()=>this.onToggle()} cssModule={{'modal-title': 'w-100 text-center'}} >Login</ModalHeader>
                         <ModalBody>
                             <FormGroup>
                                 <Label for="email">Email</Label>
@@ -70,7 +55,7 @@ class  Login extends Component {
                             </FormGroup>
                         </ModalBody>
                         <ModalFooter>
-                            <Button form="loginForm" className="w-100" type="submit" color="primary">Submit</Button>
+                            <Button form="loginForm" className="w-100" type="submit" color="primary">Login</Button>
                         </ModalFooter>
                     </Modal>
                 </Form>
