@@ -9,6 +9,7 @@ import Product from './component/Product';
 import signUpForm from './component/login_registration/signUpForm';
 import landing from './component/login_registration/landing';
 import LoginForm from './component/login_registration/loginForm';
+import Form from './component/Forms';
 
 
 class App extends Component{
@@ -23,6 +24,7 @@ class App extends Component{
       <Route exact path ='/SignUp' component={signUpForm} />
       <Route exact path ='/Login' component={LoginForm} />
       <Route exact path ='/Profile' component={landing} />
+      <Route exact path ='/Ratings' component={Form} />
       
     </div>
     </BrowserRouter>
