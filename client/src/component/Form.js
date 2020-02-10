@@ -1,8 +1,8 @@
 import React from "react";
-import ReactDOM from "react-dom";
+//import ReactDOM from "react-dom";
 import StarRatingComponent from "react-star-rating-component";
 
-export default class Form extends React.Component {
+class Form extends React.Component {
   state = {
     reviewText: "",
     labelText: "",
@@ -74,3 +74,4 @@ export default class Form extends React.Component {
     );
   }
 }
+export default Form;
