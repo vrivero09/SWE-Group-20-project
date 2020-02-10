@@ -32,10 +32,7 @@ const Example = (props) => {
               <NavLink href ="/Products">Products</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/SignUp">Sign up</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/Login">Log In</NavLink>
+              <NavLink href="/Profile">Profile</NavLink>
             </NavItem>
           </Nav>
           <NavbarText>
