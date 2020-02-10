@@ -6,6 +6,8 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import Home from './component/Home';
 import Cart from './component/Cart';
 import Product from './component/Product';
+import signUpForm from './component/login_registration/signUpForm';
+import loginForm from './component/login_registration/loginForm';
 
 
 class App extends Component{
@@ -17,6 +19,8 @@ class App extends Component{
       <Route exact path ='/' component={Home} />
       <Route exact path ='/Cart' component={Cart} />
       <Route exact path ='/Products' component={Product} />
+      <Route exact path ='/SignUp' component={signUpForm} />
+      <Route exact path ='/Login' component={loginForm} />
       
     </div>
     </BrowserRouter>
