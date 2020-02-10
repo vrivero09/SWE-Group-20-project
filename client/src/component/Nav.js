@@ -29,31 +29,17 @@ const Example = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
+              <NavLink href="/Profile">Profile</NavLink>
+            </NavItem>
+            <NavItem>
               <NavLink href ="/Products">Products</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">Sign up</NavLink>
+              <NavLink href ="/Ratings">Book Rating</NavLink>
             </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Login
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
           </Nav>
           <NavbarText>
-            <NavLink href ="/Cart"path="http://localhost:3000/Cart"><ShoppingCartIcon icon="shopping_cart" size={25} /></NavLink>
+            <NavLink href ="/Cart"><ShoppingCartIcon icon="shopping_cart" size={25} /></NavLink>
             </NavbarText>
           <NavbarText></NavbarText>
         </Collapse>
