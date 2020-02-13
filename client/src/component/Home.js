@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import { Jumbotron, Button } from 'reactstrap';
-import './Home.css';
+import styles from './Home.css';
 
 
 class Home extends Component {
   render() {
     return(
-      <div>
+      <div className={styles.Component} >
+
       <Jumbotron>
         <h1 className="display-3"><b>Welcome to the Geek Text book store!</b></h1>
 
