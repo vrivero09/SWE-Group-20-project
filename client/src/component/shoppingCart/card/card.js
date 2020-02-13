@@ -13,9 +13,9 @@ import React, {Component} from 'react';
 class card extends Component {
   render(){
   return (
-    <div>
+    <div >
     <Container>
-    <Row>
+    <Row >
     <Col sm={3}>
       <Card className = "cardSize">
         <CardImg src={HP1} alt ="HP1" />
@@ -23,7 +23,7 @@ class card extends Component {
           <CardTitle>Card title</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-          <Button href="/Cart">Add to Cart</Button>
+          <Button outline color = "info" href="/Cart"><b>Add to Cart</b></Button>
         </CardBody>
       </Card>
       </Col>
@@ -35,7 +35,7 @@ class card extends Component {
           <CardTitle>Card title</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-          <Button href="/Cart">Add to Cart</Button>
+          <Button outline color = "info" href="/Cart"><b>Add to Cart</b></Button>
         </CardBody>
       </Card>
       </Col>
@@ -47,7 +47,7 @@ class card extends Component {
           <CardTitle>Card title</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-          <Button href="/Cart">Add to Cart</Button>
+          <Button outline color = "info" href="/Cart"><b>Add to Cart</b></Button>
         </CardBody>
       </Card>
       </Col>
@@ -59,7 +59,7 @@ class card extends Component {
           <CardTitle>Card title</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-          <Button href="/Cart">Add to Cart</Button>
+          <Button outline color = "info" href="/Cart"><b>Add to Cart</b></Button>
         </CardBody>
       </Card>
       </Col>
