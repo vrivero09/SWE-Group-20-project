@@ -5,11 +5,12 @@ import Nav from './component/Nav';
 import {BrowserRouter, Route} from 'react-router-dom'
 import Home from './component/Home';
 import Cart from './component/Cart';
-import Product from './component/Product';
 import signUpForm from './component/login_registration/signUpForm';
 import landing from './component/login_registration/landing';
 import LoginForm from './component/login_registration/loginForm';
 import Form from './component/Form';
+import Product from './component/shoppingCart/Product';
+
 
 
 class App extends Component{
