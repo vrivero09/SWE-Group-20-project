@@ -5,10 +5,11 @@ import React, {Component} from 'react';
 import Card from './card/card';
 
 class Product extends Component {
+
   render() {
   return(
-    <Card />
-       );
+      <Card />
+    );
     };
 }
 export default Product;

@@ -9,7 +9,8 @@ import signUpForm from './component/login_registration/signUpForm';
 import landing from './component/login_registration/landing';
 import LoginForm from './component/login_registration/loginForm';
 import Form from './component/Form';
-import Product from './component/shoppingCart/Product';
+// import Product from './component/shoppingCart/Product';
+import productItem from './component/shoppingCart/productItem';
 
 
 
@@ -21,7 +22,7 @@ class App extends Component{
       <Nav/>
       <Route exact path ='/' component={Home} />
       <Route exact path ='/Cart' component={Cart} />
-      <Route exact path ='/Products' component={Product} />
+      <Route exact path ='/Products' component={productItem} />
       <Route exact path ='/SignUp' component={signUpForm} />
       <Route exact path ='/Login' component={LoginForm} />
       <Route exact path ='/Profile' component={landing} />
