@@ -1,14 +1,14 @@
 import './card.css';
 import {
-  Card, CardImg, CardText, CardBody,
+  Card, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Row, Col, Container
 } from 'reactstrap';
 import HP1 from './photos/HP1.jpg';
-import HP2 from './photos/HP2.jpg';
-import HP3 from './photos/HP3.jpg';
-import SW1 from './photos/SW1.jpg';
+import HP22 from './photos/HP22.jpg';
+import HP33 from './photos/HP33.jpg';
+import SW11 from './photos/SW11.jpg';
 import React, {Component} from 'react';
-
+import CardImg from 'react-bootstrap/Image'
 
 class card extends Component {
   render(){
@@ -17,8 +17,8 @@ class card extends Component {
     <Container>
     <Row >
     <Col sm={3}>
-      <Card className = "cardSize">
-        <CardImg src={HP1} alt ="HP1" />
+      <Card>
+        <CardImg src={HP1} alt ="HP1" fluid/>
         <CardBody>
           <CardTitle>Card title</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
@@ -30,7 +30,20 @@ class card extends Component {
 
       <Col sm={3}>
       <Card>
-        <CardImg height="50%" src={HP2} alt ="HP2" />
+        <CardImg src={HP22} alt ="HP2" fluid />
+        <CardBody>
+          <CardTitle>Card title</CardTitle>
+          <CardSubtitle>Card subtitle</CardSubtitle>
+          <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+          <p></p>
+          <Button outline color = "info" href="/Cart"><b>Add to Cart</b></Button>
+        </CardBody>
+      </Card>
+      </Col>
+
+      <Col sm={3}>
+      <Card>
+        <CardImg src={HP33} alt ="HP33" fluid/>
         <CardBody>
           <CardTitle>Card title</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
@@ -40,21 +53,9 @@ class card extends Component {
       </Card>
       </Col>
 
-      <Col sm={3}>
+      <Col sm={3}>      
       <Card>
-        <CardImg src={HP3} alt ="HP3" />
-        <CardBody>
-          <CardTitle>Card title</CardTitle>
-          <CardSubtitle>Card subtitle</CardSubtitle>
-          <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-          <Button outline color = "info" href="/Cart"><b>Add to Cart</b></Button>
-        </CardBody>
-      </Card>
-      </Col>
-
-      <Col sm={3}>
-      <Card>
-        <CardImg src={SW1} alt ="Star Wars" />
+        <CardImg src={SW11} alt ="Star Wars" fluid/>
         <CardBody>
           <CardTitle>Card title</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
