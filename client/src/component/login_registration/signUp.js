@@ -3,6 +3,7 @@ import {
     Row, Col, Form, FormGroup, Label, Input,Button,
     Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
+import axios from 'axios';
 
 class  SignUp extends Component {
     constructor(){
@@ -26,7 +27,7 @@ class  SignUp extends Component {
         this.setState({[e.target.name] : e.target.value});
     }
 
-    onToggle(){
+    toggleModal(){
         const opposite = !this.state.toggle;
         this.setState({toggle:opposite});
     }
@@ -34,7 +35,7 @@ class  SignUp extends Component {
     onSubmit(e){
         e.preventDefault();
 
-        const User = {
+        const newUser = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             nickname: this.state.nickname,
@@ -44,16 +45,31 @@ class  SignUp extends Component {
             confirmPass: this.state.confirmPass,
         }
 
-        console.log(User);
+        console.log(newUser);
+
+        this.register(newUser).then(res=>{
+            this.toggleModal();
+        });
+    }
+
+    register(newUser){
+        return axios.post('users/signup',{
+            firstName: newUser.firstName,
+            lastName: newUser.lastName,
+            nickname: newUser.nickname,
+            email: newUser.email,
+            username : newUser.username,
+            password: newUser.password,
+        });
     }
 
     render(){
         return(
             <div>
-                <Button className="w-100" color="info" size="md" onClick={()=>this.onToggle()}>Sign Up</Button>
+                <Button className="w-100" color="info" size="md" onClick={()=>this.toggleModal()}>Sign Up</Button>
                 <Form id="signForm" onSubmit={this.onSubmit}> 
-                    <Modal isOpen={this.state.toggle} toggle={()=>this.onToggle()}  centered={true} scrollable={true} size="lg">
-                        <ModalHeader toggle={()=>this.onToggle()} cssModule={{'modal-title': 'w-100 text-center'}} >Sign Up</ModalHeader>
+                    <Modal isOpen={this.state.toggle} toggle={()=>this.toggleModal()}  centered={true} scrollable={true} size="lg">
+                        <ModalHeader toggle={()=>this.toggleModal()} cssModule={{'modal-title': 'w-100 text-center'}} >Sign Up</ModalHeader>
                         <ModalBody className="m-3">
                             <p className="text-center">Welcome to GeekText! Please enter the information below and click submit to sign up.</p>
                             <FormGroup>
@@ -94,7 +110,6 @@ class  SignUp extends Component {
                                 <Label for="confirmPass">Confirm Password</Label>
                                 <Input type="password" name="confirmPass" id="confirmPass" value={this.state.confirmPass} onChange={this.onChange} placeholder="Enter password" />
                             </FormGroup>
-                                {/* <Button className="w-100" type="submit" color="info">Submit</Button> */}
                         </ModalBody>
                         <ModalFooter>
                             <Button form="signForm" className="w-100" type="submit" color="info">Submit</Button>
