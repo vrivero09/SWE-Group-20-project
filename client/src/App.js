@@ -10,13 +10,14 @@ import landing from './component/login_registration/landing';
 import LoginForm from './component/login_registration/loginForm';
 import Form from './component/Form';
 import Product from './component/shoppingCart/Product';
-//import productItem from './component/shoppingCart/productItem';
+import productItem from './component/shoppingCart/productItem';
 
 
 
 class App extends Component{
   render() {
   return (
+    
     <BrowserRouter>
     <div className="App">
       <Nav/>
@@ -27,6 +28,7 @@ class App extends Component{
       <Route exact path ='/Login' component={LoginForm} />
       <Route exact path ='/Profile' component={landing} />
       <Route exact path ='/Ratings' component={Form} />
+      
       
     </div>
     </BrowserRouter>

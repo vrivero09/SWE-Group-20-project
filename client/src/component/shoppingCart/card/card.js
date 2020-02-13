@@ -21,7 +21,7 @@ class card extends Component {
         <CardImg src={HP1} alt ="HP1" fluid/>
         <CardBody>
           <CardTitle>Card title</CardTitle>
-          <CardSubtitle>Card subtitle</CardSubtitle>
+          <CardSubtitle><b>$20.00</b></CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
           <Button outline color = "info" href="/Cart"><b>Add to Cart</b></Button>
         </CardBody>
@@ -33,7 +33,7 @@ class card extends Component {
         <CardImg src={HP22} alt ="HP2" fluid />
         <CardBody>
           <CardTitle>Card title</CardTitle>
-          <CardSubtitle>Card subtitle</CardSubtitle>
+          <CardSubtitle><b>$20.00</b></CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
           <p></p>
           <Button outline color = "info" href="/Cart"><b>Add to Cart</b></Button>
@@ -46,7 +46,7 @@ class card extends Component {
         <CardImg src={HP33} alt ="HP33" fluid/>
         <CardBody>
           <CardTitle>Card title</CardTitle>
-          <CardSubtitle>Card subtitle</CardSubtitle>
+          <CardSubtitle><b>$20.00</b></CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
           <Button outline color = "info" href="/Cart"><b>Add to Cart</b></Button>
         </CardBody>
@@ -58,7 +58,7 @@ class card extends Component {
         <CardImg src={SW11} alt ="Star Wars" fluid/>
         <CardBody>
           <CardTitle>Card title</CardTitle>
-          <CardSubtitle>Card subtitle</CardSubtitle>
+          <CardSubtitle><b>$20.00</b></CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
           <Button outline color = "info" href="/Cart"><b>Add to Cart</b></Button>
         </CardBody>
