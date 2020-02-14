@@ -4,7 +4,8 @@ import './component/Nav';
 import Nav from './component/Nav';
 import {BrowserRouter, Route} from 'react-router-dom'
 import Home from './component/Home';
-import Cart from './component/Cart';
+import Cart from './component/shoppingCart/Cart';
+import card from './component/shoppingCart/card/card';
 import signUpForm from './component/login_registration/signUpForm';
 import landing from './component/login_registration/landing';
 import LoginForm from './component/login_registration/loginForm';
@@ -23,7 +24,7 @@ class App extends Component{
       <Nav/>
       <Route exact path ='/' component={Home} />
       <Route exact path ='/Cart' component={Cart} />
-      <Route exact path ='/Products' component={Product} />
+      <Route exact path ='/Products' component={card} />
       <Route exact path ='/SignUp' component={signUpForm} />
       <Route exact path ='/Login' component={LoginForm} />
       <Route exact path ='/Profile' component={landing} />
