@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import 'bootstrap/dist/css/bootstrap.css';
 import cartReducer from './component/shoppingCart/reducer/cartReducer';
+
 const store = createStore(cartReducer);
 
 //import Landing from './component/login_registration/landing'
