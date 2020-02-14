@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import { addToCart } from '../actions/action-types/cart-actions'
+import { addToCart } from './cartActions';
 
 
 class Product extends Component {
