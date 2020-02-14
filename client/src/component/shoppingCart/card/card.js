@@ -3,10 +3,10 @@ import {
   Card, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Row, Col, Container
 } from 'reactstrap';
-import HP1 from './photos/HP1.jpg';
-import HP22 from './photos/HP22.jpg';
-import HP33 from './photos/HP33.jpg';
-import SW11 from './photos/SW11.jpg';
+import HP1 from './component/shoppingCart/photos/HP1.jpg';
+import HP22 from './component/shoppingCart/photos/HP22.jpg';
+import HP33 from './component/shoppingCart/photos/HP33.jpg';
+import SW11 from './component/shoppingCart/photos/SW1.jpg';
 import React, {Component} from 'react';
 import CardImg from 'react-bootstrap/Image'
 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 
 class Product extends Component {
 
@@ -22,7 +22,7 @@ class Product extends Component {
   })
   return(
           <div className="container">
-            <h3 className="center">Our items</h3>
+            <h3 className="center">Our products</h3>
               <div className="box">
                   {itemList}
               </div>
