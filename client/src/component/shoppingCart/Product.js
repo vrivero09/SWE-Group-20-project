@@ -1,18 +1,41 @@
-import HP1 from './card/photos/HP1.jpg';
-// import HP2 from './card/photos/HP2.jpg';
-// import HP3 from './card/photos/HP3.jpg';
 import React, {Component} from 'react';
-import Card from './card/card';
+import { connect } from 'react-redux';
 
 class Product extends Component {
 
   render() {
+    let itemList = this.props.items.map(item=>{
+      return(
+          <div className="card" key={item.id}>
+                  <div className="card-image">
+                      <img src={item.img} alt={item.title}/>
+                      <span className="card-title">{item.title}</span>
+                      <span to="/" className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">add</i></span>
+                  </div>
+
+                  <div className="card-content">
+                      <p>{item.desc}</p>
+                      <p><b>Price: ${item.price}</b></p>
+                  </div>
+           </div>
+      )
+  })
   return(
-      <Card />
-    );
-    };
+          <div className="container">
+            <h3 className="center">Our items</h3>
+              <div className="box">
+                  {itemList}
+              </div>
+          </div>    
+        );
+  }
 }
-export default Product;
+const mapStateToProps = (state)=>{
+  return {
+      items: state.items
+       }
+  }
+export default connect(mapStateToProps)(Product);
 
 
 
