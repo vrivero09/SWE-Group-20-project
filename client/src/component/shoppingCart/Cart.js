@@ -21,7 +21,7 @@ class Cart extends Component{
                                         <p>{item.desc}</p>
                                         <p><b>Price: {item.price}$</b></p> 
                                         <p>
-                                            <b>Quantity: {item.quantity}</b> 
+                                        <b>Quantity: {item.quantity}</b> 
                                         </p>
                                         <div className="add-remove">
                                             <Link to="/cart"><i className="material-icons">arrow_drop_up</i></Link>
