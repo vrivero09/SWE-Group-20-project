@@ -6,9 +6,9 @@ import Landing from './component/login_registration/landing'
 //import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 
-//ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
 
-ReactDOM.render(<Landing />, document.getElementById('root'));
+//ReactDOM.render(<Landing />, document.getElementById('root'));
 
 
 
