@@ -39,12 +39,12 @@ const mapStateToProps = (state)=>{
       items: state.items
        }
   }
-  const mapDispatchToProps= (dispatch)=>{
+//   const mapDispatchToProps= (dispatch)=>{
     
-    return{
-        addToCart: (id)=>{dispatch(addToCart(id))}
-    }
-}
+//     return{
+//         addToCart: (id)=>{dispatch(addToCart(id))}
+//     }
+// }
 export default connect(mapStateToProps)(Product);
 
 
