@@ -8,7 +8,6 @@ import Cart from './component/Cart';
 import Product from './component/Product';
 import landing from './component/login_registration/landing';
 import Form from './component/Form';
-//import { Form } from 'reactstrap';
 
 
 class App extends Component{
