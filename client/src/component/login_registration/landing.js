@@ -22,7 +22,7 @@ const Landing = (props) =>{
                             <SignUp/>
                         </Col>
                         <Col  sm='6'>
-                            <Login/>
+                            <Login logIn={props.logIn}/>
                         </Col>
                     </Row>
                 </CardImgOverlay>

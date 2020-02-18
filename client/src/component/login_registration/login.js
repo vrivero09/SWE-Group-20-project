@@ -3,6 +3,8 @@ import {
     Form, FormGroup, Label, Input,Button,
     Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
+import axios from 'axios';
+import {Redirect} from 'react-router-dom'
 
 class  Login extends Component {
     constructor(){
@@ -11,6 +13,7 @@ class  Login extends Component {
             username: '',
             password: '',
             toggle: false,
+            toHome:false
         };
 
         this.onChange = this.onChange.bind(this);
@@ -29,15 +32,39 @@ class  Login extends Component {
     onSubmit(e){
         e.preventDefault();
 
-        const User = {
+        const user = {
             username : this.state.username,
             password: this.state.password,
         }
 
-        console.log(User);
+        this.login(user).then(res=>{
+            if(res){
+                this.props.logIn();
+                this.setState({toHome:true});
+            }
+        });
+
+        console.log(user);
+    }
+
+    login(user){
+        return axios.post('users/login',{
+            username: this.state.username,
+            password : this.state.password
+        })
+        .then(res=>{
+            localStorage.setItem('userToken',res.data);
+            return res.data
+        })
+        .catch(err=>{
+            console.log(err);
+        });
     }
 
     render(){
+        if(this.state.toHome === true){
+            return <Redirect to='/home' />
+        }
         return(
             <div>
                 <Button className="w-100" size="md" onClick={()=>this.onToggle()}>Log In</Button>
@@ -46,12 +73,12 @@ class  Login extends Component {
                         <ModalHeader toggle={()=>this.onToggle()} cssModule={{'modal-title': 'w-100 text-center'}} >Login</ModalHeader>
                         <ModalBody>
                             <FormGroup>
-                                <Label for="email">Email</Label>
-                                <Input type="email" name="email" id="email" placeholder="name@example.com" />
+                                <Label for="username">Username</Label>
+                                <Input type="text" name="username" id="username" placeholder="username" value={this.state.username} onChange={this.onChange} />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="password">Password</Label>
-                                <Input type="password" name="password" id="password" placeholder="Enter password" />
+                                <Input type="password" name="password" id="password" placeholder="Enter password" value={this.state.password} onChange={this.onChange}/>
                             </FormGroup>
                         </ModalBody>
                         <ModalFooter>
