@@ -13,16 +13,6 @@ app.use(
     })
 );
 
-// app.get('/api/customers', (_req, res) => {
-//     const customers =[
-//         {id:1, firstName: 'Juan', lastName: 'Serret'},
-//         {id:2, firstName: 'Vanessa', lastName: 'Serret'},
-//         {id:3, firstName: 'Sarah', lastName: 'Whiddon'}
-//     ];
-//     res.json(customers);
-// });
-
-
 const mongoURI = 'mongodb+srv://admin:admin123@cluster0-ywzdx.mongodb.net/test?retryWrites=true&w=majority';
 
 mongoose.connect(mongoURI, {useUnifiedTopology: true, useNewUrlParser: true})
