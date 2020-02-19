@@ -22,8 +22,9 @@ class Navigation extends Component{
     super(props);
     this.state = {
       toggle:false,
-      toLanding:false,
-    };
+    };  
+    this.signedIn = this.props.isAuth; 
+    this.toLanding = false;
   }
 
   onToggle(){
@@ -33,16 +34,31 @@ class Navigation extends Component{
 
   logout(){
     localStorage.removeItem("userToken");
-    this.setState({toLanding:true});
-    //this.props.logOut();
+    this.toLanding = true;
+    this.signedIn = false;
+    this.props.logOut();
   }
 
   render(){
-    if(this.state.toLanding === true){
-      console.log("here");
+
+    //check if signed in
+    if(this.props.isAuth){
+      this.signedIn = true;
+    }
+
+    //if signed out
+    if(!this.signedIn && this.toLanding === true){
+      this.toLanding = false;
       return <Redirect to='/' />
     }
+
+    //if logged out and on landing page already, dont show the navigation
+    if(!this.signedIn){
+      return null;
+    }
+
     return (
+      
       <div>
         <Navbar className = "navbar navbar-dark bg-dark"color="dark" light expand="md">
           <NavbarBrand color="#000000" href="/">Geek Text</NavbarBrand>

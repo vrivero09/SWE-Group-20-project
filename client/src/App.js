@@ -16,9 +16,12 @@ class App extends Component{
     this.state={
       isAuthenticated : localStorage.getItem("userToken") ? true : false
     }
+    this.logIn = this.logIn.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   logIn(){
+    console.log("login");
     this.setState({isAuthenticated:true});
   }
 
@@ -31,11 +34,11 @@ class App extends Component{
   return (
     <BrowserRouter>
     <div className="App">
-      {this.state.isAuthenticated ? <Navigation logOut={()=>this.logOut()}/> : <div></div>}
-      <Route exact path ='/home' component={Home} />
+      <Navigation logOut={this.logOut} isAuth={this.state.isAuthenticated}/>
+      <Route exact path ='/' render={(props) => <Landing {...props} logIn={this.logIn} />}/>
+      <Route path ='/home' component={Home} />
       <Route path ='/Cart' component={Cart} />
       <Route path ='/Products' component={Product} />
-      <Route exact path ='/' render={(props) => <Landing {...props} logIn={()=>this.logIn()} />}/>
       <Route path ='/Ratings' component={Form} />
       
     </div>
