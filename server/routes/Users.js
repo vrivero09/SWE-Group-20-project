@@ -4,6 +4,10 @@ const users = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
+/*
+  see https://mongoosejs.com/docs/models.html for querying, deleting, and updating documents
+*/
+
 //get user model
 const User = require("../models/User");
 users.use(cors());
@@ -14,6 +18,8 @@ SECRET_KEY = "MySecret";
 //endpont to add user to database
 users.post('/signup', (req,res) => {
     //must validate confirm password! TODO
+
+    //store information from request body that will be used to create a new user
     const userData = {
         _id: req.body.username,
         firstName: req.body.firstName,
@@ -27,8 +33,10 @@ users.post('/signup', (req,res) => {
     User.findOne({
         _id: req.body.username
     }).then(user => {
-        //new user
+        //.then is a callback function that lets you do something with the result of the query
+        //in this case, the result is stored in user variable
         if(!user){
+            //if no user exists with that username, then create a new user
             bcrypt.hash(req.body.password, 10,(err,hash)=>{
                 //make user password in db the hashed version
                 userData.password = hash;
@@ -50,6 +58,8 @@ users.post('/signup', (req,res) => {
     });
 });
 
+
+//Endpoint to login user
 users.post('/login', (req,res)=>{
     User.findOne({
         _id : req.body.username
@@ -81,21 +91,21 @@ users.post('/login', (req,res)=>{
     });
 });
 
-users.get("/profile",(req,res)=> {
-    var decoded = jwt.verify(req.headers['authorization'], SECRET_KEY);
-    User.findOne({
-        _id:decoded._id
-    })
-    .then(user => {
-        if(user){
-            res.json(user);
-        }else{
-            res.send("User does not exist");
-        }
-    })
-    .catch(err=>{
-        res.send("error: "+ err);
-    });
-});
+// users.get("/profile",(req,res)=> {
+//     var decoded = jwt.verify(req.headers['authorization'], SECRET_KEY);
+//     User.findOne({
+//         _id:decoded._id
+//     })
+//     .then(user => {
+//         if(user){
+//             res.json(user);
+//         }else{
+//             res.send("User does not exist");
+//         }
+//     })
+//     .catch(err=>{
+//         res.send("error: "+ err);
+//     });
+// });
 
 module.exports = users;

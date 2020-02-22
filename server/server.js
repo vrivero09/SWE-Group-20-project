@@ -24,6 +24,8 @@ connection.once("open", function() {
   console.log("MongoDB database conncetion established successfully");
 });
 
+//these two lines means that your book routes that are defined in /routes/Books.js can be used 
+//by prepending /book to the route. For example localhost:5000/book/addreviews
 var Books = require("./routes/Books");
 app.use("/book", Books);
 
