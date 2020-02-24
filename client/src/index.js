@@ -5,7 +5,10 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import cartReducer from './component/shoppingCart/reducer/cartReducer';
+
+
 
 const store = createStore(cartReducer);
 
