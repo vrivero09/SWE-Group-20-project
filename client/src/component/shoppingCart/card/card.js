@@ -59,7 +59,7 @@ const mapDispatchToProps= (dispatch)=>{
 addToCart: (id)=>{dispatch(addToCart(id))}
  }
  }
-export default connect(mapStateToProps)(card);
+export default connect(mapStateToProps, mapDispatchToProps)(card);
 
 
 
