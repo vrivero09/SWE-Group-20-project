@@ -1,5 +1,7 @@
 .container{
-    margin: 100px;
-    align-items: center;
+    margin: 40px;
     
+}
+.Card{
+    block-size: small;
 }

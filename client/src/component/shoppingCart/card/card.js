@@ -1,7 +1,8 @@
 import './card.css';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {
   Card, CardText, CardBody,
-  CardTitle, CardSubtitle, Row, Col, Container
+  CardTitle, CardSubtitle, Row, Col, Container, Button
 } from 'reactstrap';
 // import HP1 from './component/shoppingCart/photos/HP1.jpg';
 // import HP22 from './component/shoppingCart/photos/HP22.jpg';
@@ -15,23 +16,22 @@ import CardImg from 'react-bootstrap/Image'
 class card extends Component {
   handleClick = (id)=>{
     this.props.addToCart(id);
+
   }
   render(){
     let itemList = this.props.items.map(item=>{
       return(
       <div>
-      <Container>
-        <Row>
-        <Card sm={3}>
+      <Container >
+      <Card className="cardContainer" style={{width:"30%", height:"60%"}}>
           <CardImg src={item.img} alt={item.title} fluid/>
           <CardBody>
             <CardTitle>Card title</CardTitle>
             <CardSubtitle>{item.title}</CardSubtitle>
             <CardText><b>Price: ${item.price}</b></CardText>
-            <span to="/" className="btn-floating halfway-fab waves-effect waves-light red" onClick={()=>{this.handleClick(item.id)}}><i className="material-icons">add to cart</i></span>
+              <Button onClick={()=>{this.handleClick(item.id)}}><AddShoppingCartIcon/></Button>
           </CardBody>
         </Card>
-        </Row>
         </Container>
         </div>
       )
