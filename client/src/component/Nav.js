@@ -9,10 +9,6 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   NavbarText
 } from 'reactstrap';
 import { Redirect} from 'react-router-dom'
@@ -61,7 +57,7 @@ class Navigation extends Component{
       
       <div>
         <Navbar className = "navbar navbar-dark bg-dark"color="dark" light expand="md">
-          <NavbarBrand color="#000000" href="/">Geek Text</NavbarBrand>
+          <NavbarBrand color="#000000" href="/Home">Geek Text</NavbarBrand>
           <NavbarToggler onClick={()=>this.onToggle()} />
           <Collapse isOpen={this.state.toggle} navbar>
             <Nav className="mr-auto" navbar>

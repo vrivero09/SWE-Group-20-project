@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './component/Nav';
 import Navigation from './component/Nav';
-import {BrowserRouter, Route, Redirect} from 'react-router-dom'
+import {BrowserRouter, Route} from 'react-router-dom'
 import Home from './component/Home';
 import Cart from './component/Cart';
 import Product from './component/Product';
@@ -36,7 +36,7 @@ class App extends Component{
     <div className="App">
       <Navigation logOut={this.logOut} isAuth={this.state.isAuthenticated}/>
       <Route exact path ='/' render={(props) => <Landing {...props} logIn={this.logIn} />}/>
-      <Route path ='/home' component={Home} />
+      <Route path ='/Home' component={Home} />
       <Route path ='/Cart' component={Cart} />
       <Route path ='/Products' component={Product} />
       <Route path ='/Ratings' component={Form} />

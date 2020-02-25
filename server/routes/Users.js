@@ -43,7 +43,16 @@ users.post('/signup', (req,res) => {
                 //create user using userData from request
                 User.create(userData)
                 .then(user => {
-                    res.json({status: user._id + " registered"});
+                    const payload = {
+                        _id : user._id
+                    };
+    
+                    //create a token for user session
+                    let token = jwt.sign(payload, SECRET_KEY, {
+                        expiresIn: 1440
+                    });
+    
+                    res.json({token: token});
                 })
                 .catch(err=>{
                     res.send("error: "+err);
@@ -51,7 +60,7 @@ users.post('/signup', (req,res) => {
             });            
         }else{
             //user already exists
-            res.json({error: 'User already exists'});
+            res.json({username_error: 'Username already exists'});
         }
     }).catch(err => {
         res.send('error: ' + err); 
@@ -77,13 +86,13 @@ users.post('/login', (req,res)=>{
                     expiresIn: 1440
                 });
 
-                res.send(token);
+                res.json({token: token});
             }else{
                 //no password match
-                res.json({error: 'User does not exist'});
+                res.json({password_error: 'Password incorrect'});
             }
         }else{
-            res.json({error: 'User does not exist'});
+            res.json({"username_error": 'Username does not exist'});
         }
     })
     .catch(err=>{
