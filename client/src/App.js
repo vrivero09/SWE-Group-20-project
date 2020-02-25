@@ -13,7 +13,7 @@ import Form from './component/Form';
 //import Product from './component/shoppingCart/Product';
 import card from './component/shoppingCart/card/card';
 //import productItem from './component/shoppingCart/productItem';
-
+import Checkout from './component/shoppingCart/checkOut'
 
 
 class App extends Component{
@@ -24,7 +24,7 @@ class App extends Component{
     <div className="App">
       <Nav/>
       <Route exact path ='/' component={Home} />
-      <Route exact path ='/Cart' component={Cart} />
+      <Route exact path ='/Cart' component={Checkout} />
       <Route exact path ='/Products' component={card} />
       <Route exact path ='/SignUp' component={signUpForm} />
       <Route exact path ='/Login' component={LoginForm} />
