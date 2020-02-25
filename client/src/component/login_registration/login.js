@@ -15,10 +15,12 @@ class  Login extends Component {
             toggle: false,
             toHome:false,
             valid:{
+                //valid state of each field
                 username: true,
                 password: true,
             },
             errors:{
+                //error message for invalid fields
                 username: "",
                 password: ""
             }
@@ -28,20 +30,8 @@ class  Login extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    // validateEmail(e) {
-    //     const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    //     const { validate } = this.state
-    //       if (emailRex.test(e.target.value)) {
-    //         validate.emailState = 'has-success'
-    //       } else {
-    //         validate.emailState = 'has-danger'
-    //       }
-    //       this.setState({ validate })
-    // }
-
     onChange(e){
         this.setState({[e.target.name] : e.target.value});
-        console.log(this.state);
     }
 
     onToggle(){
@@ -49,26 +39,9 @@ class  Login extends Component {
         this.setState({toggle:opposite});
     }
 
-    onSubmit(e){
-        e.preventDefault();
-
-        const user = {
-            username : this.state.username,
-            password: this.state.password,
-        }
-
-        const validStatus = {
-            username: true,
-            password: true,
-        }
-
-        const errors = {
-            username : "",
-            password: ""
-        }
-
-        let validForm = true;
-
+     //validate form before submit: all fields must be nonempty, check email format, check match passwords
+    validateForm(user,validStatus,errors){
+        var validForm = true;
         if(user.username === ""){
             validForm = false;
             validStatus.username = false;
@@ -81,13 +54,56 @@ class  Login extends Component {
             errors.password = "This field is required";
         }
 
+        return validForm;
+    }
+
+    onSubmit(e){
+        e.preventDefault();
+
+        //user object with input from user
+        const user = {
+            username : this.state.username,
+            password: this.state.password,
+        }
+
+        //default valid status for each input
+        const validStatus = {
+            username: true,
+            password: true,
+        }
+
+        //errors for each input
+        const errors = {
+            username : "",
+            password: ""
+        }
+
+        //check if form is valid before submit, get any invalid inputs and error messages
+        let validForm = this.validateForm(user,validStatus,errors);
         if(!validForm){
             this.setState({valid:validStatus, errors: errors});
             return;
         }
 
         this.login(user).then(res=>{
-            if(res){
+            //check for errors from the server like no user exists or incorrect password
+            if(res.username_error){
+                validForm = false;
+                validStatus.username = false;
+                errors.username = res.username_error;
+                this.setState({valid:validStatus, errors: errors});
+                return;
+            }
+
+            if(res.password_error){
+                validForm = false;
+                validStatus.password = false;
+                errors.password = res.password_error;
+                this.setState({valid:validStatus, errors: errors});
+                return;
+            }
+
+            if(res.token){
                 this.props.logIn();
                 this.setState({toHome:true});
             }
@@ -102,8 +118,7 @@ class  Login extends Component {
             password : this.state.password
         })
         .then(res=>{
-            console.log(res);
-            localStorage.setItem('userToken',res.data);
+            localStorage.setItem('userToken',res.data.token);
             return res.data
         })
         .catch(err=>{
@@ -113,7 +128,7 @@ class  Login extends Component {
 
     render(){
         if(this.state.toHome === true){
-            return <Redirect to='/home' />
+            return <Redirect to='/Home' />
         }
         return(
             <div>
