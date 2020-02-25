@@ -1,49 +1,54 @@
-import React from 'react';
-    import { isAuthenticated, getCartProducts, pay } from '../../repository';
-    import {  Redirect, Link } from 'react-router-dom';
-    
-    export default class Checkout extends React.Component {
-      constructor(props) {
-      super(props);
-        this.state = { products: [], total: 0 }
-      }
-    
-      componentDidMount() {
-        let cart = localStorage.getItem('cart');
-        if (!cart) return; 
-        getCartProducts(cart).then((products) => {
-          let total = 0;
-          for (var i = 0; i < products.length; i++) {
-            total += products[i].price * products[i].qty;
-          }
-          this.setState({ products, total });
-        });
-      }
-    
-      pay = () => pay().then(data => alert(data)).catch(err => console.log(err))
-    
-      render() {
-        if (!isAuthenticated()) return (<Redirect to="/login" />);
-        const { products, total } =  this.state;
-        return (
-        <div className=" container">
-          <h3 className="card-title">Checkout</h3><hr/>
-          { products.map((product, index) => 
-              <div key={index}>
-              <p>{product.name} <small> (quantity: {product.qty})</small>
-                 <span className="float-right text-primary">${product.qty * product.price}
-              </span></p><hr/>
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+//import { addShipping } from './actions/cartActions'
+
+  class Checkout extends React.Component {
+    componentWillUnmount() {
+      if(this.refs.shipping.checked)
+          this.props.substractShipping()
+}
+handleChecked = (e)=>{
+  if(e.target.checked){
+      this.props.addShipping();
+  }
+  else{
+      this.props.substractShipping();
+  }
+}
+
+render(){
+  
+  return(
+      <div className="container">
+          <div className="collection">
+              <li className="collection-item">
+                      <label>
+                          <input type="checkbox" ref="shipping" onChange= {this.handleChecked} />
+                          <span>Shipping(+6$)</span>
+                      </label>
+                  </li>
+                  <li className="collection-item"><b>Total: {this.props.total} $</b></li>
               </div>
-          )} <hr/>
-          { products.length ? 
-          <div><h4><small>Total Amount:</small><span className="float-right text-primary">
-                ${total}</span></h4><hr/></div>: ''}
-          { !products.length ? <h3 className="text-warning">No item on the cart</h3>: ''}
-          { products.length ? <button className="btn btn-success float-right" 
-                onClick={this.pay}>Pay</button>: '' }
-          <Link to="/"><button className="btn btn-danger float-right" 
-            style={{ marginRight: "10px" }}>Cancel</button></Link><br/><br/><br/>
-        </div>
-        );
-      }
-    }
+              <div className="checkout">
+                  <button className="waves-effect waves-light btn">Checkout</button>
+              </div>
+           </div>
+  )
+}
+}
+
+const mapStateToProps = (state)=>{
+return{
+  addedItems: state.addedItems,
+  total: state.total
+}
+}
+
+const mapDispatchToProps = (dispatch)=>{
+return{
+  addShipping: ()=>{dispatch({type: 'ADD_SHIPPING'})},
+  substractShipping: ()=>{dispatch({type: 'SUB_SHIPPING'})}
+}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Checkout)
