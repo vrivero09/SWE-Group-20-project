@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 //import { addShipping } from './actions/cartActions'
+//import card from './card/card'
 
 class Checkout extends React.Component {
     componentWillUnmount() {
@@ -19,7 +20,7 @@ handleChecked = (e)=>{
 render(){
   
   return(
-  <div className ="purchase-card">
+  <div>
     <div className="collection">
     <ul className="collection-item"><b>Total: $ {this.props.total}</b></ul>
     </div>
@@ -35,7 +36,7 @@ const mapStateToProps = (state)=>{
 return{
   addedItems: state.addedItems,
   total: state.total
-}
+  }
 }
 
 const mapDispatchToProps = (dispatch)=>{
