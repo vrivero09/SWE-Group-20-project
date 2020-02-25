@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 //import { addShipping } from './actions/cartActions'
 
-  class Checkout extends React.Component {
+class Checkout extends React.Component {
     componentWillUnmount() {
       if(this.refs.shipping.checked)
           this.props.substractShipping()
@@ -19,20 +19,14 @@ handleChecked = (e)=>{
 render(){
   
   return(
-      <div className="container">
-          <div className="collection">
-              <li className="collection-item">
-                      <label>
-                          <input type="checkbox" ref="shipping" onChange= {this.handleChecked} />
-                          <span>Shipping(+6$)</span>
-                      </label>
-                  </li>
-                  <li className="collection-item"><b>Total: {this.props.total} $</b></li>
-              </div>
-              <div className="checkout">
-                  <button className="waves-effect waves-light btn">Checkout</button>
-              </div>
-           </div>
+  <div className ="purchase-card">
+    <div className="collection">
+    <ul className="collection-item"><b>Total: $ {this.props.total}</b></ul>
+    </div>
+    <div className="checkout">
+        <button>Checkout</button>
+    </div>
+  </div>
   )
 }
 }

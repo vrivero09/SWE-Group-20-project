@@ -2,7 +2,7 @@ import './card.css';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {
   Card, CardText, CardBody,
-  CardTitle, CardSubtitle, Row, Col, Container, Button
+  CardTitle, CardSubtitle, Container, Button
 } from 'reactstrap';
 // import HP1 from './component/shoppingCart/photos/HP1.jpg';
 // import HP22 from './component/shoppingCart/photos/HP22.jpg';
@@ -12,8 +12,16 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import { addToCart } from '../actions/action-types/cartActions';
 import CardImg from 'react-bootstrap/Image'
+import Checkout from '../checkOut'
 
 class card extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      total:100
+    }
+  }
+
   handleClick = (id)=>{
     this.props.addToCart(id);
 
@@ -22,8 +30,10 @@ class card extends Component {
     let itemList = this.props.items.map(item=>{
       return(
       <div>
+      <Checkout price={this.state.total} />
+
       <Container >
-      <Card className="cardContainer" style={{width:"30%", height:"60%"}}>
+      <Card className ="purchase-card" style={{width:"50%", height:"60%"}}>
           <CardImg src={item.img} alt={item.title} fluid/>
           <CardBody>
             <CardTitle>Card title</CardTitle>
@@ -39,10 +49,12 @@ class card extends Component {
     })
   return (
         <div className="container">
-        <h3 className="center">Our products</h3>
+          <h3 className="center">Our products</h3>
+          <Container>
           <div className="center">
               {itemList}
           </div>
+          </Container>
       </div>    
     );
   }
