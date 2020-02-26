@@ -4,28 +4,27 @@ import { connect } from 'react-redux'
 //import card from './card/card'
 
 class Checkout extends React.Component {
-    componentWillUnmount() {
-      if(this.refs.shipping.checked)
-          this.props.substractShipping()
-}
-handleChecked = (e)=>{
-  if(e.target.checked){
-      this.props.addShipping();
-  }
-  else{
-      this.props.substractShipping();
-  }
-}
+//     componentWillUnmount() {
+//       if(this.refs.shipping.checked)
+//           this.props.substractShipping()
+// }
+// handleChecked = (e)=>{
+//   if(e.target.checked){
+//       this.props.addShipping();
+//   }
+//   else{
+//       this.props.substractShipping();
+//   }
+// }
 
 render(){
   
   return(
-  <div>
-    <div className="collection">
-    <ul className="collection-item"><b>Total: $ {this.props.total}</b></ul>
+  <div className="purchase-card" scrolling fixed="top"> 
+    <div className="collections"scrolling fixed="top">
+    <div className="collection"><b>Total: $ {this.props.total} </b>
+        <button text-alig>Checkout</button>
     </div>
-    <div className="checkout">
-        <button>Checkout</button>
     </div>
   </div>
   )

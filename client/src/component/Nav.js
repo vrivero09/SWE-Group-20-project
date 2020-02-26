@@ -35,7 +35,7 @@ const Example = (props) => {
             </NavItem>
           </Nav>
           <NavbarText>
-            <NavLink href ="/Cart"><ShoppingCartIcon icon="shopping_cart" size={25} id="nav-cart-count" aria-hidden="true" className="nav-cart-count nav-cart-0" />0</NavLink> 
+  <NavLink href ="/Cart"><ShoppingCartIcon icon="shopping_cart" size={25} id="nav-cart-count" aria-hidden="true" className="nav-cart-count nav-cart-0" /></NavLink> 
             </NavbarText>
           <NavbarText></NavbarText>
         </Collapse>
