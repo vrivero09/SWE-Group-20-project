@@ -8,7 +8,7 @@ render(){
   return(
   <div className="purchase-card"> 
     <div className="collection"><b>Total: $ {this.props.total} </b>
-        <button text-alig>Checkout</button>
+        <button href ="/Cart">Checkout</button>
     </div>
     </div>
   )

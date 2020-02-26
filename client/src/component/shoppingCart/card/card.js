@@ -9,7 +9,6 @@ import { connect } from 'react-redux'
 import { addToCart } from '../actions/action-types/cartActions';
 import CardImg from 'react-bootstrap/Image'
 import Checkout from '../checkOut'
-import Sidebar from '../sideMenu'
 
 class card extends Component {
   constructor(props){
@@ -51,7 +50,7 @@ class card extends Component {
   return (
         <div>
           <h3 className="center">Our products</h3>
-          <Checkout price={this.state.total} /> 
+          <Checkout href="/Cart" price={this.state.total} /> 
         <Container>
         <div className="col">
         {itemList}
