@@ -29,11 +29,11 @@ class card extends Component {
   render(){
     let itemList = this.props.items.map(item=>{
       return(
-      <div className="row-xs-4">
+      <div>
 
       <Container className="container">
       <div>
-      <Card className ="purchase-card" style={{width:"20%", height:"40%"}}>
+      <Card className ="purchase-card" style={{width:"49%", height:"40%"}}>
           <CardImg src={item.img} alt={item.title} fluid/>
           <CardBody>
             <CardTitle>Card title</CardTitle>
@@ -49,17 +49,15 @@ class card extends Component {
      
     })
   return (
-        <div className="container">
+        <div>
           <h3 className="center">Our products</h3>
-          <Checkout price={this.state.total} />    
-          <Container>
-          <Row className="row">
-            <Col>
-            {itemList}
-            </Col>
-              
-          </Row>
-          </Container>
+          <Checkout price={this.state.total} /> 
+        <Container>
+        <div className="col">
+        {itemList}
+        </div>
+
+        </Container>   
       </div>    
     );
   }
