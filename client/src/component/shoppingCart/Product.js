@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { addToCart } from './actions/action-types/cartActions';
 import Checkout from './checkOut'
 //import card from './card/card'
-import './Product.css';
 
 class Product extends Component {
   handleClick = (id)=>{
@@ -29,7 +28,7 @@ class Product extends Component {
   return(
     <div className="container_cards">
       <Checkout price={this.state.total} />
-      <h3 className="center">Our products</h3>
+      <h3 className="center">Our produuuuucts</h3>
       <Container>
           <Col className="row">
             <Col>
