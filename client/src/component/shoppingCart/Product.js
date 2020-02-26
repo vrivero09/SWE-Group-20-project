@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import { addToCart } from './actions/action-types/cartActions';
-
+import Checkout from './checkOut'
+//import card from './card/card'
+import styles from '../shoppingCart/';
 
 class Product extends Component {
   handleClick = (id)=>{
@@ -10,11 +12,12 @@ class Product extends Component {
   render() {
     let itemList = this.props.items.map(item=>{
       return(
-          <div>
+        <div className={styles.Component} ></div>
+          <div className="rows">
             <div className="card-image">
                 <img src={item.img} alt={item.title}/>
                 <span className="card-title">{item.title}</span>
-                <span to="/" className="btn-floating halfway-fab waves-effect waves-light red" onClick={()=>{this.handleClick(item.id)}}><i className="material-icons">add</i></span>
+                <span to="/" onClick={()=>{this.handleClick(item.id)}}><i className="material-icons">add</i></span>
             </div>
 
             <div className="card-content">
@@ -25,12 +28,17 @@ class Product extends Component {
       )
   })
   return(
-          <div className="container">
-            <h3 className="center">Our products</h3>
-              <div className="col-md-8">
-                  {itemList}
-              </div>
-          </div>    
+    <div className="container_cards">
+      <Checkout price={this.state.total} />
+      <h3 className="center">Our products</h3>
+      <Container>
+          <Col className="row">
+            <Col>
+              {itemList}
+            </Col>
+          </Col>        
+          </Container>   
+    </div>    
         );
   }
 }

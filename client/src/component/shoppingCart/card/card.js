@@ -1,8 +1,8 @@
 import './card.css';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {
-  Card, CardText, CardBody,
-  CardTitle, CardSubtitle, Container, Button
+  Card, CardText, CardBody, Col,
+  CardTitle, CardSubtitle, Container, Button, Row
 } from 'reactstrap';
 // import HP1 from './component/shoppingCart/photos/HP1.jpg';
 // import HP22 from './component/shoppingCart/photos/HP22.jpg';
@@ -29,11 +29,11 @@ class card extends Component {
   render(){
     let itemList = this.props.items.map(item=>{
       return(
-      <div>
-      <Checkout price={this.state.total} />
+      <div className="row-xs-4">
 
-      <Container >
-      <Card className ="purchase-card" style={{width:"50%", height:"60%"}}>
+      <Container className="container">
+      <div>
+      <Card className ="purchase-card" style={{width:"20%", height:"40%"}}>
           <CardImg src={item.img} alt={item.title} fluid/>
           <CardBody>
             <CardTitle>Card title</CardTitle>
@@ -42,6 +42,7 @@ class card extends Component {
               <Button onClick={()=>{this.handleClick(item.id)}}><AddShoppingCartIcon/></Button>
           </CardBody>
         </Card>
+        </div>
         </Container>
         </div>
       )
@@ -50,10 +51,14 @@ class card extends Component {
   return (
         <div className="container">
           <h3 className="center">Our products</h3>
+          <Checkout price={this.state.total} />    
           <Container>
-          <div className="center">
-              {itemList}
-          </div>
+          <Row className="row">
+            <Col>
+            {itemList}
+            </Col>
+              
+          </Row>
           </Container>
       </div>    
     );

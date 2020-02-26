@@ -4,7 +4,7 @@ import './component/Nav';
 import Nav from './component/Nav';
 import {BrowserRouter, Route} from 'react-router-dom'
 import Home from './component/Home';
-import Cart from './component/shoppingCart/Cart';
+//import Cart from './component/shoppingCart/Cart';
 // card from './component/shoppingCart/card/card';
 import signUpForm from './component/login_registration/signUpForm';
 import landing from './component/login_registration/landing';
