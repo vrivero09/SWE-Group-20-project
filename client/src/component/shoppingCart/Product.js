@@ -28,7 +28,7 @@ class Product extends Component {
   return(
     <div className="container_cards">
       <Checkout price={this.state.total} />
-      <h3 className="center">Our produuuuucts</h3>
+      <h3 className="center">Our </h3>
       <Container>
           <Col className="row">
             <Col>
