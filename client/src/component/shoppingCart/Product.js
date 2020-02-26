@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { addToCart } from './actions/action-types/cartActions';
 import Checkout from './checkOut'
 //import card from './card/card'
-import styles from '../shoppingCart/';
+import './Product.css';
 
 class Product extends Component {
   handleClick = (id)=>{
@@ -12,7 +12,6 @@ class Product extends Component {
   render() {
     let itemList = this.props.items.map(item=>{
       return(
-        <div className={styles.Component} ></div>
           <div className="rows">
             <div className="card-image">
                 <img src={item.img} alt={item.title}/>
