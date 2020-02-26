@@ -2,7 +2,7 @@ import HP1 from './photo/HP1.jpg'
 import HP22 from './photo/HP22.jpg'
 import HP33 from './photo/HP33.jpg'
 import SW11 from './photo/SW11.jpg'
-import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_SHIPPING } from '../actions/cart-actions'
+import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY } from '../actions/cart-actions'
 
 const initState = {
     items: [
@@ -58,7 +58,7 @@ const cartReducer= (state = initState,action)=>{
         }
     }
     //INSIDE CART COMPONENT
-    if(action.type=== ADD_QUANTITY){
+    if(action.type === ADD_QUANTITY){
         let addedItem = state.items.find(item=> item.id === action.id)
           addedItem.quantity += 1 
           let newTotal = state.total + addedItem.price
@@ -67,6 +67,7 @@ const cartReducer= (state = initState,action)=>{
               total: newTotal
           }
     }
+  
     if(action.type=== SUB_QUANTITY){  
         let addedItem = state.items.find(item=> item.id === action.id) 
         //if the qt == 0 then it should be removed

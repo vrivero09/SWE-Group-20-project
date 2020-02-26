@@ -1,32 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-//import { addShipping } from './actions/cartActions'
-//import card from './card/card'
 
 class Checkout extends React.Component {
-//     componentWillUnmount() {
-//       if(this.refs.shipping.checked)
-//           this.props.substractShipping()
-// }
-// handleChecked = (e)=>{
-//   if(e.target.checked){
-//       this.props.addShipping();
-//   }
-//   else{
-//       this.props.substractShipping();
-//   }
-// }
 
 render(){
   
   return(
-  <div className="purchase-card" scrolling fixed="top"> 
-    <div className="collections"scrolling fixed="top">
+  <div className="purchase-card"> 
     <div className="collection"><b>Total: $ {this.props.total} </b>
         <button text-alig>Checkout</button>
     </div>
     </div>
-  </div>
   )
 }
 }
@@ -38,11 +22,13 @@ return{
   }
 }
 
-const mapDispatchToProps = (dispatch)=>{
-return{
-  addShipping: ()=>{dispatch({type: 'ADD_SHIPPING'})},
-  substractShipping: ()=>{dispatch({type: 'SUB_SHIPPING'})}
-}
-}
 
-export default connect(mapStateToProps,mapDispatchToProps)(Checkout)
+
+// const mapDispatchToProps = (dispatch)=>{
+// return{
+//   addShipping: ()=>{dispatch({type: 'ADD_SHIPPING'})},
+//   substractShipping: ()=>{dispatch({type: 'SUB_SHIPPING'})}
+// }
+// }
+
+export default connect(mapStateToProps)(Checkout)

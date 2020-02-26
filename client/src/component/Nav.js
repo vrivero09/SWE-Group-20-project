@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux'
 import './Nav.css';
 import ShoppingCartIcon from 'react-google-material-icons';
 import {
@@ -12,7 +13,7 @@ import {
   NavbarText
 } from 'reactstrap';
 
-const Example = (props) => {
+const Example = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -35,7 +36,7 @@ const Example = (props) => {
             </NavItem>
           </Nav>
           <NavbarText>
-  <NavLink href ="/Cart"><ShoppingCartIcon icon="shopping_cart" size={25} id="nav-cart-count" aria-hidden="true" className="nav-cart-count nav-cart-0" /></NavLink> 
+        <NavLink href ="/Cart"><ShoppingCartIcon icon="shopping_cart" size={25} />0</NavLink> 
             </NavbarText>
           <NavbarText></NavbarText>
         </Collapse>
@@ -44,4 +45,13 @@ const Example = (props) => {
   );
 }
 
-export default Example;
+const mapStateToProps = (state)=>{
+  return{
+    addedItems: state.addedItems,
+    total: state.total
+    }
+  }
+
+  
+
+export default connect(mapStateToProps)(Example)

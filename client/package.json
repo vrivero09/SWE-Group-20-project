@@ -14,6 +14,7 @@
     "material-ui-icons": "^1.0.0-beta.36",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
+    "react-bootstrap-sidebar": "0.0.1",
     "react-dom": "^16.12.0",
     "react-google-material-icons": "^1.0.4",
     "react-image-file-resizer": "^0.2.1",
