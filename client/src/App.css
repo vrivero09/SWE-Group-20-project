@@ -8,6 +8,6 @@
   margin: auto;
 }
 .col{
-  columns: 2 auto;
   padding: 20px;
+  columns: 2 auto;
 }

@@ -1,18 +1,15 @@
 import './card.css';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {
-  Card, CardText, CardBody, Col,
+  Card, CardText, CardBody,
   CardTitle, CardSubtitle, Container, Button, Row
 } from 'reactstrap';
-// import HP1 from './component/shoppingCart/photos/HP1.jpg';
-// import HP22 from './component/shoppingCart/photos/HP22.jpg';
-// import HP33 from './component/shoppingCart/photos/HP33.jpg';
-// import SW11 from './component/shoppingCart/photos/SW1.jpg';
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import { addToCart } from '../actions/action-types/cartActions';
 import CardImg from 'react-bootstrap/Image'
 import Checkout from '../checkOut'
+import Sidebar from '../sideMenu'
 
 class card extends Component {
   constructor(props){
@@ -26,13 +23,14 @@ class card extends Component {
     this.props.addToCart(id);
 
   }
+  
   render(){
     let itemList = this.props.items.map(item=>{
       return(
       <div>
 
       <Container className="container">
-      <div>
+        <div>
       <Card className ="purchase-card" style={{width:"49%", height:"40%"}}>
           <CardImg src={item.img} alt={item.title} fluid/>
           <CardBody>
@@ -44,7 +42,9 @@ class card extends Component {
         </Card>
         </div>
         </Container>
-        </div>
+       
+
+      </div>
       )
      
     })
@@ -56,6 +56,7 @@ class card extends Component {
         <div className="col">
         {itemList}
         </div>
+       
 
         </Container>   
       </div>    
@@ -71,9 +72,9 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps= (dispatch)=>{
     
  return{
-addToCart: (id)=>{dispatch(addToCart(id))}
- }
- }
+    addToCart: (id)=>{dispatch(addToCart(id))}
+    }
+  }
 export default connect(mapStateToProps, mapDispatchToProps)(card);
 
 
