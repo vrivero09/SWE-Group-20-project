@@ -8,6 +8,7 @@ import Cart from './component/Cart';
 import Product from './component/Product';
 import Landing from './component/login_registration/landing';
 import Form from './component/Form';
+import Profile from './component/profile/profile'
 
 
 class App extends Component{
@@ -40,6 +41,7 @@ class App extends Component{
       <Route path ='/Cart' component={Cart} />
       <Route path ='/Products' component={Product} />
       <Route path ='/Ratings' component={Form} />
+      <Route path ='/Profile' component={Profile} />
       
     </div>
     </BrowserRouter>
