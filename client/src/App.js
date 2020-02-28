@@ -4,16 +4,12 @@ import './component/Nav';
 import Nav from './component/Nav';
 import {BrowserRouter, Route} from 'react-router-dom'
 import Home from './component/Home';
-//import Cart from './component/shoppingCart/Cart';
 import card from './component/shoppingCart/card/card';
 import signUpForm from './component/login_registration/signUpForm';
 import landing from './component/login_registration/landing';
 import LoginForm from './component/login_registration/loginForm';
 import Form from './component/Form';
-//import Product from './component/shoppingCart/Product';
 import Cart from './component/shoppingCart/Cart';
-//import productItem from './component/shoppingCart/productItem';
-//import Checkout from './component/shoppingCart/checkOut'
 
 
 class App extends Component{
