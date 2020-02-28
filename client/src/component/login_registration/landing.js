@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './landing.css'
 import {
     Card, CardImg, CardImgOverlay, CardText, CardTitle,
-    Row,Col,Button,
-    Modal, ModalHeader, ModalBody, ModalFooter
+    Row,Col
 } from 'reactstrap';
 import SignUp from './signUp';
 import Login from './login'
@@ -19,10 +18,10 @@ const Landing = (props) =>{
                     <CardText className="box" tag="h4">Welcome to GeekText where you can browse thousands of books and read them on your free time.</CardText>
                     <Row className="box btns">
                         <Col  sm='6'>
-                            <SignUp/>
+                            <SignUp logIn={props.logIn}/>
                         </Col>
                         <Col  sm='6'>
-                            <Login/>
+                            <Login logIn={props.logIn}/>
                         </Col>
                     </Row>
                 </CardImgOverlay>
