@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Button} from 'reactstrap'
 
 class Checkout extends React.Component {
 
@@ -8,7 +9,7 @@ render(){
   return(
   <div className="purchase-card"> 
     <div className="collection"><b>Total: $ {this.props.total} </b>
-        <button href ="/Cart">Checkout</button>
+        <Button href ="/Cart">Checkout</Button>
     </div>
     </div>
   )
