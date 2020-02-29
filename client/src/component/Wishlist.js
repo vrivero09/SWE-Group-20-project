@@ -21,7 +21,9 @@ function WishlistBookEntry(props) {
             wishlist_id: wishlistId
         }).then(
             res => {
-                setWishlists(res.data.wishlists);
+                if (res.data.result == 0) {
+                    setWishlists(res.data.wishlists);
+                }
             }
         );
     };
@@ -34,7 +36,9 @@ function WishlistBookEntry(props) {
             wishlist_id_to: wishlist_id
         }).then(
             res => {
-                setWishlists(res.data.wishlists);
+                if (res.data.result == 0) {
+                    setWishlists(res.data.wishlists);
+                }
             }
         );
     };
@@ -51,9 +55,9 @@ function WishlistBookEntry(props) {
                 {book.bookTitle}
             </div>
             <div className="align-items-around wishlist-entry-actions-container d-flex justify-content-around pb-3">
-                <button className="btn btn-sm btn-danger" onClick={() => removeBook(book._id) }>Remove</button>
-                <button className="btn btn-sm btn-primary">Add to Cart</button>
-                <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                <Button color="danger" size="sm" onClick={() => removeBook(book._id) }>Remove</Button>
+                <Button color="primary" size="sm">Add to Cart</Button>
+                <Dropdown isOpen={dropdownOpen} toggle={toggle} size="sm">
                     <DropdownToggle caret>
                         Move to
                         </DropdownToggle>
@@ -73,6 +77,21 @@ function Wishlist(props) {
     const wishlists = props.wishlists;
     let books = [];
     let index = 0;
+
+    const removeWishlist = () => {
+        axios.post('wishlist/remove', {
+            wishlist_id: wishlist._id
+        })
+        .then(res => {
+            if (res.data.result == 0) {
+                setWishlists(res.data.wishlists);
+            }
+            if (res.data.result != 0) {
+                alert(res.data.message);
+            }
+        });
+    };
+
     wishlist.books.forEach(book => {
         books.push(<WishlistBookEntry book={book} key={index++} wishlistId={wishlist._id} setWishlists={setWishlists} wishlists={wishlists} />);
     });
@@ -80,7 +99,7 @@ function Wishlist(props) {
         <div className="wishlist p-2">
             <div className="wishlist-title d-flex justify-content-between align-items-center">
                 <div>{ wishlist.name }</div>
-                <button className="btn btn-danger">delete</button>
+                <Button color="danger" onClick={() => removeWishlist()}>delete</Button>
             </div>
             {books}
         </div>
@@ -96,11 +115,13 @@ function Wishlists() {
         if (wishlists.length === 0) {
             axios.get('wishlist')
             .then(res => {
-                setWishlists(res.data.wishlists);
+                if (res.data.result == 0) {
+                    setWishlists(res.data.wishlists);
+                }
             });
         }
     });
-    function addWishlist(setWishlists, wishlistName){
+    const addWishlist = (setWishlists, wishlistName) => {
         console.log(`adding wishlist ${wishlistName}`);
         if (wishlistName === '') {
             alert(`Wishlist name can't be empty.`);
@@ -117,6 +138,7 @@ function Wishlists() {
                 case 0: {
                     // success, add to wishlist
                     const _wishlists = res.data.wishlists;
+                    setWishlistName("");
                     setWishlists(_wishlists);
                     break;
                 }
@@ -141,7 +163,8 @@ function Wishlists() {
         .catch(err=>{
             console.log(err);
         });
-    }
+    };
+
     let elmWishlist = [];
     let index = 0;
     wishlists.forEach(wishlist => {
