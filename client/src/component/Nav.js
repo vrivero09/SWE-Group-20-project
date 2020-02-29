@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import './Nav.css';
-import ShoppingCartIcon from 'react-google-material-icons';
+import MaterialIcon from 'react-google-material-icons';
 import {
   Collapse,
   Navbar,
@@ -72,7 +72,10 @@ class Navigation extends Component{
               </NavItem>
             </Nav>
             <NavbarText>
-              <NavLink href ="/Cart"><ShoppingCartIcon icon="shopping_cart" size={25} /></NavLink>
+              <NavLink href ="/Cart"><MaterialIcon icon="shopping_cart" size={25} /></NavLink>
+            </NavbarText>
+            <NavbarText>
+              <NavLink href ="/Wishlist"><MaterialIcon icon="assignment" size={25} /></NavLink>
               </NavbarText>
             <NavbarText href="" onClick={()=>this.logout()}>Logout</NavbarText>
           </Collapse>

@@ -28,6 +28,11 @@ const ShoppingCartSchema = new Schema({
 
 });
 
+const WishlistSchema = new Schema({
+    name: String,
+    books: [{type: mongoose.ObjectId, ref: 'Book'}]
+});
+
 const UserSchema = new Schema({
     _id: String,
     firstName : {
@@ -58,6 +63,7 @@ const UserSchema = new Schema({
     },
     shippingAddress: [ShippingAddressSchema],
     creditCards: [CreditCardSchema],
+    wishLists:[WishlistSchema]
 });
 
 /*
