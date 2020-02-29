@@ -2,7 +2,7 @@ import './card.css';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {
   Card, CardText, CardBody,
-  CardTitle, CardSubtitle, Container, Button, Row
+  CardTitle, CardSubtitle, Container, Button, Row, Col
 } from 'reactstrap';
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
@@ -64,12 +64,10 @@ class card extends Component {
           <Checkout href="/Cart" price={this.state.total} /> 
         <Container className="items">
         <div className="col">
-        <Row gutter ={[16,16]}>
+        <Col gutter ={[3 ,3]}>
           {itemList}
-        </Row>  
+        </Col>  
         </div>
-       
-
         </Container>   
       </div>    
     );
