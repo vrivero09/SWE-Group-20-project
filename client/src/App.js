@@ -14,6 +14,15 @@ import Card from './component/shoppingCart/card/card'
 import checkOut from './component/shoppingCart/checkOut';
 
 class App extends Component{
+  state={
+    bookTitle: '',
+    description: '',
+    price: ''
+  };
+
+  
+
+
   constructor(props){
     super(props);
     this.state={

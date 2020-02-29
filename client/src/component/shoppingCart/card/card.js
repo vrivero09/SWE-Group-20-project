@@ -10,7 +10,18 @@ import { addToCart } from '../actions/action-types/cartActions';
 import CardImg from 'react-bootstrap/Image'
 import Checkout from '../checkOut'
 
+
+
 class card extends Component {
+
+  // axios.post('/api/product/getProducts').then(response=>{
+  //   if(response.data.success){
+
+  //   }else{
+  //     alert('Failed to fetch product data')
+  //   }
+  // })
+
   constructor(props){
     super(props);
     this.state={
@@ -51,9 +62,11 @@ class card extends Component {
         <div>
           <h3 className="center">Our products</h3>
           <Checkout href="/Cart" price={this.state.total} /> 
-        <Container>
+        <Container className="items">
         <div className="col">
-        {itemList}
+        <Row gutter ={[16,16]}>
+          {itemList}
+        </Row>  
         </div>
        
 
