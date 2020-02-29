@@ -17,7 +17,7 @@ import Book from 'C:\Users\river\OneDrive\Documents\GitHub\SWE-Group-20-project\
 // publisher:{type: String, required:true},
 // bookImage:{type: String, required:true}
 
-});
+// });
 module.exports = mongoose.model('Product', Book);
 
 

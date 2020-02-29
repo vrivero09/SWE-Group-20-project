@@ -12,16 +12,14 @@ import Form from './component/Form';
 import Profile from './component/profile/profile'
 import Card from './component/shoppingCart/card/card'
 import checkOut from './component/shoppingCart/checkOut';
+import CartItem from './component/shoppingCart/CartItem'
 
 class App extends Component{
-  state={
-    bookTitle: '',
-    description: '',
-    price: ''
-  };
-
-  
-
+  // state={
+  //   bookTitle: '',
+  //   description: '',
+  //   price: ''
+  // };
 
   constructor(props){
     super(props);
@@ -53,6 +51,7 @@ class App extends Component{
       <Route path ='/Cart' component={checkOut} />
       <Route path ='/Wishlist' component={Wishlist} />
       <Route path ='/Products' component={Card} />
+      <Route path ='/CartItems' component={CartItem} />
       <Route path ='/Ratings' component={Form} />
       <Route path ='/Profile' component={Profile} />
       
