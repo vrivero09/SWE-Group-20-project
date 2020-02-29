@@ -13,7 +13,8 @@ app.use(
   })
 );
 
-const mongoURI = 'mongodb+srv://admin:admin123@cluster0-ywzdx.mongodb.net/test?retryWrites=true&w=majority';
+// const mongoURI = 'mongodb+srv://admin:admin123@cluster0-ywzdx.mongodb.net/test?retryWrites=true&w=majority';
+const mongoURI = "mongodb://127.0.0.1:27017/test";
 
 mongoose.connect(mongoURI, {useUnifiedTopology: true, useNewUrlParser: true})
     .catch(err => console.log(err));
@@ -34,5 +35,8 @@ var Users = require("./routes/Users");
 
 //use the route
 app.use("/users", Users);
+
+var Wishlist = require("./routes/Wishlist");
+app.use("/wishlist", Wishlist);
 
 app.listen(port, () => console.log("Server started on port " + port));
