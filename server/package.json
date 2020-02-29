@@ -13,6 +13,8 @@
   "author": "Group project",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^3.0.8",
+    "body-parser": "^1.19.0",
     "concurrently": "^5.1.0",
     "cors": "^2.8.5",
     "eslint-plugin-flowtype": "^3.13.0",
