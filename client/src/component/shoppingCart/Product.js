@@ -4,11 +4,29 @@ import { addToCart } from './actions/action-types/cartActions';
 import Checkout from './checkOut'
 import {Container, Col} from 'reactstrap'
 //import card from './card/card'
+import Book from 'C:\Users\river\OneDrive\Documents\GitHub\SWE-Group-20-project\server\models\Book.js'
+
+// const schema= new this.schema({
+// bookTitle:{type: String, required:true},
+// price:{type: Number, required:true},
+// author:{type: String, required:true},
+// authorBio:{type: String, required:true},
+// averageRating:{type: Number, required:true},
+// description:{type: String, required:true},
+// genre:{type: String, required:true},
+// publisher:{type: String, required:true},
+// bookImage:{type: String, required:true}
+
+});
+module.exports = mongoose.model('Product', Book);
+
 
 class Product extends Component {
   handleClick = (id)=>{
     this.props.addToCart(id); 
 }
+
+
   render() {
     let itemList = this.props.items.map(item=>{
       return(
