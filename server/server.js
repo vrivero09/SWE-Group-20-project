@@ -13,8 +13,8 @@ app.use(
   })
 );
 
-// const mongoURI = 'mongodb+srv://admin:admin123@cluster0-ywzdx.mongodb.net/test?retryWrites=true&w=majority';
-const mongoURI = "mongodb://127.0.0.1:27017/test";
+const mongoURI = 'mongodb+srv://admin:admin123@cluster0-ywzdx.mongodb.net/test?retryWrites=true&w=majority';
+// const mongoURI = "mongodb://127.0.0.1:27017/test";
 
 mongoose.connect(mongoURI, {useUnifiedTopology: true, useNewUrlParser: true})
     .catch(err => console.log(err));
