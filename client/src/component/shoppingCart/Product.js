@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import { addToCart } from './actions/action-types/cartActions';
 import Checkout from './checkOut'
+import {Container, Col} from 'reactstrap'
 //import card from './card/card'
 
 class Product extends Component {

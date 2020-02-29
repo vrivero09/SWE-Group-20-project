@@ -2,30 +2,12 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import './index.css';
 import App from './App';
-<<<<<<< HEAD
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import cartReducer from './component/shoppingCart/reducer/cartReducer';
-
-
-
-const store = createStore(cartReducer);
-
-//import Landing from './component/login_registration/landing'
-=======
->>>>>>> dev
 //import * as serviceWorker from './serviceWorker';
 
 
 ReactDOM.render(<App/>, document.getElementById('root'));
 
-<<<<<<< HEAD
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
-=======
 //ReactDOM.render(<Landing />, document.getElementById('root'));
->>>>>>> dev
 
 
 
