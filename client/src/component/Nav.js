@@ -8,7 +8,7 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
+  NavLink, Badge,
   NavbarText
 } from 'reactstrap';
 import { Redirect} from 'react-router-dom'
@@ -40,18 +40,18 @@ class Navigation extends Component{
     //check if signed in
     if(this.props.isAuth){
       this.signedIn = true;
-    }
+     }
 
     //if signed out
-    if(!this.signedIn && this.toLanding === true){
-      this.toLanding = false;
-      return <Redirect to='/' />
-    }
+     if(!this.signedIn && this.toLanding === true){
+       this.toLanding = false;
+       return <Redirect to='/' />
+     }
 
-    //if logged out and on landing page already, dont show the navigation
-    if(!this.signedIn){
-      return null;
-    }
+     //if logged out and on landing page already, dont show the navigation
+     if(!this.signedIn){
+       return null;
+     }
 
     return (
       
@@ -72,11 +72,12 @@ class Navigation extends Component{
               </NavItem>
             </Nav>
             <NavbarText>
-              <NavLink href ="/Cart"><MaterialIcon icon="shopping_cart" size={25} /></NavLink>
+              <NavLink href ="/Cart"><MaterialIcon icon="shopping_cart" size={25} /><Badge count ={1}>0</Badge>
+              </NavLink>
             </NavbarText>
             <NavbarText>
               <NavLink href ="/Wishlist"><MaterialIcon icon="assignment" size={25} /></NavLink>
-              </NavbarText>
+            </NavbarText>
             <NavbarText href="" onClick={()=>this.logout()}>Logout</NavbarText>
           </Collapse>
         </Navbar>
