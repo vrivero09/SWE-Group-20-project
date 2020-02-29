@@ -11,3 +11,23 @@
   padding: 20px;
   columns: 2 auto;
 }
+
+
+/* wishlist section */
+
+.container.page-container {
+    height: calc(100vh - 80px);
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.wishlist {
+    border-radius: 4px;
+    background-color: #dddddd;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.wishlist .wishlist-title {
+    border-bottom: 2px solid #343434;
+}
