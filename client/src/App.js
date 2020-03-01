@@ -9,7 +9,8 @@ import Landing from './component/login_registration/landing';
 import Form from './component/Form';
 import Profile from './component/profile/profile';
 import bookDetails from './component/bookDetails/bookDetails';
-
+import Cart from './component/shoppingCart/Cart';
+import Product from './component/shoppingCart/Product';
 class App extends Component{
 
   constructor(props){
@@ -41,10 +42,10 @@ class App extends Component{
       <Route path ='/Home' component={Home} />
       <Route path ='/Cart' component={Cart} />
       <Route path ='/Wishlist' component={Wishlist} />
-      <Route path ='/Products' component={Product} />
+      {/* <Route path ='/Products' component={Product} /> */}
       <Route path ='/Ratings' component={Form} />
       <Route path ='/Profile' component={Profile} />
-      <Route path ='/bookDetails' component={bookDetails} />
+      <Route path ='/Products' component={bookDetails} />
     </div>
     </BrowserRouter>
 
