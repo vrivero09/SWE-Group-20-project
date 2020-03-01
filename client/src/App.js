@@ -42,10 +42,10 @@ class App extends Component{
       <Route path ='/Home' component={Home} />
       <Route path ='/Cart' component={Cart} />
       <Route path ='/Wishlist' component={Wishlist} />
-      {/* <Route path ='/Products' component={Product} /> */}
+      <Route path ='/Products' component={Product} />
       <Route path ='/Ratings' component={Form} />
       <Route path ='/Profile' component={Profile} />
-      <Route path ='/Products' component={bookDetails} />
+      <Route path ='/bookDetails' component={bookDetails} />
     </div>
     </BrowserRouter>
 
