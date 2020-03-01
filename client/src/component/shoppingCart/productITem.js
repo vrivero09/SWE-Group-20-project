@@ -1,29 +1,28 @@
 import React from 'react';
-import ProductItem from './productItem';
-import { getProducts } from '';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-
+import getProduct from './Product'
+import { addToCart } from './actions/action-types/cartActions';
 //import card from './card/card';
     
   class productItem extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-          products: []
-          }
+         constructor(props) {
+         super(props);
+         this.state = {
+           product: []
+           }
         }
       
       componentDidMount() {
-      getProducts().then((products) =>this.setState({ products }));
+      getProduct().then((product) =>this.setState({ product }));
       }
       
         render() {
-          const { products } =  this.state;
+          const { product } =  this.state;
           return (
             <div className=" container">
               <h3 className="card-title">List of Available Products</h3><hr/>
-            {products.map((product, index) => <ProductItem product={product} key={index}/>)}
+            {product.map((product, index) => <productItem product={product} key={index}/>)}
               <hr/>
               <Link to="/checkout">
                 <button className="btn btn-success float-right">Checkout</button>
@@ -37,12 +36,17 @@ import { connect } from 'react-redux'
         }
       }
 
-      const mapStateToProps = (state) => {
- 
-        return {
-            products: state.product.products
-        }
-    };
+    const mapStateToProps = (state)=>{
+      return {
+          items: state.items
+           }
+      }
+    const mapDispatchToProps= (dispatch)=>{
+        
+    return{
+      addToCart: (id)=>{dispatch(addToCart(id))}
+      }
+    }
      
      
-    export default connect(mapStateToProps)(productItem)
+    export default connect(mapStateToProps, mapDispatchToProps)(productItem)
