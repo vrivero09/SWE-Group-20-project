@@ -1,10 +1,12 @@
 import React from 'react';
-    import ProductItem from './productItem';
-    import { getProducts } from '../repository';
-    import { Link } from 'react-router-dom';
-import card from './card/card';
+import ProductItem from './productItem';
+import { getProducts } from '';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
+
+//import card from './card/card';
     
-    export default class ProductList extends React.Component {
+  class productItem extends React.Component {
         constructor(props) {
           super(props);
           this.state = {
@@ -12,16 +14,16 @@ import card from './card/card';
           }
         }
       
-        // componentDidMount() {
-        //   getProducts().then((products) =>this.setState({ products }));
-        // }
+      componentDidMount() {
+      getProducts().then((products) =>this.setState({ products }));
+      }
       
         render() {
           const { products } =  this.state;
           return (
             <div className=" container">
               <h3 className="card-title">List of Available Products</h3><hr/>
-            {card.map((product, index) => <ProductItem product={product} key={index}/>)}
+            {products.map((product, index) => <ProductItem product={product} key={index}/>)}
               <hr/>
               <Link to="/checkout">
                 <button className="btn btn-success float-right">Checkout</button>
@@ -34,3 +36,13 @@ import card from './card/card';
           );
         }
       }
+
+      const mapStateToProps = (state) => {
+ 
+        return {
+            products: state.product.products
+        }
+    };
+     
+     
+    export default connect(mapStateToProps)(productItem)
