@@ -2,15 +2,19 @@
   text-align: center;
   text-decoration-color: blanchedalmond;
   
-  
+  /* Product section Begin */
 }
-.collection{
-  margin: auto;
+.container{
+  padding: 10px;
+
 }
-.col{
-  padding: 20px;
-  /* columns: 2 auto; */
+.purchase-card{
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  padding: 1em;
+  margin: 10px;
 }
+
+  /* Product section End */
 
 
 /* wishlist section */

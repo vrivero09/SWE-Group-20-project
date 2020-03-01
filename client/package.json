@@ -26,7 +26,8 @@
     "react-shopping-cart": "^1.8.32",
     "react-star-rating-component": "^1.4.1",
     "reactstrap": "^8.4.1",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "ts-loader": "^6.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

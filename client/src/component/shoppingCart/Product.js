@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import { addToCart } from './actions/action-types/cartActions';
+import { addToCart, removeItem } from './actions/action-types/cartActions';
 import Checkout from './checkOut'
-import {Container, Col} from 'reactstrap'
-//import card from './card/card'
-import Book from 'C:\Users\river\OneDrive\Documents\GitHub\SWE-Group-20-project\server\models\Book.js'
+import {
+  Card, CardText, CardBody,CardImg,
+  CardTitle, CardSubtitle, Container, Button, Row, Col
+} from 'reactstrap';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+
+
+
+//import Book from 'C:\Users\river\OneDrive\Documents\GitHub\SWE-Group-20-project\server\models\Book.js'
 
 // const schema= new this.schema({
 // bookTitle:{type: String, required:true},
@@ -18,43 +24,57 @@ import Book from 'C:\Users\river\OneDrive\Documents\GitHub\SWE-Group-20-project\
 // bookImage:{type: String, required:true}
 
 // });
-module.exports = mongoose.model('Product', Book);
+//module.exports = mongoose.model('Product', Book);
 
 
 class Product extends Component {
+
+  constructor(props){
+    super(props);
+    this.state={
+      total:100
+    }
+  }
+
   handleClick = (id)=>{
     this.props.addToCart(id); 
 }
 
+handleRemove = (id)=>{
+  this.props.removeItem(id);
+}
 
   render() {
     let itemList = this.props.items.map(item=>{
       return(
-          <div className="rows">
-            <div className="card-image">
-                <img src={item.img} alt={item.title}/>
-                <span className="card-title">{item.title}</span>
-                <span to="/" onClick={()=>{this.handleClick(item.id)}}><i className="material-icons">add</i></span>
-            </div>
-
-            <div className="card-content">
-                <p>{item.desc}</p>
-                <p><b>Price: ${item.price}</b></p>
-            </div>
-           </div>
+        <Container className="container">
+        <div >
+      <Card className ="purchase-card" style={{width:"49%", height:"40%"}}>
+          <CardImg src={item.img} alt={item.title} fluid/>
+          <CardBody>
+            <CardTitle>Card title</CardTitle>
+            <CardSubtitle>{item.title}</CardSubtitle>
+            <CardText><b>Price: ${item.price}</b></CardText>
+              <Button onClick={()=>{this.handleClick(item.id)}}><AddShoppingCartIcon/></Button>
+              <Button onClick={()=>{this.handleRemove(item.id)}}>Remove</Button>
+          </CardBody>
+        </Card>
+        </div>
+        </Container>
+       
       )
   })
   return(
     <div className="container_cards">
-      <Checkout price={this.state.total} />
-      <h3 className="center">Our productssss</h3>
-      <Container>
-          <Col className="row">
-            <Col>
-              {itemList}
-            </Col>
-          </Col>        
-          </Container>   
+          <h3 className="center">Our products</h3>
+          <Checkout href="/Cart" price={this.state.total} item={this.props.items} /> 
+        <Container className="items">
+        <div className="col-xs-6">
+        <Col gutter ={[3 ,3]}>
+          {itemList}
+        </Col>  
+        </div>
+        </Container>   
     </div>    
         );
   }
@@ -67,9 +87,15 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps= (dispatch)=>{
     
 return{
-  addToCart: (id)=>{dispatch(addToCart(id))}
+  addToCart: (id)=>{dispatch(addToCart(id))},
+  removeItem: (id)=>{dispatch(removeItem(id))}
+  // addQuantity: (id)=>{dispatch(addQuantity(id))},
+  // subtractQuantity: (id)=>{dispatch(subtractQuantity(id))}
   }
 }
+
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(Product);
 
 
