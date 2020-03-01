@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { removeItem,addQuantity,subtractQuantity} from './actions/action-types/cartActions';
 import Checkout from './checkOut';
+import productItem from './productItem'
 
 
 
@@ -59,6 +60,7 @@ class Cart extends Component{
                 <div className="cart">
                     <h5>You have ordered:</h5>
                     <ul className="collection">
+                        <productItem />
                         {addedItems}
                     </ul>
                     </div> 

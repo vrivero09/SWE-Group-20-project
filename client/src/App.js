@@ -13,6 +13,7 @@ import Profile from './component/profile/profile'
 import Card from './component/shoppingCart/card/card'
 import checkOut from './component/shoppingCart/checkOut';
 import CartItem from './component/shoppingCart/CartItem'
+import Cart from './component/shoppingCart/Cart';
 
 class App extends Component{
   // state={
@@ -48,7 +49,7 @@ class App extends Component{
       <Navigation logOut={this.logOut} isAuth={this.state.isAuthenticated}/>
       <Route exact path ='/' render={(props) => <Landing {...props} logIn={this.logIn} />}/>
       <Route path ='/Home' component={Home} />
-      <Route path ='/Cart' component={checkOut} />
+      <Route path ='/Cart' component={Cart} />
       <Route path ='/Wishlist' component={Wishlist} />
       <Route path ='/Products' component={Card} />
       <Route path ='/CartItems' component={CartItem} />
