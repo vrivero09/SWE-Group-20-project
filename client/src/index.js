@@ -3,7 +3,7 @@ import React from 'react';
 import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
-import cartReducer from './component/shoppingCart/reducer/cartReducer'
+import cartReducer from './component/shoppingCart/reducer/user_reducer'
 //import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 

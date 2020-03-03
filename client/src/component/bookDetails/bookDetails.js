@@ -5,6 +5,8 @@ import {
 } from 'reactstrap';
 import React, {Component} from 'react';
 import axios from 'axios';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+
 
 class bookDetails extends Component {
     constructor(props) {
@@ -24,6 +26,7 @@ class bookDetails extends Component {
     componentDidMount() {
            this.getBook()
           }
+          
      getBook(){
         return axios.post('book/products',{
             _id:"5e50b8101c9d4400000eed83"
@@ -66,7 +69,8 @@ class bookDetails extends Component {
             </div>
                   
                   </CardText>
-          <Button href="/Cart">Add to Cart</Button>
+                  <Button><AddShoppingCartIcon/></Button>
+                  {/* onClick={()=>{this.handleClick(this.state.products.id)}} */}
         </CardBody>
       </Card>
       </Col>

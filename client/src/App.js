@@ -10,7 +10,9 @@ import Form from './component/Form';
 import Profile from './component/profile/profile';
 import bookDetails from './component/bookDetails/bookDetails';
 import Cart from './component/shoppingCart/Cart';
-import Product from './component/shoppingCart/Product';
+import Product from './component/shoppingCart/productPage';
+import productPage from './component/shoppingCart/productPage';
+
 class App extends Component{
 
   constructor(props){
@@ -39,10 +41,14 @@ class App extends Component{
     <div className="App">
       <Navigation logOut={this.logOut} isAuth={this.state.isAuthenticated}/>
       <Route exact path ='/' render={(props) => <Landing {...props} logIn={this.logIn} />}/>
+
       <Route path ='/Home' component={Home} />
+
       <Route path ='/Cart' component={Cart} />
-      <Route path ='/Wishlist' component={Wishlist} />
       <Route path ='/Products' component={Product} />
+      <Route path ='/Products/:productId' component={productPage} />
+
+      <Route path ='/Wishlist' component={Wishlist} />
       <Route path ='/Ratings' component={Form} />
       <Route path ='/Profile' component={Profile} />
       <Route path ='/bookDetails' component={bookDetails} />
