@@ -2,19 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { Card, Row, Col, Button, Container, CardImg, CardText } from 'reactstrap'
 import { Link } from 'react-router-dom'
-import { ADD_TO_CART } from './actions/action-types'
+import { addToCart, removeItem } from './actions/cart-actions';
 import { connect } from 'react-redux'
-
-
-export function addToCart(_id) {
-  const request = axios.push(`book/products/Cart?productId=${_id}`)
-      .then(response => response.data);
-
-  return {
-      type: ADD_TO_CART,
-      payload: request
-  }
-}
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 
 
@@ -23,17 +13,19 @@ class Product extends React.Component {
     super(props);
     this.state = {
     products: [],
+    total:100
     }
   }
 
 
-  handleAdd = (id) =>{
-    this.props.addToCart(this.props.products.id);
-  }
+handleClick = (id)=>{
+    this.props.addToCart(id); 
+}
 
-  // handleClick = (_id) => {
-  //   this.props.addToCart(_id); 
-  //   }
+handleRemove = (id)=>{
+  this.props.removeItem(id);
+}
+
 
 componentDidMount() {
        this.getBook()
@@ -73,8 +65,10 @@ componentDidMount() {
         <p><b>Description: </b>{item.description}</p>
       </CardText>
         
-      <Link to="/Cart"><Button  onClick={()=>{this.handleAdd(item.id)}}>Add to Cart</Button></Link>
-      &nbsp;
+      <Link to="/Cart"><Button onClick={()=>{this.handleClick(item.id)}}><AddShoppingCartIcon/></Button></Link>
+      &nbsp;&nbsp;&nbsp;
+      <Link to="/Cart"><Button onClick={()=>{this.handleRemove(item.id)}}>Remove</Button></Link>
+      &nbsp;&nbsp;&nbsp;
 
       </Card>
       </Col>
@@ -88,10 +82,22 @@ componentDidMount() {
 }
 
 const mapStateToProps = (state)=>{
-  return{
-      items: state.addedItems
+  return {
+      items: state.items
+       }
+  }
+const mapDispatchToProps= (dispatch)=>{
+    
+return{
+  addToCart: (id)=>{dispatch(addToCart(id))},
+  removeItem: (id)=>{dispatch(removeItem(id))}
+  // addQuantity: (id)=>{dispatch(addQuantity(id))},
+  // subtractQuantity: (id)=>{dispatch(subtractQuantity(id))}
   }
 }
 
-export default connect(mapStateToProps)(Product)
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
+
 

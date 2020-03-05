@@ -2,9 +2,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { removeItem,addQuantity,subtractQuantity} from './actions/cart-actions'
+import { removeItem,addQuantity,subtractQuantity} from './actions/cart-actions';
 import Checkout from './checkOut';
-//import item from './productItem'
 
 
 
