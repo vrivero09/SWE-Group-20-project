@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import './Nav.css';
-import ShoppingCartIcon from 'react-google-material-icons';
+import MaterialIcon from 'react-google-material-icons';
 import jwt_decode from 'jwt-decode';
 import {
   Collapse,
@@ -75,6 +75,9 @@ class Navigation extends Component{
           <Collapse isOpen={this.state.toggle} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
+                <NavLink href="/bookDetails">bookDetails</NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink href ="/Products">Products</NavLink>
               </NavItem>
               <NavItem>
@@ -82,7 +85,10 @@ class Navigation extends Component{
               </NavItem>
             </Nav>
             <NavbarText>
-              <NavLink href ="/Cart"><ShoppingCartIcon icon="shopping_cart" size={25} /></NavLink>
+              <NavLink href ="/Cart"><MaterialIcon icon="shopping_cart" size={25} /></NavLink>
+            </NavbarText>
+            <NavbarText>
+              <NavLink href ="/Wishlist"><MaterialIcon icon="assignment" size={25} /></NavLink>
             </NavbarText>
             <Nav navbar>
               <UncontrolledDropdown nav inNavbar>
