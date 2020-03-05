@@ -52,7 +52,7 @@ class App extends Component{
 
 
 
-      <Route path ='/Cart' component={Carts} />
+      <Route path ='/Cart' component={Cart} />
 
 
       <Route path ='/Wishlist' component={Wishlist} />
