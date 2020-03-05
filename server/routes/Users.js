@@ -44,7 +44,8 @@ users.post('/signup', (req,res) => {
                 User.create(userData)
                 .then(user => {
                     const payload = {
-                        _id : user._id
+                        _id : user._id,
+                        firstName: user.firstName
                     };
     
                     //create a token for user session
@@ -78,7 +79,8 @@ users.post('/login', (req,res)=>{
             if(bcrypt.compareSync(req.body.password,user.password)){
                 //password matches
                 const payload = {
-                    _id : user._id
+                    _id : user._id,
+                    firstName: user.firstName
                 };
 
                 //create a token for user session
