@@ -50,7 +50,7 @@ users.post('/signup', (req,res) => {
     
                     //create a token for user session
                     let token = jwt.sign(payload, SECRET_KEY, {
-                        expiresIn: 1440
+                        expiresIn: 60*60*24*30
                     });
     
                     res.json({token: token});
@@ -85,7 +85,7 @@ users.post('/login', (req,res)=>{
 
                 //create a token for user session
                 let token = jwt.sign(payload, SECRET_KEY, {
-                    expiresIn: 1440
+                    expiresIn: 60*60*24*30
                 });
 
                 res.json({token: token});
@@ -101,6 +101,7 @@ users.post('/login', (req,res)=>{
         res.send("error: " + err);
     });
 });
+
 
 // users.get("/profile",(req,res)=> {
 //     var decoded = jwt.verify(req.headers['authorization'], SECRET_KEY);

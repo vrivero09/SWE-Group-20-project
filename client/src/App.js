@@ -5,11 +5,12 @@ import Navigation from './component/Nav';
 import {BrowserRouter, Route} from 'react-router-dom'
 import Home from './component/Home';
 import Cart from './component/Cart';
+import Wishlist from './component/Wishlist';
 import Product from './component/Product';
 import Landing from './component/login_registration/landing';
 import Form from './component/Form';
-import Profile from './component/profile/profile'
-
+import Profile from './component/profile/profile';
+import bookDetails from './component/bookDetails/bookDetails';
 
 class App extends Component{
   constructor(props){
@@ -39,10 +40,11 @@ class App extends Component{
       <Route exact path ='/' render={(props) => <Landing {...props} logIn={this.logIn} />}/>
       <Route path ='/Home' component={Home} />
       <Route path ='/Cart' component={Cart} />
+      <Route path ='/Wishlist' component={Wishlist} />
       <Route path ='/Products' component={Product} />
       <Route path ='/Ratings' component={Form} />
       <Route path ='/Profile' component={Profile} />
-      
+      <Route path ='/bookDetails' component={bookDetails} />
     </div>
     </BrowserRouter>
   );
