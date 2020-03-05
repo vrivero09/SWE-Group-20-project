@@ -1,25 +1,20 @@
-import Item1 from '../../images/item1.jpg'
-import Item2 from '../../images/item2.jpg'
-import Item3 from '../../images/item3.jpg'
-import Item4 from '../../images/item4.jpg'
-import Item5 from '../../images/item5.jpg'
-import Item6 from '../../images/item6.jpg'
-import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_SHIPPING } from '../actions/action-types/types'
-
+import HP1 from './photo/HP1.jpg'
+import HP22 from './photo/HP22.jpg'
+import HP33 from './photo/HP33.jpg'
+import SW11 from './photo/SW11.jpg'
+import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY, ADD_SHIPPING } from '../actions/action-types/types'
 
 const initState = {
     items: [
-        {id:1,title:'Winter body', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:110,img:Item1},
-        {id:2,title:'Adidas', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:80,img: Item2},
-        {id:3,title:'Vans', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",price:120,img: Item3},
-        {id:4,title:'White', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:260,img:Item4},
-        {id:5,title:'Cropped-sho', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:160,img: Item5},
-        {id:6,title:'Blues', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",price:90,img: Item6}
+        {id:1,title:'Deathly Hallows', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:20,img:HP1},
+        {id:2,title:'Goblet of Fire', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:30,img: HP22},
+        {id:3,title:'Deathly Hallows: Old version', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",price:15,img: HP33},
+        {id:4,title:'Star Wars: Darth Vader', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:50,img:SW11}
     ],
     addedItems:[],
     total: 0
 
-}
+};
 const cartReducer= (state = initState,action)=>{
    
     //INSIDE HOME COMPONENT
