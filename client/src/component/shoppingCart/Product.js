@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Card, Row, Col, Button, Container, CardImg, CardText } from 'reactstrap'
 import { Link } from 'react-router-dom'
-import { ADD_TO_CART } from './actions/types'
+import { ADD_TO_CART } from './actions/action-types'
 import { connect } from 'react-redux'
 
 
