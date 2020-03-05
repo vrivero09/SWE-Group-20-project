@@ -10,15 +10,19 @@ import Form from './component/Form';
 import Profile from './component/profile/profile';
 import bookDetails from './component/bookDetails/bookDetails';
 import Cart from './component/shoppingCart/Cart';
-import Product from './component/shoppingCart/productPage';
-import productPage from './component/shoppingCart/productPage';
+import Product from './component/shoppingCart/Product';
+import CartItemList from './component/shoppingCart/CartItemList';
+import Carts from './component/shoppingCart/Carts';
 
 class App extends Component{
+
+  
 
   constructor(props){
     super(props);
     this.state={
-      isAuthenticated : localStorage.getItem("userToken") ? true : false
+      isAuthenticated : localStorage.getItem("userToken") ? true : false,
+      products: []
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
@@ -43,15 +47,17 @@ class App extends Component{
       <Route exact path ='/' render={(props) => <Landing {...props} logIn={this.logIn} />}/>
 
       <Route path ='/Home' component={Home} />
-
-      <Route path ='/Cart' component={Cart} />
+      <Route path ='/bookDetails' component={bookDetails} />
       <Route path ='/Products' component={Product} />
-      <Route path ='/Products/:productId' component={productPage} />
+
+
+
+      <Route path ='/Cart' component={Carts} />
+
 
       <Route path ='/Wishlist' component={Wishlist} />
       <Route path ='/Ratings' component={Form} />
       <Route path ='/Profile' component={Profile} />
-      <Route path ='/bookDetails' component={bookDetails} />
     </div>
     </BrowserRouter>
 

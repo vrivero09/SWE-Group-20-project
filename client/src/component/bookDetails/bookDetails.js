@@ -1,4 +1,3 @@
-
 import {
   Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Row, Col, Container
@@ -12,7 +11,7 @@ class bookDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        products: {
+        products: [{
             bookTitle: "",
             description: "",
             genre: "",
@@ -21,12 +20,14 @@ class bookDetails extends Component {
             bookCoverAddress: "",
             author: "",
             authorBio: "",
+            price:""
+        }]
         }
-        }}
+      }
     componentDidMount() {
            this.getBook()
           }
-          
+
      getBook(){
         return axios.post('book/products',{
             _id:"5e50b8101c9d4400000eed83"
@@ -63,6 +64,11 @@ class bookDetails extends Component {
              <div>
             {this.state.products.authorBio}
                   </div>
+            <div>
+              <b>Price : </b>$
+              {this.state.products.price}
+            </div>
+
              <div>
                  Average Rating :
               {this.state.products.averageRating}
