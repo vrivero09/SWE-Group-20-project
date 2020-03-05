@@ -1,111 +1,49 @@
-// import React, {Component} from 'react'
-// import PropTypes from 'prop-types'
-// import {withStyles} from 'material-ui/styles'
-// import Card from 'material-ui/Card'
-// import TextField from 'material-ui/TextField'
-// import Typography from 'material-ui/Typography'
-// import Icon from 'material-ui/Icon'
-// import auth from './../auth/auth-helper'
-// import cart from './cart-helper.js'
-// import PlaceOrder from './PlaceOrder'
-// import {Elements} from 'react-stripe-elements'
-
-// const styles = theme => ({
-//   card: {
-//     margin: '24px 0px',
-//     padding: '16px 40px 90px 40px',
-//     backgroundColor: '#80808017'
-//   },
-//   title: {
-//     margin: '24px 16px 8px 0px',
-//     color: theme.palette.openTitle
-//   },
-//   subheading: {
-//     color: 'rgba(88, 114, 128, 0.87)',
-//     marginTop: "20px",
-//   },
-//   addressField: {
-//     marginTop: "4px",
-//     marginLeft: theme.spacing.unit,
-//     marginRight: theme.spacing.unit,
-//     width: "45%"
-//   },
-//   streetField: {
-//     marginTop: "4px",
-//     marginLeft: theme.spacing.unit,
-//     marginRight: theme.spacing.unit,
-//     width: "93%"
-//   },
-//   textField: {
-//     marginLeft: theme.spacing.unit,
-//     marginRight: theme.spacing.unit,
-//     width: "90%"
-//   }
-// })
-
-// class Checkout extends Component {
-//   state = {
-//     checkoutDetails: {
-//       customer_name: '',
-//       customer_email:'',
-//       delivery_address: { street: '', city: '', state: '', zipcode: '', country:''}
-//     },
-//     error: ''
-//   }
-//   componentDidMount = () => {
-//     let user = auth.isAuthenticated().user
-//     let checkoutDetails = this.state.checkoutDetails
-//     checkoutDetails.products = cart.getCart()
-//     checkoutDetails.customer_name = user.name
-//     checkoutDetails.customer_email = user.email
-//     this.setState({checkoutDetails: checkoutDetails})
-//   }
-
-//   handleCustomerChange = name => event => {
-//     let checkoutDetails = this.state.checkoutDetails
-//     checkoutDetails[name] = event.target.value || undefined
-//     this.setState({checkoutDetails: checkoutDetails})
-//   }
-
-//   handleAddressChange = name => event => {
-//     let checkoutDetails = this.state.checkoutDetails
-//     checkoutDetails.delivery_address[name] = event.target.value || undefined
-//     this.setState({checkoutDetails: checkoutDetails})
-//   }
-
-//   render() {
-//     const {classes} = this.props
-//     return (
-//       <Card className={classes.card}>
-//         <Typography type="title" className={classes.title}>
-//           Checkout
-//         </Typography>
-//         <TextField id="name" label="Name" className={classes.textField} value={this.state.checkoutDetails.customer_name} onChange={this.handleCustomerChange('customer_name')} margin="normal"/><br/>
-//         <TextField id="email" type="email" label="Email" className={classes.textField} value={this.state.checkoutDetails.customer_email} onChange={this.handleCustomerChange('customer_email')} margin="normal"/><br/>
-//         <Typography type="subheading" component="h3" className={classes.subheading}>
-//             Delivery Address
-//         </Typography>
-//         <TextField id="street" label="Street Address" className={classes.streetField} value={this.state.checkoutDetails.delivery_address.street} onChange={this.handleAddressChange('street')} margin="normal"/><br/>
-//         <TextField id="city" label="City" className={classes.addressField} value={this.state.checkoutDetails.delivery_address.city} onChange={this.handleAddressChange('city')} margin="normal"/>
-//         <TextField id="state" label="State" className={classes.addressField} value={this.state.checkoutDetails.delivery_address.state} onChange={this.handleAddressChange('state')} margin="normal"/><br/>
-//         <TextField id="zipcode" label="Zip Code" className={classes.addressField} value={this.state.checkoutDetails.delivery_address.zipcode} onChange={this.handleAddressChange('zipcode')} margin="normal"/>
-//         <TextField id="country" label="Country" className={classes.addressField} value={this.state.checkoutDetails.delivery_address.country} onChange={this.handleAddressChange('country')} margin="normal"/>
-//         <br/> {
-//             this.state.error && (<Typography component="p" color="error">
-//                 <Icon color="error" className={classes.error}>error</Icon>
-//                 {this.state.error}</Typography>)
-//           }
-//         <div>
-//           <Elements>
-//             <PlaceOrder checkoutDetails={this.state.checkoutDetails} />
-//           </Elements>
-//         </div>
-//       </Card>)
-//   }
-// }
-
-// Checkout.propTypes = {
-//   classes: PropTypes.object.isRequired
-// }
-
-// export default withStyles(styles)(Checkout)
+import React from 'react';
+    import { isAuthenticated, getCartProducts, pay } from '../../repository';
+    import {  Redirect, Link } from 'react-router-dom';
+    
+    export default class Checkout extends React.Component {
+      constructor(props) {
+      super(props);
+        this.state = { products: [], total: 0 }
+      }
+    
+      componentDidMount() {
+        let cart = localStorage.getItem('cart');
+        if (!cart) return; 
+        getCartProducts(cart).then((products) => {
+          let total = 0;
+          for (var i = 0; i < products.length; i++) {
+            total += products[i].price * products[i].qty;
+          }
+          this.setState({ products, total });
+        });
+      }
+    
+      pay = () => pay().then(data => alert(data)).catch(err => console.log(err))
+    
+      render() {
+        if (!isAuthenticated()) return (<Redirect to="/login" />);
+        const { products, total } =  this.state;
+        return (
+        <div className=" container">
+          <h3 className="card-title">Checkout</h3><hr/>
+          { products.map((product, index) => 
+              <div key={index}>
+              <p>{product.name} <small> (quantity: {product.qty})</small>
+                 <span className="float-right text-primary">${product.qty * product.price}
+              </span></p><hr/>
+              </div>
+          )} <hr/>
+          { products.length ? 
+          <div><h4><small>Total Amount:</small><span className="float-right text-primary">
+                ${total}</span></h4><hr/></div>: ''}
+          { !products.length ? <h3 className="text-warning">No item on the cart</h3>: ''}
+          { products.length ? <button className="btn btn-success float-right" 
+                onClick={this.pay}>Pay</button>: '' }
+          <Link to="/"><button className="btn btn-danger float-right" 
+            style={{ marginRight: "10px" }}>Cancel</button></Link><br/><br/><br/>
+        </div>
+        );
+      }
+    }
