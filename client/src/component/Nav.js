@@ -1,6 +1,7 @@
 import React, {Component } from 'react';
 import './Nav.css';
 import ShoppingCartIcon from 'react-google-material-icons';
+import jwt_decode from 'jwt-decode';
 import {
   Collapse,
   Navbar,
@@ -9,7 +10,10 @@ import {
   Nav,
   NavItem,
   NavLink,
-  NavbarText
+  NavbarText,  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from 'reactstrap';
 import { Redirect} from 'react-router-dom'
 
@@ -18,9 +22,18 @@ class Navigation extends Component{
     super(props);
     this.state = {
       toggle:false,
+      userFirstName:"No user"
     };  
     this.signedIn = this.props.isAuth; 
     this.toLanding = false;
+  }
+
+  componentDidMount(){
+    const token = localStorage.getItem("userToken");
+    if(token){
+        const decoded = jwt_decode(token);
+        this.setState({userFirstName:decoded.firstName});
+    } 
   }
 
   onToggle(){
@@ -62,9 +75,6 @@ class Navigation extends Component{
           <Collapse isOpen={this.state.toggle} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink href="/Profile">Profile</NavLink>
-              </NavItem>
-              <NavItem>
                 <NavLink href ="/Products">Products</NavLink>
               </NavItem>
               <NavItem>
@@ -73,8 +83,23 @@ class Navigation extends Component{
             </Nav>
             <NavbarText>
               <NavLink href ="/Cart"><ShoppingCartIcon icon="shopping_cart" size={25} /></NavLink>
-              </NavbarText>
-            <NavbarText href="" onClick={()=>this.logout()}>Logout</NavbarText>
+            </NavbarText>
+            <Nav navbar>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  {this.state.userFirstName}
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem href="/Profile">
+                    Profile
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem onClick={()=>this.logout()}>
+                    logout
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            </Nav>
           </Collapse>
         </Navbar>
       </div>
