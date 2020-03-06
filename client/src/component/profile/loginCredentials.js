@@ -48,7 +48,7 @@ class  LoginCredentialsForm extends Component {
                         <FormGroup row>
                             <Label sm={2} for="password">Password</Label>
                             <Col sm={4}>
-                                <Input  type="password" name="password" id="password" placeholder="Enter password" value={this.state.password} onChange={this.onChange}/>
+                                <Input  type="password" name="password" id="password" placeholder="Enter new password" value={this.state.password} onChange={this.onChange}/>
                                 <FormFeedback></FormFeedback>
                             </Col>
                         </FormGroup>
