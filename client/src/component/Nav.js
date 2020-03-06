@@ -22,17 +22,17 @@ class Navigation extends Component{
     super(props);
     this.state = {
       toggle:false,
-      userFirstName:"No user"
     };  
     this.signedIn = this.props.isAuth; 
     this.toLanding = false;
+    this.userFirstName = "No user";
   }
 
   componentDidMount(){
     const token = localStorage.getItem("userToken");
     if(token){
         const decoded = jwt_decode(token);
-        this.setState({userFirstName:decoded.firstName});
+        this.userFirstName = decoded.firstName;
     } 
   }
 
@@ -53,6 +53,11 @@ class Navigation extends Component{
     //check if signed in
     if(this.props.isAuth){
       this.signedIn = true;
+      const token = localStorage.getItem("userToken");
+      if(token){
+          const decoded = jwt_decode(token);
+          this.userFirstName = decoded.firstName;
+      } 
     }
 
     //if signed out
@@ -93,7 +98,7 @@ class Navigation extends Component{
             <Nav navbar>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  {this.state.userFirstName}
+                  {this.userFirstName}
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem href="/Profile">
