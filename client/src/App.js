@@ -9,8 +9,8 @@ import Wishlist from './component/Wishlist';
 import Product from './component/Product';
 import Landing from './component/login_registration/landing';
 import Form from './component/Form';
-import Profile from './component/profile/profile'
-
+import Profile from './component/profile/profile';
+import bookDetails from './component/bookDetails/bookDetails';
 
 class App extends Component{
   constructor(props){
@@ -44,7 +44,7 @@ class App extends Component{
       <Route path ='/Products' component={Product} />
       <Route path ='/Ratings' component={Form} />
       <Route path ='/Profile' component={Profile} />
-      
+      <Route path ='/bookDetails' component={bookDetails} />
     </div>
     </BrowserRouter>
   );

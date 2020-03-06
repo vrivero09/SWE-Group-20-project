@@ -14,6 +14,7 @@ books.use(cors());
 //endpoint to add review to database
 books.post("/addreview", (req, res) => {
 
+
   //store information from request body that will be used to create a new review
   const reviewData = {
     reviewText: req.body.reviewText,
@@ -44,6 +45,27 @@ books.post("/addreview", (req, res) => {
 
 });
 
+
+
+books.post("/products", (req, res) => {
+ 
+  //store book id that was given in request body, need to cast the string into ObjectId
+  const book_ID = new mongoose.Types.ObjectId(req.body._id);
+
+  //use a model method to query the database, find the book with the given id
+  Book.findOne({
+    _id: book_ID
+  }).then(book => {
+    //.then is a callback function that lets you do something with the result of the query
+    //in this case, the result is stored in book variable
+    if (book == null) {
+      res.send("Book is null");
+    } else {
+     res.send(book)
+    }
+  });
+
+});
+
 //must export your routes so you can use them in server.js
 module.exports = books;
-
