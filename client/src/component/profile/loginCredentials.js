@@ -21,8 +21,7 @@ class  LoginCredentialsForm extends Component {
         const token = localStorage.getItem("userToken");
         if(token){
             const decoded = jwt_decode(token)
-            this.setState({user_id:decoded._id});
-            //TODO get user data
+            this.setState({username:decoded._id});
         }
         
     }

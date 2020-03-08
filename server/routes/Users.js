@@ -102,22 +102,23 @@ users.post('/login', (req,res)=>{
     });
 });
 
-
-// users.get("/profile",(req,res)=> {
-//     var decoded = jwt.verify(req.headers['authorization'], SECRET_KEY);
-//     User.findOne({
-//         _id:decoded._id
-//     })
-//     .then(user => {
-//         if(user){
-//             res.json(user);
-//         }else{
-//             res.send("User does not exist");
-//         }
-//     })
-//     .catch(err=>{
-//         res.send("error: "+ err);
-//     });
-// });
+//Endpoint to get user information to be used in profile page
+users.get("/profile",(req,res)=> {
+    var decoded = jwt.verify(req.headers['authorization'], SECRET_KEY);
+    User.findOne({
+        _id:decoded._id,
+    })
+    .then(user => {
+        if(user){
+            res.json({user:user});
+            
+        }else{
+            res.send("User " + decoded.user_id+" does not exist");
+        }
+    })
+    .catch(err=>{
+        res.send("error: "+ err);
+    });
+});
 
 module.exports = users;
