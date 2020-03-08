@@ -11,25 +11,9 @@ class  Profile extends Component {
     constructor(){
         super();
         this.state = {
-            user_id:""
         };
 
-        this.onChange = this.onChange.bind(this);
     }
-
-    componentDidMount(){
-        const token = localStorage.getItem("userToken");
-        if(token){
-            const decoded = jwt_decode(token)
-            this.setState({user_id:decoded._id});
-        }
-        
-    }
-
-    onChange(e){
-        this.setState({[e.target.name] : e.target.value});
-    }
-
     
 
     render(){
