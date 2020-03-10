@@ -44,8 +44,7 @@ users.post('/signup', (req,res) => {
                 User.create(userData)
                 .then(user => {
                     const payload = {
-                        _id : user._id,
-                        firstName: user.firstName
+                        _id : user._id
                     };
     
                     //create a token for user session
@@ -80,7 +79,6 @@ users.post('/login', (req,res)=>{
                 //password matches
                 const payload = {
                     _id : user._id,
-                    firstName: user.firstName
                 };
 
                 //create a token for user session
@@ -111,6 +109,54 @@ users.get("/profile",(req,res)=> {
     .then(user => {
         if(user){
             res.json({user:user});
+            
+        }else{
+            res.send("User " + decoded.user_id+" does not exist");
+        }
+    })
+    .catch(err=>{
+        res.send("error: "+ err);
+    });
+});
+
+//Endpoint to change password
+users.post("/changePassword",(req,res)=> {
+    var decoded = jwt.verify(req.headers['authorization'], SECRET_KEY);
+    User.findOne({
+        _id:decoded._id,
+    })
+    .then(user => {
+        if(user){
+            bcrypt.hash(req.body.password, 10,(err,hash)=>{
+                user.password = hash;
+                user.save();
+                res.send("password saved");
+            }); 
+            
+        }else{
+            res.send("User " + decoded.user_id+" does not exist");
+        }
+    })
+    .catch(err=>{
+        res.send("error: "+ err);
+    });
+});
+
+//Endpoint to change personal Info
+users.post("/changePersonalInfo",(req,res)=> {
+    var decoded = jwt.verify(req.headers['authorization'], SECRET_KEY);
+    console.log(decoded._id);
+    User.findOne({
+        _id:decoded._id,
+    })
+    .then(user => {
+        if(user){
+            user.firstName = req.body.firstName;
+            user.lastName = req.body.lastName;
+            user.email = req.body.email;
+            user.nickname = req.body.nickname;
+            user.save();
+            res.send("Saved successfully");
             
         }else{
             res.send("User " + decoded.user_id+" does not exist");
