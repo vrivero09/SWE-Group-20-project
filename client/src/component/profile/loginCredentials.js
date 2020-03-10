@@ -12,9 +12,11 @@ class  LoginCredentialsForm extends Component {
         this.state = {
             username:"",
             password:"",
+            saved:false
         };
 
         this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentDidMount(){
@@ -27,7 +29,22 @@ class  LoginCredentialsForm extends Component {
     }
 
     onChange(e){
-        this.setState({[e.target.name] : e.target.value});
+        this.setState({[e.target.name] : e.target.value,saved:false});
+    }
+
+    onSubmit(e){
+        e.preventDefault();
+
+        axios.post('users/changePassword',{
+            password : this.state.password
+        })
+        .then(res=>{
+            console.log("success");
+            this.setState({saved:true});
+        })
+        .catch(err=>{
+            console.log(err);
+        });
     }
 
     
@@ -47,14 +64,15 @@ class  LoginCredentialsForm extends Component {
                         <FormGroup row>
                             <Label sm={2} for="password">Password</Label>
                             <Col sm={4}>
-                                <Input  type="password" name="password" id="password" placeholder="Enter new password" value={this.state.password} onChange={this.onChange}/>
-                                <FormFeedback></FormFeedback>
+                                <Input type="password" name="password" id="password" placeholder="Enter new password" value={this.state.password} onChange={this.onChange}/>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Col sm={2}></Col>
-                            <Col  sm={4}>
-                            <Button className="float-right" size="sm" color="primary" style={{padding:"5px 15px"}}>Save</Button>
+                            <Col sm={4}>
+                                <div style={{color:"#32CD32"}} hidden={!this.state.saved}>Password Changed!</div>
+                            </Col>
+                            <Col  sm={2}>
+                            <Button className="float-right" onClick={this.onSubmit} size="sm" color="primary" style={{padding:"5px 15px"}}>Save</Button>
                             </Col>
                         </FormGroup>
                        

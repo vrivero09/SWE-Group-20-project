@@ -16,7 +16,8 @@ class  PersonalInfoForm extends Component {
                 nickname:"",
                 email:"",
             },
-            disabled:true
+            disabled:true,
+            saved:false
         };
 
         const user_id = "";
@@ -50,19 +51,39 @@ class  PersonalInfoForm extends Component {
     }
 
     onChange(e){
-        this.setState({[e.target.name] : e.target.value});
+        this.setState({
+            info: {                   // object that we want to update
+                ...this.state.info,    // keep all other key-value pairs
+                [e.target.name]: e.target.value       // update the value of specific key
+            }
+        });
     }
 
     //enable inputs
     onClickEdit(e){
         e.preventDefault();
-        this.setState({disabled:false});
+        this.setState({disabled:false,saved:false});
     }
 
     //save and disable inputs
     onClickSave(e){
         e.preventDefault();
-        this.setState({disabled:true});
+
+        axios.post('users/changePersonalInfo',{
+            firstName : this.state.info.firstName,
+            lastName: this.state.info.lastName,
+            email:this.state.info.email,
+            nickname:this.state.info.nickname
+        })
+        .then(res=>{
+            console.log("success");
+            this.setState({disabled:true,saved:true});
+            
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+
     }
 
 
@@ -114,8 +135,10 @@ class  PersonalInfoForm extends Component {
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Col sm={2}></Col>
-                            <Col  sm={4}>
+                            <Col sm={4}>
+                                <div style={{color:"#32CD32"}} hidden={!this.state.saved}>Info Saved!</div>
+                            </Col>
+                            <Col  sm={2}>
                             {button}
                             </Col>
                         </FormGroup>

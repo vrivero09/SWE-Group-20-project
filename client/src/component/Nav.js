@@ -25,14 +25,14 @@ class Navigation extends Component{
     };  
     this.signedIn = this.props.isAuth; 
     this.toLanding = false;
-    this.userFirstName = "No user";
+    this.user_id = "No user";
   }
 
   componentDidMount(){
     const token = localStorage.getItem("userToken");
     if(token){
         const decoded = jwt_decode(token);
-        this.userFirstName = decoded.firstName;
+        this.user_id = decoded._id;
     } 
   }
 
@@ -56,7 +56,7 @@ class Navigation extends Component{
       const token = localStorage.getItem("userToken");
       if(token){
           const decoded = jwt_decode(token);
-          this.userFirstName = decoded.firstName;
+          this.user_id = decoded._id;
       } 
     }
 
@@ -98,7 +98,7 @@ class Navigation extends Component{
             <Nav navbar>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  {this.userFirstName}
+                  {this.user_id}
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem href="/Profile">
