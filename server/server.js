@@ -39,4 +39,7 @@ app.use("/users", Users);
 var Wishlist = require("./routes/Wishlist");
 app.use("/wishlist", Wishlist);
 
+var CreditCards = require("./routes/CreditCards");
+app.use("/creditCards", CreditCards);
+
 app.listen(port, () => console.log("Server started on port " + port));
