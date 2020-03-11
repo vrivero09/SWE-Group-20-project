@@ -56,6 +56,7 @@ class Navigation extends Component{
       const token = localStorage.getItem("userToken");
       if(token){
           const decoded = jwt_decode(token);
+          console.log(token);
           this.user_id = decoded._id;
       } 
     }
