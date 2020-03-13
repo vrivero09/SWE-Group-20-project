@@ -4,6 +4,7 @@ import { Button, Container, Card } from 'reactstrap'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+
 class Carts extends Component{
 
     render(){
@@ -45,6 +46,7 @@ class Carts extends Component{
                       <Container>
                         <Card>
                         {addedItems}
+                        
                         </Card>
                       
                       </Container>

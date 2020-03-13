@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema({
-    book: [{type: mongoose.ObjectId, ref: 'book'}],
+    book: [{type: mongoose._id, ref: 'book'}],
 }, {_id: false});
 mongoose.model('ProductSchema', ProductSchema);
 
