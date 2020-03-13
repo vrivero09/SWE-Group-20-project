@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import { addToCart, removeItem } from './actions/action-types/cartActions';
+import { addToCart, removeItem } from './actions/action-types/types';
 import Checkout from './checkOut'
 import {
   Card, CardText, CardBody,CardImg,
@@ -89,7 +89,7 @@ const mapDispatchToProps= (dispatch)=>{
 return{
   addToCart: (id)=>{dispatch(addToCart(id))},
   removeItem: (id)=>{dispatch(removeItem(id))}
-  // addQuantity: (id)=>{dispatch(addQuantity(id))},
+  //addQuantity: (id)=>{dispatch(addQuantity(id))},
   // subtractQuantity: (id)=>{dispatch(subtractQuantity(id))}
   }
 }
