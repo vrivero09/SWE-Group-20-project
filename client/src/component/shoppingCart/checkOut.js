@@ -8,7 +8,7 @@ render(){
   
   return(
   <div className="purchase-card"> 
-  <div className="collection"><b>Item: {this.props.addedItems} </b>
+  <div className="collection"><b>Item: {this.props.items} </b>
     <div className="collection"><b>Total: $ {this.props.total} </b>
         <Button href ="/Cart">Checkout</Button>
     </div>
@@ -20,7 +20,7 @@ render(){
 
 const mapStateToProps = (state)=>{
 return{
-  addedItems: state.product,
+  items: state.id,
   total: state.total
   }
 }
