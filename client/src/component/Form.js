@@ -19,7 +19,7 @@ export default class Form extends React.Component {
       "userToken"
     );
     axios
-      .post("/Form/addreview", {
+      .post("/Books/addreview", {
         //may be book/addreview instead
         reviewText: this.state.reviewText,
         showUsername: this.state.checkBoxValue,
@@ -80,7 +80,7 @@ export default class Form extends React.Component {
           defaultChecked={this.state.checkBoxValue}
           onChange={e => this.boxChange(e)}
         />
-        <button onClick={e => this.onClickSave(e)}>Submit</button>
+        <button onClick={this.onClickSave}>Submit</button>
 
         <div>
           <h2>Rating from state: {rating}</h2>
