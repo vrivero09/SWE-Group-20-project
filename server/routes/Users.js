@@ -145,7 +145,6 @@ users.post("/changePassword",(req,res)=> {
 //Endpoint to change personal Info
 users.post("/changePersonalInfo",(req,res)=> {
     var decoded = jwt.verify(req.headers['authorization'], SECRET_KEY);
-    console.log(decoded._id);
     User.findOne({
         _id:decoded._id,
     })
