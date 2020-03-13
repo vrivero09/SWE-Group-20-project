@@ -9,9 +9,9 @@ import Landing from './component/login_registration/landing';
 import Form from './component/Form';
 import Profile from './component/profile/profile';
 import bookDetails from './component/bookDetails/bookDetails';
-import Cart from './component/shoppingCart/Cart';
+//import Cart from './component/shoppingCart/Cart';
 import Product from './component/shoppingCart/Product';
-import CartItemList from './component/shoppingCart/CartItemList';
+//import CartItemList from './component/shoppingCart/CartItemList';
 import Carts from './component/shoppingCart/Carts';
 
 class App extends Component{
@@ -52,7 +52,7 @@ class App extends Component{
 
 
 
-      <Route path ='/Cart' component={Cart} />
+      <Route path ='/Cart' component={Carts} />
 
 
       <Route path ='/Wishlist' component={Wishlist} />

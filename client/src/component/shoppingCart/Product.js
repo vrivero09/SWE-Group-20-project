@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom'
 import { addToCart, removeItem } from './actions/cart-actions';
 import { connect } from 'react-redux'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-
-
+import Item from './CartItem'
 
 class Product extends React.Component {
   constructor(props) {
@@ -15,6 +14,7 @@ class Product extends React.Component {
     products: [],
     total:100
     }
+    this.addedItems = this.addedItems.bind(this);
   }
 
 
@@ -55,6 +55,7 @@ componentDidMount() {
     return <div key={item._id}>
     <div><h1>Product Page</h1></div>
     <Container>
+
     <Row>
       <Col md={4}>
       <Card >
@@ -69,7 +70,6 @@ componentDidMount() {
       &nbsp;&nbsp;&nbsp;
       <Link to="/Cart"><Button onClick={()=>{this.handleRemove(item.id)}}>Remove</Button></Link>
       &nbsp;&nbsp;&nbsp;
-
       </Card>
       </Col>
       </Row>
