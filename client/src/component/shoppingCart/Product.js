@@ -1,24 +1,42 @@
-import React from 'react';
-import axios from 'axios';
-import { Card, Row, Col, Button, Container, CardImg, CardText } from 'reactstrap'
-import { Link } from 'react-router-dom'
-import { addToCart, removeItem } from './actions/cart-actions';
+import React, {Component} from 'react';
 import { connect } from 'react-redux'
+import { addToCart, removeItem } from './actions/action-types/cartActions';
+import Checkout from './checkOut'
+import {
+  Card, CardText, CardBody,CardImg,
+  CardTitle, CardSubtitle, Container, Button, Row, Col
+} from 'reactstrap';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import Item from './CartItem'
 
-class Product extends React.Component {
-  constructor(props) {
+
+
+//import Book from 'C:\Users\river\OneDrive\Documents\GitHub\SWE-Group-20-project\server\models\Book.js'
+
+// const schema= new this.schema({
+// bookTitle:{type: String, required:true},
+// price:{type: Number, required:true},
+// author:{type: String, required:true},
+// authorBio:{type: String, required:true},
+// averageRating:{type: Number, required:true},
+// description:{type: String, required:true},
+// genre:{type: String, required:true},
+// publisher:{type: String, required:true},
+// bookImage:{type: String, required:true}
+
+// });
+//module.exports = mongoose.model('Product', Book);
+
+
+class Product extends Component {
+
+  constructor(props){
     super(props);
-    this.state = {
-    products: [],
-    total:100
+    this.state={
+      total:100
     }
-    this.addedItems = this.addedItems.bind(this);
   }
 
-
-handleClick = (id)=>{
+  handleClick = (id)=>{
     this.props.addToCart(id); 
 }
 
@@ -26,61 +44,41 @@ handleRemove = (id)=>{
   this.props.removeItem(id);
 }
 
-
-componentDidMount() {
-       this.getBook()
-      }
- getBook(){
-    return axios.post('book/products',{
-        _id:"5e50b8101c9d4400000eed83"
-    })
-    .then(res=>{
-       console.log(res);
-        this.setState({products:res.data})
-       console.log(this.state);
-    })
-    .catch(err=>{
-        console.log(err);
-    });
-  }
-
-
   render() {
-    let items = [this.state.products];
-    
-          for (let key of Object.keys(items)) {
-              console.log(`$key: ${items[key]}`);
-          }
-  return items.map(item => {
-    return <div key={item._id}>
-    <div><h1>Product Page</h1></div>
-    <Container>
-
-    <Row>
-      <Col md={4}>
-      <Card >
-      <CardImg src={item.bookCoverAddress} flex/>
-
-      <CardText>
-        <p><b>Price: $</b>{item.price}</p>
-        <p><b>Description: </b>{item.description}</p>
-      </CardText>
-        
-      <Link to="/Cart"><Button onClick={()=>{this.handleClick(item.id)}}><AddShoppingCartIcon/></Button></Link>
-      &nbsp;&nbsp;&nbsp;
-      <Link to="/Cart"><Button onClick={()=>{this.handleRemove(item.id)}}>Remove</Button></Link>
-      &nbsp;&nbsp;&nbsp;
-      </Card>
-      </Col>
-      </Row>
-
-    </Container>
-    </div>
-
- })
+    let itemList = this.props.items.map(item=>{
+      return(
+        <Container className="container">
+        <div >
+      <Card className ="purchase-card" style={{width:"49%", height:"40%"}}>
+          <CardImg src={item.img} alt={item.title} fluid/>
+          <CardBody>
+            <CardTitle>Card title</CardTitle>
+            <CardSubtitle>{item.title}</CardSubtitle>
+            <CardText><b>Price: ${item.price}</b></CardText>
+              <Button onClick={()=>{this.handleClick(item.id)}}><AddShoppingCartIcon/></Button>
+              <Button onClick={()=>{this.handleRemove(item.id)}}>Remove</Button>
+          </CardBody>
+        </Card>
+        </div>
+        </Container>
+       
+      )
+  })
+  return(
+    <div className="container_cards">
+          <h3 className="center">Our products</h3>
+          <Checkout href="/Cart" price={this.state.total} item={this.props.items} /> 
+        <Container className="items">
+        <div className="col-xs-6">
+        <Col gutter ={[3 ,3]}>
+          {itemList}
+        </Col>  
+        </div>
+        </Container>   
+    </div>    
+        );
+  }
 }
-}
-
 const mapStateToProps = (state)=>{
   return {
       items: state.items
@@ -99,5 +97,6 @@ return{
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);
+
 
 
