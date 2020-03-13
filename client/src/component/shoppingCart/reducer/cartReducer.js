@@ -2,7 +2,7 @@ import HP1 from './photo/HP1.jpg'
 import HP22 from './photo/HP22.jpg'
 import HP33 from './photo/HP33.jpg'
 import SW11 from './photo/SW11.jpg'
-import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY } from '../actions/cart-actions'
+import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY } from '../actions/action-types/types'
 
 const initState = {
     items: [
