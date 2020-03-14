@@ -80,8 +80,7 @@ export default class Form extends React.Component {
           defaultChecked={this.state.checkBoxValue}
           onChange={e => this.boxChange(e)}
         />
-        <button onClick={this.onClickSave}>Submit</button>
-
+        <button onClick={e => this.onClickSave}>Submit</button>
         <div>
           <h2>Rating from state: {rating}</h2>
           <StarRatingComponent
