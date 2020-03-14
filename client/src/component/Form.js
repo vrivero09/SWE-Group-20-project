@@ -23,7 +23,8 @@ export default class Form extends React.Component {
         //may be book/addreview instead
         reviewText: this.state.reviewText,
         showUsername: this.state.checkBoxValue,
-        starRating: this.state.rating
+        starRating: this.state.rating,
+        _id: "5e559a1c1c9d440000350f9c"
       })
       .then(res => {})
       .catch(err => {
@@ -80,7 +81,7 @@ export default class Form extends React.Component {
           defaultChecked={this.state.checkBoxValue}
           onChange={e => this.boxChange(e)}
         />
-        <button onClick={e => this.onClickSave}>Submit</button>
+        <button onClick={e => this.onClickSave(e)}>Submit</button>
         <div>
           <h2>Rating from state: {rating}</h2>
           <StarRatingComponent
