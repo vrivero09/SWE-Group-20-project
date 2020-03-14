@@ -19,7 +19,7 @@ export default class Form extends React.Component {
       "userToken"
     );
     axios
-      .post("/Books/addreview", {
+      .post("/book/addreview", {
         //may be book/addreview instead
         reviewText: this.state.reviewText,
         showUsername: this.state.checkBoxValue,
