@@ -1,6 +1,7 @@
 import React, {Component } from 'react';
 import './Nav.css';
 import MaterialIcon from 'react-google-material-icons';
+import jwt_decode from 'jwt-decode';
 import {
   Collapse,
   Navbar,
@@ -8,8 +9,11 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink, Badge,
-  NavbarText
+  NavLink,
+  NavbarText,  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from 'reactstrap';
 import { Redirect} from 'react-router-dom'
 
@@ -21,6 +25,15 @@ class Navigation extends Component{
     };  
     this.signedIn = this.props.isAuth; 
     this.toLanding = false;
+    this.user_id = "No user";
+  }
+
+  componentDidMount(){
+    const token = localStorage.getItem("userToken");
+    if(token){
+        const decoded = jwt_decode(token);
+        this.user_id = decoded._id;
+    } 
   }
 
   onToggle(){
@@ -40,7 +53,13 @@ class Navigation extends Component{
     //check if signed in
     if(this.props.isAuth){
       this.signedIn = true;
-     }
+      const token = localStorage.getItem("userToken");
+      if(token){
+          const decoded = jwt_decode(token);
+          console.log(token);
+          this.user_id = decoded._id;
+      } 
+    }
 
     //if signed out
      if(!this.signedIn && this.toLanding === true){
@@ -62,7 +81,7 @@ class Navigation extends Component{
           <Collapse isOpen={this.state.toggle} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink href="/Profile">Profile</NavLink>
+                <NavLink href="/bookDetails">bookDetails</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href ="/Products">Products</NavLink>
@@ -79,7 +98,22 @@ class Navigation extends Component{
             <NavbarText>
               <NavLink href ="/Wishlist"><MaterialIcon icon="assignment" size={25} /></NavLink>
             </NavbarText>
-            <NavbarText href="" onClick={()=>this.logout()}>Logout</NavbarText>
+            <Nav navbar>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  {this.user_id}
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem href="/Profile">
+                    Profile
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem onClick={()=>this.logout()}>
+                    logout
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            </Nav>
           </Collapse>
         </Navbar>
       </div>
