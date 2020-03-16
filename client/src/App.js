@@ -9,10 +9,15 @@ import Landing from './component/login_registration/landing';
 import Form from './component/Form';
 import Profile from './component/profile/profile';
 import bookDetails from './component/bookDetails/bookDetails';
-//import Cart from './component/shoppingCart/Cart';
-import Product from './component/shoppingCart/Product';
+import Cart from './component/shoppingCart/Cart';
+import Product from './component/shoppingCart/ProductList';
+import Checkout from './component/shoppingCart/checkOut'
 //import CartItemList from './component/shoppingCart/CartItemList';
-import Carts from './component/shoppingCart/Carts';
+//import Carts from './component/shoppingCart/Carts';
+import ProductList from '../src/component/shoppingCart/ProductList'
+//import ProductItem from './component/shoppingCart/ProductItem'
+import ProductItem from './component/shoppingCart/ProductItem'
+
 
 class App extends Component{
 
@@ -36,9 +41,11 @@ class App extends Component{
   logOut(){
     console.log("logout");
     this.setState({isAuthenticated:false});
+    //localStorage.removeItem('x-access-token');
   }
 
   render() {
+   
   return (
     
     <BrowserRouter>
@@ -47,12 +54,18 @@ class App extends Component{
       <Route exact path ='/' render={(props) => <Landing {...props} logIn={this.logIn} />}/>
 
       <Route path ='/Home' component={Home} />
+      
       <Route path ='/bookDetails' component={bookDetails} />
-      <Route path ='/Products' component={Product} />
 
 
 
-      <Route path ='/Cart' component={Carts} />
+      <div className="container">
+        <br/>
+        <Route exact path="/Products" component={Product} />
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/checkout" component={Checkout} />
+
+      </div>
 
 
       <Route path ='/Wishlist' component={Wishlist} />

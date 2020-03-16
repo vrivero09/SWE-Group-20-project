@@ -1,15 +1,17 @@
-import ReactDOM from 'react-dom';
 import React from 'react';
-import './index.css';
+import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import cartReducer from './component/shoppingCart/reducer/cartReducer';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const store = createStore(cartReducer);
+// import cartReducer from './component/shoppingCart/reducer/cartReducer';
+// import { Provider } from 'react-redux';
+// import { createStore } from 'redux';
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+//const store = createStore(cartReducer);
+
+//ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 
 // If you want your app to work offline and load faster, you can change

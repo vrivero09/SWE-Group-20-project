@@ -9,7 +9,9 @@ class CartItemList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        products: []
+        products: [{
+          _id: String
+        }]
         }
       }
     componentDidMount() {

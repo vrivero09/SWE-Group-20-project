@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema({
-    book: [{type: mongoose._id, ref: 'book'}],
+    _id: [{type: mongoose._id, ref: 'book'}],
 }, {_id: false});
-mongoose.model('ProductSchema', ProductSchema);
+module.exports = Book = mongoose.model('ProductSchema', ProductSchema);
 
 const OrderSchema = new Schema({
     _id: String,
