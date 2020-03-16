@@ -4,7 +4,7 @@ import { addToCart, removeItem } from './actions/action-types/cartActions';
 import Checkout from './checkOut'
 import {
   Card, CardText, CardBody,CardImg,
-  CardTitle, CardSubtitle, Container, Button, Row, Col
+  CardTitle, CardSubtitle, Container, Button, Col
 } from 'reactstrap';
 //import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
