@@ -1,102 +1,93 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux'
-import { addToCart, removeItem } from './actions/action-types/cartActions';
-import Checkout from './checkOut'
-import {
-  Card, CardText, CardBody,CardImg,
-  CardTitle, CardSubtitle, Container, Button, Row, Col
-} from 'reactstrap';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import React from 'react';
+import axios from 'axios'
+//import { getProducts} from './repository';
 
+//will be used to render each product on the product list.
 
+export default class ProductItem extends React.Component {
 
-//import Book from 'C:\Users\river\OneDrive\Documents\GitHub\SWE-Group-20-project\server\models\Book.js'
-
-// const schema= new this.schema({
-// bookTitle:{type: String, required:true},
-// price:{type: Number, required:true},
-// author:{type: String, required:true},
-// authorBio:{type: String, required:true},
-// averageRating:{type: Number, required:true},
-// description:{type: String, required:true},
-// genre:{type: String, required:true},
-// publisher:{type: String, required:true},
-// bookImage:{type: String, required:true}
-
-// });
-//module.exports = mongoose.model('Product', Book);
-
-
-class Product extends Component {
-
-  constructor(props){
-    super(props);
-    this.state={
-      total:100
-    }
-  }
-
-  handleClick = (id)=>{
-    this.props.addToCart(id); 
-}
-
-handleRemove = (id)=>{
-  this.props.removeItem(id);
-}
-
-  render() {
-    let itemList = this.props.items.map(item=>{
-      return(
-        <Container className="container">
-        <div >
-      <Card className ="purchase-card" style={{width:"49%", height:"40%"}}>
-          <CardImg src={item.img} alt={item.title} fluid/>
-          <CardBody>
-            <CardTitle>Card title</CardTitle>
-            <CardSubtitle>{item.title}</CardSubtitle>
-            <CardText><b>Price: ${item.price}</b></CardText>
-              <Link to="/Cart"><Button onClick={()=>{this.handleClick(item.id)}}><AddShoppingCartIcon/></Button></Link>
-              <Link to="/Cart"><Button onClick={()=>{this.handleRemove(item.id)}}>Remove</Button></Link>
-          </CardBody>
-        </Card>
-        </div>
-        </Container>
-       
-      )
-  })
-  return(
-    <div className="container_cards">
-          <h3 className="center">Our products</h3>
-          <Checkout href="/Cart" price={this.state.total} item={this.props.items} /> 
-        <Container className="items">
-        <div className="col-xs-6">
-        <Col gutter ={[3 ,3]}>
-          {itemList}
-        </Col>  
-        </div>
-        </Container>   
-    </div>    
-        );
-  }
-}
-const mapStateToProps = (state)=>{
-  return {
-      items: state.items
-       }
-  }
-const mapDispatchToProps= (dispatch)=>{
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: {
+                bookTitle: "",
+                description: "",
+                bookCoverAddress: "",
+                price:"",
+                quantity: 1}
+            };
+            
+        }
     
-return{
-  addToCart: (id)=>{dispatch(addToCart(id))},
-  removeItem: (id)=>{dispatch(removeItem(id))}
-  // addQuantity: (id)=>{dispatch(addQuantity(id))},
-  // subtractQuantity: (id)=>{dispatch(subtractQuantity(id))}
-  }
+    //     async componentDidMount() {
+    //     getProducts().then((products) => {
+    //       return this.setState({ products });
+    //     });
+    //   }
+    componentDidMount() {
+        this.getBook()
+       }
+
+  getBook(){
+     return axios.get('book/products',{
+        _id:"5e50b8101c9d4400000eed83"
+    })
+     .then(res=>{
+        console.log(res);
+         this.setState({products:res.data})
+        console.log(this.state);
+     })
+     .catch(err=>{
+         console.log(err);
+     });
+  }    
+
+    // handleInputChange = event => 
+    // this.setState({[event.target.name]: event.target.value})
+
+    addToCart = () => {
+    let cart = localStorage.getItem('cart') 
+                    ? JSON.parse(localStorage.getItem('cart')) : {};
+
+    let id = this.props.products.id.toString();
+    cart[id] = (cart[id] ? cart[id]: 0);
+    let qty = cart[id] + parseInt(this.state.quantity);
+    if (this.props.products.quantity < qty) {
+        cart[id] = this.props.products.quantity; 
+    } else {
+        cart[id] = qty
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    render(){
+    let products = [this.state.products];
+    
+    for (let key of Object.keys(products)) {
+        console.log(`$key: ${products[key]}`);
+    }
+    //console.log(products)
+    return (
+        <div className="card" style={{ marginBottom: "10px"}}>
+        <div className="card-body">
+            <h4 className="card-title">{products.bookTitle}</h4>
+            <p className="card-text">{products.description}</p>
+            <h5 className="card-text"><small>price: </small>${products.price}</h5>
+            <span className="card-text">
+            <small>Available Quantity: </small>{products.quantity}
+            </span>
+            { products.available_quantity > 0 ?
+            <div>
+                <button className="btn btn-sm btn-warning float-right" 
+                onClick={this.addToCart}>Add to cart</button>
+                <input type="number" value={this.state.quantity} name="quantity" 
+                onChange={this.handleInputChange} className="float-right" 
+                style={{ width: "60px", marginRight: "10px", borderRadius: "3px"}}/>
+            </div> : 
+            <p className="text-danger"> product is out of stock </p>
+        }
+        </div>
+    </div>
+    )
+    }
 }
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
-
-
-
