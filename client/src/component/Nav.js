@@ -1,4 +1,4 @@
-import React, {Component } from 'react';
+import React, {Component, Badge } from 'react';
 import './Nav.css';
 import MaterialIcon from 'react-google-material-icons';
 import jwt_decode from 'jwt-decode';

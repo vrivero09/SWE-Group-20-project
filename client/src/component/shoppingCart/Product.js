@@ -6,7 +6,7 @@ import {
   Card, CardText, CardBody,CardImg,
   CardTitle, CardSubtitle, Container, Button, Row, Col
 } from 'reactstrap';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+//import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 
 
@@ -55,7 +55,7 @@ handleRemove = (id)=>{
             <CardTitle>Card title</CardTitle>
             <CardSubtitle>{item.title}</CardSubtitle>
             <CardText><b>Price: ${item.price}</b></CardText>
-              <Button onClick={()=>{this.handleClick(item.id)}}><AddShoppingCartIcon/></Button>
+              <Button onClick={()=>{this.handleClick(item.id)}}>ADD</Button>
               <Button onClick={()=>{this.handleRemove(item.id)}}>Remove</Button>
           </CardBody>
         </Card>
