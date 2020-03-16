@@ -6,7 +6,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
-
 class bookDetails extends Component {
     constructor(props) {
         super(props);
