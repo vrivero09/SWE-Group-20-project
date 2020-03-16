@@ -1,6 +1,6 @@
 
 import React from 'react';
-import ProductItem from './ProductItem';
+import ProductItem from './productItem';
 import { getProducts} from './repository';
 import { Link } from 'react-router-dom';
 import './repository'
