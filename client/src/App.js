@@ -14,9 +14,6 @@ import Product from './component/shoppingCart/ProductList';
 import Checkout from './component/shoppingCart/checkOut'
 //import CartItemList from './component/shoppingCart/CartItemList';
 //import Carts from './component/shoppingCart/Carts';
-import ProductList from '../src/component/shoppingCart/ProductList'
-//import ProductItem from './component/shoppingCart/ProductItem'
-import ProductItem from './component/shoppingCart/ProductItem'
 
 
 class App extends Component{
