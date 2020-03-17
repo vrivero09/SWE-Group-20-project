@@ -1,4 +1,5 @@
-import React, {Component, Badge } from 'react';
+import React, {Component } from 'react';
+import {Badge} from 'reactstrap'
 import './Nav.css';
 import MaterialIcon from 'react-google-material-icons';
 import jwt_decode from 'jwt-decode';
@@ -18,6 +19,7 @@ import {
 import { Redirect} from 'react-router-dom'
 
 class Navigation extends Component{
+
   constructor(props){
     super(props);
     this.state = {
