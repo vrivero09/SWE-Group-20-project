@@ -1,32 +1,37 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component, Link} from 'react';
 import { connect } from 'react-redux'
-import { addToCart, removeItem } from './actions/cart-actions';
+import { addToCart, removeItem } from './actions/action-types/cartActions';
 import Checkout from './checkOut'
 import {
   Card, CardText, CardBody,CardImg,
-  CardTitle, CardSubtitle, Container, Button, Col
+  CardTitle, CardSubtitle, Container, Button, Row, Col
 } from 'reactstrap';
-//import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+
+
+
+//import Book from 'C:\Users\river\OneDrive\Documents\GitHub\SWE-Group-20-project\server\models\Book.js'
+
+// const schema= new this.schema({
+// bookTitle:{type: String, required:true},
+// price:{type: Number, required:true},
+// author:{type: String, required:true},
+// authorBio:{type: String, required:true},
+// averageRating:{type: Number, required:true},
+// description:{type: String, required:true},
+// genre:{type: String, required:true},
+// publisher:{type: String, required:true},
+// bookImage:{type: String, required:true}
+
+// });
+//module.exports = mongoose.model('Product', Book);
+
 
 class Product extends Component {
-  // render() {
-  //   let items = [this.state.products];
-    
-  //         for (let key of Object.keys(items)) {
-  //             console.log(`$key: ${items[key]}`);
-  //         }
-
-  //   return <div key={items._id}>
-  //       <h3>{items.price}</h3>
-  //       <p>{items.description}</p>
-  //   </div>
-  // }
 
   constructor(props){
     super(props);
     this.state={
-      addedItems: String,
-      cart: [],
       total:100
     }
   }
@@ -39,37 +44,30 @@ handleRemove = (id)=>{
   this.props.removeItem(id);
 }
 
-
-render() {
+  render() {
     let itemList = this.props.items.map(item=>{
       return(
-        <Fragment>
         <Container className="container">
         <div >
-      <Card className ="purchase-card" style={{width:"20%", height:"40%"}}>
+      <Card className ="purchase-card" style={{width:"49%", height:"40%"}}>
           <CardImg src={item.img} alt={item.title} fluid/>
           <CardBody>
             <CardTitle>Card title</CardTitle>
             <CardSubtitle>{item.title}</CardSubtitle>
             <CardText><b>Price: ${item.price}</b></CardText>
-<<<<<<< HEAD
-              <Button onClick={()=>{this.handleClick(item.id)}}>ADD</Button>
-=======
-              <Button onClick={()=>{this.handleClick(item.id)}}><AddShoppingCartIcon/></Button>
-              
->>>>>>> shoppingCart
-              <Button onClick={()=>{this.handleRemove(item.id)}}>Remove</Button>
+              <Link to="/Cart"><Button onClick={()=>{this.handleClick(item.id)}}><AddShoppingCartIcon/></Button></Link>
+              <Link to="/Cart"><Button onClick={()=>{this.handleRemove(item.id)}}>Remove</Button></Link>
           </CardBody>
         </Card>
         </div>
         </Container>
-        </Fragment>
+       
       )
   })
   return(
     <div className="container_cards">
           <h3 className="center">Our products</h3>
-          <Checkout href="/Cart" price={this.state.total} title={this.state.addedItems} /> 
+          <Checkout href="/Cart" price={this.state.total} item={this.props.items} /> 
         <Container className="items">
         <div className="col-xs-6">
         <Col gutter ={[3 ,3]}>
@@ -91,7 +89,7 @@ const mapDispatchToProps= (dispatch)=>{
 return{
   addToCart: (id)=>{dispatch(addToCart(id))},
   removeItem: (id)=>{dispatch(removeItem(id))}
-  //addQuantity: (id)=>{dispatch(addQuantity(id))},
+  // addQuantity: (id)=>{dispatch(addQuantity(id))},
   // subtractQuantity: (id)=>{dispatch(subtractQuantity(id))}
   }
 }
