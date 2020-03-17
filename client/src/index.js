@@ -1,17 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-<<<<<<< HEAD
-// import { Provider } from 'react-redux';
-// import cartReducer from './component/shoppingCart/reducer/cartReducer'
-//import * as serviceWorker from './serviceWorker';
-// import { createStore } from 'redux';
-
-// const store = createStore(cartReducer);
-
-// ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
-ReactDOM.render(<App />, document.getElementById('root'));
-=======
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -20,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import { createStore } from 'redux';
 
 //const store = createStore(cartReducer);
->>>>>>> shoppingCart
 
 //ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 ReactDOM.render(<App />, document.getElementById('root'));
