@@ -17,6 +17,8 @@ import {
   DropdownItem,
 } from 'reactstrap';
 import { Redirect} from 'react-router-dom'
+import {  BrowserRouter as Link } from 'react-router-dom';
+//import { isAuthenticated } from './shoppingCart/repository';
 
 class Navigation extends Component{
 
@@ -51,6 +53,7 @@ class Navigation extends Component{
   }
 
   render(){
+    //const auth = isAuthenticated();
 
     //check if signed in
     if(this.props.isAuth){
