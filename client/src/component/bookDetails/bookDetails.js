@@ -1,16 +1,16 @@
-
 import {
   Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Row, Col, Container
 } from 'reactstrap';
 import React, {Component} from 'react';
 import axios from 'axios';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 class bookDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        products: {
+        products: [{
             bookTitle: "",
             description: "",
             genre: "",
@@ -19,11 +19,14 @@ class bookDetails extends Component {
             bookCoverAddress: "",
             author: "",
             authorBio: "",
+            price:""
+        }]
         }
-        }}
+      }
     componentDidMount() {
            this.getBook()
           }
+
      getBook(){
         return axios.post('book/products',{
             _id:"5e50b8101c9d4400000eed83"
@@ -60,13 +63,19 @@ class bookDetails extends Component {
              <div>
             {this.state.products.authorBio}
                   </div>
+            <div>
+              <b>Price : </b>$
+              {this.state.products.price}
+            </div>
+
              <div>
                  Average Rating :
               {this.state.products.averageRating}
             </div>
                   
                   </CardText>
-          <Button href="/Cart">Add to Cart</Button>
+                  <Button><AddShoppingCartIcon/></Button>
+                  {/* onClick={()=>{this.handleClick(this.state.products.id)}} */}
         </CardBody>
       </Card>
       </Col>

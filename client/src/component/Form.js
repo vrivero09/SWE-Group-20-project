@@ -1,14 +1,36 @@
 import React from "react";
 //import ReactDOM from "react-dom";
 import StarRatingComponent from "react-star-rating-component";
+import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 export default class Form extends React.Component {
   state = {
     reviewText: "",
-    labelText: "",
     checkBoxValue: false,
     rating: 0
   };
+
+  //save and disable inputs
+  onClickSave(e) {
+    e.preventDefault();
+
+    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
+      "userToken"
+    );
+    axios
+      .post("/book/addreview", {
+        //may be book/addreview instead
+        reviewText: this.state.reviewText,
+        showUsername: this.state.checkBoxValue,
+        starRating: this.state.rating,
+        _id: "5e559a1c1c9d440000350f9c"
+      })
+      .then(res => {})
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   change = e => {
     this.setState({
@@ -59,8 +81,7 @@ export default class Form extends React.Component {
           defaultChecked={this.state.checkBoxValue}
           onChange={e => this.boxChange(e)}
         />
-        <button onClick={() => this.onSubmit()}>Submit</button>
-
+        <button onClick={e => this.onClickSave(e)}>Submit</button>
         <div>
           <h2>Rating from state: {rating}</h2>
           <StarRatingComponent
