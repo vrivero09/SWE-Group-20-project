@@ -15,7 +15,7 @@ class ShippingAddreses extends Component{
         };
 
         const user_id = "";
-
+        this.updateList = this.updateList.bind(this);
     }
 
     componentDidMount(){
@@ -38,12 +38,17 @@ class ShippingAddreses extends Component{
         });
     }
 
+    //update the list when there is a change
+    updateList(newList){
+        this.setState({addresses:newList});
+    }
+
     //render each shipping address item in the list
     renderItem(){
         if(this.state.addresses.length > 0){
            return( this.state.addresses.map((item, index) => (
                     <div key={item._id} style={{marginBottom:'20px'}}>
-                        <ShippingAddrForm disabled style={{paddingBottom:'50px'}} item={item} />
+                        <ShippingAddrForm disabled style={{paddingBottom:'50px'}} item={item} update={this.updateList} Edit />
                     </div> 
                 ))
             );
@@ -56,7 +61,7 @@ class ShippingAddreses extends Component{
         return(
             <div>
                 <div style={{marginTop:'20px'}}>
-                    <ShippingAddrForm Add ></ShippingAddrForm> 
+                    <ShippingAddrForm Add update={this.updateList} ></ShippingAddrForm> 
                     </div>
                     <h5 className="text-left" style={{marginTop:'20px'}}>Your saved shipping addresses:</h5>
                     <div style={{marginTop:'20px'}}>
@@ -75,18 +80,22 @@ class  ShippingAddrForm extends Component {
         super();
         this.state = {
             item:{
+                _id:"",
                 street:"",
                 city:"",
                 state:"",
                 zip:"",
             },
-            disabled: false
+            disabled: false,
+            saved: false
             
         };
 
         this.onChange = this.onChange.bind(this);
         this.onClickEdit = this.onClickEdit.bind(this);
         this.onClickSave = this.onClickSave.bind(this);
+        this.onClickAdd = this.onClickAdd.bind(this);
+        this.onClickDelete = this.onClickDelete.bind(this);
     }
 
     componentDidMount(){
@@ -97,19 +106,85 @@ class  ShippingAddrForm extends Component {
     }
 
     onChange(e){
-        this.setState({[e.target.name] : e.target.value});
+        this.setState({
+            item: {                   // object that we want to update
+                ...this.state.item,    // keep all other key-value pairs
+                [e.target.name]: e.target.value       // update the value of specific key
+            }
+        });
+
+        //remove the saved message
+        if(this.props.Add){
+            this.setState({saved:false});
+        }
     }
 
     //enable inputs
     onClickEdit(e){
         e.preventDefault();
-        this.setState({disabled:false});
+        this.setState({disabled:false, saved:false});
     }
 
     //save and disable inputs
     onClickSave(e){
         e.preventDefault();
-        this.setState({disabled:true});
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
+        axios.post("/shippingAddresses/update",{
+            street: this.state.item.street,
+            state: this.state.item.state,
+            city: this.state.item.city,
+            zip:this.state.item.zip,
+            addr_id:this.state.item._id
+        }).then(res=>{
+            if(res.data.addresses){
+                this.props.update(res.data.addresses);
+                this.setState({disabled:true,saved:true});
+            }
+        }).catch(err=>{
+            console.log(err);
+        });
+    }
+
+    //add address to the list and reset state to blank inputs
+    onClickAdd(e){
+        e.preventDefault();
+
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
+        axios.post("/shippingAddresses/add",{
+            street: this.state.item.street,
+            state: this.state.item.state,
+            city: this.state.item.city,
+            zip:this.state.item.zip,
+        }).then(res=>{
+            console.log(res);
+            if(res.data.addresses){
+                this.props.update(res.data.addresses);
+                this.setState({ item:{
+                    street:"",
+                    state:"",
+                    city:"",
+                    zip:"",
+                },saved:true});
+            }
+        }).catch(err=>{
+            console.log(err);
+        });
+    }
+
+    //delete addresses
+    onClickDelete(e){
+        e.preventDefault();
+
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
+        axios.post("/shippingAddresses/remove",{
+            addr_id:this.state.item._id
+        }).then(res=>{
+            if(res.data.addresses){
+                this.props.update(res.data.addresses);
+            }
+        }).catch(err=>{
+            console.log(err);
+        });
     }
 
     
@@ -118,11 +193,11 @@ class  ShippingAddrForm extends Component {
         //determine to show add, edit, or save button
         var button = null;
         if(this.props.Add){
-            button = <Button className="float-right" size="sm" color="primary" style={{padding:"5px 15px"}}>Add</Button>;
+            button = <Button className="float-right" size="sm" color="primary" style={{padding:"5px 15px"}} onClick={this.onClickAdd}>Add</Button>;
         }else if(this.state.disabled){
             button = (
                 <div>
-                    <Button className="float-right" size="sm" color="danger"> <MaterialIcon icon="delete_forever" size={18} /></Button>
+                    <Button className="float-right" size="sm" color="danger" onClick={this.onClickDelete}> <MaterialIcon icon="delete_forever" size={18} /></Button>
                     <Button className="float-right mr-2" size="sm" color="secondary" style={{padding:"5px 15px"}} onClick={this.onClickEdit}>Edit</Button>
                 </div>
             );
@@ -169,8 +244,10 @@ class  ShippingAddrForm extends Component {
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
-                                <Col sm={4}></Col>
-                                <Col  sm={8}>
+                                <Col sm={8}>
+                                    <div style={{color:"#32CD32"}} hidden={!this.state.saved} >Info Saved!</div>
+                                </Col>
+                                <Col  sm={4}>
                                     {button}
                                 </Col>
                             </FormGroup>
