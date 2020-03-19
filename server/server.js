@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const middleware = require('./middleware')
+const data = require('./data');
 
 const port = 5000;
 app.use(bodyParser.json());
@@ -14,11 +15,11 @@ app.use(
   })
 );
 
-app.get('/api/products', (req, res) => { //lists all  available products
+app.get('/api/products', (req, res) => {
   return res.json(data.products);
 });
 
-app.post('/api/products', (req, res) => { //generates the list of products in the cart
+app.post('/api/products', (req, res) => {
   let products = [], id = null;
   let cart = JSON.parse(req.body.cart);
   if (!cart) return res.json(products)
@@ -56,7 +57,6 @@ app.use("/book", Books);
 
 //import user route
 var Users = require("./routes/Users");
-
 //use the route
 app.use("/users", Users);
 
