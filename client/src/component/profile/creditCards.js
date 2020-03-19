@@ -33,7 +33,6 @@ class CreditCards extends Component{
         .then(res => {
             if(res.data.user){
                 this.setState({cards:res.data.user.creditCards});
-                console.log(this.state.cards);
             }
         }).catch(err=>{
             console.log(err);
