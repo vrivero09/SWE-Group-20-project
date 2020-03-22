@@ -73,20 +73,20 @@ class  LoginCredentialsForm extends Component {
                 <AvForm onValidSubmit={this.onSubmit} id="loginForm"> 
                     <div style={{margin:'30px'}} className="text-left">
                         <FormGroup row>
-                            <Label sm={3} for="username">Username</Label>
+                            <Label sm={2} for="username">Username</Label>
                             <Col sm={4}>
                                 <Input disabled type="text" name="username" id="username" placeholder="username" value={this.state.username} onChange={this.onChange} />
                                 <FormFeedback> </FormFeedback>
                             </Col>
                         </FormGroup>
                         <FormGroup row style={{marginBottom:'0'}}>
-                            <Label sm={3} for="password">Password</Label>
+                            <Label sm={2} for="password">Password</Label>
                             <Col sm={4}>
                                 <AvField disabled={this.state.disabled} type="password" name="password" id="password" placeholder="Enter new password" required onChange={this.onChange} errorMessage="This field is required"/>
                             </Col>
                         </FormGroup>
                         <FormGroup hidden={this.state.disabled} row>
-                            <Label sm={3} for="confirmPassword">Confirm Password</Label>
+                            <Label sm={2} for="confirmPassword">Confirm Password</Label>
                             <Col sm={4}>
                                 <AvField disabled={this.state.disabled} type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" onChange={this.onChange} validate={{
                                     required:{value:true, errorMessage:'This field is required!'},
@@ -98,7 +98,7 @@ class  LoginCredentialsForm extends Component {
                             <Col sm={4}>
                                 <div style={{color:"#32CD32"}} hidden={!this.state.saved}>Password Changed!</div>
                             </Col>
-                            <Col  sm={3}>
+                            <Col  sm={2}>
                              {button}
                             </Col>
                         </FormGroup>
