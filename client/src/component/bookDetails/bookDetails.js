@@ -42,26 +42,32 @@ class bookDetails extends Component {
     <div>
     <Container>
     <Row>
-      <Col sm={3}>
+      <Col sm={4}>
       <Card>
         <CardImg src={this.state.products.bookCoverAddress} />
         <CardBody>
-          <CardTitle>{this.state.products.bookTitle}</CardTitle>
-          <CardSubtitle>{this.state.products.author}</CardSubtitle>
+          <CardTitle><strong>{this.state.products.bookTitle}</strong></CardTitle>
+              
+          <CardSubtitle>Author:&nbsp;{this.state.products.author}</CardSubtitle>
 
           <CardText><div>
+               Description:&nbsp; 
           {this.state.products.description}
               </div>
-              <div>{this.state.products.genre}
-                  </div>
               <div>
+                  Genre:&nbsp;  
+              {this.state.products.genre}
+              </div>
+              <div>
+                Publisher:&nbsp; 
               {this.state.products.publisher}
                   </div>
              <div>
+               Author Bio:&nbsp;  
             {this.state.products.authorBio}
                   </div>
              <div>
-                 Average Rating :
+                 Average Rating:&nbsp;  
               {this.state.products.averageRating}
             </div>
                   
