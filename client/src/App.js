@@ -11,6 +11,7 @@ import Landing from './component/login_registration/landing';
 import Form from './component/Form';
 import Profile from './component/profile/profile';
 import bookDetails from './component/bookDetails/bookDetails';
+import authorBooks from './component/bookDetails/authorBooks';
 
 class App extends Component{
   constructor(props){
@@ -45,6 +46,7 @@ class App extends Component{
       <Route path ='/Ratings' component={Form} />
       <Route path ='/Profile' component={Profile} />
       <Route path ='/bookDetails' component={bookDetails} />
+      <Route path ='/authorBooks/:authorName' component={authorBooks} />
     </div>
     </BrowserRouter>
   );

@@ -5,7 +5,7 @@ import {
 } from 'reactstrap';
 import React, {Component} from 'react';
 import axios from 'axios';
-
+import {Link} from "react-router-dom";
 class bookDetails extends Component {
     constructor(props) {
         super(props);
@@ -48,7 +48,7 @@ class bookDetails extends Component {
         <CardBody>
           <CardTitle><strong>{this.state.products.bookTitle}</strong></CardTitle>
               
-          <CardSubtitle>Author:&nbsp;{this.state.products.author}</CardSubtitle>
+          <CardSubtitle>Author:&nbsp;<Link to={"/authorBooks/"+this.state.products.author}>{this.state.products.author}</Link></CardSubtitle>
 
           <CardText><div>
                Description:&nbsp; 
