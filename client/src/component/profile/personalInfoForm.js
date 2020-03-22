@@ -5,16 +5,13 @@ import {
 } from 'reactstrap';
 import jwt_decode from 'jwt-decode';
 import axios from 'axios';
+import {AvForm,AvField} from 'availity-reactstrap-validation';
 
 class  PersonalInfoForm extends Component {
     constructor(){
         super();
         this.state = {
             info:{
-                firstName:"",
-                lastName:"",
-                nickname:"",
-                email:"",
             },
             disabled:true,
             saved:false
@@ -22,7 +19,7 @@ class  PersonalInfoForm extends Component {
 
         const user_id = "";
 
-        this.onChange = this.onChange.bind(this);
+        // this.onChange = this.onChange.bind(this);
         this.onClickEdit = this.onClickEdit.bind(this);
         this.onClickSave = this.onClickSave.bind(this);
     }
@@ -50,14 +47,14 @@ class  PersonalInfoForm extends Component {
         });
     }
 
-    onChange(e){
-        this.setState({
-            info: {                   // object that we want to update
-                ...this.state.info,    // keep all other key-value pairs
-                [e.target.name]: e.target.value       // update the value of specific key
-            }
-        });
-    }
+    // onChange(e){
+    //     this.setState({
+    //         info: {                   // object that we want to update
+    //             ...this.state.info,    // keep all other key-value pairs
+    //             [e.target.name]: e.target.value       // update the value of specific key
+    //         }
+    //     });
+    // }
 
     //enable inputs
     onClickEdit(e){
@@ -66,18 +63,18 @@ class  PersonalInfoForm extends Component {
     }
 
     //save and disable inputs
-    onClickSave(e){
-        e.preventDefault();
+    onClickSave(e,values){
+        //e.preventDefault();
 
         axios.post('users/changePersonalInfo',{
-            firstName : this.state.info.firstName,
-            lastName: this.state.info.lastName,
-            email:this.state.info.email,
-            nickname:this.state.info.nickname
+            firstName : values.firstName,
+            lastName: values.lastName,
+            email:values.email,
+            nickname:values.nickname
         })
         .then(res=>{
             console.log("success");
-            this.setState({disabled:true,saved:true});
+            this.setState({disabled:true,saved:true,info:values});
             
         })
         .catch(err=>{
@@ -98,40 +95,39 @@ class  PersonalInfoForm extends Component {
             );
         }else{
             button = (
-                    <Button className="float-right" size="sm" color="primary" style={{padding:"5px 15px"}} onClick={this.onClickSave}>Save</Button>
+                    <Button className="float-right" size="sm" color="primary" style={{padding:"5px 15px"}} >Save</Button>
             );
         }
 
         return(
             <div>
-                <Form  id="personalForm" > 
+                <AvForm onValidSubmit={this.onClickSave} id="personalForm" > 
                     <div style={{margin:'30px'}} className="text-left">
-                        <FormGroup row>
+                        <FormGroup row style={{marginBottom:'0'}}>
                             <Label sm={2} for="firstName">First Name</Label>
                             <Col sm={4}>
-                                <Input  type="text" name="firstName" id="firstName" disabled={this.state.disabled} placeholder="firstName" value={this.state.info.firstName} onChange={this.onChange} />
-                                <FormFeedback> </FormFeedback>
+                                <AvField required type="text" name="firstName" id="firstName" disabled={this.state.disabled} placeholder="firstName" value={this.state.info.firstName || ''} errorMessage='This field is required!' />
                             </Col>
                         </FormGroup>
-                        <FormGroup row>
+                        <FormGroup row style={{marginBottom:'0'}}>
                             <Label sm={2} for="lastName">Last Name</Label>
                             <Col sm={4}>
-                                <Input  type="text" name="lastName" id="lastName" disabled={this.state.disabled} placeholder="lastName" value={this.state.info.lastName} onChange={this.onChange}/>
-                                <FormFeedback></FormFeedback>
+                                <AvField required  type="text" name="lastName" id="lastName" disabled={this.state.disabled} placeholder="lastName" value={this.state.info.lastName||''} errorMessage='This field is required!'/>
                             </Col>
                         </FormGroup>
-                        <FormGroup row>
+                        <FormGroup row style={{marginBottom:'0'}}>
                             <Label sm={2} for="nickname">Nickname</Label>
                             <Col sm={4}>
-                                <Input  type="text" name="nickname" id="nickname" disabled={this.state.disabled}  placeholder="nickname" value={this.state.info.nickname} onChange={this.onChange}/>
-                                <FormFeedback></FormFeedback>
+                                <AvField required  type="text" name="nickname" id="nickname" disabled={this.state.disabled}  placeholder="nickname" value={this.state.info.nickname||''} errorMessage='This field is required!' />
                             </Col>
                         </FormGroup>
-                        <FormGroup row>
+                        <FormGroup row style={{marginBottom:'0'}}>
                             <Label sm={2} for="email">Email</Label>
                             <Col sm={4}>
-                                <Input  type="email" name="email" id="email"  disabled={this.state.disabled} placeholder="email" value={this.state.info.email} onChange={this.onChange}/>
-                                <FormFeedback></FormFeedback>
+                                <AvField  type="email" name="email" id="email"  disabled={this.state.disabled} placeholder="email" value={this.state.info.email||''} validate={{
+                                    required:{value:true, errorMessage:'This field is required!'},
+                                    email:{value:true, errorMessage:'Incorrect email format'}
+                                }}/>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
@@ -143,9 +139,7 @@ class  PersonalInfoForm extends Component {
                             </Col>
                         </FormGroup>
                     </div>
-                    
-                </Form>
-                
+                </AvForm>
             </div>
         );
     }
