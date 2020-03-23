@@ -14,7 +14,8 @@ class  PersonalInfoForm extends Component {
             info:{
             },
             disabled:true,
-            saved:false
+            saved:false,
+            foundAddress: true
         };
 
         const user_id = "";
@@ -40,7 +41,12 @@ class  PersonalInfoForm extends Component {
         axios.get('users/profile')
         .then(res => {
             if(res.data.user){
-                this.setState({info:res.data.user});
+                if(res.data.user.homeAddress){
+                    this.setState({info:res.data.user});
+                }else{
+                    this.setState({info:res.data.user,foundAddress:false});
+                }
+                
             }
         }).catch(err=>{
             console.log(err);
@@ -70,11 +76,15 @@ class  PersonalInfoForm extends Component {
             firstName : values.firstName,
             lastName: values.lastName,
             email:values.email,
-            nickname:values.nickname
+            nickname:values.nickname,
+            street:values.homeAddress.street,
+            city:values.homeAddress.city,
+            state:values.homeAddress.state,
+            zip:values.homeAddress.zip
         })
         .then(res=>{
             console.log("success");
-            this.setState({disabled:true,saved:true,info:values});
+            this.setState({disabled:true,saved:true,info:values,foundAddress:true});
             
         })
         .catch(err=>{
@@ -99,6 +109,16 @@ class  PersonalInfoForm extends Component {
             );
         }
 
+        var homeAddress = this.state.info.homeAddress;
+        if(!homeAddress){
+            homeAddress={
+                street:'',
+                city:'',
+                state:'',
+                zip:''
+            }
+        }
+
         return(
             <div>
                 <AvForm onValidSubmit={this.onClickSave} id="personalForm" > 
@@ -121,13 +141,38 @@ class  PersonalInfoForm extends Component {
                                 <AvField required  type="text" name="nickname" id="nickname" disabled={this.state.disabled}  placeholder="nickname" value={this.state.info.nickname||''} errorMessage='This field is required!' />
                             </Col>
                         </FormGroup>
-                        <FormGroup row style={{marginBottom:'0'}}>
+                        <FormGroup row style={{marginBottom:'40px'}}>
                             <Label sm={2} for="email">Email</Label>
                             <Col sm={4}>
                                 <AvField  type="email" name="email" id="email"  disabled={this.state.disabled} placeholder="email" value={this.state.info.email||''} validate={{
                                     required:{value:true, errorMessage:'This field is required!'},
                                     email:{value:true, errorMessage:'Incorrect email format'}
                                 }}/>
+                            </Col>
+                        </FormGroup>
+                        <p hidden={this.state.foundAddress} style={{color:'red'}}>You have no saved home address, please edit.</p>
+                        <FormGroup row style={{marginBottom:'0'}}>
+                            <Label sm={2} for="homeAddress.street">Street</Label>
+                            <Col sm={4}>
+                                <AvField required  type="text" name="homeAddress.street" disabled={this.state.disabled}  placeholder="Street" value={homeAddress.street} errorMessage='This field is required!' />
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row style={{marginBottom:'0'}}>
+                            <Label sm={2} for="homeAddress.city">City</Label>
+                            <Col sm={4}>
+                                <AvField required  type="text" name="homeAddress.city" disabled={this.state.disabled}  placeholder="City" value={homeAddress.city} errorMessage='This field is required!' />
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row style={{marginBottom:'0'}}>
+                            <Label sm={2} for="homeAddress.state">State</Label>
+                            <Col sm={4}>
+                                <AvField required  type="text" name="homeAddress.state" disabled={this.state.disabled}  placeholder="State" value={homeAddress.state} errorMessage='This field is required!' />
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row style={{marginBottom:'0'}}>
+                            <Label sm={2} for="homeAddress.zip">Zip</Label>
+                            <Col sm={4}>
+                                <AvField required  type="number" name="homeAddress.zip" disabled={this.state.disabled}  placeholder="Zip" value={homeAddress.zip} errorMessage='This field is required!' />
                             </Col>
                         </FormGroup>
                         <FormGroup row>
