@@ -26,7 +26,7 @@ class Navigation extends Component{
     super(props);
     this.state = {
       toggle:false,
-    };  
+    };
     this.signedIn = this.props.isAuth; 
     this.toLanding = false;
     this.user_id = "No user";
@@ -54,7 +54,11 @@ class Navigation extends Component{
 
   render(){
     //const auth = isAuthenticated();
-
+    let wishlistItemCount = 0;
+    console.log(this.props.wishlists);
+    this.props.wishlists.forEach(wishlist => {
+      wishlistItemCount += wishlist.books.length;
+    });
     //check if signed in
     if(this.props.isAuth){
       this.signedIn = true;
@@ -101,7 +105,7 @@ class Navigation extends Component{
               </NavLink>
             </NavbarText>
             <NavbarText>
-              <NavLink href ="/Wishlist"><MaterialIcon icon="assignment" size={25} /></NavLink>
+              <NavLink href ="/Wishlist"><MaterialIcon icon="assignment" size={25} /><Badge>{wishlistItemCount}</Badge></NavLink>
             </NavbarText>
             <Nav navbar>
               <UncontrolledDropdown nav inNavbar>
