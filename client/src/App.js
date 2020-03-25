@@ -12,14 +12,9 @@ import bookDetails from './component/bookDetails/bookDetails';
 import Cart from './component/shoppingCart/Cart';
 import Product from './component/shoppingCart/ProductList';
 import Checkout from './component/shoppingCart/checkOut'
-//import CartItemList from './component/shoppingCart/CartItemList';
-//import Carts from './component/shoppingCart/Carts';
 
 
 class App extends Component{
-
-  
-
   constructor(props){
     super(props);
     this.state={

@@ -1,34 +1,42 @@
 const products = [
     {
-      id: 01,
-      name: 'Product 1',
+      id: "5e559a1c1c9d440000350f9c",
+      name: "Harry Potter and the Chamber of Secrets",
       available_quantity: 5,
-      price: 450,
-      description: 'Lorem ipsum dolor sit amet, iusto appellantur vix te, nam affert feugait menandri eu. Magna simul ad est. Nostrum neglegentur ius at, at pertinax repudiare vel. Vim an adolescens quaerendum.'
+      price: 14,
+      description: 'Sequel of Book of a boy who does magic',
+      img: "https://images-na.ssl-images-amazon.com/images/I/51jNORv6nQL._SX340_BO1,204,203,200_.jpg",
+      author: "J.K. Rowling"
     },
   
     {
-      id: 02,
-      name: 'Product 2',
+      id: "5e50b8101c9d4400000eed83",
+      name: 'Harry Potter and the Sorcerer',
       available_quantity: 7,
-      price: 50,
-      description: 'Lorem ipsum dolor sit amet, iusto appellantur vix te, nam affert feugait menandri eu. Magna simul ad est. Nostrum neglegentur ius at, at pertinax repudiare vel. Vim an adolescens quaerendum.'
+      price: 15,
+      description: 'Book of a boy who does magic.',
+      img: "https://prodimage.images-bn.com/pimages/9781781100523_p0_v3_s1200x630.jpg",
+      author: "J.K. Rowling"
     },
   
     {
-      id: 03,
-      name: 'Product 3',
-      available_quantity: 0,
-      price: 500,
-      description: 'Lorem ipsum dolor sit amet, iusto appellantur vix te, nam affert feugait menandri eu. Magna simul ad est. Nostrum neglegentur ius at, at pertinax repudiare vel. Vim an adolescens quaerendum.'
+      id: "5e559a941c9d440000350f9d",
+      name: 'Harry Potter and the Prisoner of Azkaban',
+      available_quantity: 5,
+      price: 14,
+      description: 'Third book of the Harry Potter series',
+      img: "https://images-na.ssl-images-amazon.com/images/I/51-zRYQweBL.jpg",
+      author: "J.K. Rowling"
     },
   
     {
-      id: 04,
-      name: 'Product 4',
+      id: "5e559ae61c9d440000350f9e",
+      name: 'Harry Potter and the Goblet of Fire',
       available_quantity: 4,
-      price: 1500,
-      description: 'Lorem ipsum dolor sit amet, iusto appellantur vix te, nam affert feugait menandri eu. Magna simul ad est. Nostrum neglegentur ius at, at pertinax repudiare vel. Vim an adolescens quaerendum.'
+      price: 14,
+      description: 'Fourth book of the Harry Potter series',
+      img: "https://prodimage.images-bn.com/pimages/9781781100523_p0_v3_s1200x630.jpg",
+      author: "J.K. Rowling"
     },
   ];
 
