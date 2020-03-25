@@ -27,6 +27,9 @@ users.post('/signup', (req,res) => {
         email: req.body.email,
         nickname: req.body.nickname,
         password: req.body.password,
+        wishLists: [{
+            name: 'primary'
+        }]
     };
 
     //find user by id (username)
