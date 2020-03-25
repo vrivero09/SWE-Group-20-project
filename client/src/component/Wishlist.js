@@ -107,16 +107,15 @@ function Wishlist(props) {
     );
 }
 
-function Wishlists() {
-    const [wishlists, setWishlists] = useState([]);
+function Wishlists(props) {
     const [wishlistName, setWishlistName] = useState("");
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
     useEffect(() => {
-        if (wishlists.length === 0) {
+        if (props.wishlists.length === 0) {
             axios.get('wishlist')
             .then(res => {
                 if (res.data.result == 0) {
-                    setWishlists(res.data.wishlists);
+                    props.setWishlists(res.data.wishlists);
                 }
             });
         }
@@ -167,8 +166,8 @@ function Wishlists() {
 
     let elmWishlist = [];
     let index = 0;
-    wishlists.forEach(wishlist => {
-        elmWishlist.push(<div className="col-4" key={index++}><Wishlist wishlist={wishlist} setWishlists={setWishlists} wishlists={wishlists}/></div>);
+    props.wishlists.forEach(wishlist => {
+        elmWishlist.push(<div className="col-4" key={index++}><Wishlist wishlist={wishlist} setWishlists={props.setWishlists} wishlists={props.wishlists}/></div>);
     });
 
       return(
@@ -178,7 +177,7 @@ function Wishlists() {
         </div>
         <div className="d-flex w-100">
             <Input placeholder="wishlist name" className="w-25" value={wishlistName} onChange={(evt) => setWishlistName(evt.target.value)}/>
-            <Button onClick={()=>{ addWishlist(setWishlists, wishlistName); }}>Add Wishlist</Button>
+            <Button onClick={()=>{ addWishlist(props.setWishlists, wishlistName); }}>Add Wishlist</Button>
         </div>
         <div className="row pt-3 w-100 flex-grow-1 pb-3">
             {elmWishlist}
