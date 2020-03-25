@@ -33,7 +33,6 @@ app.post('/api/products', (req, res) => {
   return res.json(products);
 });
 
-
 app.get('/api/pay', middleware, (req, res) => { //checkout route for signed in users
   return res.json("Payment Successful!");
 });
@@ -62,6 +61,10 @@ app.use("/users", Users);
 
 var Wishlist = require("./routes/Wishlist");
 app.use("/wishlist", Wishlist);
+
+
+var cart = require("./routes/Cart");
+app.use("/cart", cart);
 
 var CreditCards = require("./routes/CreditCards");
 app.use("/creditCards", CreditCards);

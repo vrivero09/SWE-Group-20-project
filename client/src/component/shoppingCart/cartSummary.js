@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCartProducts, getSaveproducts } from './repository';
+import { getCartProducts } from './repository';
 import CartItem from './CartItem';
-import saveList from './saveList';
-import { Button, CardBody, Card } from 'reactstrap'
+import { Button } from 'reactstrap'
 
 export default class Cart extends React.Component {
 	constructor(props) {
@@ -13,18 +12,12 @@ export default class Cart extends React.Component {
 			total: 0
 		}
 	}
-
+	
 	handleInputChange = event => this.setState({[event.target.name]: event.target.value})
 
-	// //Saving data in the localStorage
-	// //localStorage.setItem method to store the value of products
-	// saveForLater = (products) =>{
-	// 	let save = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
-	// 	localStorage.setItem('save', JSON.stringify(save));
-	// 	this.setState({products})
-	// }
+    
+    componentWillMount() {
 
-	componentWillMount() {
 		let cart = localStorage.getItem('cart');
 		if (!cart) return; 
 		getCartProducts(cart).then((products) => {
@@ -32,11 +25,9 @@ export default class Cart extends React.Component {
 			for (var i = 0; i < products.length; i++) {
 				total += products[i].price * products[i].qty;
 			}
-			console.log('hiiiii')
 	    	this.setState({ products, total });
-		});
-		console.log('welcome Mount section')
-	}
+	    });
+
 		// let cart = localStorage.getItem('cart');
 		// if (!cart) return; 
 		// getCartProducts(cart).then((products) => {
@@ -49,6 +40,7 @@ export default class Cart extends React.Component {
 		// 	}
 		// 	this.setState({ products, total });
 	    // });
+	}
 
 	removeFromCart = (product) => {
 		let products = this.state.products.filter((item) => item.id !== product.id);
@@ -59,52 +51,30 @@ export default class Cart extends React.Component {
 		this.setState({products, total});
 	}
 
-
-
 	clearCart = () => {
 		localStorage.removeItem('cart');
 		this.setState({products: []});
 	}
 
-	clearSave = () => {
-		localStorage.removeItem('save');
-		this.setState({save: []});
-
-	}
-
 	render() {
-		const { products, total, save } =  this.state;
-\		return (
-			<div className=" container"style = {{marginBottom: '40%'}}>
-				<h3 className="card-title">Your shopping cart</h3>
+		const { products, total } =  this.state;
+		return (
+			<div className=" container">
+				<h3 className="card-title">Summary cart</h3>
 				<hr/>
 				{
-					products.map((product, index) => <CartItem product={product} remove={this.removeFromCart} key={index}  onChange={this.handleInputChange}/>)
+					products.map((product, index) => <CartItem product={product} remove={this.removeFromCart}  onChange={this.handleInputChange} key={index}/>)
 				}
 				<hr/>
 				{ products.length ? <div><h4><small>Total Amount: <b>${total}</b></small></h4><hr/></div>: ''}
 
-				{ !products.length ? <h3 style = {{marginBottom: "100px"}}>Empty cart</h3>: ''}
-	
+				{ !products.length ? <h3 className="text-warning">Empty cart</h3>: ''}
+				
 				<Link to="/checkout"><button className="btn btn-success float-right">Checkout</button></Link>
-				<Link to="/Products" style = {{marginRight: '40%'}}><Button>Continue shopping</Button></Link>
 				<button className="btn btn-danger float-right" onClick={this.clearCart} style={{ marginRight: "10px" }}>Clear Cart</button>
 
 				<br/><br/><br/>
-				<div>
-				<Card>
-					<h3 className="card-title">Saved items</h3>
-					<hr/>
-					<saveList remove={this.removeFromCart} onChange={this.handleInputChange}/>
-					<hr/>
-
-				</Card>
-
-
-				</div>
-
 			</div>
 		);
-		
 	}
 }

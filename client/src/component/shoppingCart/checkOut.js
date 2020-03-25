@@ -24,7 +24,6 @@ export default class Checkout extends React.Component {
 	}
 
 	render() {
-		if (!isAuthenticated()) return (<Redirect to="/login" />);
 		const { products, total } =  this.state;
 		return (
 			<div className=" container">
