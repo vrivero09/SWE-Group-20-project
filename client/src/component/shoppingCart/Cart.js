@@ -74,7 +74,7 @@ export default class Cart extends React.Component {
 
 	render() {
 		const { products, total, save } =  this.state;
-\		return (
+	return (
 			<div className=" container"style = {{marginBottom: '40%'}}>
 				<h3 className="card-title">Your shopping cart</h3>
 				<hr/>
