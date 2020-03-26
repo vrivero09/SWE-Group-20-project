@@ -30,9 +30,8 @@ export default class Cart extends React.Component {
 		getCartProducts(cart).then((products) => {
 			let total = 0;
 			for (var i = 0; i < products.length; i++) {
-				total += products[i].price * products[i].qty;
+				total += products[i].price * products[i].quantity;
 			}
-			console.log('hiiiii')
 	    	this.setState({ products, total });
 		});
 		console.log('welcome Cart Mount section')
@@ -52,35 +51,35 @@ export default class Cart extends React.Component {
 	clearCart = () => {
 		localStorage.removeItem('cart');
 		this.setState({products: []});
-	}
+	};
 
 	render() {
 		const { products, total } =  this.state;
 	return (
 			<Row>
-				<div u>
-				<h3 className="card-title">Your shopping cart</h3>
-				<hr/>
-				{
-					products.map((product, index) => <CartItem product={product} remove={this.removeFromCart} key={index}  onChange={this.handleInputChange}/>)
-				}
-				<hr/>
-				{ products.length ? <div><h4><small>Total Amount: <b>${total}</b></small></h4><hr/></div>: ''}
+				<Col md="8">
+					<h3 className="card-title">Your shopping cart</h3>
+					<hr/>
+					{
+						products.map((product, index) => <CartItem product={product} remove={this.removeFromCart} key={index}  onChange={this.handleInputChange}/>)
+					}
+					<hr/>
+					{ products.length ? <div><h4><small>Total Amount: <b>${total}</b></small></h4><hr/></div>: ''}
 
-				{ !products.length ? <h3 style = {{marginBottom: "100px"}}>Empty cart</h3>: ''}
-	
-				<Link to="/checkout"><button className="btn btn-success float-right">Checkout</button></Link>
-				<Link to="/Products" style = {{marginRight: '40%'}}><Button>Continue shopping</Button></Link>
-				<button className="btn btn-danger float-right" onClick={this.clearCart} style={{ marginRight: "10px" }}>Clear Cart</button>
+					{ !products.length ? <h3 style = {{marginBottom: "100px"}}>Empty cart</h3>: ''}
 
-				<br/><br/><br/>
+					<Link to="/checkout"><button className="btn btn-success float-right">Checkout</button></Link>
+					<Link to="/Products" style = {{marginRight: '40%'}}><Button>Continue shopping</Button></Link>
+					<button className="btn btn-danger float-right" onClick={this.clearCart} style={{ marginRight: "10px" }}>Clear Cart</button>
 
-				</div>
-				<div>
-				<h3>Saved items</h3>
-					<Save />
-				<hr/>
-				</div>
+					<br/><br/><br/>
+
+				</Col>
+				<Col md="4">
+					<h3>Saved items</h3>
+						<Save />
+					<hr/>
+				</Col>
 			</Row>
 			
 		);

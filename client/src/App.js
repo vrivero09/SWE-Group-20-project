@@ -72,7 +72,7 @@ class App extends Component{
 
       <div className="container">
         <br/>
-        <Route exact path="/Products" component={Product} />
+        <Route exact path="/Products" render={props => <Product {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists}/>} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
 
