@@ -14,8 +14,6 @@ import Product from './component/shoppingCart/ProductList';
 import Checkout from './component/shoppingCart/checkOut'
 import axios from "axios";
 
-
-
 class App extends Component{
   constructor(props){
     super(props);
@@ -68,7 +66,7 @@ class App extends Component{
 
       <Route path ='/Home' component={Home} />
       
-      <Route path ='/bookDetails' render={props => <BookDetails {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists}/>} />
+      <Route path ='/bookDetails/:bookId' render={props => <BookDetails {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists}/>} />
 
       <div className="container">
         <br/>
