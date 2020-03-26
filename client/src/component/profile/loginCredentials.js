@@ -19,6 +19,7 @@ class  LoginCredentialsForm extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onClickEdit = this.onClickEdit.bind(this);
+        this.onCancel = this.onCancel.bind(this);
     }
 
     componentDidMount(){
@@ -52,6 +53,12 @@ class  LoginCredentialsForm extends Component {
         });
     }
 
+    onCancel(e){
+        e.preventDefault();
+        this.form && this.form.reset();
+        this.setState({password:"",disabled:true});
+    }
+
     
 
     render(){
@@ -63,14 +70,17 @@ class  LoginCredentialsForm extends Component {
             );
         }else{
             button = (
+                <div>
+                    <Button className="float-right" size="sm" color="secondary" style={{padding:"5px 15px",marginLeft:"5px"}} onClick={this.onCancel}>Cancel</Button>
                     <Button className="float-right" size="sm" color="primary" style={{padding:"5px 15px"}}>Save</Button>
+                </div>                
             );
         }
 
         return(
             
             <div>
-                <AvForm onValidSubmit={this.onSubmit} id="loginForm"> 
+                <AvForm onValidSubmit={this.onSubmit} id="loginForm" ref={c => (this.form = c)}> 
                     <div style={{margin:'30px'}} className="text-left">
                         <FormGroup row>
                             <Label sm={2} for="username">Username</Label>
@@ -102,8 +112,7 @@ class  LoginCredentialsForm extends Component {
                              {button}
                             </Col>
                         </FormGroup>
-                    </div>
-                    
+                    </div> 
                 </AvForm>
                 
             </div>
