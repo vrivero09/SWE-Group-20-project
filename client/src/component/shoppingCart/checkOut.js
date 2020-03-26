@@ -17,7 +17,7 @@ export default class Checkout extends React.Component {
 		getCartProducts(cart).then((products) => {
 			let total = 0;
 			for (var i = 0; i < products.length; i++) {
-				total += products[i].price * products[i].qty;
+				total += products[i].price * products[i].quantity;
 			}
 	    	this.setState({ products, total });
 	    });
@@ -34,8 +34,8 @@ export default class Checkout extends React.Component {
 						<div key={index}>
 							<p>
 								{product.name} 
-								<small> (quantity: {product.qty})</small>
-								<span className="float-right text-primary">${product.qty * product.price}</span>
+								<small> (quantity: {product.quantity})</small>
+								<span className="float-right text-primary">${product.quantity * product.price}</span>
 							</p><hr/>
 						</div>
 					)
