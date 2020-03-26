@@ -1,5 +1,4 @@
 import React, {Component } from 'react';
-import {Badge} from 'reactstrap'
 import './Nav.css';
 import MaterialIcon from 'react-google-material-icons';
 import jwt_decode from 'jwt-decode';
@@ -10,18 +9,17 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  NavbarText,  UncontrolledDropdown,
+  NavLink, Badge,
+  NavbarText,UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
 import { Redirect} from 'react-router-dom'
-import {  BrowserRouter as Link } from 'react-router-dom';
+//import {  BrowserRouter as Link } from 'react-router-dom';
 //import { isAuthenticated } from './shoppingCart/repository';
 
 class Navigation extends Component{
-
   constructor(props){
     super(props);
     this.state = {
@@ -39,7 +37,6 @@ class Navigation extends Component{
         this.user_id = decoded._id;
     } 
   }
-
   onToggle(){
     const opposite = !this.state.toggle;
     this.setState({toggle:opposite});
@@ -54,7 +51,11 @@ class Navigation extends Component{
 
   render(){
     //const auth = isAuthenticated();
-
+    let wishlistItemCount = 0;
+    console.log(this.props.wishlists);
+    this.props.wishlists.forEach(wishlist => {
+      wishlistItemCount += wishlist.books.length;
+    });
     //check if signed in
     if(this.props.isAuth){
       this.signedIn = true;
@@ -86,14 +87,16 @@ class Navigation extends Component{
           <Collapse isOpen={this.state.toggle} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink href="/Ratings">Ratings</NavLink>
-              </NavItem>
-              <NavItem>
                 <NavLink href ="/Products">Products</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href ="/bookDetails">bookDetails</NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink href ="/Ratings">Ratings</NavLink>
+              </NavItem>
+
+
 
             </Nav>
             <NavbarText className="test">
@@ -101,7 +104,7 @@ class Navigation extends Component{
               </NavLink>
             </NavbarText>
             <NavbarText>
-              <NavLink href ="/Wishlist"><MaterialIcon icon="assignment" size={25} /></NavLink>
+              <NavLink href ="/Wishlist"><MaterialIcon icon="assignment" size={25} /><Badge>{wishlistItemCount}</Badge></NavLink>
             </NavbarText>
             <Nav navbar>
               <UncontrolledDropdown nav inNavbar>

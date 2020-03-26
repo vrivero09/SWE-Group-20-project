@@ -25,7 +25,8 @@ const CreditCardSchema= new Schema({
 });
 
 const ShoppingCartSchema = new Schema({
-
+    books: {type: mongoose.ObjectId, ref: 'book'},
+    quantity: Number
 });
 
 const WishlistSchema = new Schema({
@@ -63,7 +64,8 @@ const UserSchema = new Schema({
     },
     shippingAddress: [ShippingAddressSchema],
     creditCards: [CreditCardSchema],
-    wishLists:[WishlistSchema]
+    wishLists:[WishlistSchema],
+    cart: [ShoppingCartSchema],
 });
 
 /*
