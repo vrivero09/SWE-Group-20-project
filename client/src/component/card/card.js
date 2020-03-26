@@ -20,9 +20,9 @@ class card extends Component {
       <Card className = "cardSize">
         <CardImg src={HP1} alt ="HP1" />
         <CardBody>
-          <CardTitle>Harry Potter and the Deathly Hallows</CardTitle>
-          <CardSubtitle>Fantasy by J. K. Rowling</CardSubtitle>
-          <CardText>Harry has finally come of age, and finally started on his final journey to defeat Voldemort for good.</CardText>
+          <CardTitle>Card title</CardTitle>
+          <CardSubtitle>Card subtitle</CardSubtitle>
+          <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
           <Button href="/Cart">Add to Cart</Button>
         </CardBody>
       </Card>
