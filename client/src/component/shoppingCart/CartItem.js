@@ -13,7 +13,7 @@ export default class CartItem extends React.Component {
 		}
 	}
 
-	handleInputChange = event => this.setState({[event.target.name]: event.target.value})
+	handleInputChange = event => this.setState({[event.target.name]: event.target.value});
 
 	render(){
 		const { product } = this.props;
@@ -21,14 +21,16 @@ export default class CartItem extends React.Component {
 		    <div className="card" style={{ marginBottom: "10px"}}>
 			  <div className="card-body">
 				<Row>
-				<Media src={product.img} width="10%" alt="image holder" />
-			    <h5 className="card-title">{product.name}</h5>
-			    <p><h6 className="card-text"><small>price:</small>${product.price}</h6></p> 
-				<br></br>
-			    <p><span className="card-text text-success"><small>Quantity: </small>{product.qty}</span>
-				<Button onClick={() => this.props.remove(product)} >Remove from cart</Button>
-				</p>
-				<br></br>
+					<img src={product.bookCoverAddress} width="120px" alt="image holder" />
+					<div className="flex-grow-1">
+						<h4 className="card-title text-center">{product.bookTitle}</h4>
+						<h6 className="card-text text-center">price: ${product.price}</h6>
+						<br></br>
+						<div className="d-flex justify-content-end align-items-center">
+							<div className="card-text text-success">Quantity: {product.quantity}</div>
+							<Button className="ml-3" onClick={() => this.props.remove(product)} >Remove from cart</Button>
+						</div>
+					</div>
 				</Row>
 			  </div>
 			</div>

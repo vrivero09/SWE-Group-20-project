@@ -22,6 +22,7 @@ users.get('/', (req, res) => {
     .populate('wishLists.books')
     .then(user => {
         let wishLists = user.wishLists;
+        console.log(user);
         res.json({result: 0, wishlists: wishLists});
     });
 });
@@ -41,7 +42,9 @@ users.post('/addbook', (req, res) => {
             let wishList = user.wishLists.find(wishlist => wishlist._id.equals(ObjectID(wishlist_id)));
             let i_book = -1;
             let book_count = wishList.books.length;
+            console.log(user);
             for (let i = 0; i < book_count; i++) {
+                console.log(`${i}thbook.`);
                 console.log(JSON.stringify(wishList.books[i]));
                 if (wishList.books[i]._id.equals(book_id)) {
                     i_book = i;
@@ -50,7 +53,7 @@ users.post('/addbook', (req, res) => {
             }
             if (i_book === -1)
             {
-                wishList.books.push(ObjectID(book_id));
+                wishList.books.push(book_id);
                 user.save();
             }
             res.json({result: 0, message: 'success', wishlists: user.wishLists});
