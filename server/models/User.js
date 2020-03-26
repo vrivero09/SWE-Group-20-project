@@ -18,10 +18,10 @@ const ShippingAddressSchema = new Schema({
 
 const CreditCardSchema= new Schema({
     cardHolderName: String,
-    cardNumber:Number,
-    expirationMonth : Number,
-    expirationYear : Number,
-    securityCode : Number,
+    cardNumber:String,
+    expirationMonth : String,
+    expirationYear : String,
+    securityCode : String,
 });
 
 const ShoppingCartSchema = new Schema({
@@ -56,7 +56,7 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    address:{
+    homeAddress:{
         street: String,
         city: String,
         state: String,
