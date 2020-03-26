@@ -10,10 +10,9 @@ import ButtonAddToWishList from "../common/ButtonAddToWishlist";
 class BookDetails extends Component {
     constructor(props) {
         super(props);
-        console.log(`hel: ${this.props.hello}`);
-        console.log(`wishlists: ${JSON.stringify(props)}`);
+        console.log(props.match.params.bookId);
         this.state = {
-            products: [{
+            product: [{
                 bookTitle: "",
                 description: "",
                 genre: "",
@@ -34,13 +33,9 @@ class BookDetails extends Component {
     }
 
     getBook() {
-        return axios.post('book/products', {
-            _id: "5e50b8101c9d4400000eed83"
-        })
+        return axios.get(`/api/book?id=${this.props.match.params.bookId}`)
             .then(res => {
-                console.log(res);
-                this.setState({products: res.data})
-                console.log(this.state);
+                this.setState({product: res.data});
             })
             .catch(err => {
                 console.log(err);
@@ -58,31 +53,31 @@ class BookDetails extends Component {
                     <Row>
                         <Col sm={3}>
                             <Card>
-                                <CardImg src={this.state.products.bookCoverAddress}/>
+                                <CardImg src={this.state.product.bookCoverAddress}/>
                                 <CardBody>
-                                    <CardTitle>{this.state.products.bookTitle}</CardTitle>
-                                    <CardSubtitle>{this.state.products.author}</CardSubtitle>
+                                    <CardTitle>{this.state.product.bookTitle}</CardTitle>
+                                    <CardSubtitle>{this.state.product.author}</CardSubtitle>
 
                                     <CardText>
                                         <div>
-                                            {this.state.products.description}
+                                            {this.state.product.description}
                                         </div>
-                                        <div>{this.state.products.genre}
-                                        </div>
-                                        <div>
-                                            {this.state.products.publisher}
+                                        <div>{this.state.product.genre}
                                         </div>
                                         <div>
-                                            {this.state.products.authorBio}
+                                            {this.state.product.publisher}
+                                        </div>
+                                        <div>
+                                            {this.state.product.authorBio}
                                         </div>
                                         <div>
                                             <b>Price : </b>$
-                                            {this.state.products.price}
+                                            {this.state.product.price}
                                         </div>
 
                                         <div>
                                             Average Rating :
-                                            {this.state.products.averageRating}
+                                            {this.state.product.averageRating}
                                         </div>
                                     </CardText>
                                     <div className="d-flex justify-content-between">

@@ -4,7 +4,8 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const middleware = require('./middleware');
-const data = require('./data');
+const ObjectID = require('mongodb').ObjectID;
+const Book = require("./models/Book");
 
 const port = 5000;
 app.use(bodyParser.json());
@@ -19,8 +20,15 @@ app.get('/api/products', async (req, res) => {
   return res.json(await Book.find());
 });
 
+app.get('/api/book', async (req, res) => {
+  const bookId = req.query.id;
+  return res.json(await Book.findOne({_id: ObjectID(bookId)}));
+});
+
+
 app.post('/api/products', async (req, res) => {
   let products = [], id = null;
+  console.log(req.body.cart);
   let cart = JSON.parse(req.body.cart);
   if (!cart) return res.json(products);
   let books = await Book.find();
@@ -31,7 +39,8 @@ app.post('/api/products', async (req, res) => {
         quantity: cart[id],
         bookTitle: books[i].bookTitle,
         bookCoverAddress: books[i].bookCoverAddress,
-        price: books[i].price
+        price: books[i].price,
+        _id: books[i]._id
       });
     }
   }
@@ -41,6 +50,7 @@ app.post('/api/products', async (req, res) => {
 app.get('/api/pay', middleware, (req, res) => { //checkout route for signed in users
   return res.json("Payment Successful!");
 });
+
 
 // const mongoURI = 'mongodb+srv://admin:admin123@cluster0-ywzdx.mongodb.net/test?retryWrites=true&w=majority';
 const mongoURI = "mongodb://127.0.0.1:27017/test";

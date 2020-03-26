@@ -34,19 +34,21 @@ export default class Cart extends React.Component {
 			}
 	    	this.setState({ products, total });
 		});
-		console.log('welcome Cart Mount section')
 	}
 
 	removeFromCart = (product) => {
-		let products = this.state.products.filter((item) => item.id !== product.id);
 		let cart = JSON.parse(localStorage.getItem('cart'));
-		delete cart[product.id.toString()];
+		console.log(product);
+		delete cart[product._id];
 		localStorage.setItem('cart', JSON.stringify(cart));
-		let total = this.state.total - (product.qty * product.price) 
-		this.setState({products, total});
-	}
-
-
+		getCartProducts(localStorage.getItem('cart')).then((products) => {
+			let total = 0;
+			for (let i = 0; i < products.length; i++) {
+				total += products[i].price * products[i].quantity;
+			}
+			this.setState({ products, total });
+		});
+	};
 
 	clearCart = () => {
 		localStorage.removeItem('cart');
@@ -61,7 +63,7 @@ export default class Cart extends React.Component {
 					<h3 className="card-title">Your shopping cart</h3>
 					<hr/>
 					{
-						products.map((product, index) => <CartItem product={product} remove={this.removeFromCart} key={index}  onChange={this.handleInputChange}/>)
+						products.map((product, index) => <CartItem product={product} remove={() => this.removeFromCart(product)} key={index}  onChange={this.handleInputChange}/>)
 					}
 					<hr/>
 					{ products.length ? <div><h4><small>Total Amount: <b>${total}</b></small></h4><hr/></div>: ''}
