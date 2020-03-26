@@ -40,6 +40,7 @@ class  Profile extends Component {
                     <h3 className="text-left" style={{marginTop:'100px'}}>Shipping Addresses</h3>
                     <Divider/>
                     <ShippingAddresses></ShippingAddresses>
+                    <div style={{marginBottom:'100px'}}></div>
                     
                 </div>
                 

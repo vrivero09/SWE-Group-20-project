@@ -54,9 +54,7 @@ connection.once("open", function() {
 var Books = require("./routes/Books");
 app.use("/book", Books);
 
-//import user route
 var Users = require("./routes/Users");
-//use the route
 app.use("/users", Users);
 
 var Wishlist = require("./routes/Wishlist");
@@ -68,5 +66,8 @@ app.use("/cart", cart);
 
 var CreditCards = require("./routes/CreditCards");
 app.use("/creditCards", CreditCards);
+
+var ShippingAddresses = require('./routes/ShippingAddrs');
+app.use("/shippingAddresses",ShippingAddresses);
 
 app.listen(port, () => console.log("Server started on port " + port));
