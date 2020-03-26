@@ -1,43 +1,67 @@
+import React from 'react';
+import {
+	Media, Row, Button
+  } from 'reactstrap';
 
-    import React from 'react';
+export default class CartItem extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			quantity: 1,
+			products: []
+		}
+	}
+
+	handleInputChange = event => this.setState({[event.target.name]: event.target.value})
+
+	render(){
+		const { product } = this.props;
+		return (
+		    <div className="card" style={{ marginBottom: "10px"}}>
+			  <div className="card-body">
+				<Row>
+				<Media src={product.img} width="10%" alt="image holder" />
+			    <h5 className="card-title">{product.name}</h5>
+			    <p><h6 className="card-text"><small>price:</small>${product.price}</h6></p> 
+				<br></br>
+			    <p><span className="card-text text-success"><small>Quantity: </small>{product.qty}</span>
+				<Button onClick={() => this.props.remove(product)} >Remove from cart</Button>
+				</p>
+				<br></br>
+				</Row>
+			  </div>
+			</div>
+		)
+	}
+}
 
 
-    //will be used to render each product on the cart.
-    export default class CartItem extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-            products: [{
-              id: "",
-              bookTitle: "",
-              description: "",
-              genre: "",
-              publisher: "",
-              averageRating: "",
-              bookCoverAddress: "",
-              author: "",
-              authorBio: "",
-              price:""
-          }],
-            cart:[],
-            quantity: 1
-        }
-      }
-      //component uses the remove method provided as a prop..
-      // to remove the item from the cart completely.
-      render(){
-        let products = this.state.products;
-        return (
-          <div className="card" style={{ marginBottom: "10px"}}>
-            <div className="card-body">
-              <h4 className="card-title">{products.bookTitle}</h4>
-              <h5 className="card-text"><small>price: </small>${products.price}</h5>
-              <span className="card-text text-success">
-                  <small>Quantity: </small>{products.quantity}</span>
-              <button className="btn btn-sm btn-warning float-right" 
-                  onClick={() => this.props.remove(products)}>Remove from cart</button>
-            </div>
-          </div>
-         )
-      }
-    }
+
+	// componentWillMount(){
+	// 	console.log("Hiiiii")
+	// 		var book = this.props.product.books;
+	// 		console.log(book);
+
+	// 	  this.setState({ book:{name: book.bookTitle, description: book.description, price: book.price}, quantity: this.props.product.quantity  });
+
+	// }
+
+    // getSave = () => {
+	// 	const save = window.localStorage.getItem('save');
+	// 	console.log(save)
+	// }
+
+	// componentWillMount(){
+	// 	let save = localStorage.getItem('save');
+	// 	if (!save) return; 
+	// 	getSaveproducts(save).then((products) => {
+	// 		let total = 0;
+	// 		for (var i = 0; i < products.length; i++) {
+	// 			total += products[i].price * products[i].qty;
+	// 		}
+	// 		console.log('hiiiii')
+	//     	this.setState({ products, total, save });
+	// 	});
+	// }
+

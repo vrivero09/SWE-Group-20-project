@@ -13,8 +13,7 @@ import Cart from './component/shoppingCart/Cart';
 import Product from './component/shoppingCart/ProductList';
 import Checkout from './component/shoppingCart/checkOut'
 import axios from "axios";
-//import CartItemList from './component/shoppingCart/CartItemList';
-//import Carts from './component/shoppingCart/Carts';
+
 
 
 class App extends Component{
