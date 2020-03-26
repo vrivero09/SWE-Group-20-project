@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCartProducts, getSaveproducts } from './repository';
 import CartItem from './CartItem';
-import saveList from './saveList';
-import { Button, CardBody, Card } from 'reactstrap'
+import { Button, Row, Col } from 'reactstrap'
+import Save from './Save'
 
 export default class Cart extends React.Component {
 	constructor(props) {
@@ -35,20 +35,8 @@ export default class Cart extends React.Component {
 			console.log('hiiiii')
 	    	this.setState({ products, total });
 		});
-		console.log('welcome Mount section')
+		console.log('welcome Cart Mount section')
 	}
-		// let cart = localStorage.getItem('cart');
-		// if (!cart) return; 
-		// getCartProducts(cart).then((products) => {
-		// 	console.log("Hiiiyyyaaaii")
-		// 	let total = 0;
-		// 	for (var i = 0; i < products.length; i++) {
-		// 		console.log(products[i].books.price)
-		// 		console.log(products[i].quantity)
-		// 		total += products[i].books.price * products[i].quantity;
-		// 	}
-		// 	this.setState({ products, total });
-	    // });
 
 	removeFromCart = (product) => {
 		let products = this.state.products.filter((item) => item.id !== product.id);
@@ -66,16 +54,11 @@ export default class Cart extends React.Component {
 		this.setState({products: []});
 	}
 
-	clearSave = () => {
-		localStorage.removeItem('save');
-		this.setState({save: []});
-
-	}
-
 	render() {
-		const { products, total, save } =  this.state;
+		const { products, total } =  this.state;
 	return (
-			<div className=" container"style = {{marginBottom: '40%'}}>
+			<Row>
+				<div u>
 				<h3 className="card-title">Your shopping cart</h3>
 				<hr/>
 				{
@@ -91,20 +74,31 @@ export default class Cart extends React.Component {
 				<button className="btn btn-danger float-right" onClick={this.clearCart} style={{ marginRight: "10px" }}>Clear Cart</button>
 
 				<br/><br/><br/>
-				<div>
-				<Card>
-					<h3 className="card-title">Saved items</h3>
-					<hr/>
-					<saveList remove={this.removeFromCart} onChange={this.handleInputChange}/>
-					<hr/>
-
-				</Card>
-
 
 				</div>
-
-			</div>
+				<div>
+				<h3>Saved items</h3>
+					<Save />
+				<hr/>
+				</div>
+			</Row>
+			
 		);
 		
 	}
 }
+
+
+		// let cart = localStorage.getItem('cart');
+		// if (!cart) return; 
+		// getCartProducts(cart).then((products) => {
+		// 	console.log("Hiiiyyyaaaii")
+		// 	let total = 0;
+		// 	for (var i = 0; i < products.length; i++) {
+		// 		console.log(products[i].books.price)
+		// 		console.log(products[i].quantity)
+		// 		total += products[i].books.price * products[i].quantity;
+		// 	}
+		// 	this.setState({ products, total });
+	    // });
+
