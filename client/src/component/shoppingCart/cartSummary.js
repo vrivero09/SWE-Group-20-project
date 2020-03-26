@@ -13,7 +13,7 @@ export default class Cart extends React.Component {
 		}
 	}
 	
-	handleInputChange = event => this.setState({[event.target.name]: event.target.value})
+	handleInputChange = event => this.setState({[event.target.name]: event.target.value});
 
     
     componentWillMount() {
@@ -22,8 +22,8 @@ export default class Cart extends React.Component {
 		if (!cart) return; 
 		getCartProducts(cart).then((products) => {
 			let total = 0;
-			for (var i = 0; i < products.length; i++) {
-				total += products[i].price * products[i].qty;
+			for (let i = 0; i < products.length; i++) {
+				total += products[i].price * products[i].quantity;
 			}
 	    	this.setState({ products, total });
 	    });

@@ -28,6 +28,14 @@ function WishlistBookEntry(props) {
         );
     };
 
+    const addToCart = (productId) => {
+        let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
+        cart[productId] = (cart[productId] ? cart[productId] : 0);
+        let qty = cart[productId] + 1;
+        cart[productId] = qty;
+        localStorage.setItem('cart', JSON.stringify(cart));
+    };
+
     const moveTo = (wishlist_id) => {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
         axios.post('wishlist/movebook', {
@@ -56,7 +64,7 @@ function WishlistBookEntry(props) {
             </div>
             <div className="align-items-around wishlist-entry-actions-container d-flex justify-content-around pb-3">
                 <Button color="danger" size="sm" onClick={() => removeBook(book._id) }>Remove</Button>
-                <Button color="primary" size="sm">Add to Cart</Button>
+                <Button color="primary" size="sm" onClick={() => addToCart(book._id)}>Add to Cart</Button>
                 <Dropdown isOpen={dropdownOpen} toggle={toggle} size="sm">
                     <DropdownToggle caret>
                         Move to

@@ -25,13 +25,13 @@ const CreditCardSchema= new Schema({
 });
 
 const ShoppingCartSchema = new Schema({
-    books: {type: mongoose.ObjectId, ref: 'book'},
+    books: {type: mongoose.ObjectId, ref: 'Book'},
     quantity: Number
 });
 
 const WishlistSchema = new Schema({
     name: String,
-    books: [{type: mongoose.ObjectId, ref: 'Book'}]
+    books: [{type: Schema.Types.ObjectId, ref: 'Book'}]
 });
 
 const UserSchema = new Schema({

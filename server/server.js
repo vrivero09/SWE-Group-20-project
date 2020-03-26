@@ -3,8 +3,9 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const middleware = require('./middleware')
-const data = require('./data');
+const middleware = require('./middleware');
+const ObjectID = require('mongodb').ObjectID;
+const Book = require("./models/Book");
 
 const port = 5000;
 app.use(bodyParser.json());
@@ -15,19 +16,32 @@ app.use(
   })
 );
 
-app.get('/api/products', (req, res) => {
-  return res.json(data.products);
+app.get('/api/products', async (req, res) => {
+  return res.json(await Book.find());
 });
 
-app.post('/api/products', (req, res) => {
+app.get('/api/book', async (req, res) => {
+  const bookId = req.query.id;
+  return res.json(await Book.findOne({_id: ObjectID(bookId)}));
+});
+
+
+app.post('/api/products', async (req, res) => {
   let products = [], id = null;
+  console.log(req.body.cart);
   let cart = JSON.parse(req.body.cart);
-  if (!cart) return res.json(products)
-  for (var i = 0; i < data.products.length; i++) {
-    id = data.products[i].id.toString();
+  if (!cart) return res.json(products);
+  let books = await Book.find();
+  for (let i = 0; i < books.length; i++) {
+    id = books[i].id.toString();
     if (cart.hasOwnProperty(id)) {
-      data.products[i].qty = cart[id]
-      products.push(data.products[i]);
+      products.push({
+        quantity: cart[id],
+        bookTitle: books[i].bookTitle,
+        bookCoverAddress: books[i].bookCoverAddress,
+        price: books[i].price,
+        _id: books[i]._id
+      });
     }
   }
   return res.json(products);
@@ -37,8 +51,9 @@ app.get('/api/pay', middleware, (req, res) => { //checkout route for signed in u
   return res.json("Payment Successful!");
 });
 
-const mongoURI = 'mongodb+srv://admin:admin123@cluster0-ywzdx.mongodb.net/test?retryWrites=true&w=majority';
-// const mongoURI = "mongodb://127.0.0.1:27017/test";
+
+// const mongoURI = 'mongodb+srv://admin:admin123@cluster0-ywzdx.mongodb.net/test?retryWrites=true&w=majority';
+const mongoURI = "mongodb://127.0.0.1:27017/test";
 
 mongoose.connect(mongoURI, {useUnifiedTopology: true, useNewUrlParser: true})
     .catch(err => console.log(err));
