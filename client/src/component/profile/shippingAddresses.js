@@ -6,6 +6,7 @@ import {
 import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 import MaterialIcon from 'react-google-material-icons';
+import {AvForm,AvField} from 'availity-reactstrap-validation';
 
 class ShippingAddreses extends Component{
     constructor(){
@@ -14,7 +15,6 @@ class ShippingAddreses extends Component{
             addresses:[]
         };
 
-        const user_id = "";
         this.updateList = this.updateList.bind(this);
     }
 
@@ -96,6 +96,7 @@ class  ShippingAddrForm extends Component {
         this.onClickSave = this.onClickSave.bind(this);
         this.onClickAdd = this.onClickAdd.bind(this);
         this.onClickDelete = this.onClickDelete.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentDidMount(){
@@ -125,9 +126,17 @@ class  ShippingAddrForm extends Component {
         this.setState({disabled:false, saved:false});
     }
 
+    onSubmit(e,values){
+        if(this.props.Add){
+            this.onClickAdd(e,values);
+        }else{
+            this.onClickSave(e,values);
+        }
+    }
+
     //save and disable inputs
     onClickSave(e){
-        e.preventDefault();
+        //e.preventDefault();
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
         axios.post("/shippingAddresses/update",{
             street: this.state.item.street,
@@ -146,15 +155,15 @@ class  ShippingAddrForm extends Component {
     }
 
     //add address to the list and reset state to blank inputs
-    onClickAdd(e){
-        e.preventDefault();
+    onClickAdd(e,values){
+        //e.preventDefault();
 
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
         axios.post("/shippingAddresses/add",{
-            street: this.state.item.street,
-            state: this.state.item.state,
-            city: this.state.item.city,
-            zip:this.state.item.zip,
+            street: values.street,
+            state: values.state,
+            city: values.city,
+            zip: values.zip,
         }).then(res=>{
             console.log(res);
             if(res.data.addresses){
@@ -165,6 +174,7 @@ class  ShippingAddrForm extends Component {
                     city:"",
                     zip:"",
                 },saved:true});
+                this.form && this.form.reset();
             }
         }).catch(err=>{
             console.log(err);
@@ -193,7 +203,7 @@ class  ShippingAddrForm extends Component {
         //determine to show add, edit, or save button
         var button = null;
         if(this.props.Add){
-            button = <Button className="float-right" size="sm" color="primary" style={{padding:"5px 15px"}} onClick={this.onClickAdd}>Add</Button>;
+            button = <Button className="float-right" size="sm" color="primary" style={{padding:"5px 15px"}}>Add</Button>;
         }else if(this.state.disabled){
             button = (
                 <div>
@@ -204,8 +214,8 @@ class  ShippingAddrForm extends Component {
         }else{
             button = (
                 <div>
-                    <Button className="float-right" size="sm" color="danger"> <MaterialIcon icon="delete_forever" size={18} /></Button>
-                    <Button className="float-right mr-2" size="sm" color="primary" style={{padding:"5px 15px"}} onClick={this.onClickSave}>Save</Button>
+                    <Button className="float-right" size="sm" color="danger" onClick={this.onClickDelete}> <MaterialIcon icon="delete_forever" size={18} /></Button>
+                    <Button className="float-right mr-2" size="sm" color="primary" style={{padding:"5px 15px"}} >Save</Button>
                 </div>
             );
         }
@@ -213,34 +223,35 @@ class  ShippingAddrForm extends Component {
         return(
             <div>
                 <Card style={{width:'600px'}}>
-                    <Form > 
+                    <AvForm onValidSubmit={this.onSubmit} ref={c => (this.form = c)}> 
                         <div style={{margin:'30px'}} className="text-left">
                             <FormGroup row>
                                 <Label sm={3} for="street">Street</Label>
                                 <Col >
-                                    <Input  type="text" name="street" disabled={this.state.disabled} placeholder="Enter street" value={this.state.item.street} onChange={this.onChange} />
-                                    <FormFeedback> </FormFeedback>
+                                    <AvField required  type="text" name="street" disabled={this.state.disabled} placeholder="Enter street" value={this.state.item.street||''} onChange={this.onChange} errorMessage='This field is required!' />
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label sm={3} for="city">City</Label>
                                 <Col>
-                                    <Input  type="text" name="city" disabled={this.state.disabled}  placeholder="Enter city" value={this.state.item.city} onChange={this.onChange}/>
-                                    <FormFeedback></FormFeedback>
+                                    <AvField required  type="text" name="city" disabled={this.state.disabled}  placeholder="Enter city" value={this.state.item.city} onChange={this.onChange} errorMessage="This field is required!"/>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label sm={3} for="state">State</Label>
                                 <Col>
-                                    <Input  type="text" name="state" disabled={this.state.disabled}  placeholder="Enter state" value={this.state.item.state} onChange={this.onChange}/>
-                                    <FormFeedback></FormFeedback>
+                                    <AvField required  type="text" name="state" disabled={this.state.disabled}  placeholder="Enter state" value={this.state.item.state} onChange={this.onChange} errorMessage="This field is required!"/>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label sm={3} for="zip">Zip</Label>
                                 <Col>
-                                    <Input  type="text" name="zip" disabled={this.state.disabled} placeholder="Enter zip" value={this.state.item.zip} onChange={this.onChange}/>
-                                    <FormFeedback></FormFeedback>
+                                    <AvField  type="text" name="zip" disabled={this.state.disabled} placeholder="Enter zip" value={this.state.item.zip} onChange={this.onChange} validate={{
+                                        required:{value:true,errorMessage:'This field is required!'},
+                                        pattern:{value:'^[0-9]*$'},
+                                        minLength:{value:5, errorMessage:'Enter 5 digits'},
+                                        maxLength:{value:5, errorMessage:'Enter 5 digits'}
+                                    }}/>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
@@ -252,7 +263,7 @@ class  ShippingAddrForm extends Component {
                                 </Col>
                             </FormGroup>
                         </div>
-                    </Form>
+                    </AvForm>
                 </Card>
             </div>
         );

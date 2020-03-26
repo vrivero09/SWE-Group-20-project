@@ -16,7 +16,6 @@ class CreditCards extends Component{
             cards:[]
         };
 
-        const user_id = "";
         this.updateList = this.updateList.bind(this);
     }
 
@@ -166,10 +165,10 @@ class  CreditCardForm extends Component {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
         axios.post("/creditCards/addCard",{
             cardHolderName: values.cardHolderName,
-            cardNumber: this.state.item.cardNumber,
-            expirationMonth: this.state.item.expirationMonth,
-            expirationYear:this.state.item.expirationYear,
-            securityCode: this.state.item.securityCode
+            cardNumber: values.cardNumber,
+            expirationMonth: values.expirationMonth,
+            expirationYear:values.expirationYear,
+            securityCode: values.securityCode
         }).then(res=>{
             if(res.data.cards){
                 this.props.update(res.data.cards);
@@ -220,7 +219,7 @@ class  CreditCardForm extends Component {
         }else{
             button = (
                 <div>
-                    <Button className="float-right" size="sm" color="danger"> <MaterialIcon icon="delete_forever" size={18} /></Button>
+                    <Button className="float-right" size="sm" color="danger" onClick={this.onClickDelete}> <MaterialIcon icon="delete_forever" size={18} /></Button>
                     <Button className="float-right mr-2" size="sm" color="primary" style={{padding:"5px 15px"}} >Save</Button>
                 </div>
             );
@@ -234,7 +233,6 @@ class  CreditCardForm extends Component {
                             <FormGroup>
                                 <Label for="cardHolderName">Card Holder Name</Label>
                                 <AvField required  type="text" name="cardHolderName" disabled={this.state.disabled} placeholder="Card Holder Name" value={this.state.item.cardHolderName|| ''} onChange={this.onChange} errorMessage='This field is required!' />
-                                <FormFeedback> </FormFeedback>
                             </FormGroup>
                             <FormGroup>
                                 <Label  for="cardNumber">Card Number</Label>
