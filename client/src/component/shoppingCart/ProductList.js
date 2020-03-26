@@ -20,6 +20,7 @@ export default class ProductList extends React.Component {
 		  this.setState({ products });
 		});
 	}
+	
 
 	render() {
 		const { products } =  this.state;
@@ -34,7 +35,6 @@ export default class ProductList extends React.Component {
 				{
 					products.map((product, index) => <ProductItem product={product} key={index}/>)
 				}
-				
 				</div>
 				</Col>
 				<Col xs="3">
