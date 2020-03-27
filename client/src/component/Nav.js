@@ -65,7 +65,7 @@ class Navigation extends Component{
                 <NavLink href="/Profile">Profile</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/bookDetails">bookDetails</NavLink>
+                <NavLink href="/bookDetails">Book Details</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href ="/Products">Products</NavLink>
