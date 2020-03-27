@@ -5,6 +5,8 @@ import {
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import ButtonAddToWishList from "../common/ButtonAddToWishlist";
 
 class bookDetails extends Component {
     constructor(props) {
@@ -80,8 +82,8 @@ class bookDetails extends Component {
                                         </div>
                                     </CardText>
                                     <div className="d-flex justify-content-between">
-                                        <Button>add to cart</Button>
-                                        <Button wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}>Add to Wishlist</Button>
+                                    <Button><AddShoppingCartIcon/></Button>
+                                    <ButtonAddToWishList wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/> 
                                     </div>
                                 </CardBody>
                             </Card>
