@@ -1,91 +1,99 @@
 import {
-  Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button, Row, Col, Container
+    Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button, Row, Col, Container
 } from 'reactstrap';
 import React, {Component} from 'react';
 import axios from 'axios';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import ButtonAddToWishList from "../common/ButtonAddToWishlist";
 
-class bookDetails extends Component {
+class BookDetails extends Component {
     constructor(props) {
         super(props);
+        console.log(props.match.params.bookId);
         this.state = {
-        products: [{
-            bookTitle: "",
-            description: "",
-            genre: "",
-            publisher: "",
-            averageRating: "",
-            bookCoverAddress: "",
-            author: "",
-            authorBio: "",
-            price:""
-        }]
+            product: [{
+                bookTitle: "",
+                description: "",
+                genre: "",
+                publisher: "",
+                averageRating: "",
+                bookCoverAddress: "",
+                author: "",
+                authorBio: "",
+                price: ""
+            }],
+            dropDownOpen: false
         }
-      }
+        this.toggle = this.toggle.bind(this);
+    }
+
     componentDidMount() {
-           this.getBook()
-          }
+        this.getBook();
+    }
 
-     getBook(){
-        return axios.post('book/products',{
-            _id:"5e50b8101c9d4400000eed83"
-        })
-        .then(res=>{
-           console.log(res);
-            this.setState({products:res.data})
-           console.log(this.state);
-        })
-        .catch(err=>{
-            console.log(err);
-        });
-     }     
-  render(){
-  return (
-    <div>
-    <Container>
-    <Row>
-      <Col sm={3}>
-      <Card>
-        <CardImg src={this.state.products.bookCoverAddress} />
-        <CardBody>
-          <CardTitle>{this.state.products.bookTitle}</CardTitle>
-          <CardSubtitle>{this.state.products.author}</CardSubtitle>
+    getBook() {
+        return axios.get(`/api/book?id=${this.props.match.params.bookId}`)
+            .then(res => {
+                this.setState({product: res.data});
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 
-          <CardText><div>
-          {this.state.products.description}
-              </div>
-              <div>{this.state.products.genre}
-                  </div>
-              <div>
-              {this.state.products.publisher}
-                  </div>
-             <div>
-            {this.state.products.authorBio}
-                  </div>
+    toggle() {
+        this.setState({dropDownOpen: !this.state.dropDownOpen});
+    }
+
+    render() {
+        return (
             <div>
-              <b>Price : </b>$
-              {this.state.products.price}
-            </div>
+                <Container>
+                    <Row>
+                        <Col sm={3}>
+                            <Card>
+                                <CardImg src={this.state.product.bookCoverAddress}/>
+                                <CardBody>
+                                    <CardTitle>{this.state.product.bookTitle}</CardTitle>
+                                    <CardSubtitle>{this.state.product.author}</CardSubtitle>
 
-             <div>
-                 Average Rating :
-              {this.state.products.averageRating}
-            </div>
-                  
-                  </CardText>
-                  <Button><AddShoppingCartIcon/></Button>
-                  {/* onClick={()=>{this.handleClick(this.state.products.id)}} */}
-        </CardBody>
-      </Card>
-      </Col>
+                                    <CardText>
+                                        <div>
+                                            {this.state.product.description}
+                                        </div>
+                                        <div>{this.state.product.genre}
+                                        </div>
+                                        <div>
+                                            {this.state.product.publisher}
+                                        </div>
+                                        <div>
+                                            {this.state.product.authorBio}
+                                        </div>
+                                        <div>
+                                            <b>Price : </b>$
+                                            {this.state.product.price}
+                                        </div>
 
-      </Row>
-      </Container>
-    </div>
-    );
-  }
+                                        <div>
+                                            Average Rating :
+                                            {this.state.product.averageRating}
+                                        </div>
+                                    </CardText>
+                                    <div className="d-flex justify-content-between">
+                                        <Button><AddShoppingCartIcon/></Button>
+                                        <ButtonAddToWishList wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/>
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+
+                    </Row>
+                </Container>
+            </div>
+        );
+    }
 }
 
-export default bookDetails;
+export default BookDetails;
 

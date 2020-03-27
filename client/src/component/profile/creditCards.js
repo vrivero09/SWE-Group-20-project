@@ -6,6 +6,7 @@ import {
 import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 import MaterialIcon from 'react-google-material-icons';
+import {AvForm,AvField} from 'availity-reactstrap-validation';
 
 
 class CreditCards extends Component{
@@ -15,7 +16,6 @@ class CreditCards extends Component{
             cards:[]
         };
 
-        const user_id = "";
         this.updateList = this.updateList.bind(this);
     }
 
@@ -33,7 +33,6 @@ class CreditCards extends Component{
         .then(res => {
             if(res.data.user){
                 this.setState({cards:res.data.user.creditCards});
-                console.log(this.state.cards);
             }
         }).catch(err=>{
             console.log(err);
@@ -99,6 +98,7 @@ class  CreditCardForm extends Component {
         this.onClickSave = this.onClickSave.bind(this);
         this.onClickAdd = this.onClickAdd.bind(this);
         this.onClickDelete = this.onClickDelete.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentDidMount(){
@@ -127,9 +127,17 @@ class  CreditCardForm extends Component {
         this.setState({disabled:false,saved:false});
     }
 
+    onSubmit(e,values){
+        if(this.props.Add){
+            this.onClickAdd(e,values);
+        }else{
+            this.onClickSave(e,values);
+        }
+    }
+
     //save and disable inputs
-    onClickSave(e){
-        e.preventDefault();
+    onClickSave(e,values){
+        //e.preventDefault();
 
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
         axios.post("/creditCards/update",{
@@ -151,16 +159,16 @@ class  CreditCardForm extends Component {
     }
 
     //add card to the list and reset state to blank inputs
-    onClickAdd(e){
-        e.preventDefault();
+    onClickAdd(e,values){
+        //e.preventDefault();
 
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
         axios.post("/creditCards/addCard",{
-            cardHolderName: this.state.item.cardHolderName,
-            cardNumber: this.state.item.cardNumber,
-            expirationMonth: this.state.item.expirationMonth,
-            expirationYear:this.state.item.expirationYear,
-            securityCode: this.state.item.securityCode
+            cardHolderName: values.cardHolderName,
+            cardNumber: values.cardNumber,
+            expirationMonth: values.expirationMonth,
+            expirationYear:values.expirationYear,
+            securityCode: values.securityCode
         }).then(res=>{
             if(res.data.cards){
                 this.props.update(res.data.cards);
@@ -171,6 +179,7 @@ class  CreditCardForm extends Component {
                     expirationYear:"",
                     securityCode:"",
                 },saved:true});
+                this.form && this.form.reset();
             }
         }).catch(err=>{
             console.log(err);
@@ -199,7 +208,7 @@ class  CreditCardForm extends Component {
         //determine to show add, edit, or save button
         var button = null;
         if(this.props.Add){
-            button = <Button className="float-right" size="sm" color="primary" style={{padding:"5px 15px"}} onClick={this.onClickAdd}>Add</Button>;
+            button = <Button className="float-right" size="sm" color="primary" style={{padding:"5px 15px"}}>Add</Button>;
         }else if(this.state.disabled){
             button = (
                 <div>
@@ -210,8 +219,8 @@ class  CreditCardForm extends Component {
         }else{
             button = (
                 <div>
-                    <Button className="float-right" size="sm" color="danger"> <MaterialIcon icon="delete_forever" size={18} /></Button>
-                    <Button className="float-right mr-2" size="sm" color="primary" style={{padding:"5px 15px"}} onClick={this.onClickSave}>Save</Button>
+                    <Button className="float-right" size="sm" color="danger" onClick={this.onClickDelete}> <MaterialIcon icon="delete_forever" size={18} /></Button>
+                    <Button className="float-right mr-2" size="sm" color="primary" style={{padding:"5px 15px"}} >Save</Button>
                 </div>
             );
         }
@@ -219,17 +228,20 @@ class  CreditCardForm extends Component {
         return(
             <div>
                 <Card style={{width:'600px'}}>
-                    <Form > 
+                    <AvForm onValidSubmit={this.onSubmit} ref={c => (this.form = c)}> 
                         <div style={{margin:'30px'}} className="text-left">
                             <FormGroup>
                                 <Label for="cardHolderName">Card Holder Name</Label>
-                                <Input  type="text" name="cardHolderName" disabled={this.state.disabled} placeholder="Card Holder Name" value={this.state.item.cardHolderName} onChange={this.onChange} />
-                                <FormFeedback> </FormFeedback>
+                                <AvField required  type="text" name="cardHolderName" disabled={this.state.disabled} placeholder="Card Holder Name" value={this.state.item.cardHolderName|| ''} onChange={this.onChange} errorMessage='This field is required!' />
                             </FormGroup>
                             <FormGroup>
                                 <Label  for="cardNumber">Card Number</Label>
-                                <Input  type="text" name="cardNumber" disabled={this.state.disabled} placeholder="Enter card number" value={this.state.item.cardNumber} onChange={this.onChange}/>
-                                <FormFeedback></FormFeedback>
+                                <AvField  required type="text" name="cardNumber" disabled={this.state.disabled} placeholder="Enter card number" value={this.state.item.cardNumber|| ''} onChange={this.onChange} validate={{
+                                    required:{value:true,errorMessage:'This field is required!'},
+                                    pattern:{value:'^[0-9]*$'},
+                                    minLength:{value:16},
+                                    maxLength:{value:16}
+                                }}/>
                             </FormGroup>
                             <FormGroup>
                                 <Row>
@@ -245,16 +257,32 @@ class  CreditCardForm extends Component {
                                 </Row>
                                 <Row>
                                     <Col >
-                                        <Input  type="text" name="expirationMonth" disabled={this.state.disabled} placeholder="Exp. Month" value={this.state.item.expirationMonth} onChange={this.onChange}/>
-                                        <FormFeedback></FormFeedback>
+                                        <AvField  type="text" name="expirationMonth" disabled={this.state.disabled} placeholder="MM" value={this.state.item.expirationMonth || ''} onChange={this.onChange} validate={{
+                                            required:{value:true,errorMessage:'This field is required!'},
+                                            pattern:{value:'^[0-9]*$'},
+                                            minLength:{value:2},
+                                            maxLength:{value:2},
+                                            min:{value:1},
+                                            max:{value:12}
+                                        }}/>
                                     </Col>
                                     <Col >
-                                        <Input  type="text" name="expirationYear" disabled={this.state.disabled} placeholder="Exp. year" value={this.state.item.expirationYear} onChange={this.onChange}/>
-                                        <FormFeedback></FormFeedback>
+                                        <AvField  type="text" name="expirationYear" disabled={this.state.disabled} placeholder="YYYY" value={this.state.item.expirationYear || ''} onChange={this.onChange} validate={{
+                                            required:{value:true,errorMessage:'This field is required!'},
+                                            pattern:{value:'^[0-9]*$'},
+                                            minLength:{value:4},
+                                            maxLength:{value:4},
+                                            min:{value:2020,errorMessage:'Expired!'}
+                                        }}/>
                                     </Col>
                                     <Col >
-                                        <Input  type="text" name="securityCode" disabled={this.state.disabled} placeholder="Enter security code" value={this.state.item.securityCode} onChange={this.onChange}/>
-                                        <FormFeedback></FormFeedback>
+                                        <AvField  type="text" name="securityCode" disabled={this.state.disabled} placeholder="Enter security code" value={this.state.item.securityCode || ''} onChange={this.onChange} validate={{
+                                            required:{value:true,errorMessage:'This field is required!'},
+                                            pattern:{value:'^[0-9]*$'},
+                                            minLength:{value:3},
+                                            maxLength:{value:3},
+                                            min:{value:1}
+                                        }}/>
                                     </Col>
                                 </Row>
                             </FormGroup>
@@ -267,7 +295,7 @@ class  CreditCardForm extends Component {
                                 </Col>
                             </FormGroup>
                         </div>
-                    </Form>
+                    </AvForm>
                 </Card>
                 
             </div>

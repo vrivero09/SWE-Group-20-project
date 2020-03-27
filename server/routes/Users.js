@@ -27,6 +27,9 @@ users.post('/signup', (req,res) => {
         email: req.body.email,
         nickname: req.body.nickname,
         password: req.body.password,
+        wishLists: [{
+            name: 'primary'
+        }]
     };
 
     //find user by id (username)
@@ -154,6 +157,10 @@ users.post("/changePersonalInfo",(req,res)=> {
             user.lastName = req.body.lastName;
             user.email = req.body.email;
             user.nickname = req.body.nickname;
+            user.homeAddress.street = req.body.street;
+            user.homeAddress.city = req.body.city;
+            user.homeAddress.state = req.body.state;
+            user.homeAddress.zip = req.body.zip;
             user.save();
             res.send("Saved successfully");
             
