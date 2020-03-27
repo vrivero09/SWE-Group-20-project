@@ -4,10 +4,8 @@ import {
 } from 'reactstrap';
 import React, {Component} from 'react';
 import axios from 'axios';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import ButtonAddToWishList from "../common/ButtonAddToWishlist";
-
-class BookDetails extends Component {
+import {Link} from "react-router-dom";
+class bookDetails extends Component {
     constructor(props) {
         super(props);
         console.log(props.match.params.bookId);
@@ -56,7 +54,7 @@ class BookDetails extends Component {
                                 <CardImg src={this.state.product.bookCoverAddress}/>
                                 <CardBody>
                                     <CardTitle>{this.state.product.bookTitle}</CardTitle>
-                                    <CardSubtitle>{this.state.product.author}</CardSubtitle>
+                                    <CardSubtitle>Author:&nbsp;<Link to={"/authorBooks/"+this.state.products.author}>{this.state.products.author}</Link></CardSubtitle>
 
                                     <CardText>
                                         <div>

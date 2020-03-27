@@ -8,11 +8,8 @@ import Wishlist from './component/Wishlist';
 import Landing from './component/login_registration/landing';
 import Form from './component/Form';
 import Profile from './component/profile/profile';
-import BookDetails from './component/bookDetails/bookDetails';
-import Cart from './component/shoppingCart/Cart';
-import Product from './component/shoppingCart/ProductList';
-import Checkout from './component/shoppingCart/checkOut'
-import axios from "axios";
+import bookDetails from './component/bookDetails/bookDetails';
+import authorBooks from './component/bookDetails/authorBooks';
 
 class App extends Component{
   constructor(props){
@@ -80,6 +77,8 @@ class App extends Component{
       <Route path ='/Wishlist' render={props => <Wishlist {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists} />} />
       <Route path ='/Ratings' component={Form} />
       <Route path ='/Profile' component={Profile} />
+      {/* <Route path ='/bookDetails' component={bookDetails} /> */}
+      <Route path ='/authorBooks/:authorName' component={authorBooks} />
     </div>
     </BrowserRouter>
 
