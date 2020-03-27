@@ -37,10 +37,6 @@ export default class ProductList extends React.Component {
                         }
                     </div>
                 </Col>
-                <Col xs="3">
-                    <CartSummary/>
-
-                </Col>
             </Row>
 
 

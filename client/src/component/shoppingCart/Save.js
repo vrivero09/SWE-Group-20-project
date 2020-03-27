@@ -36,7 +36,7 @@ export default class saveList extends React.Component {
 		const { products } =  this.state;
 		return (
 
-				<div className="row" style={{marginLeft: "100px"}}>
+				<div className="row" style={{marginLeft: "300px"}}>
 					<hr/>
 				{
 				products.map((product, index) => <SavesItem product={product} key={index} onChange={this.handleInputChange} remove={this.removedSaved}/>)
