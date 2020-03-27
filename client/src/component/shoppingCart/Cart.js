@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCartProducts, getSaveproducts } from './repository';
+import { getCartProducts } from './repository';
 import CartItem from './CartItem';
 import { Button, Row, Col } from 'reactstrap'
 import Save from './Save'

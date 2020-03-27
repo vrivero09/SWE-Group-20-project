@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	Media, Row, Button, 
+	Row, Button, 
   } from 'reactstrap';
 
 export default class CartItem extends React.Component {
