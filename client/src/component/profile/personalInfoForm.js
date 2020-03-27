@@ -172,7 +172,12 @@ class  PersonalInfoForm extends Component {
                         <FormGroup row style={{marginBottom:'0'}}>
                             <Label sm={2} for="homeAddress.zip">Zip</Label>
                             <Col sm={4}>
-                                <AvField required  type="number" name="homeAddress.zip" disabled={this.state.disabled}  placeholder="Zip" value={homeAddress.zip} errorMessage='This field is required!' />
+                                <AvField  type="text" name="homeAddress.zip" disabled={this.state.disabled}  placeholder="Zip" value={homeAddress.zip} validate={{
+                                    required:{value:true,errorMessage:'This field is required!'},
+                                    pattern:{value:'^[0-9]*$'},
+                                    minLength:{value:5, errorMessage:'Enter 5 digits'},
+                                    maxLength:{value:5, errorMessage:'Enter 5 digits'}
+                                }}/>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
