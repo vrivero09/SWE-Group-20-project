@@ -28,7 +28,9 @@ export default class saveItem extends React.Component {
         } else {
             cart[productId] = qty
         }
-        localStorage.setItem('cart', JSON.stringify(cart));
+		localStorage.setItem('cart', JSON.stringify(cart));
+		localStorage.removeItem('save');
+
     }
 
 
@@ -42,7 +44,7 @@ export default class saveItem extends React.Component {
 			    <h5 className="card-title">{product.bookTitle}</h5>
 				<Button color="danger" size="md" onClick={() => this.props.remove(product)} style={{marginLeft: "85%"}}>Remove</Button>
 				<Link to="/Cart" className="btn btn-sm btn-warning float-right mx-3" onClick={this.addToCart}
-                    onChange={this.handleInputChange}>Add to cart</Link>
+                    onChange={this.handleInputChange}>Move To cart</Link>
 
 				</Row>
 			  </div>

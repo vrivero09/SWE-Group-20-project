@@ -19,6 +19,7 @@ export default class CartItem extends React.Component {
 	saveCartItem = (products) =>{
 		let save = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
 		localStorage.setItem('save', JSON.stringify(save));
+		localStorage.removeItem('cart');
 		this.setState({products})
 	}
 
