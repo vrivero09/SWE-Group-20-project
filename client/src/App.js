@@ -10,6 +10,10 @@ import Form from './component/Form';
 import Profile from './component/profile/profile';
 import bookDetails from './component/bookDetails/bookDetails';
 import authorBooks from './component/bookDetails/authorBooks';
+import Cart from './component/shoppingCart/Cart';
+import Product from './component/shoppingCart/ProductList';
+import Checkout from './component/shoppingCart/checkOut'
+import axios from "axios";
 
 class App extends Component{
   constructor(props){
