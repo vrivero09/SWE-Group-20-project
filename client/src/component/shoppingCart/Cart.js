@@ -58,7 +58,7 @@ export default class Cart extends React.Component {
 		const { products, total } =  this.state;
 	return (
 			<Row>
-				<div u>
+				<div>
 				<h3 className="card-title">Your shopping cart</h3>
 				<hr/>
 				{
@@ -74,14 +74,16 @@ export default class Cart extends React.Component {
 				<button className="btn btn-danger float-right" onClick={this.clearCart} style={{ marginRight: "10px" }}>Clear Cart</button>
 
 				<br/><br/><br/>
-
 				</div>
-				<div>
-				<h3>Saved items</h3>
+				<div style={{marginRight: "30px"}}>
+				<h3 style={{marginLeft:"200px"}}>Saved items</h3>
 					<Save />
 				<hr/>
 				</div>
 			</Row>
+			
+
+			
 			
 		);
 		

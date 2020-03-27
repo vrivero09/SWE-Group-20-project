@@ -8,7 +8,6 @@ export default class saveItem extends React.Component {
 		super(props);
 		this.state = {
 			quantity: 1,
-			products: []
 		}
 	}
 
