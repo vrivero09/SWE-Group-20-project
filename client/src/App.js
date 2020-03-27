@@ -82,7 +82,7 @@ class App extends Component{
       <Route path ='/Wishlist' render={props => <Wishlist {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists} />} />
       <Route path ='/Ratings' component={Form} />
       <Route path ='/Profile' component={Profile} />
-      <Route path ='/bookDetails' component={Books} />
+      {/* <Route path ='/bookDetails' component={Books} /> */}
       <Route path ='/authorBooks/:authorName' component={authorBooks} />
     </div>
     </BrowserRouter>
