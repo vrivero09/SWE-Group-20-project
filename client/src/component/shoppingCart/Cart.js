@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCartProducts } from './repository';
 import CartItem from './CartItem';
-import { Button, Row, Col } from 'reactstrap'
+import { Button, Container } from 'reactstrap'
 import Save from './Save'
 
 export default class Cart extends React.Component {
@@ -18,11 +18,6 @@ export default class Cart extends React.Component {
 
 	// //Saving data in the localStorage
 	// //localStorage.setItem method to store the value of products
-	// saveForLater = (products) =>{
-	// 	let save = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
-	// 	localStorage.setItem('save', JSON.stringify(save));
-	// 	this.setState({products})
-	// }
 
 	componentWillMount() {
 		let cart = localStorage.getItem('cart');
@@ -58,10 +53,8 @@ export default class Cart extends React.Component {
 	render() {
 		const { products, total } =  this.state;
 	return (
-			<Row>
-				<Col md="8">
-					<h3 className="card-title">Your shopping cart</h3>
-					<hr/>
+			<Container>
+					<h3 className="card-title"><hr/>Your shopping cart<hr/></h3>
 					{
 						products.map((product, index) => <CartItem product={product} remove={() => this.removeFromCart(product)} key={index}  onChange={this.handleInputChange}/>)
 					}
@@ -76,13 +69,10 @@ export default class Cart extends React.Component {
 
 					<br/><br/><br/>
 
-				</Col>
-				<Col md="4">
-					<h3>Saved items</h3>
+					<h3><hr/>Saved items<hr/></h3>
 						<Save />
 					<hr/>
-				</Col>
-			</Row>
+			</Container>
 			
 
 			
