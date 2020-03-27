@@ -5,6 +5,7 @@ import {
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
+
 class bookDetails extends Component {
     constructor(props) {
         super(props);
@@ -93,5 +94,5 @@ class bookDetails extends Component {
     }
 }
 
-export default BookDetails;
+export default bookDetails;
 
