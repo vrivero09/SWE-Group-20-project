@@ -1,7 +1,7 @@
 import React from 'react';
 import { getCartProducts } from './repository';
 import SavesItem from './SavesItem'
-import { Button } from 'reactstrap'
+import { Row } from 'reactstrap'
 
 export default class saveList extends React.Component {
 	constructor(props) {
@@ -32,19 +32,19 @@ export default class saveList extends React.Component {
 	}
 
 
-
-
 	render() {
 		const { products } =  this.state;
 		return (
 
-				<div>
+				<div className="row" style={{marginLeft: "100px"}}>
+					<hr/>
 				{
-					products.map((product, index) => <SavesItem product={product} key={index} onChange={this.handleInputChange} remove={this.removedSaved}/>)
+				products.map((product, index) => <SavesItem product={product} key={index} onChange={this.handleInputChange} remove={this.removedSaved}/>)
 				}
+				
+				{ !products.length ? <h3 style = {{marginBottom: "100px"}}><hr/>No saved items<hr/></h3>: ''}
 
-				{ !products.length ? <h3 style = {{marginBottom: "100px"}}>No saved items</h3>: ''}
-
+				<hr/>
 
 				</div>
 

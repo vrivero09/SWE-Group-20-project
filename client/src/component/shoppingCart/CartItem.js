@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	Media, Row, Button
+	Media, Row, Button, 
   } from 'reactstrap';
 
 export default class CartItem extends React.Component {
@@ -18,20 +18,31 @@ export default class CartItem extends React.Component {
 	render(){
 		const { product } = this.props;
 		return (
-		    <div className="card" style={{ marginBottom: "10px"}}>
-			  <div className="card-body">
-				<Row>
-				<Media src={product.img} width="10%" alt="image holder" />
-			    <h5 className="card-title">{product.name}</h5>
-			    <p><h6 className="card-text"><small>price:</small>${product.price}</h6></p> 
-				<br></br>
-			    <p><span className="card-text text-success"><small>Quantity: </small>{product.qty}</span>
+			<Media style={{ marginBottom: "10px",  marginLeft: "100px"}}>
+			<Media left href="">
+				<Media src={product.img} width="50%" alt="image holder" />
+			</Media>
+			<Media body>
+				<Media heading>
+				{product.name}
+			</Media>
+				<p >{product.description}</p>
+				<p>Author: {product.author}</p>
+				<h5 className="card-text"><small>price: </small>${product.price}</h5>
+				<span className="card-text"><small>Available Quantity: </small>{product.available_quantity}</span>
+				{ product.available_quantity > 0 ?
+							<div>
+								<br></br>
+								<button className="btn btn-sm btn-warning float-right" value={this.state.quantity} onChange={this.handleInputChange} >Change quantity</button>
+								<input type="number" value={this.state.quantity} name="quantity" onChange={this.handleInputChange} className="float-right" style={{ width: "60px", marginRight: "10px", borderRadius: "3px"}}/>
+							</div> : 
+							<p> </p>
+						}
+
 				<Button onClick={() => this.props.remove(product)} >Remove from cart</Button>
-				</p>
-				<br></br>
-				</Row>
-			  </div>
-			</div>
+				</Media>
+				</Media>
+			
 		)
 	}
 }
