@@ -8,7 +8,7 @@ import Wishlist from './component/Wishlist';
 import Landing from './component/login_registration/landing';
 import Form from './component/Form';
 import Profile from './component/profile/profile';
-import bookDetails from './component/bookDetails/bookDetails';
+import Books from './component/bookDetails/bookDetails';
 import authorBooks from './component/bookDetails/authorBooks';
 import Cart from './component/shoppingCart/Cart';
 import Product from './component/shoppingCart/ProductList';
@@ -68,7 +68,7 @@ class App extends Component{
 
       <Route path ='/Home' component={Home} />
       
-      <Route path ='/bookDetails/:bookId' render={props => <bookDetails {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists}/>} />
+      <Route path ='/bookDetails/:bookId' render={props => <Books {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists}/>} />
 
       <div className="container">
         <br/>
@@ -82,7 +82,7 @@ class App extends Component{
       <Route path ='/Wishlist' render={props => <Wishlist {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists} />} />
       <Route path ='/Ratings' component={Form} />
       <Route path ='/Profile' component={Profile} />
-      {/* <Route path ='/bookDetails' component={BookDetails} /> */}
+      <Route path ='/bookDetails' component={Books} />
       <Route path ='/authorBooks/:authorName' component={authorBooks} />
     </div>
     </BrowserRouter>
