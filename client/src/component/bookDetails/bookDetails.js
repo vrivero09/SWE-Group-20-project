@@ -57,7 +57,7 @@ class bookDetails extends Component {
                                 <CardImg src={this.state.product.bookCoverAddress}/>
                                 <CardBody>
                                     <CardTitle>{this.state.product.bookTitle}</CardTitle>
-                                    <CardSubtitle>Author:&nbsp;<Link to={"/authorBooks/"+this.state.products.author}>{this.state.products.author}</Link></CardSubtitle>
+                                    <CardSubtitle>Author:&nbsp;<Link to={"/authorBooks/"+this.state.product.author}>{this.state.product.author}</Link></CardSubtitle>
 
                                     <CardText>
                                         <div>
