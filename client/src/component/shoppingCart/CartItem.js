@@ -2,6 +2,7 @@ import React from 'react';
 import {
 	Row, Button, 
   } from 'reactstrap';
+import { getSaveproducts } from './repository'
 
 export default class CartItem extends React.Component {
 
@@ -14,6 +15,25 @@ export default class CartItem extends React.Component {
 	}
 
 	handleInputChange = event => this.setState({[event.target.name]: event.target.value});
+
+	saveCartItem = (products) =>{
+		let save = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
+		localStorage.setItem('save', JSON.stringify(save));
+		this.setState({products})
+	}
+
+
+    // saveCartItem = () => {
+	// 	let cart = JSON.parse(localStorage.getItem('cart'));
+	// 	localStorage.setItem('save', JSON.stringify(cart));
+	// 	getSaveproducts(localStorage.getItem('save')).then((products) => {
+	// 		let total = 0;
+	// 		for (let i = 0; i < products.length; i++) {
+	// 			total += products[i].price * products[i].quantity;
+	// 		}
+	// 		this.setState({ products, total });
+	// 	});
+	// };
 
 	render(){
 		const { product } = this.props;
@@ -29,6 +49,8 @@ export default class CartItem extends React.Component {
 						<div className="d-flex justify-content-end align-items-center">
 							<div className="card-text text-success">Quantity: {product.quantity}</div>
 							<Button className="ml-3" onClick={() => this.props.remove(product)} >Remove from cart</Button>
+													<Button onClick={this.saveCartItem} onChange={this.handleInputChange}>Save for Later</Button>
+
 						</div>
 					</div>
 				</Row>

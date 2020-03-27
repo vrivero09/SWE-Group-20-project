@@ -27,7 +27,8 @@ export default class ProductList extends React.Component {
             <Row>
                 <Col>
                     <div className="d-flex flex-column">
-                        <h3 className="card-title">Product List</h3>
+                        <h3 className="card-title"><hr/>Product List<hr/></h3>
+                        
                         <div>
                             <Link to="/cart" className="btn btn-primary float-right">View Cart</Link>
                         </div>
