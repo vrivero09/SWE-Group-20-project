@@ -4,10 +4,11 @@ import {
 } from 'reactstrap';
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Link} from "react-router-dom";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ButtonAddToWishList from "../common/ButtonAddToWishlist";
 
-class BookDetails extends Component {
+class bookDetails extends Component {
     constructor(props) {
         super(props);
         console.log(props.match.params.bookId);
@@ -51,23 +52,28 @@ class BookDetails extends Component {
             <div>
                 <Container>
                     <Row>
-                        <Col sm={3}>
+                        <Col sm={4}>
                             <Card>
                                 <CardImg src={this.state.product.bookCoverAddress}/>
                                 <CardBody>
-                                    <CardTitle>{this.state.product.bookTitle}</CardTitle>
-                                    <CardSubtitle>{this.state.product.author}</CardSubtitle>
+                                    <CardTitle><strong>{this.state.product.bookTitle}</strong></CardTitle>
+                                    <CardSubtitle>Author:&nbsp;<Link to={"/authorBooks/"+this.state.product.author}>{this.state.product.author}</Link></CardSubtitle>
 
                                     <CardText>
                                         <div>
+                                             Description:&nbsp; 
                                             {this.state.product.description}
                                         </div>
-                                        <div>{this.state.product.genre}
+                                        <div>  
+                                            Genre:&nbsp;  
+                                            {this.state.product.genre}
                                         </div>
                                         <div>
+                                            Publisher:&nbsp; 
                                             {this.state.product.publisher}
                                         </div>
                                         <div>
+                                            Author Bio:&nbsp;  
                                             {this.state.product.authorBio}
                                         </div>
                                         <div>
@@ -76,13 +82,13 @@ class BookDetails extends Component {
                                         </div>
 
                                         <div>
-                                            Average Rating :
+                                            Average Rating:&nbsp;  
                                             {this.state.product.averageRating}
                                         </div>
                                     </CardText>
                                     <div className="d-flex justify-content-between">
-                                        <Button><AddShoppingCartIcon/></Button>
-                                        <ButtonAddToWishList wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/>
+                                    <Button><AddShoppingCartIcon/></Button>
+                                    <ButtonAddToWishList wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/> 
                                     </div>
                                 </CardBody>
                             </Card>
@@ -95,5 +101,5 @@ class BookDetails extends Component {
     }
 }
 
-export default BookDetails;
+export default bookDetails;
 
