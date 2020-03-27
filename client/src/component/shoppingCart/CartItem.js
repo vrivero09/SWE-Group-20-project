@@ -10,17 +10,23 @@ export default class CartItem extends React.Component {
 		super(props);
 		this.state = {
 			quantity: 1,
-			products: []
 		}
 	}
 
 	handleInputChange = event => this.setState({[event.target.name]: event.target.value});
 
-	saveCartItem = (products) =>{
-		let save = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
-		localStorage.setItem('save', JSON.stringify(save));
-		localStorage.removeItem('cart');
-		this.setState({products})
+	saveCartItem = () =>{
+		let save = localStorage.getItem('save') ? JSON.parse(localStorage.getItem('save')) : {};
+        let productId = this.props.product._id.toString();
+        save[productId] = (save[productId] ? save[productId] : 0);
+        let qty = save[productId] + parseInt(this.state.quantity);
+        if (this.props.product.quantity < qty) {
+            save[productId] = this.props.product.quantity;
+        } else {
+            save[productId] = qty
+        }
+        localStorage.setItem('save', JSON.stringify(save));
+		
 	}
 
 
