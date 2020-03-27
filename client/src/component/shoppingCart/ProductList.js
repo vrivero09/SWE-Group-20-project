@@ -3,7 +3,6 @@ import ProductItem from './productITem';
 import {getProducts} from './repository';
 import {Link} from 'react-router-dom';
 import {Row, Col} from 'reactstrap';
-import CartSummary from './cartSummary'
 
 export default class ProductList extends React.Component {
     constructor(props) {
