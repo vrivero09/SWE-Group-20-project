@@ -61,9 +61,9 @@ export default class ProductItem extends React.Component {
                             <input type="number" value={this.state.quantity} name="quantity"
                                    onChange={this.handleInputChange} className="float-right"
                                    style={{width: "60px", marginRight: "10px", borderRadius: "3px"}}/>
-                            <button className="btn btn-sm btn-warning float-right mx-3" onClick={this.addToCart}
-                                    onChange={this.handleInputChange}>Add to cart
-                            </button>
+                            <Link to="/Cart" className="btn btn-sm btn-warning float-right mx-3" onClick={this.addToCart}
+                                    onChange={this.handleInputChange}>Add to cart</Link>
+                                    
                             <ButtonAddToWishList productId={product._id} wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/>
                         </div> :
                         <p className="text-danger"> Product is out of stock. </p>
