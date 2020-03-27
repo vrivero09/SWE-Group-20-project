@@ -9,6 +9,7 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.0.0",
+    "availity-reactstrap-validation": "^2.6.1",
     "axios": "^0.18.0",
     "bootstrap": "^4.4.1",
     "jwt-decode": "^2.2.0",

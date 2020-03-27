@@ -26,6 +26,36 @@ users.get('/', (req, res) => {
     });
 });
 
+// endpoint to add wishlist book item to database
+users.post('/addbook', (req, res) => {
+    const decoded = jwt.verify(req.headers['authorization'], SECRET_KEY);
+    User.findOne(
+        {
+            _id: decoded._id
+        }
+    )
+        .populate('wishLists.books')
+        .then(user => {
+            const book_id = req.body.book_id;
+            const wishlist_id = req.body.wishlist_id;
+            let wishList = user.wishLists.find(wishlist => wishlist._id.equals(ObjectID(wishlist_id)));
+            let i_book = -1;
+            let book_count = wishList.books.length;
+            for (let i = 0; i < book_count; i++) {
+                if (wishList.books[i]._id.equals(book_id)) {
+                    i_book = i;
+                    break;
+                }
+            }
+            if (i_book === -1)
+            {
+                wishList.books.push(book_id);
+                user.save();
+            }
+            res.json({result: 0, message: 'success', wishlists: user.wishLists});
+        });
+});
+
 // endpoint to remove wishlist book item from database
 users.post('/removebook', (req, res) => {
     const decoded = jwt.verify(req.headers['authorization'], SECRET_KEY);

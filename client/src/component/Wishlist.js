@@ -28,6 +28,14 @@ function WishlistBookEntry(props) {
         );
     };
 
+    const addToCart = (productId) => {
+        let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
+        cart[productId] = (cart[productId] ? cart[productId] : 0);
+        let qty = cart[productId] + 1;
+        cart[productId] = qty;
+        localStorage.setItem('cart', JSON.stringify(cart));
+    };
+
     const moveTo = (wishlist_id) => {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
         axios.post('wishlist/movebook', {
@@ -56,7 +64,7 @@ function WishlistBookEntry(props) {
             </div>
             <div className="align-items-around wishlist-entry-actions-container d-flex justify-content-around pb-3">
                 <Button color="danger" size="sm" onClick={() => removeBook(book._id) }>Remove</Button>
-                <Button color="primary" size="sm">Add to Cart</Button>
+                <Button color="primary" size="sm" onClick={() => addToCart(book._id)}>Add to Cart</Button>
                 <Dropdown isOpen={dropdownOpen} toggle={toggle} size="sm">
                     <DropdownToggle caret>
                         Move to
@@ -107,16 +115,15 @@ function Wishlist(props) {
     );
 }
 
-function Wishlists() {
-    const [wishlists, setWishlists] = useState([]);
+function Wishlists(props) {
     const [wishlistName, setWishlistName] = useState("");
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
     useEffect(() => {
-        if (wishlists.length === 0) {
+        if (props.wishlists.length === 0) {
             axios.get('wishlist')
             .then(res => {
                 if (res.data.result == 0) {
-                    setWishlists(res.data.wishlists);
+                    props.setWishlists(res.data.wishlists);
                 }
             });
         }
@@ -167,8 +174,8 @@ function Wishlists() {
 
     let elmWishlist = [];
     let index = 0;
-    wishlists.forEach(wishlist => {
-        elmWishlist.push(<div className="col-4" key={index++}><Wishlist wishlist={wishlist} setWishlists={setWishlists} wishlists={wishlists}/></div>);
+    props.wishlists.forEach(wishlist => {
+        elmWishlist.push(<div className="col-4" key={index++}><Wishlist wishlist={wishlist} setWishlists={props.setWishlists} wishlists={props.wishlists}/></div>);
     });
 
       return(
@@ -178,7 +185,7 @@ function Wishlists() {
         </div>
         <div className="d-flex w-100">
             <Input placeholder="wishlist name" className="w-25" value={wishlistName} onChange={(evt) => setWishlistName(evt.target.value)}/>
-            <Button onClick={()=>{ addWishlist(setWishlists, wishlistName); }}>Add Wishlist</Button>
+            <Button onClick={()=>{ addWishlist(props.setWishlists, wishlistName); }}>Add Wishlist</Button>
         </div>
         <div className="row pt-3 w-100 flex-grow-1 pb-3">
             {elmWishlist}
