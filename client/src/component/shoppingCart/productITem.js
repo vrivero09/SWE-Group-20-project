@@ -2,6 +2,7 @@ import React from 'react';
 import { Media } from 'reactstrap';
 import axios from "axios";
 import ButtonAddToWishList from "../common/ButtonAddToWishlist";
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {Link} from "react-router-dom";
 
 export default class ProductItem extends React.Component {
@@ -54,15 +55,15 @@ export default class ProductItem extends React.Component {
                     <p>{product.description}</p>
                     <p>Author: {product.author}</p>
                     <h5 className="card-text"><small>price: </small>${product.price}</h5>
+                    <p style={{marginTop: "10px"}}><Link to={`/bookDetails/${product._id}`} className="btn btn-outline-secondary">Book Details</Link></p>
                     <span className="card-text"><small>Available Quantity: </small>{product.quantity}</span>
                     {product.quantity > 0 ?
                         <div className="d-flex justify-content-end">
-                            <Link to={`/bookDetails/${product._id}`} className="btn btn-link">Details</Link>
                             <input type="number" value={this.state.quantity} name="quantity"
                                    onChange={this.handleInputChange} className="float-right"
                                    style={{width: "60px", marginRight: "10px", borderRadius: "3px"}}/>
-                            <Link to="/Cart" className="btn btn-sm btn-warning float-right mx-3" onClick={this.addToCart}
-                                    onChange={this.handleInputChange}>Add to cart</Link>
+                            <Link to="/Cart" className="btn btn-sm btn btn-info float-right mx-3" onClick={this.addToCart}
+                                    onChange={this.handleInputChange}><AddShoppingCartIcon/></Link>
                                     
                             <ButtonAddToWishList productId={product._id} wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/>
                         </div> :

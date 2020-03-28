@@ -30,7 +30,7 @@ export default class ProductList extends React.Component {
                         <h3 className="card-title"><hr/>Product List<hr/></h3>
                         
                         <div>
-                            <Link to="/cart" className="btn btn-primary float-right">View Cart</Link>
+                            <Link to="/cart" className="btn btn btn-info float-right">View Cart</Link>
                         </div>
                         {
                             products.map((product, index) => <ProductItem wishlists={this.props.wishlists} setWishlists={this.props.setWishlists} product={product} key={index}/>)

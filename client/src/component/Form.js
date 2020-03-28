@@ -3,6 +3,7 @@ import React from "react";
 import StarRatingComponent from "react-star-rating-component";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { FixedSizeList as List } from "react-window";
 
 export default class Form extends React.Component {
   state = {
@@ -55,18 +56,21 @@ export default class Form extends React.Component {
   render() {
     const { rating } = this.state;
 
+    const Row = ({ index, style }) => <div style={style}>Row {index}</div>;
+
     return (
       <form>
+        <List height={150} itemCount={1000} itemSize={35} width={300}>
+          {Row}
+        </List>
+
         <div className="Review text">
           Review text: {String(this.state.reviewText)}
         </div>
-
         <div className="Checkbox">
           Checkbox: {String(this.state.checkBoxValue)}
         </div>
-
         <div className="Rating">Rating: {String(this.state.rating)}</div>
-
         <textarea
           name="reviewText"
           placeholder="Review text here."
@@ -74,7 +78,6 @@ export default class Form extends React.Component {
           value={this.state.reviewText}
           onChange={e => this.change(e)}
         />
-
         <input
           name="showUsername"
           type="checkbox"

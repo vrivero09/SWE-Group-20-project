@@ -10,16 +10,25 @@ export default class CartItem extends React.Component {
 		super(props);
 		this.state = {
 			quantity: 1,
-			products: []
 		}
 	}
 
 	handleInputChange = event => this.setState({[event.target.name]: event.target.value});
 
-	saveCartItem = (products) =>{
-		let save = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
-		localStorage.setItem('save', JSON.stringify(save));
-		this.setState({products})
+	saveCartItem = () =>{
+		let save = localStorage.getItem('save') ? JSON.parse(localStorage.getItem('save')) : {};
+        let productId = this.props.product._id.toString();
+        save[productId] = (save[productId] ? save[productId] : 0);
+        let qty = save[productId] + parseInt(this.state.quantity);
+        if (this.props.product.quantity < qty) {
+            save[productId] = this.props.product.quantity;
+        } else {
+            save[productId] = qty
+		}
+		let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
+		localStorage.removeItem(cart)
+        localStorage.setItem('save', JSON.stringify(save));
+		
 	}
 
 
@@ -49,7 +58,8 @@ export default class CartItem extends React.Component {
 						<div className="d-flex justify-content-end align-items-center">
 							<div className="card-text text-success">Quantity: {product.quantity}</div>
 							<Button className="ml-3" onClick={() => this.props.remove(product)} >Remove from cart</Button>
-													<Button onClick={this.saveCartItem} onChange={this.handleInputChange}>Save for Later</Button>
+							&nbsp;
+							<Button onClick={this.saveCartItem} onChange={this.handleInputChange}>Save for Later</Button>
 
 						</div>
 					</div>
