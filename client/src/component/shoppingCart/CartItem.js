@@ -58,7 +58,8 @@ export default class CartItem extends React.Component {
 						<div className="d-flex justify-content-end align-items-center">
 							<div className="card-text text-success">Quantity: {product.quantity}</div>
 							<Button className="ml-3" onClick={() => this.props.remove(product)} >Remove from cart</Button>
-													<Button onClick={this.saveCartItem} onChange={this.handleInputChange}>Save for Later</Button>
+							&nbsp;
+							<Button onClick={this.saveCartItem} onChange={this.handleInputChange}>Save for Later</Button>
 
 						</div>
 					</div>
