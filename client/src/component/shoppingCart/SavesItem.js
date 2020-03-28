@@ -41,8 +41,8 @@ export default class saveItem extends React.Component {
 				<Media src={product.bookCoverAddress} width="10%" alt="image holder" />
 			    <h5 className="card-title">{product.bookTitle}</h5>
 				<Button color="danger" size="md" onClick={() => this.props.remove(product)} style={{marginLeft: "85%"}}>Remove</Button>
-				<Link to="/Cart" className="btn btn-sm btn-warning float-right mx-3" onClick={this.addToCart}
-                    onChange={this.handleInputChange}>Add to cart</Link>
+				<Link to="/Cart" className="btn btn-sm btn-success float-right mx-3" onClick={this.addToCart}
+                    onChange={this.handleInputChange}>Move to Cart</Link>
 
 				</Row>
 			  </div>
