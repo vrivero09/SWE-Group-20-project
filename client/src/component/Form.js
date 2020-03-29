@@ -9,7 +9,8 @@ export default class Form extends React.Component {
   state = {
     reviewText: "",
     checkBoxValue: false,
-    rating: 0
+    rating: 0,
+    raw_data: []
   };
 
   //save and disable inputs
@@ -52,6 +53,26 @@ export default class Form extends React.Component {
   onStarClick(nextValue, prevValue, name) {
     this.setState({ rating: nextValue });
   }
+
+  componentDidMount = () => {
+    this.getReviewInfo();
+  };
+
+  getReviewInfo = () => {
+    //have to make a new Books.js endpoint
+    //in server to for .get(). endpoint
+    //must be for reading, not writing
+    axios
+      .get("./server/routes/Books.js")
+      .then(response => {
+        const data = response.data;
+        this.setState({ raw_data: data });
+        console.log("Data has been received!");
+      })
+      .catch(() => {
+        alert("Error Retrieving data!");
+      });
+  };
 
   render() {
     const { rating } = this.state;
