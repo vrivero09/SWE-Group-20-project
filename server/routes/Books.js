@@ -2,6 +2,8 @@ const express = require("express");
 var cors = require("cors");
 const books = express.Router();
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+
 /*
   see https://mongoosejs.com/docs/models.html for querying, deleting, and updating documents
 */
@@ -9,6 +11,23 @@ const mongoose = require("mongoose");
 //get book model
 const Book = require("../models/Book");
 books.use(cors());
+
+SECRET_KEY = "MySecret";
+
+// endpoint to get reviews from database (not working)
+const book_ID = new mongoose.Types.ObjectId(req.body._id);
+
+books.get("/getReviews", (req, res) => {
+  const decoded = jwt.verify(req.headers["authorization"], SECRET_KEY);
+  Book.findOne({
+    _id: book_ID
+  })
+    //    .populate("wishLists.books")
+    .then(currentBookGetReview => {
+      let allReviewsForBook = currentBookGetReview.allReviews;
+      res.json({ result: 0, reviews: allReviewsForBook });
+    });
+});
 
 //endpoint to add review to database
 books.post("/addreview", (req, res) => {
