@@ -63,7 +63,7 @@ export default class Form extends React.Component {
     //in server to for .get(). endpoint
     //must be for reading, not writing
     axios
-      .get("./server/routes/Books.js")
+      .get("/book/getReviews")
       .then(response => {
         const data = response.data;
         this.setState({ raw_data: data });
