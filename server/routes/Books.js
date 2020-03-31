@@ -8,6 +8,10 @@ const jwt = require("jsonwebtoken");
   see https://mongoosejs.com/docs/models.html for querying, deleting, and updating documents
 */
 
+state = {
+  received_data: []
+};
+
 //get book model
 const Book = require("../models/Book");
 books.use(cors());
@@ -30,9 +34,25 @@ books.post("/getReviews", (req, res) => {
     //    .populate("Book.allReviews")
     .then(currentBookGetReview => {
       let allReviewsForBook = currentBookGetReview.allReviews;
+      received_data = allReviewsForBook;
+
+      //      displayReviews(received_data);
+      console.log(received_data[0]);
+
       res.json({ result: 0, reviews: allReviewsForBook });
     });
 });
+
+// displayReviews = reviews_array => {
+//   if (!reviews_array.length) return null;
+
+//   reviews_array.map((current_review, index) => (
+//     <div key={index}>
+//       <h3>{current_review.reviewText}</h3>
+//       <p>{String(current_review.starRating)}</p>
+//     </div>
+//   ));
+// };
 
 //endpoint to add review to database
 books.post("/addreview", (req, res) => {
