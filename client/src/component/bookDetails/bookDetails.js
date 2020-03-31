@@ -88,7 +88,7 @@ class bookDetails extends Component {
                                     </CardText>
                                     <div className="d-flex justify-content-between">
                                     <Button><AddShoppingCartIcon/></Button>
-                                    <ButtonAddToWishList wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/> 
+                                    <ButtonAddToWishList productId={this.props.match.params.bookId} wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/> 
                                     </div>
                                 </CardBody>
                             </Card>
