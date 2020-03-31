@@ -68,13 +68,27 @@ export default class Form extends React.Component {
         _id: "5e559a1c1c9d440000350f9c"
       })
       .then(response => {
-        const data = response.data;
-        this.setState({ raw_data: data });
+        const data = response.data.reviews;
+
+        this.state.raw_data = data;
+
+        console.log("DATA: " + this.state.raw_data[3].reviewText);
         console.log("Data has been received!");
       })
       .catch(() => {
         alert("Error Retrieving data!");
       });
+  };
+
+  displayReviewInfo = reviewInfo => {
+    if (!reviewInfo.length) return null;
+
+    return reviewInfo.map((currentReview, index) => (
+      <div key={index}>
+        <h3>{currentReview.reviewText}</h3>
+        <p>{String(currentReview.starRating)}</p>
+      </div>
+    ));
   };
 
   render() {
@@ -117,6 +131,9 @@ export default class Form extends React.Component {
             value={rating}
             onStarClick={this.onStarClick.bind(this)}
           />
+        </div>
+        <div className="Review info">
+          {this.displayReviewInfo(this.state.raw_data)}
         </div>
       </form>
     );
