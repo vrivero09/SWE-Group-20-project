@@ -64,7 +64,7 @@ export default class Form extends React.Component {
     //must be for reading, not writing
 
     axios
-      .get("/book/getReviews", {
+      .post("/book/getReviews", {
         _id: "5e559a1c1c9d440000350f9c"
       })
       .then(response => {

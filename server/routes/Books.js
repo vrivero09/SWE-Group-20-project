@@ -17,11 +17,11 @@ SECRET_KEY = "MySecret";
 // endpoint to get reviews from database (not working)
 //const book_ID = "5e559a1c1c9d440000350f9c";
 
-books.get("/getReviews", (req, res) => {
+books.post("/getReviews", (req, res) => {
   console.log("TESTING");
 
   const decoded = jwt.verify(req.headers["authorization"], SECRET_KEY);
-  const book_ID = decoded._id;
+  const book_ID = req.body._id;
   console.log("BOOK ID 2: " + book_ID);
 
   Book.findOne({
