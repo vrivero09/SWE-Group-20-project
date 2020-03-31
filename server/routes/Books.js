@@ -15,17 +15,19 @@ books.use(cors());
 SECRET_KEY = "MySecret";
 
 // endpoint to get reviews from database (not working)
-const book_ID = "5e559a1c1c9d440000350f9c";
+//const book_ID = "5e559a1c1c9d440000350f9c";
 
 books.get("/getReviews", (req, res) => {
-  //  const book_ID = new mongoose.Types.ObjectId(req.body._id);
+  console.log("TESTING");
 
-  console.log("BOOK ID: " + book_ID);
   const decoded = jwt.verify(req.headers["authorization"], SECRET_KEY);
+  const book_ID = decoded._id;
+  console.log("BOOK ID 2: " + book_ID);
+
   Book.findOne({
     _id: book_ID
   })
-    //    .populate("wishLists.books")
+    //    .populate("Book.allReviews")
     .then(currentBookGetReview => {
       let allReviewsForBook = currentBookGetReview.allReviews;
       res.json({ result: 0, reviews: allReviewsForBook });

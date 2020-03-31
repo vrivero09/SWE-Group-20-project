@@ -64,7 +64,9 @@ export default class Form extends React.Component {
     //must be for reading, not writing
 
     axios
-      .get("/book/getReviews")
+      .get("/book/getReviews", {
+        _id: "5e559a1c1c9d440000350f9c"
+      })
       .then(response => {
         const data = response.data;
         this.setState({ raw_data: data });
