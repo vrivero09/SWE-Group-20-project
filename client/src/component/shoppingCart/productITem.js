@@ -43,6 +43,7 @@ export default class ProductItem extends React.Component {
             })
             .catch(err => { });
     };
+
     render() {
         const {product} = this.props;
         return (
