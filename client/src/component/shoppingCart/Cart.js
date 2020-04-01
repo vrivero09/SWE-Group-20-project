@@ -64,7 +64,7 @@ export default class Cart extends React.Component {
 					<h3 className="card-title"><hr/>Your shopping cart<hr/></h3>
 					{
 						products.map((product, index) => <CartItem product={product} remove={
-							() => this.removeFromCart(product)} increment={this.increment()} 
+							() => this.removeFromCart(product)} 
 							key={index}  onChange={this.handleInputChange}/>)
 					}
 					<hr/>
