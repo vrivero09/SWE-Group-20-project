@@ -2,7 +2,6 @@ import React from 'react';
 import {
 	Row, Button, 
   } from 'reactstrap';
-import { getSaveproducts } from './repository'
 
 export default class CartItem extends React.Component {
 
@@ -11,12 +10,15 @@ export default class CartItem extends React.Component {
 		this.state = {
 			quantity: 1,
 		}
-	}
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
 
-	handleInputChange = event => this.setState({[event.target.name]: event.target.value});
+    //we’re using the setState method to keep the component’s state up-to-date every time a change occurs in our form
+    handleInputChange = (e) => this.setState({quantity: e.target.value});
 
-	saveCartItem = () =>{
-		let save = localStorage.getItem('save') ? JSON.parse(localStorage.getItem('save')) : {};
+
+	saveCartItem = (product) =>{
+		let save = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
         let productId = this.props.product._id.toString();
         save[productId] = (save[productId] ? save[productId] : 0);
         let qty = save[productId] + parseInt(this.state.quantity);
@@ -25,24 +27,53 @@ export default class CartItem extends React.Component {
         } else {
             save[productId] = qty
 		}
-		let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
-		localStorage.removeItem(cart)
-        localStorage.setItem('save', JSON.stringify(save));
-		
+		let cart = JSON.parse(localStorage.getItem('cart'));
+		delete cart[product._id];
+		localStorage.setItem('save', JSON.stringify(save));	
+		window.location.reload(save);
+
 	}
 
+	increment = () => {
+        let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
+		console.log(cart)
+		let productId = this.props.product._id.toString();
+		console.log(productId)
+        cart[productId] = (cart[productId] ? cart[productId] : 0);
+		console.log(cart[productId])
+		let qty = cart[productId] + parseInt(this.state.quantity) * 2;
+		console.log(qty)
+		console.log(cart)
+        if (this.props.product.quantity < qty) {
+            cart[productId] = this.props.product.quantity + 1;
+        } else {
+            cart[productId] = qty;
+		}
+			localStorage.setItem('cart', JSON.stringify(cart));
+			window.location.reload(cart);
 
-    // saveCartItem = () => {
-	// 	let cart = JSON.parse(localStorage.getItem('cart'));
-	// 	localStorage.setItem('save', JSON.stringify(cart));
-	// 	getSaveproducts(localStorage.getItem('save')).then((products) => {
-	// 		let total = 0;
-	// 		for (let i = 0; i < products.length; i++) {
-	// 			total += products[i].price * products[i].quantity;
-	// 		}
-	// 		this.setState({ products, total });
-	// 	});
-	// };
+		};
+
+		decrement = () => {
+			let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
+			let productId = this.props.product._id.toString();
+			cart[productId] = (cart[productId] ? cart[productId] : 0);
+			let qty = cart[productId] + parseInt(this.state.quantity) * 2;
+			if (this.props.product.quantity < qty) {
+				cart[productId] = this.props.product.quantity - 1;
+			} else {
+				cart[productId] = qty;
+			}
+			if(this.props.product.quantity == 1){
+				delete cart[productId];
+			} else {
+					
+			}
+				localStorage.setItem('cart', JSON.stringify(cart));
+				window.location.reload(cart);
+
+			};
+	
 
 	render(){
 		const { product } = this.props;
@@ -55,12 +86,15 @@ export default class CartItem extends React.Component {
 						<h4 className="card-title text-center">{product.bookTitle}</h4>
 						<h6 className="card-text text-center">price: ${product.price}</h6>
 						<br></br>
+						<br></br>
+						<br></br>
+						<br></br>
 						<div className="d-flex justify-content-end align-items-center">
-							<div className="card-text text-success">Quantity: {product.quantity}</div>
-							<Button className="ml-3" onClick={() => this.props.remove(product)} >Remove from cart</Button>
-							&nbsp;
+							<h5>Quantity: {product.quantity}</h5>&nbsp;&nbsp;
+							<button onClick={this.handleInputChange} onClick={this.increment} >+</button>&nbsp;
+							<button onClick={this.decrement}>-</button>&nbsp;
+							<Button className="ml-3" onClick={() => this.props.remove(product)} >Remove from cart</Button>&nbsp;
 							<Button onClick={this.saveCartItem} onChange={this.handleInputChange}>Save for Later</Button>
-
 						</div>
 					</div>
 				</Row>
@@ -69,33 +103,3 @@ export default class CartItem extends React.Component {
 		)
 	}
 }
-
-
-
-	// componentWillMount(){
-	// 	console.log("Hiiiii")
-	// 		var book = this.props.product.books;
-	// 		console.log(book);
-
-	// 	  this.setState({ book:{name: book.bookTitle, description: book.description, price: book.price}, quantity: this.props.product.quantity  });
-
-	// }
-
-    // getSave = () => {
-	// 	const save = window.localStorage.getItem('save');
-	// 	console.log(save)
-	// }
-
-	// componentWillMount(){
-	// 	let save = localStorage.getItem('save');
-	// 	if (!save) return; 
-	// 	getSaveproducts(save).then((products) => {
-	// 		let total = 0;
-	// 		for (var i = 0; i < products.length; i++) {
-	// 			total += products[i].price * products[i].qty;
-	// 		}
-	// 		console.log('hiiiii')
-	//     	this.setState({ products, total, save });
-	// 	});
-	// }
-
