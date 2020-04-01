@@ -10,11 +10,11 @@ export default class CartItem extends React.Component {
 		this.state = {
 			quantity: 1,
 		}
-		this.handleInputChange = this.handleInputChange.bind(this);
-	}
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
 
-
-	handleInputChange = event => this.setState({[event.target.name]: event.target.value});
+    //we’re using the setState method to keep the component’s state up-to-date every time a change occurs in our form
+    handleInputChange = (e) => this.setState({quantity: e.target.value});
 
 
 	saveCartItem = (product) =>{
@@ -56,14 +56,9 @@ export default class CartItem extends React.Component {
 
 		decrement = () => {
 			let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
-			console.log(cart)
 			let productId = this.props.product._id.toString();
-			console.log(productId)
 			cart[productId] = (cart[productId] ? cart[productId] : 0);
-			console.log(cart[productId])
 			let qty = cart[productId] + parseInt(this.state.quantity) * 2;
-			console.log(qty)
-			console.log(cart)
 			if (this.props.product.quantity < qty) {
 				cart[productId] = this.props.product.quantity - 1;
 			} else {
@@ -96,7 +91,7 @@ export default class CartItem extends React.Component {
 						<br></br>
 						<div className="d-flex justify-content-end align-items-center">
 							<h5>Quantity: {product.quantity}</h5>&nbsp;&nbsp;
-							<button onChange={this.handleInputChange} onClick={this.increment} >+</button>&nbsp;
+							<button onClick={this.handleInputChange} onClick={this.increment} >+</button>&nbsp;
 							<button onClick={this.decrement}>-</button>&nbsp;
 							<Button className="ml-3" onClick={() => this.props.remove(product)} >Remove from cart</Button>&nbsp;
 							<Button onClick={this.saveCartItem} onChange={this.handleInputChange}>Save for Later</Button>
