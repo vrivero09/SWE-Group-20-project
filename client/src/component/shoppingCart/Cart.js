@@ -33,7 +33,6 @@ export default class Cart extends React.Component {
 
 	removeFromCart = (product) => {
 		let cart = JSON.parse(localStorage.getItem('cart'));
-		console.log(product);
 		delete cart[product._id];
 		localStorage.setItem('cart', JSON.stringify(cart));
 		getCartProducts(localStorage.getItem('cart')).then((products) => {
@@ -45,7 +44,15 @@ export default class Cart extends React.Component {
 		});
 	};
 
-	clearCart = () => {
+// increment = (product) => {
+// 	let cart = JSON.parse(localStorage.getItem('cart'));
+// 	localStorage.setItem('cart', JSON.stringify(cart));
+// 	console.log(cart)
+// 	}
+
+
+
+		clearCart = () => {
 		localStorage.removeItem('cart');
 		this.setState({products: []});
 	};
@@ -56,7 +63,9 @@ export default class Cart extends React.Component {
 			<Container>
 					<h3 className="card-title"><hr/>Your shopping cart<hr/></h3>
 					{
-						products.map((product, index) => <CartItem product={product} remove={() => this.removeFromCart(product)} key={index}  onChange={this.handleInputChange}/>)
+						products.map((product, index) => <CartItem product={product} remove={
+							() => this.removeFromCart(product)} increment={this.increment()} 
+							key={index}  onChange={this.handleInputChange}/>)
 					}
 					<hr/>
 					{ products.length ? <div><h4><small>Total Amount: <b>${total}</b></small></h4><hr/></div>: ''}
