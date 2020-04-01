@@ -4,7 +4,6 @@ import {
   } from 'reactstrap';
 
 import {Link} from "react-router-dom";
-import { getSaveproducts } from './repository'
 
 
 export default class saveItem extends React.Component {
@@ -29,7 +28,9 @@ export default class saveItem extends React.Component {
         } else {
             cart[productId] = qty
         }
-        localStorage.setItem('cart', JSON.stringify(cart));
+		localStorage.setItem('cart', JSON.stringify(cart));
+		window.location.reload();
+
     }
 
 
