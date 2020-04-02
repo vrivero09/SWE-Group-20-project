@@ -24,12 +24,10 @@ export default class saveList extends React.Component {
 	}
 
 	removedSaved = (product) => {
-		let products = this.state.products.filter((item) => item.id !== product.id);
-		let cart = JSON.parse(localStorage.getItem('save'));
-		delete cart[product.id];
-		localStorage.removeItem('save');
-		this.setState({products});
-	}
+		let save = JSON.parse(localStorage.getItem('save'));
+		delete save[product._id];
+		localStorage.setItem('save', JSON.stringify(save));
+	};
 	
 
 
@@ -41,7 +39,7 @@ export default class saveList extends React.Component {
 				<div className="row" style={{marginLeft: "10px"}}>
 				<hr/>
 				{
-				products.map((product, index) => <SavesItem product={product} key={index} onChange={this.handleInputChange} remove={this.removedSaved}/>)
+				products.map((product, index) => <SavesItem product={product} key={index} onChange={this.handleInputChange} remove = {() => this.removeFromSave(product)} />)
 				}
 				
 				{ !products.length ? <h3 style = {{marginBottom: "100px"}}><hr/>No saved items<hr/></h3>: ''}

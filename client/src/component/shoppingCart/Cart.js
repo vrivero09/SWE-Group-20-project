@@ -44,17 +44,9 @@ export default class Cart extends React.Component {
 		});
 	};
 
-// increment = (product) => {
-// 	let cart = JSON.parse(localStorage.getItem('cart'));
-// 	localStorage.setItem('cart', JSON.stringify(cart));
-// 	console.log(cart)
-// 	}
-
-
-
-		clearCart = () => {
-		localStorage.removeItem('cart');
-		this.setState({products: []});
+	clearCart = () => {
+	localStorage.removeItem('cart');
+	this.setState({products: []});
 	};
 
 	render() {
@@ -63,9 +55,7 @@ export default class Cart extends React.Component {
 			<Container>
 					<h3 className="card-title"><hr/>Your shopping cart<hr/></h3>
 					{
-						products.map((product, index) => <CartItem product={product} remove={
-							() => this.removeFromCart(product)} 
-							key={index}  onChange={this.handleInputChange}/>)
+						products.map((product, index) => <CartItem product={product} key={index} remove={() => this.removeFromCart(product)} onChange={this.handleInputChange}/>)
 					}
 					<hr/>
 					{ products.length ? <div><h4><small>Total Amount: <b>${total}</b></small></h4><hr/></div>: ''}
