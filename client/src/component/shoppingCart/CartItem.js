@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	Row, Button, 
+	Button, Media
   } from 'reactstrap';
 
 export default class CartItem extends React.Component {
@@ -10,15 +10,14 @@ export default class CartItem extends React.Component {
 		this.state = {
 			quantity: 1,
 		}
-        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     //we’re using the setState method to keep the component’s state up-to-date every time a change occurs in our form
     handleInputChange = (e) => this.setState({quantity: e.target.value});
 
 
-	saveCartItem = (product) =>{
-		let save = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
+	saveCartItem = () =>{
+		let save = localStorage.getItem('save') ? JSON.parse(localStorage.getItem('save')) : {};
         let productId = this.props.product._id.toString();
         save[productId] = (save[productId] ? save[productId] : 0);
         let qty = save[productId] + parseInt(this.state.quantity);
@@ -27,10 +26,12 @@ export default class CartItem extends React.Component {
         } else {
             save[productId] = qty
 		}
+		localStorage.setItem('save', JSON.stringify(save))
 		let cart = JSON.parse(localStorage.getItem('cart'));
-		delete cart[product._id];
-		localStorage.setItem('save', JSON.stringify(save));	
-		window.location.reload(save);
+		cart[productId] = (cart[productId] ? cart[productId] : 0);
+		delete cart[productId];
+		localStorage.setItem('cart', JSON.stringify(cart));
+		window.location.reload();
 
 	}
 
@@ -78,28 +79,22 @@ export default class CartItem extends React.Component {
 	render(){
 		const { product } = this.props;
 		return (
-		    <div className="card" style={{ marginBottom: "10px"}}>
-			  <div className="card-body">
-				<Row>
-					<img src={product.bookCoverAddress} width="120px" alt="image holder" />
-					<div className="flex-grow-1">
-						<h4 className="card-title text-center">{product.bookTitle}</h4>
-						<h6 className="card-text text-center">price: ${product.price}</h6>
-						<br></br>
-						<br></br>
-						<br></br>
-						<br></br>
-						<div className="d-flex justify-content-end align-items-center">
-							<h5>Quantity: {product.quantity}</h5>&nbsp;&nbsp;
-							<button onClick={this.handleInputChange} onClick={this.increment} >+</button>&nbsp;
-							<button onClick={this.decrement}>-</button>&nbsp;
-							<Button className="ml-3" onClick={() => this.props.remove(product)} >Remove from cart</Button>&nbsp;
+			<Media className="my-3">
+				<Media left href="">
+                    <img src={product.bookCoverAddress} width="120px" alt="image holder"/>
+                </Media>
+				<Media body>
+					<h3>Title: {product.bookTitle}</h3>
+                    <p><h6>Description: {product.description}</h6></p>
+					<h6>Author: {product.author} </h6>
+					<h6>Rating: {product.averageRating}</h6>
+                    <h5 className="card-text"><small>Price: </small>${product.price}</h5>
+					<p><button onClick={this.handleInputChange} onClick={this.increment}>+</button>&nbsp;&nbsp;Quantity: {product.quantity}&nbsp;&nbsp;<button onClick={this.handleInputChange} onClick={this.decrement}>-</button>&nbsp;</p>
+							<Button className="ml-3" onClick={() => this.props.remove(product)} >Remove from cart</Button>&nbsp;&nbsp;
 							<Button onClick={this.saveCartItem} onChange={this.handleInputChange}>Save for Later</Button>
-						</div>
-					</div>
-				</Row>
-			  </div>
-			</div>
+
+				</Media>
+			</Media>
 		)
 	}
 }
