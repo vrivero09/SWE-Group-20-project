@@ -32,8 +32,8 @@ export default class Checkout extends React.Component {
 				{
 					products.map((product, index) => 
 						<div key={index}>
+						{product.bookTitle} 
 							<p>
-								{product.name} 
 								<small> (quantity: {product.quantity})</small>
 								<span className="float-right text-primary">${product.quantity * product.price}</span>
 							</p><hr/>

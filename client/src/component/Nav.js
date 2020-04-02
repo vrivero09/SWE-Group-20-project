@@ -92,12 +92,9 @@ class Navigation extends Component{
               <NavItem>
                 <NavLink href ="/Ratings">Ratings</NavLink>
               </NavItem>
-
-
-
             </Nav>
             <NavbarText className="test">
-              <NavLink href ="/Cart"><MaterialIcon icon="shopping_cart" size={25} /><Badge>0</Badge>
+              <NavLink href ="/Cart"><MaterialIcon icon="shopping_cart" size={25} />
               </NavLink>
             </NavbarText>
             <NavbarText>
