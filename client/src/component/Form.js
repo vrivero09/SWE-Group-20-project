@@ -55,6 +55,13 @@ export default class Form extends React.Component {
   }
 
   componentDidMount = () => {
+    setTimeout(
+      function() {
+        //Start the timer
+        this.setState({ render: true }); //After 1 second, set render to true
+      }.bind(this),
+      1000
+    );
     this.getReviewInfo();
   };
 
