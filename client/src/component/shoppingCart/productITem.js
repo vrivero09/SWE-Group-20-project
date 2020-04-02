@@ -31,17 +31,17 @@ export default class ProductItem extends React.Component {
 
     // //needs to be here DONT REMOVE
     // //componentWillMount not needed
-    saveForLater = (bookId) => {
-        axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-        axios.post('wishlist/addbook', {
-            book_id: bookId,
-            wishlist_id: this.props.wishlist._id
-        })
-            .then(res => {
-                this.props.setWishlists(res.data.wishlists);
-            })
-            .catch(err => { });
-    };
+    // saveForLater = (bookId) => {
+    //     axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
+    //     axios.post('wishlist/addbook', {
+    //         book_id: bookId,
+    //         wishlist_id: this.props.wishlist._id
+    //     })
+    //         .then(res => {
+    //             this.props.setWishlists(res.data.wishlists);
+    //         })
+    //         .catch(err => { });
+    // };
 
     render() {
         const {product} = this.props;
@@ -52,9 +52,9 @@ export default class ProductItem extends React.Component {
                 </Media>
                 <Media body>
 					<h3>{product.bookTitle}</h3>
-                    <p>{product.description}</p>
-                    <p>Author: {product.author}</p>
-                    <h5 className="card-text"><small>price: </small>${product.price}</h5>
+                    <p><b>Description:</b> {product.description}</p>
+                    <p><b>Author:</b> {product.author}</p>
+                    <h6 className="card-text"><b>Price: </b>${product.price}</h6>
                     <span className="card-text"><small>Available Quantity: </small>{product.quantity}</span>
                     {product.quantity > 0 ?
                         <div className="d-flex justify-content-end">
