@@ -67,8 +67,6 @@ export default class Cart extends React.Component {
 					<button className="btn btn-danger float-right" onClick={this.clearCart} style={{ marginRight: "10px" }}>Clear Cart</button>
 
 					<br/><br/><br/>
-
-					<h3><hr/>Saved items<hr/></h3>
 					
 						<Save />
 					<hr/>
