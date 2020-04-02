@@ -1,7 +1,7 @@
 import React from 'react';
 import { getCartProducts } from './repository';
 import SavesItem from './SavesItem'
-import { Row } from 'reactstrap'
+import { Row, Col } from 'reactstrap'
 
 export default class saveList extends React.Component {
 	constructor(props) {
@@ -29,24 +29,22 @@ export default class saveList extends React.Component {
 		localStorage.setItem('save', JSON.stringify(save));
 	};
 	
-
-
-
-
 	render() {
 		const { products } =  this.state;
 		return (
-				<div className="row" style={{marginLeft: "10px"}}>
+			<Row>
+                <Col>
+				<div>
 				<hr/>
 				{
-				products.map((product, index) => <SavesItem product={product} key={index} onChange={this.handleInputChange} remove = {() => this.removeFromSave(product)} />)
+				products.map((product, index) => <SavesItem product={product} key={index} onChange={this.handleInputChange} />)
 				}
 				
 				{ !products.length ? <h3 style = {{marginBottom: "100px"}}><hr/>No saved items<hr/></h3>: ''}
 				<hr/>
-
-				</div>
-
+			</div>
+			</Col>
+        </Row>
 
 			
 			

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	Media, Button, Row
+	Media
   } from 'reactstrap';
 
 import {Link} from "react-router-dom";
@@ -48,18 +48,18 @@ export default class saveItem extends React.Component {
 	render(){
 		const { product } = this.props;
 		return (
-		    <div className="card" style={{ marginBottom: "10px"}}>
-			  <div className="card-body">
-				<Row>
-				<Media src={product.bookCoverAddress} width="10%" alt="image holder" />
-			    <h5 className="card-title">{product.bookTitle}</h5>
-				<Button className="ml-3" onClick={this.removeFromSave}>Delete</Button>&nbsp;
-				<Link to="/Cart" className="btn btn-sm btn-warning float-right mx-3" onClick={this.moveToCart}
-                    onChange={this.handleInputChange}>Move To cart</Link>
+			<Media className="my-3">
+				<Media left href="">
+					<img src={product.bookCoverAddress} width="120px" alt="image holder" style={{marginRight: "600px"}}/>
+				</Media>
+				<Media body>
+					<h5 className="card-title">{product.bookTitle}</h5>
+					<button className="btn btn-danger float-right"  onClick={this.removeFromSave}>Delete</button>&nbsp;
+					<Link to="/Cart" className="btn btn-sm btn-warning float-right mx-3" onClick={this.moveToCart}
+						onChange={this.handleInputChange}>Move To cart</Link>
 
-				</Row>
-			  </div>
-			</div>
+				</Media>
+			</Media>
 		)		
 	}
 }
