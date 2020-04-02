@@ -1,9 +1,11 @@
 import React from 'react';
 import {
-	Media
+	Media, Button
   } from 'reactstrap';
+import DeleteForever from '@material-ui/icons/DeleteForever';
+import AddShoppingCart from '@material-ui/icons/AddShoppingCart';
 
-import {Link} from "react-router-dom";
+
 
 export default class saveItem extends React.Component {
 
@@ -50,15 +52,17 @@ export default class saveItem extends React.Component {
 		return (
 			<Media className="my-3">
 				<Media left href="">
-					<img src={product.bookCoverAddress} width="120px" alt="image holder" style={{marginRight: "600px"}}/>
+					<img src={product.bookCoverAddress} width="120px" alt="image holder" />
 				</Media>
 				<Media body>
-					<h5 className="card-title">{product.bookTitle}</h5>
-					<button className="btn btn-danger float-right"  onClick={this.removeFromSave}>Delete</button>&nbsp;
-					<Link to="/Cart" className="btn btn-sm btn-warning float-right mx-3" onClick={this.moveToCart}
-						onChange={this.handleInputChange}>Move To cart</Link>
-
+				<h3>Title: {product.bookTitle}</h3>
+				<p><h6>Description: {product.description}</h6></p>
+				<h6>Author: {product.author} </h6>
+				<h6>Rating: {product.averageRating}</h6>
 				</Media>
+				<p><Button outline color="danger"  onClick={this.removeFromSave}><DeleteForever/></Button></p>&nbsp;
+				<Button outline color="success" onClick={this.moveToCart}
+						onChange={this.handleInputChange}><AddShoppingCart/></Button>
 			</Media>
 		)		
 	}
