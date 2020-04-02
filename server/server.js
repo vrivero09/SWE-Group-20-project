@@ -37,9 +37,12 @@ app.post('/api/products', async (req, res) => {
     if (cart.hasOwnProperty(id)) {
       products.push({
         quantity: cart[id],
+        author: books[i].author,
+        description: books[i].description,
         bookTitle: books[i].bookTitle,
         bookCoverAddress: books[i].bookCoverAddress,
         price: books[i].price,
+        averageRating: books[i].averageRating,
         _id: books[i]._id
       });
     }
