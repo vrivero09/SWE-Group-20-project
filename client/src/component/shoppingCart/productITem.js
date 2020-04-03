@@ -59,6 +59,7 @@ export default class ProductItem extends React.Component {
                     <span className="card-text"><small>Available Quantity: </small>{product.quantity}</span>
                     {product.quantity > 0 ?
                         <div className="d-flex justify-content-end">
+                          <Link to={`/bookDetails/${product._id}`} className="btn btn-link">Details</Link>
                             <input type="number" value={this.state.quantity} name="quantity"
                                    onChange={this.handleInputChange} className="float-right"
                                    style={{width: "60px", marginRight: "10px", borderRadius: "3px"}}/>
