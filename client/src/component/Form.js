@@ -10,7 +10,8 @@ export default class Form extends React.Component {
     reviewText: "",
     checkBoxValue: false,
     rating: 0,
-    raw_data: []
+    raw_data: [],
+    current_username: ""
   };
 
   //save and disable inputs
@@ -20,6 +21,12 @@ export default class Form extends React.Component {
     axios.defaults.headers.common["Authorization"] = localStorage.getItem(
       "userToken"
     );
+
+    if (this.state.checkBoxValue) {
+      this.state.reviewText =
+        this.state.current_username + ": " + this.state.reviewText;
+    }
+
     axios
       .post("/book/addreview", {
         //may be book/addreview instead
@@ -54,8 +61,25 @@ export default class Form extends React.Component {
     this.setState({ rating: nextValue });
   }
 
+  getUsername = () => {
+    const token = localStorage.getItem("userToken");
+    if (token) {
+      const decoded = jwt_decode(token);
+      this.state.current_username = decoded._id;
+      console.log("Test 2: " + this.state.current_username);
+    }
+  };
+
   componentDidMount = () => {
+    setTimeout(
+      function() {
+        //Start the timer
+        this.setState({ render: true }); //After 1 second, set render to true
+      }.bind(this),
+      1000
+    );
     this.getReviewInfo();
+    this.getUsername();
   };
 
   getReviewInfo = () => {
