@@ -9,7 +9,8 @@ export default class Form extends React.Component {
   state = {
     reviewText: "",
     checkBoxValue: false,
-    rating: 0
+    rating: 0,
+    raw_data: []
   };
 
   //save and disable inputs
@@ -53,6 +54,50 @@ export default class Form extends React.Component {
     this.setState({ rating: nextValue });
   }
 
+  componentDidMount = () => {
+    setTimeout(
+      function() {
+        //Start the timer
+        this.setState({ render: true }); //After 1 second, set render to true
+      }.bind(this),
+      1000
+    );
+    this.getReviewInfo();
+  };
+
+  getReviewInfo = () => {
+    //have to make a new Books.js endpoint
+    //in server to for .get(). endpoint
+    //must be for reading, not writing
+
+    axios
+      .post("/book/getReviews", {
+        _id: "5e559a1c1c9d440000350f9c"
+      })
+      .then(response => {
+        const data = response.data.reviews;
+
+        this.state.raw_data = data;
+
+        console.log("DATA: " + this.state.raw_data[3].reviewText);
+        console.log("Data has been received!");
+      })
+      .catch(() => {
+        alert("Error Retrieving data!");
+      });
+  };
+
+  displayReviewInfo = reviewInfo => {
+    if (!reviewInfo.length) return null;
+
+    return reviewInfo.map((currentReview, index) => (
+      <div key={index}>
+        <h3>{currentReview.reviewText}</h3>
+        <p>{String(currentReview.starRating)}</p>
+      </div>
+    ));
+  };
+
   render() {
     const { rating } = this.state;
 
@@ -93,6 +138,9 @@ export default class Form extends React.Component {
             value={rating}
             onStarClick={this.onStarClick.bind(this)}
           />
+        </div>
+        <div className="Review info">
+          {this.displayReviewInfo(this.state.raw_data)}
         </div>
       </form>
     );

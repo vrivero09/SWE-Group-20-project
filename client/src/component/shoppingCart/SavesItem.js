@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-	Media, Button, Row
+	Media, Button
   } from 'reactstrap';
+import DeleteForever from '@material-ui/icons/DeleteForever';
+import AddShoppingCart from '@material-ui/icons/AddShoppingCart';
 
-import {Link} from "react-router-dom";
 
 
 export default class saveItem extends React.Component {
@@ -18,35 +19,51 @@ export default class saveItem extends React.Component {
 	//we’re using the setState method to keep the component’s state up-to-date every time a change occurs in our form
 	handleInputChange = event => this.setState({[event.target.name]: event.target.value})
 
-	addToCart = () => {
-        let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
+	moveToCart = () => {
+		let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
         let productId = this.props.product._id.toString();
-        cart[productId] = (cart[productId] ? cart[productId] : 0);
+        cart[productId] = (cart[productId] ? cart[productId] : 1);
         let qty = cart[productId] + parseInt(this.state.quantity);
         if (this.props.product.quantity < qty) {
             cart[productId] = this.props.product.quantity;
         } else {
             cart[productId] = qty
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
+		}
+		localStorage.setItem('cart', JSON.stringify(cart))
+		let save = JSON.parse(localStorage.getItem('save'));
+		save[productId] = (save[productId] ? save[productId] : 0);
+		delete save[productId];
+		localStorage.setItem('save', JSON.stringify(save));
+		window.location.reload();
 
+    }
+	removeFromSave = () => {
+		let save = JSON.parse(localStorage.getItem('save'));
+		let productId = this.props.product._id.toString();
+		save[productId] = (save[productId] ? save[productId] : 0);
+		delete save[productId];
+		localStorage.setItem('save', JSON.stringify(save));
+		window.location.reload();
+
+	}
 
 	render(){
 		const { product } = this.props;
 		return (
-		    <div className="card" style={{ marginBottom: "10px"}}>
-			  <div className="card-body">
-				<Row>
-				<Media src={product.bookCoverAddress} width="10%" alt="image holder" />
-			    <h5 className="card-title">{product.bookTitle}</h5>
-				<Button color="danger" size="md" onClick={() => this.props.remove(product)} style={{marginLeft: "85%"}}>Remove</Button>
-				<Link to="/Cart" className="btn btn-sm btn-success float-right mx-3" onClick={this.addToCart}
-                    onChange={this.handleInputChange}>Move to Cart</Link>
-
-				</Row>
-			  </div>
-			</div>
+			<Media className="my-3">
+				<Media left href="">
+					<img src={product.bookCoverAddress} width="120px" alt="image holder" />
+				</Media>
+				<Media body>
+				<h3>Title: {product.bookTitle}</h3>
+				<p><h6>Description: {product.description}</h6></p>
+				<h6>Author: {product.author} </h6>
+				<h6>Rating: {product.averageRating}</h6>
+				</Media>
+				<p><Button outline color="danger"  onClick={this.removeFromSave}><DeleteForever/></Button></p>&nbsp;
+				<Button outline color="success" onClick={this.moveToCart}
+						onChange={this.handleInputChange}><AddShoppingCart/></Button>
+			</Media>
 		)		
 	}
 }
