@@ -2,13 +2,57 @@ const express = require("express");
 var cors = require("cors");
 const books = express.Router();
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+
 /*
   see https://mongoosejs.com/docs/models.html for querying, deleting, and updating documents
 */
 
+state = {
+  received_data: []
+};
+
 //get book model
 const Book = require("../models/Book");
 books.use(cors());
+
+SECRET_KEY = "MySecret";
+
+// endpoint to get reviews from database (not working)
+//const book_ID = "5e559a1c1c9d440000350f9c";
+
+books.post("/getReviews", (req, res) => {
+  console.log("TESTING");
+
+  const decoded = jwt.verify(req.headers["authorization"], SECRET_KEY);
+  const book_ID = req.body._id;
+  console.log("BOOK ID 2: " + book_ID);
+
+  Book.findOne({
+    _id: book_ID
+  })
+    //    .populate("Book.allReviews")
+    .then(currentBookGetReview => {
+      let allReviewsForBook = currentBookGetReview.allReviews;
+      received_data = allReviewsForBook;
+
+      //      displayReviews(received_data);
+      console.log(received_data[0]);
+
+      res.json({ result: 0, reviews: allReviewsForBook });
+    });
+});
+
+// displayReviews = reviews_array => {
+//   if (!reviews_array.length) return null;
+
+//   reviews_array.map((current_review, index) => (
+//     <div key={index}>
+//       <h3>{current_review.reviewText}</h3>
+//       <p>{String(current_review.starRating)}</p>
+//     </div>
+//   ));
+// };
 
 //endpoint to add review to database
 books.post("/addreview", (req, res) => {

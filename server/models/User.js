@@ -66,6 +66,7 @@ const UserSchema = new Schema({
     creditCards: [CreditCardSchema],
     wishLists:[WishlistSchema],
     cart: [ShoppingCartSchema],
+    purchasedBooks: [{type: mongoose.ObjectId, ref: 'Book'}],
 });
 
 /*
