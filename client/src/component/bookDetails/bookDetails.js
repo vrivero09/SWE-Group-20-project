@@ -7,6 +7,7 @@ import axios from 'axios';
 import {Link} from "react-router-dom";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ButtonAddToWishList from "../common/ButtonAddToWishlist";
+import "./bookDetails.css"
 
 class bookDetails extends Component {
     constructor(props) {
@@ -51,7 +52,7 @@ class bookDetails extends Component {
         return (
             <div>
                 <Container>
-                    <Row>
+                    <Row className = "row">
                         <Col sm={4}>
                             <Card>
                                 <CardImg src={this.state.product.bookCoverAddress}/>
