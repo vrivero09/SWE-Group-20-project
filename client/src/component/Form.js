@@ -5,13 +5,17 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { FixedSizeList as List } from "react-window";
 
+const Book_ID_In_Page = "5e559a1c1c9d440000350f9c";
+
 export default class Form extends React.Component {
   state = {
     reviewText: "",
     checkBoxValue: false,
     rating: 0,
     raw_data: [],
-    current_username: ""
+    current_username: "",
+    purchased_books: [],
+    userOwnsBook: false,
   };
 
   //save and disable inputs
@@ -33,23 +37,23 @@ export default class Form extends React.Component {
         reviewText: this.state.reviewText,
         showUsername: this.state.checkBoxValue,
         starRating: this.state.rating,
-        _id: "5e559a1c1c9d440000350f9c"
+        _id: Book_ID_In_Page,
       })
-      .then(res => {})
-      .catch(err => {
+      .then((res) => {})
+      .catch((err) => {
         console.log(err);
       });
   }
 
-  change = e => {
+  change = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  boxChange = e => {
+  boxChange = (e) => {
     this.setState({
-      checkBoxValue: !this.state.checkBoxValue
+      checkBoxValue: !this.state.checkBoxValue,
     });
   };
 
@@ -59,6 +63,36 @@ export default class Form extends React.Component {
 
   onStarClick(nextValue, prevValue, name) {
     this.setState({ rating: nextValue });
+  }
+
+  ownsBook = (bookID) => {
+    for (var i = 0; i < this.state.purchased_books.length; i++) {
+      if (this.state.purchased_books[i] == bookID) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  userOwnsBook(listOfBooks) {
+    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
+      "userToken"
+    );
+    return axios
+      .get("Users/getPurchases")
+      .then((res) => {
+        this.setState({ purchased_books: res.data.purchases });
+        console.log("PURCHASED BOOKS: ");
+        console.log("length " + this.state.purchased_books.length);
+        console.log("value: " + this.state.purchased_books[0]);
+        this.state.userOwnsBook = this.ownsBook(Book_ID_In_Page);
+        console.log("owns book: " + this.state.userOwnsBook);
+      })
+      .catch((err) => {
+        console.log("Error. Cannot find purchased books.");
+        console.log(err);
+      });
   }
 
   getUsername = () => {
@@ -72,7 +106,7 @@ export default class Form extends React.Component {
 
   componentDidMount = () => {
     setTimeout(
-      function() {
+      function () {
         //Start the timer
         this.setState({ render: true }); //After 1 second, set render to true
       }.bind(this),
@@ -80,6 +114,7 @@ export default class Form extends React.Component {
     );
     this.getReviewInfo();
     this.getUsername();
+    this.userOwnsBook(this.state.purchased_books);
   };
 
   getReviewInfo = () => {
@@ -89,9 +124,9 @@ export default class Form extends React.Component {
 
     axios
       .post("/book/getReviews", {
-        _id: "5e559a1c1c9d440000350f9c"
+        _id: Book_ID_In_Page,
       })
-      .then(response => {
+      .then((response) => {
         const data = response.data.reviews;
 
         this.state.raw_data = data;
@@ -104,7 +139,7 @@ export default class Form extends React.Component {
       });
   };
 
-  displayReviewInfo = reviewInfo => {
+  displayReviewInfo = (reviewInfo) => {
     if (!reviewInfo.length) return null;
 
     return reviewInfo.map((currentReview, index) => (
@@ -138,15 +173,15 @@ export default class Form extends React.Component {
           placeholder="Review text here."
           rows={window.innerHeight / 50}
           value={this.state.reviewText}
-          onChange={e => this.change(e)}
+          onChange={(e) => this.change(e)}
         />
         <input
           name="showUsername"
           type="checkbox"
           defaultChecked={this.state.checkBoxValue}
-          onChange={e => this.boxChange(e)}
+          onChange={(e) => this.boxChange(e)}
         />
-        <button onClick={e => this.onClickSave(e)}>Submit</button>
+        <button onClick={(e) => this.onClickSave(e)}>Submit</button>
         <div>
           <h2>Rating from state: {rating}</h2>
           <StarRatingComponent
