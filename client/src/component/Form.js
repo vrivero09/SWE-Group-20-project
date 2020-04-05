@@ -5,8 +5,6 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { FixedSizeList as List } from "react-window";
 
-const Book_ID_In_Page = "5e559a1c1c9d440000350f9c";
-
 export default class Form extends React.Component {
   state = {
     reviewText: "",
@@ -37,7 +35,7 @@ export default class Form extends React.Component {
         reviewText: this.state.reviewText,
         showUsername: this.state.checkBoxValue,
         starRating: this.state.rating,
-        _id: Book_ID_In_Page,
+        _id: this.props.ID_Of_Book,
       })
       .then((res) => {})
       .catch((err) => {
@@ -86,7 +84,7 @@ export default class Form extends React.Component {
         console.log("PURCHASED BOOKS: ");
         console.log("length " + this.state.purchased_books.length);
         console.log("value: " + this.state.purchased_books[0]);
-        this.state.userOwnsBook = this.ownsBook(Book_ID_In_Page);
+        this.state.userOwnsBook = this.ownsBook(this.props.ID_Of_Book);
         console.log("owns book: " + this.state.userOwnsBook);
       })
       .catch((err) => {
@@ -115,6 +113,7 @@ export default class Form extends React.Component {
     this.getReviewInfo();
     this.getUsername();
     this.userOwnsBook(this.state.purchased_books);
+    console.log("From Form: " + this.props.ID_Of_Book);
   };
 
   getReviewInfo = () => {
@@ -124,15 +123,11 @@ export default class Form extends React.Component {
 
     axios
       .post("/book/getReviews", {
-        _id: Book_ID_In_Page,
+        _id: this.props.ID_Of_Book,
       })
       .then((response) => {
         const data = response.data.reviews;
-
         this.state.raw_data = data;
-
-        console.log("DATA: " + this.state.raw_data[3].reviewText);
-        console.log("Data has been received!");
       })
       .catch(() => {
         alert("Error Retrieving data!");
