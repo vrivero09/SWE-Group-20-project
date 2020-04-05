@@ -9,7 +9,7 @@ export default class Form extends React.Component {
   state = {
     reviewText: "",
     checkBoxValue: false,
-    rating: 0,
+    rating: 1,
     raw_data: [],
     current_username: "",
     purchased_books: [],
@@ -73,17 +73,17 @@ export default class Form extends React.Component {
     return false;
   };
 
-  userOwnsBook(listOfBooks) {
+  userOwnsBook() {
     axios.defaults.headers.common["Authorization"] = localStorage.getItem(
       "userToken"
     );
     return axios
-      .get("Users/getPurchases")
+      .get("http://localhost:5000/users/getPurchases")
       .then((res) => {
-        this.setState({ purchased_books: res.data.purchases });
         console.log("PURCHASED BOOKS: ");
+        this.setState({ purchased_books: res.data.purchases });
         console.log("length " + this.state.purchased_books.length);
-        console.log("value: " + this.state.purchased_books[0]);
+        //        console.log("value: " + this.state.purchased_books[0]);
         this.state.userOwnsBook = this.ownsBook(this.props.ID_Of_Book);
         console.log("owns book: " + this.state.userOwnsBook);
       })
@@ -112,7 +112,7 @@ export default class Form extends React.Component {
     );
     this.getReviewInfo();
     this.getUsername();
-    this.userOwnsBook(this.state.purchased_books);
+    this.userOwnsBook();
     console.log("From Form: " + this.props.ID_Of_Book);
   };
 
@@ -176,12 +176,19 @@ export default class Form extends React.Component {
           defaultChecked={this.state.checkBoxValue}
           onChange={(e) => this.boxChange(e)}
         />
-        <button onClick={(e) => this.onClickSave(e)}>Submit</button>
+
+        <button
+          disabled={!this.state.userOwnsBook}
+          onClick={(e) => this.onClickSave(e)}
+        >
+          Submit
+        </button>
+
         <div>
           <h2>Rating from state: {rating}</h2>
           <StarRatingComponent
             name="rate1"
-            starCount={10}
+            starCount={5}
             value={rating}
             onStarClick={this.onStarClick.bind(this)}
           />
