@@ -7,6 +7,8 @@ import { FixedSizeList as List } from "react-window";
 
 export default class Form extends React.Component {
   state = {
+    firstNameOfUser: "",
+    nicknameOfUser: "",
     reviewText: "",
     checkBoxValue: false,
     rating: 1,
@@ -26,7 +28,10 @@ export default class Form extends React.Component {
 
     if (this.state.checkBoxValue) {
       this.state.reviewText =
-        this.state.current_username + ": " + this.state.reviewText;
+        this.state.nicknameOfUser + ": " + this.state.reviewText;
+    } else {
+      this.state.reviewText =
+        this.state.firstNameOfUser + ": " + this.state.reviewText;
     }
 
     axios
@@ -102,6 +107,40 @@ export default class Form extends React.Component {
     }
   };
 
+  getFirstName = () => {
+    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
+      "userToken"
+    );
+    return axios
+      .get("http://localhost:5000/users/profile")
+      .then((res) => {
+        console.log("Getting first name...");
+        this.setState({ firstNameOfUser: res.data.user.firstName });
+        console.log("USER FIRST NAME " + this.state.firstNameOfUser);
+      })
+      .catch((err) => {
+        console.log("Error. Cannot retreive profile information.");
+        console.log(err);
+      });
+  };
+
+  getNickName = () => {
+    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
+      "userToken"
+    );
+    return axios
+      .get("http://localhost:5000/users/profile")
+      .then((res) => {
+        console.log("Getting nick name...");
+        this.setState({ nicknameOfUser: res.data.user.nickname });
+        console.log("USER NICK NAME " + this.state.nicknameOfUser);
+      })
+      .catch((err) => {
+        console.log("Error. Cannot retreive profile information.");
+        console.log(err);
+      });
+  };
+
   componentDidMount = () => {
     setTimeout(
       function () {
@@ -113,6 +152,8 @@ export default class Form extends React.Component {
     this.getReviewInfo();
     this.getUsername();
     this.userOwnsBook();
+    this.getFirstName();
+    this.getNickName();
     console.log("From Form: " + this.props.ID_Of_Book);
   };
 
