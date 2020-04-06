@@ -8,6 +8,8 @@ import {Link} from "react-router-dom";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ButtonAddToWishList from "../common/ButtonAddToWishlist";
 import "./bookDetails.css"
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 
 class bookDetails extends Component {
     constructor(props) {
@@ -55,7 +57,12 @@ class bookDetails extends Component {
                     <Row className = "row">
                         <Col sm={4}>
                             <Card>
-                                <CardImg src={this.state.product.bookCoverAddress}/>
+                            <Zoom>
+                              <img
+                                alt="that wanaka tree"
+                                src= {this.state.product.bookCoverAddress}
+                                />
+                            </Zoom>
                                 <CardBody>
                                     <CardTitle><strong>{this.state.product.bookTitle}</strong></CardTitle>
                                     <CardSubtitle>Author:&nbsp;<Link to={"/authorBooks/"+this.state.product.author}>{this.state.product.author}</Link></CardSubtitle>
