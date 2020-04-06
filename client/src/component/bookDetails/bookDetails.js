@@ -18,6 +18,7 @@ import ButtonAddToWishList from "../common/ButtonAddToWishlist";
 import "./bookDetails.css"
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
+import Form from '../Form';
 
 class bookDetails extends Component {
   constructor(props) {
