@@ -85,7 +85,7 @@ class bookDetails extends Component {
         return (
             <div>
                 <Container>
-                    <Row className = "row">
+                    <Row className = "bookDetail-center">
                         <Col sm={4}>
                             <Card>
                             <Zoom>

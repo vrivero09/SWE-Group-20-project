@@ -89,9 +89,6 @@ class Navigation extends Component{
               <NavItem>
                 <NavLink href ="/Products">Products</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href ="/Ratings">Ratings</NavLink>
-              </NavItem>
             </Nav>
             
             <NavbarText className="test">
