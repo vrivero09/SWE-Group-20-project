@@ -81,11 +81,11 @@ export default class CartItem extends React.Component {
 		return (
 			<Media className="my-3">
 				<Media left href="">
-                    <img src={product.bookCoverAddress} width="120px" alt="image holder"/>
+                    <img src={product.bookCoverAddress} width="200px" alt="image holder"/>
                 </Media>
 				<Media body>
-					<h3>Title: {product.bookTitle}</h3>
-                    <p><h6>Description: {product.description}</h6></p>
+					<h3>{product.bookTitle}</h3>
+                    <p><h6>Description: <small>{product.description}</small></h6></p>
 					<h6>Author: {product.author} </h6>
 					<h6>Rating: {product.averageRating}</h6>
                     <h5 className="card-text"><small>Price: </small>${product.price}</h5>

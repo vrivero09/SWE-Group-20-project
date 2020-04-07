@@ -1,8 +1,3 @@
-
-import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button, Row, Col, Container
-  } from 'reactstrap';
   import React, {Component} from 'react';
   import axios from 'axios';
  
@@ -20,7 +15,8 @@ import {
             }
        getBooks(){
         return axios.post('http://localhost:5000/book/authorLink',{
-            authorName: this.authorName
+            authorName: this.authorName,
+            
         })
         .then(res=>{
            console.log(res);
@@ -32,9 +28,17 @@ import {
         });
        }     
     render(){
-    return (
+      const { books } = this.state;
+     return (
       <div>
-     
+        <h1>Books by: {this.authorName} </h1>
+        {books.map(function(d, idx){
+         return (<ul key={idx}>
+
+         <img alt="images" src= {d.bookCoverAddress} width="200px"/>
+           Title: {d.bookTitle}
+           </ul>)
+       })}
       </div>
       );
     }
