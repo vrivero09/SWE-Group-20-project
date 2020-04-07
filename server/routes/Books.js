@@ -85,7 +85,7 @@ books.post("/addreview", (req, res) => {
       //save and update in the database
       book.save();
 
-      res.send("Review saved");
+      res.send({reviews:book.allReviews});
     }
   });
 });

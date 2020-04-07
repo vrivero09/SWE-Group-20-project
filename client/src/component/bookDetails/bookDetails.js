@@ -25,7 +25,7 @@ class bookDetails extends Component {
     super(props);
     console.log(props.match.params.bookId);
     this.state = {
-      product: [
+      product: 
         {
           bookTitle: "",
           description: "",
@@ -37,10 +37,10 @@ class bookDetails extends Component {
           authorBio: "",
           price: "",
         },
-      ],
       dropDownOpen: false,
     };
     this.toggle = this.toggle.bind(this);
+    this.changeAvg = this.changeAvg.bind(this);
   }
 
   componentDidMount() {
@@ -52,11 +52,29 @@ class bookDetails extends Component {
     return axios
       .get(`/api/book?id=${this.props.match.params.bookId}`)
       .then((res) => {
-        this.setState({ product: res.data });
+        var product = res.data;
+        this.setState({ product: product});
+        this.changeAvg(product.allReviews);
       })
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  changeAvg(reviews){
+    var avg = 0;
+    for(let i = 0 ; i < reviews.length; i++){
+      avg += reviews[i].starRating;
+    }
+
+    avg = avg / reviews.length;
+    var average = Number(avg.toFixed(1));
+    this.setState({
+      product: {                   
+        ...this.state.product,   
+        averageRating:average     
+      }
+    });
   }
 
   toggle() {
@@ -71,11 +89,9 @@ class bookDetails extends Component {
                         <Col sm={4}>
                             <Card>
                             <Zoom>
-                              <img
-                                alt="that wanaka tree"
-                                src= {this.state.product.bookCoverAddress}
-                                />
+                              <CardImg src={this.state.product.bookCoverAddress}/>
                             </Zoom>
+                            
                                 <CardBody>
                                     <CardTitle><strong>{this.state.product.bookTitle}</strong></CardTitle>
                                     <CardSubtitle>Author:&nbsp;<Link to={"/authorBooks/"+this.state.product.author}>{this.state.product.author}</Link></CardSubtitle>
@@ -121,7 +137,7 @@ class bookDetails extends Component {
             </Col>
           </Row>
         </Container>
-        <Form ID_Of_Book={this.props.match.params.bookId}> </Form>
+        <Form ID_Of_Book={this.props.match.params.bookId} changeAvg={this.changeAvg}> </Form>
       </div>
     );
   }
