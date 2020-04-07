@@ -42,7 +42,10 @@ export default class Form extends React.Component {
         starRating: this.state.rating,
         _id: this.props.ID_Of_Book,
       })
-      .then((res) => {})
+      .then((res) => {
+        this.setState({reviewText:"", raw_data:res.data.reviews, checkBoxValue:false,rating:1});
+        this.props.changeAvg(res.data.reviews);
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -193,9 +196,9 @@ export default class Form extends React.Component {
 
     return (
       <form>
-        <List height={150} itemCount={1000} itemSize={35} width={300}>
+        {/* <List height={150} itemCount={1000} itemSize={35} width={300}>
           {Row}
-        </List>
+        </List> */}
 
         <div className="Review text">
           Review text: {String(this.state.reviewText)}
@@ -214,6 +217,7 @@ export default class Form extends React.Component {
         <input
           name="showUsername"
           type="checkbox"
+          checked={this.state.checkBoxValue}
           defaultChecked={this.state.checkBoxValue}
           onChange={(e) => this.boxChange(e)}
         />
