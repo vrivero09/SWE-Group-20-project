@@ -43,6 +43,19 @@ class bookDetails extends Component {
     this.toggle = this.toggle.bind(this);
   }
 
+  addToCart = () => {
+    let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
+    let productId = this.props.product._id.toString();
+    cart[productId] = (cart[productId] ? cart[productId] : 0);
+    let qty = cart[productId] + parseInt(this.state.quantity);
+    if (this.props.product.quantity < qty) {
+        cart[productId] = this.props.product.quantity;
+    } else {
+        cart[productId] = qty
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
   componentDidMount() {
     this.getBook();
     console.log("From bookdetails: " + this.props.match.params.bookId);
@@ -62,6 +75,20 @@ class bookDetails extends Component {
   toggle() {
     this.setState({ dropDownOpen: !this.state.dropDownOpen });
   }
+
+  addToCart = () => {
+    let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
+    let productId = this.props.product._id.toString();
+    cart[productId] = (cart[productId] ? cart[productId] : 0);
+    let qty = cart[productId] + parseInt(this.state.quantity);
+    if (this.props.product.quantity < qty) {
+        cart[productId] = this.props.product.quantity;
+    } else {
+        cart[productId] = qty
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
 
     render() {
         return (
@@ -107,9 +134,9 @@ class bookDetails extends Component {
                     </div>
                   </CardText>
                   <div className="d-flex justify-content-between">
-                    <Button>
-                      <AddShoppingCartIcon />
-                    </Button>
+                  <Link to="/Cart" className="btn btn-sm btn btn-info float-right mx-3" onClick={this.addToCart}
+                                    onChange={this.handleInputChange}><AddShoppingCartIcon/></Link>
+                    
                     <ButtonAddToWishList
                       productId={this.props.match.params.bookId}
                       wishlists={this.props.wishlists}

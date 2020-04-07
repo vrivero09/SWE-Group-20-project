@@ -30,31 +30,19 @@ export default class ProductItem extends React.Component {
         localStorage.setItem('cart', JSON.stringify(cart));
     }
 
-    // //needs to be here DONT REMOVE
-    // //componentWillMount not needed
-    // saveForLater = (bookId) => {
-    //     axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-    //     axios.post('wishlist/addbook', {
-    //         book_id: bookId,
-    //         wishlist_id: this.props.wishlist._id
-    //     })
-    //         .then(res => {
-    //             this.props.setWishlists(res.data.wishlists);
-    //         })
-    //         .catch(err => { });
-    // };
-
     render() {
         const {product} = this.props;
         return (
-            <Media className="my-3">
-                <Media left href="">
-                    <img src={product.bookCoverAddress} width="120px" alt="image holder"/>
+            <Media style={{marginBottom: "10px"}}className="my-6">                
+                <Media left href="" >
+                    <img src={product.bookCoverAddress} width="200px" alt="image holder"/>
                 </Media>
+                
                 <Media body>
 					<h3>{product.bookTitle}</h3>
                     <p><b>Description:</b> {product.description}</p>
                     <p><b>Author:</b> {product.author}</p>
+                    <p>Rating: {product.averageRating} </p>
                     <h6 className="card-text"><b>Price: </b>${product.price}</h6>
                     <span className="card-text"><small>Available Quantity: </small>{product.quantity}</span>
                     {product.quantity > 0 ?
