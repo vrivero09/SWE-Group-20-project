@@ -24,20 +24,16 @@ export default class ProductList extends React.Component {
     render() {
         const {products} = this.state;
         return (
-            <Row>
-                <Col>
-                    <div className="d-flex flex-column">
-                        <h3 className="card-title"><hr/>Product List<hr/></h3>
-                        
-                        <div>
-                            <Link to="/cart" className="btn btn btn-info float-right">View Cart</Link>
-                        </div>
-                        {
+                    <div>
+                        <h3><hr/>Book List<hr/></h3>
+                        <div className="col d-flex align-content-start flex-wrap" style={{}}>
+                                                {
                             products.map((product, index) => <ProductItem wishlists={this.props.wishlists} setWishlists={this.props.setWishlists} product={product} key={index}/>)
                         }
+
+                        </div>
                     </div>
-                </Col>
-            </Row>
+
 
 
         );

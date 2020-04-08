@@ -100,7 +100,7 @@ class bookDetails extends Component {
                             <Zoom>
                               <img
                                 alt="that wanaka tree"
-                                src= {this.state.product.bookCoverAddress}
+                                src= {this.state.product.bookCoverAddress} width="350px flex"
                                 />
                             </Zoom>
                                 <CardBody>
