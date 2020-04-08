@@ -7,6 +7,8 @@ import { FixedSizeList as List } from "react-window";
 
 export default class Form extends React.Component {
   state = {
+    firstNameOfUser: "",
+    nicknameOfUser: "",
     reviewText: "",
     checkBoxValue: false,
     rating: 1,
@@ -26,7 +28,10 @@ export default class Form extends React.Component {
 
     if (this.state.checkBoxValue) {
       this.state.reviewText =
-        this.state.current_username + ": " + this.state.reviewText;
+        this.state.nicknameOfUser + ": " + this.state.reviewText;
+    } else {
+      this.state.reviewText =
+        this.state.firstNameOfUser + ": " + this.state.reviewText;
     }
 
     axios
@@ -37,7 +42,10 @@ export default class Form extends React.Component {
         starRating: this.state.rating,
         _id: this.props.ID_Of_Book,
       })
-      .then((res) => {})
+      .then((res) => {
+        this.setState({reviewText:"", raw_data:res.data.reviews, checkBoxValue:false,rating:1});
+        this.props.changeAvg(res.data.reviews);
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -102,6 +110,40 @@ export default class Form extends React.Component {
     }
   };
 
+  getFirstName = () => {
+    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
+      "userToken"
+    );
+    return axios
+      .get("http://localhost:5000/users/profile")
+      .then((res) => {
+        console.log("Getting first name...");
+        this.setState({ firstNameOfUser: res.data.user.firstName });
+        console.log("USER FIRST NAME " + this.state.firstNameOfUser);
+      })
+      .catch((err) => {
+        console.log("Error. Cannot retreive profile information.");
+        console.log(err);
+      });
+  };
+
+  getNickName = () => {
+    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
+      "userToken"
+    );
+    return axios
+      .get("http://localhost:5000/users/profile")
+      .then((res) => {
+        console.log("Getting nick name...");
+        this.setState({ nicknameOfUser: res.data.user.nickname });
+        console.log("USER NICK NAME " + this.state.nicknameOfUser);
+      })
+      .catch((err) => {
+        console.log("Error. Cannot retreive profile information.");
+        console.log(err);
+      });
+  };
+
   componentDidMount = () => {
     setTimeout(
       function () {
@@ -113,6 +155,8 @@ export default class Form extends React.Component {
     this.getReviewInfo();
     this.getUsername();
     this.userOwnsBook();
+    this.getFirstName();
+    this.getNickName();
     console.log("From Form: " + this.props.ID_Of_Book);
   };
 
@@ -152,9 +196,9 @@ export default class Form extends React.Component {
 
     return (
       <form>
-        <List height={150} itemCount={1000} itemSize={35} width={300}>
+        {/* <List height={150} itemCount={1000} itemSize={35} width={300}>
           {Row}
-        </List>
+        </List> */}
 
         <div className="Review text">
           Review text: {String(this.state.reviewText)}
@@ -173,6 +217,7 @@ export default class Form extends React.Component {
         <input
           name="showUsername"
           type="checkbox"
+          checked={this.state.checkBoxValue}
           defaultChecked={this.state.checkBoxValue}
           onChange={(e) => this.boxChange(e)}
         />
