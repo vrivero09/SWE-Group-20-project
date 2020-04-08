@@ -95,60 +95,49 @@ class bookDetails extends Component {
             <div>
                 <Container>
                     <Row className = "row">
-                        <Col sm={4}>
-                            <Card>
+                        <Col sm={4} style={{marginTop: "30px"}}>
                             <Zoom>
                               <img
                                 alt="that wanaka tree"
-                                src= {this.state.product.bookCoverAddress} width="350px flex"
+                                src= {this.state.product.bookCoverAddress} width="315px flex"
                                 />
                             </Zoom>
-                                <CardBody>
-                                    <CardTitle><strong>{this.state.product.bookTitle}</strong></CardTitle>
-                                    <CardSubtitle>Author:&nbsp;<Link to={"/authorBooks/"+this.state.product.author}>{this.state.product.author}</Link></CardSubtitle>
+                          </Col>
+                        <Col colSpan="100" style={{marginLeft: "50px", marginTop: "50px"}}>
+                            <div className="text-md-left">
+                              <h2><strong>{this.state.product.bookTitle}</strong></h2>
+                            <p><b>by:</b>&nbsp;<Link to={"/authorBooks/"+this.state.product.author}>{this.state.product.author}</Link></p>
 
-                  <CardText>
-                    <div>
-                      Description:&nbsp;
-                      {this.state.product.description}
-                    </div>
-                    <div>
-                      Genre:&nbsp;
-                      {this.state.product.genre}
-                    </div>
-                    <div>
-                      Publisher:&nbsp;
-                      {this.state.product.publisher}
-                    </div>
-                    <div>
-                      Author Bio:&nbsp;
-                      {this.state.product.authorBio}
-                    </div>
-                    <div>
-                      <b>Price : </b>${this.state.product.price}
-                    </div>
+                                <p><b>Description:</b>&nbsp;
+                                {this.state.product.description}</p>
+                                <p><b>Genre:</b>&nbsp;
+                                {this.state.product.genre}</p>
+                                <p><b>Publisher:</b>&nbsp;
+                                {this.state.product.publisher}</p>
+                                <p> <b>Price : </b>${this.state.product.price}</p>
+                                <p><b>Average Rating:</b>&nbsp;
+                                {this.state.product.averageRating}</p>
+                                <p><b>Author Bio:</b>&nbsp;
+                                {this.state.product.authorBio}</p>
+                            </div>
+                            <div className="d-flex">
+                          <Link to="/Cart" className="btn btn-md btn btn-info" onClick={this.addToCart}
+                                            onChange={this.handleInputChange}>&nbsp; Add to Cart &nbsp;</Link>
+                            &nbsp;
+                            &nbsp;
+                            &nbsp;
+                            
+                            <ButtonAddToWishList
+                              productId={this.props.match.params.bookId}
+                              wishlists={this.props.wishlists}
+                              setWishlists={this.props.setWishlists}/>
+                          </div>
+                        </Col>
+                    </Row>
+          <h1><hr/>Comments and Rating<hr/></h1>
+          <Form ID_Of_Book={this.props.match.params.bookId}> </Form>
 
-                    <div>
-                      Average Rating:&nbsp;
-                      {this.state.product.averageRating}
-                    </div>
-                  </CardText>
-                  <div className="d-flex justify-content-between">
-                  <Link to="/Cart" className="btn btn-sm btn btn-info float-right mx-3" onClick={this.addToCart}
-                                    onChange={this.handleInputChange}><AddShoppingCartIcon/></Link>
-                    
-                    <ButtonAddToWishList
-                      productId={this.props.match.params.bookId}
-                      wishlists={this.props.wishlists}
-                      setWishlists={this.props.setWishlists}
-                    />
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
         </Container>
-        <Form ID_Of_Book={this.props.match.params.bookId}> </Form>
       </div>
     );
   }
