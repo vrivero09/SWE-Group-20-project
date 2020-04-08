@@ -1,5 +1,7 @@
   import React, {Component} from 'react';
   import axios from 'axios';
+  import {Link} from "react-router-dom";
+
  
   class authorBooks extends Component {
       constructor(props) {
@@ -30,16 +32,24 @@
     render(){
       const { books } = this.state;
      return (
-      <div>
-        <h1>Books by: {this.authorName} </h1>
+       <div>
+         <h1>Books by: <h3>{this.authorName}</h3></h1>
+        <div className="d-flex flex-wrap align-content-start">
+        
         {books.map(function(d, idx){
          return (<ul key={idx}>
 
-         <img alt="images" src= {d.bookCoverAddress} width="200px"/>
-           Title: {d.bookTitle}
+                <div className="d-flex flex-wrap align-content-start">
+                <p>
+                <Link to={`/bookDetails/${d._id}`} className="btn btn-link"><img src={d.bookCoverAddress} width="200px" alt="image holder"/></Link>
+
+                </p>
+            </div>
            </ul>)
        })}
       </div>
+
+       </div>
       );
     }
   }

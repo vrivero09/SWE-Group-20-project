@@ -33,33 +33,17 @@ export default class ProductItem extends React.Component {
     render() {
         const {product} = this.props;
         return (
-            <Media style={{marginBottom: "10px"}}className="my-6">                
-                <Media left href="" >
-                    <img src={product.bookCoverAddress} width="200px" alt="image holder"/>
-                </Media>
-                
-                <Media body>
-					<h3>{product.bookTitle}</h3>
-                    <p><b>Description:</b> {product.description}</p>
-                    <p><b>Author:</b> {product.author}</p>
-                    <p>Rating: {product.averageRating} </p>
-                    <h6 className="card-text"><b>Price: </b>${product.price}</h6>
-                    <span className="card-text"><small>Available Quantity: </small>{product.quantity}</span>
-                    {product.quantity > 0 ?
-                        <div className="d-flex justify-content-end">
-                          <Link to={`/bookDetails/${product._id}`} className="btn btn-link">Details</Link>
-                            <input type="number" value={this.state.quantity} name="quantity"
-                                   onChange={this.handleInputChange} className="float-right"
-                                   style={{width: "60px", marginRight: "10px", borderRadius: "3px"}}/>
-                            <Link to="/Cart" className="btn btn-sm btn btn-info float-right mx-3" onClick={this.addToCart}
+                <div className="d-flex flex-wrap align-content-start">
+                <p>
+                <Link to={`/bookDetails/${product._id}`} className="btn btn-link"><img src={product.bookCoverAddress} width="200px" alt="image holder"/></Link>
+                <h6>By: {product.author}</h6>
+               <p><Link to="/Cart" className="btn btn-sm btn btn-info float-right mx-3" onClick={this.addToCart}
                                     onChange={this.handleInputChange}><AddShoppingCartIcon/></Link>
-                                    
-                            <ButtonAddToWishList productId={product._id} wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/>
-                        </div> :
-                        <p className="text-danger"> Product is out of stock. </p>
-                    }
-                </Media>
-            </Media>
+                <ButtonAddToWishList productId={product._id} wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/></p> 
+
+                </p>
+            </div>
+
         )
     }
 }
