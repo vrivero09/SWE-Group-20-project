@@ -35,7 +35,7 @@ export default class ProductItem extends React.Component {
         return (
                 <div className="flex-wrap align-content-start-xs-2" style={{margin: '15px'}}>
                 <p style={{height:"60%"}}>
-                <Link to={`/bookDetails/${product._id}`} className="btn btn-link"><img src={product.bookCoverAddress} width="200px" alt="image holder"/></Link>
+                <Link onUpdate={window.scrollTo(0, 0)} to={`/bookDetails/${product._id}`} className="btn btn-link"><img src={product.bookCoverAddress} width="200px" alt="image holder"/></Link>
                 <h6>By: {product.author}</h6>
 
                 <p><ButtonAddToWishList productId={product._id} wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/></p>&nbsp;&nbsp;
