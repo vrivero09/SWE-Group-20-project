@@ -58,6 +58,7 @@ class bookDetails extends Component {
 
   componentDidMount() {
     this.getBook();
+    window.scrollTo(0, 0)
     console.log("From bookdetails: " + this.props.match.params.bookId);
   }
 
