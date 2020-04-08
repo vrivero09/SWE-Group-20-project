@@ -18,19 +18,20 @@ const ShippingAddressSchema = new Schema({
 
 const CreditCardSchema= new Schema({
     cardHolderName: String,
-    cardNumber:Number,
-    expirationMonth : Number,
-    expirationYear : Number,
-    securityCode : Number,
+    cardNumber:String,
+    expirationMonth : String,
+    expirationYear : String,
+    securityCode : String,
 });
 
 const ShoppingCartSchema = new Schema({
-
+    books: {type: mongoose.ObjectId, ref: 'Book'},
+    quantity: Number
 });
 
 const WishlistSchema = new Schema({
     name: String,
-    books: [{type: mongoose.ObjectId, ref: 'Book'}]
+    books: [{type: Schema.Types.ObjectId, ref: 'Book'}]
 });
 
 const UserSchema = new Schema({
@@ -55,7 +56,7 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    address:{
+    homeAddress:{
         street: String,
         city: String,
         state: String,
@@ -63,7 +64,9 @@ const UserSchema = new Schema({
     },
     shippingAddress: [ShippingAddressSchema],
     creditCards: [CreditCardSchema],
-    wishLists:[WishlistSchema]
+    wishLists:[WishlistSchema],
+    cart: [ShoppingCartSchema],
+    purchasedBooks: [{type: mongoose.ObjectId, ref: 'Book'}],
 });
 
 /*
