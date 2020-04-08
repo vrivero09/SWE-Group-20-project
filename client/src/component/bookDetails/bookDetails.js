@@ -25,7 +25,7 @@ class bookDetails extends Component {
     super(props);
     console.log(props.match.params.bookId);
     this.state = {
-      product: [
+      product: 
         {
           bookTitle: "",
           description: "",
@@ -37,10 +37,10 @@ class bookDetails extends Component {
           authorBio: "",
           price: "",
         },
-      ],
       dropDownOpen: false,
     };
     this.toggle = this.toggle.bind(this);
+    this.changeAvg = this.changeAvg.bind(this);
   }
 
   addToCart = () => {
@@ -65,11 +65,29 @@ class bookDetails extends Component {
     return axios
       .get(`/api/book?id=${this.props.match.params.bookId}`)
       .then((res) => {
-        this.setState({ product: res.data });
+        var product = res.data;
+        this.setState({ product: product});
+        this.changeAvg(product.allReviews);
       })
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  changeAvg(reviews){
+    var avg = 0;
+    for(let i = 0 ; i < reviews.length; i++){
+      avg += reviews[i].starRating;
+    }
+
+    avg = avg / reviews.length;
+    var average = Number(avg.toFixed(1));
+    this.setState({
+      product: {                   
+        ...this.state.product,   
+        averageRating:average     
+      }
+    });
   }
 
   toggle() {
