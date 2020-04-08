@@ -33,13 +33,16 @@ export default class ProductItem extends React.Component {
     render() {
         const {product} = this.props;
         return (
-                <div className="d-flex flex-wrap align-content-start">
-                <p>
+                <div className="flex-wrap align-content-start-xs-2" style={{margin: '15px'}}>
+                <p style={{height:"60%"}}>
                 <Link to={`/bookDetails/${product._id}`} className="btn btn-link"><img src={product.bookCoverAddress} width="200px" alt="image holder"/></Link>
                 <h6>By: {product.author}</h6>
-               <p><Link to="/Cart" className="btn btn-sm btn btn-info float-right mx-3" onClick={this.addToCart}
+
+                <p><ButtonAddToWishList productId={product._id} wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/></p>&nbsp;&nbsp;
+
+                <Link to="/Cart" className="btn btn-sm btn btn-info" onClick={this.addToCart}
                                     onChange={this.handleInputChange}><AddShoppingCartIcon/></Link>
-                <ButtonAddToWishList productId={product._id} wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/></p> 
+
 
                 </p>
             </div>

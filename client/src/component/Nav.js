@@ -87,7 +87,7 @@ class Navigation extends Component{
           <Collapse isOpen={this.state.toggle} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink href ="/Products">Products</NavLink>
+                <NavLink href ="/Books"><b>Books</b></NavLink>
               </NavItem>
             </Nav>
             
