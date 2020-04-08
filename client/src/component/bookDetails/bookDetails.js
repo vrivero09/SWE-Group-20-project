@@ -121,7 +121,7 @@ class bookDetails extends Component {
                                 {this.state.product.authorBio}</p>
                             </div>
                             <div className="d-flex">
-                          <Link to="/Cart" className="btn btn-md btn btn-info" onClick={this.addToCart}
+                          <Link onUpdate={() => window.scrollTo(0, 0)} to="/Cart" className="btn btn-md btn btn-info" onClick={this.addToCart}
                                             onChange={this.handleInputChange}>&nbsp; Add to Cart &nbsp;</Link>
                             &nbsp;
                             &nbsp;
