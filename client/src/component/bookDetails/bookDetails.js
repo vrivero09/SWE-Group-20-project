@@ -43,19 +43,6 @@ class bookDetails extends Component {
     this.changeAvg = this.changeAvg.bind(this);
   }
 
-  addToCart = () => {
-    let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
-    let productId = this.props.product._id.toString();
-    cart[productId] = (cart[productId] ? cart[productId] : 0);
-    let qty = cart[productId] + parseInt(this.state.quantity);
-    if (this.props.product.quantity < qty) {
-        cart[productId] = this.props.product.quantity;
-    } else {
-        cart[productId] = qty
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
-}
-
   componentDidMount() {
     this.getBook();
     window.scrollTo(0, 0)
@@ -97,11 +84,11 @@ class bookDetails extends Component {
 
   addToCart = () => {
     let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
-    let productId = this.props.product._id.toString();
+    let productId = this.state.product._id.toString();
     cart[productId] = (cart[productId] ? cart[productId] : 0);
     let qty = cart[productId] + parseInt(this.state.quantity);
-    if (this.props.product.quantity < qty) {
-        cart[productId] = this.props.product.quantity;
+    if (this.state.product.quantity < qty) {
+        cart[productId] = this.state.product.quantity;
     } else {
         cart[productId] = qty
     }
