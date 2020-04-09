@@ -42,7 +42,7 @@ export default class Checkout extends React.Component {
 
 	purchaseBooks(){
 		axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-		return axios.post('users/purchaseBooks',{
+		return axios.post('http://localhost:5000/users/purchaseBooks',{
             cartBooks: this.state.products
         })
         .then(res=>{

@@ -18,7 +18,7 @@ export default function ButtonAddToWishList(props) {
                     return (
                         <DropdownItem key={index} onClick={() => {
                             axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-                            axios.post('/wishlist/addbook', {
+                            axios.post('http://localhost:5000/wishlist/addbook', {
                                 book_id: props.productId,
                                 wishlist_id: wishlist._id
                             })
