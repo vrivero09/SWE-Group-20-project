@@ -16,7 +16,7 @@ function WishlistBookEntry(props) {
 
     const removeBook = (book_id) => {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-        axios.post('wishlist/removebook', {
+        axios.post('http://localhost:5000/wishlist/removebook', {
             book_id: book_id,
             wishlist_id: wishlistId
         }).then(
@@ -38,7 +38,7 @@ function WishlistBookEntry(props) {
 
     const moveTo = (wishlist_id) => {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-        axios.post('wishlist/movebook', {
+        axios.post('http://localhost:5000/wishlist/movebook', {
             book_id: book._id,
             wishlist_id_from: wishlistId,
             wishlist_id_to: wishlist_id
@@ -87,7 +87,7 @@ function Wishlist(props) {
     let index = 0;
 
     const removeWishlist = () => {
-        axios.post('wishlist/remove', {
+        axios.post('http://localhost:5000/wishlist/remove', {
             wishlist_id: wishlist._id
         })
         .then(res => {
@@ -120,7 +120,7 @@ function Wishlists(props) {
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
     useEffect(() => {
         if (props.wishlists.length === 0) {
-            axios.get('wishlist')
+            axios.get('http://localhost:5000/wishlist')
             .then(res => {
                 if (res.data.result == 0) {
                     props.setWishlists(res.data.wishlists);
@@ -134,7 +134,7 @@ function Wishlists(props) {
             alert(`Wishlist name can't be empty.`);
             return;
         }
-        axios.post('wishlist/add',{
+        axios.post('http://localhost:5000/wishlist/add',{
             name: wishlistName
         })
         .then(res=>{

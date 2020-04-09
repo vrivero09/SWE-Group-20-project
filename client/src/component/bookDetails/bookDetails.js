@@ -64,7 +64,7 @@ class bookDetails extends Component {
 
   getBook() {
     return axios
-      .get(`/api/book?id=${this.props.match.params.bookId}`)
+      .get(`http://localhost:5000/api/book?id=${this.props.match.params.bookId}`)
       .then((res) => {
         var product = res.data;
         this.setState({ product: product});

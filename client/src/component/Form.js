@@ -35,7 +35,7 @@ export default class Form extends React.Component {
     }
 
     axios
-      .post("/book/addreview", {
+      .post("http://localhost:5000/book/addreview", {
         //may be book/addreview instead
         reviewText: this.state.reviewText,
         showUsername: this.state.checkBoxValue,
@@ -166,7 +166,7 @@ export default class Form extends React.Component {
     //must be for reading, not writing
 
     axios
-      .post("/book/getReviews", {
+      .post("http://localhost:5000/book/getReviews", {
         _id: this.props.ID_Of_Book,
       })
       .then((response) => {
