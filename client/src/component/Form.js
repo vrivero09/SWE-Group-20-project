@@ -43,8 +43,13 @@ export default class Form extends React.Component {
         _id: this.props.ID_Of_Book,
       })
       .then((res) => {
-        this.setState({reviewText:"", raw_data:res.data.reviews, checkBoxValue:false,rating:1});
-        this.props.refreshBook();
+        this.setState({
+          reviewText: "",
+          raw_data: res.data.reviews,
+          checkBoxValue: false,
+          rating: 1,
+        });
+        this.props.changeAvg(res.data.reviews);
       })
       .catch((err) => {
         console.log(err);
@@ -69,6 +74,10 @@ export default class Form extends React.Component {
 
   onStarClick(nextValue, prevValue, name) {
     this.setState({ rating: nextValue });
+  }
+
+  onStarClick_Disabled(nextValue, prevValue, name) {
+    this.setState({ rating: prevValue });
   }
 
   ownsBook = (bookID) => {
@@ -100,7 +109,7 @@ export default class Form extends React.Component {
         console.log(err);
       });
   }
-  
+
   getUsername = () => {
     const token = localStorage.getItem("userToken");
     if (token) {
@@ -184,6 +193,15 @@ export default class Form extends React.Component {
     return reviewInfo.map((currentReview, index) => (
       <div key={index}>
         <h3>{currentReview.reviewText}</h3>
+
+        <StarRatingComponent
+          name="rate1"
+          starCount={5}
+          onStarClick_Disabled={
+            (currentReview.starRating, currentReview.starRating, "Rating")
+          }
+          value={currentReview.starRating}
+        />
         <p>{String(currentReview.starRating)}</p>
       </div>
     ));
