@@ -160,11 +160,11 @@ class bookDetails extends Component {
               </div>
             </Col>
           </Row>
-          <h1>
+          <h3>
             <hr />
             Comments and Rating
             <hr />
-          </h1>
+          </h3>
           <Form
             ID_Of_Book={this.props.match.params.bookId}
             refreshBook={this.getBook}

@@ -63,7 +63,7 @@ export default class Cart extends React.Component {
 					{ !products.length ? <h3 style = {{marginBottom: "100px"}}>Empty cart</h3>: ''}
 
 					<Link to="/checkout"><button className="btn btn-success float-right">Checkout</button></Link>
-					<Link to="/Books" style = {{marginRight: '40%'}}><Button>Continue shopping</Button></Link>
+					<Link to="/Books" style = {{marginRight: '40%'}} className="float-left"><Button>Continue shopping</Button></Link>
 					<button className="btn btn-danger float-right" onClick={this.clearCart} style={{ marginRight: "10px" }}>Clear Cart</button>
 
 					<br/><br/><br/>
