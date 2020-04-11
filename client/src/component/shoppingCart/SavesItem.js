@@ -54,11 +54,9 @@ export default class saveItem extends React.Component {
 				<Media left href="">
 					<img src={product.bookCoverAddress} width="120px" alt="image holder" />
 				</Media>
-				<Media body>
-				<h3>Title: {product.bookTitle}</h3>
-				<p><h6>Description: {product.description}</h6></p>
-				<h6>Author: {product.author} </h6>
-				<h6>Rating: {product.averageRating}</h6>
+				<Media style={{ marginLeft: "50px"}} body>
+				<h3 className="text-md-left">{product.bookTitle}</h3>
+				<p className="text-md-left"><h6>Description: <small>{product.description}</small></h6></p>
 				</Media>
 				<p><Button outline color="danger"  onClick={this.removeFromSave}><DeleteForever/></Button></p>&nbsp;
 				<Button outline color="success" onClick={this.moveToCart}

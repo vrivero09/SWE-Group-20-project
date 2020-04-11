@@ -2,6 +2,8 @@ import React, {Component, useState} from 'react';
 import { Button, Input, Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { Link } from "react-router-dom";
+
 
 
 function WishlistBookEntry(props) {
@@ -62,9 +64,9 @@ function WishlistBookEntry(props) {
             <div className="text-left">
                 {book.bookTitle}
             </div>
-            <div className="align-items-around wishlist-entry-actions-container d-flex justify-content-around pb-3">
+            <div style={{marginTop: "10px"}}className="align-items-around wishlist-entry-actions-container d-flex justify-content-around pb-3">
                 <Button color="danger" size="sm" onClick={() => removeBook(book._id) }>Remove</Button>
-                <Button color="primary" size="sm" onClick={() => addToCart(book._id)}>Add to Cart</Button>
+                <Link className="btn btn-xs btn btn-info" to="/Cart" color="primary" size="sm" onClick={() => addToCart(book._id)}>Add to Cart</Link>
                 <Dropdown isOpen={dropdownOpen} toggle={toggle} size="sm">
                     <DropdownToggle caret>
                         Move to
@@ -181,9 +183,9 @@ function Wishlists(props) {
       return(
       <div className="container page-container d-flex flex-column">
         <div  className ="example">
-            <h1>Wishlist Page</h1>
+            <h3><hr/>Wishlist Page<hr/></h3>
         </div>
-        <div className="d-flex w-100">
+        <div className="d-flex w-100" style={{margin: '20px'}}>
             <Input placeholder="wishlist name" className="w-25" value={wishlistName} onChange={(evt) => setWishlistName(evt.target.value)}/>
             <Button onClick={()=>{ addWishlist(props.setWishlists, wishlistName); }}>Add Wishlist</Button>
         </div>

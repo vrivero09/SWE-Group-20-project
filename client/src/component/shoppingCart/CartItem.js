@@ -2,6 +2,9 @@ import React from 'react';
 import {
 	Button, Media
   } from 'reactstrap';
+  import StarRatingComponent from "react-star-rating-component";
+  import { Link } from "react-router-dom";
+
 
 export default class CartItem extends React.Component {
 
@@ -83,15 +86,29 @@ export default class CartItem extends React.Component {
 				<Media left href="">
                     <img src={product.bookCoverAddress} width="200px" alt="image holder"/>
                 </Media>
-				<Media body>
-					<h3>{product.bookTitle}</h3>
+				<Media style={{ marginLeft: "50px"}} body>
+					<div className="text-md-left">
+					<h2><strong>{product.bookTitle}</strong></h2>
                     <p><h6>Description: <small>{product.description}</small></h6></p>
-					<h6>Author: {product.author} </h6>
-					<h6>Rating: {product.averageRating}</h6>
-                    <h5 className="card-text"><small>Price: </small>${product.price}</h5>
-					<p><button onClick={this.handleInputChange} onClick={this.increment}>+</button>&nbsp;&nbsp;Quantity: {product.quantity}&nbsp;&nbsp;<button onClick={this.handleInputChange} onClick={this.decrement}>-</button>&nbsp;</p>
-							<Button className="ml-3" onClick={() => this.props.remove(product)} >Remove from cart</Button>&nbsp;&nbsp;
-							<Button onClick={this.saveCartItem} onChange={this.handleInputChange}>Save for Later</Button>
+					<h6>by: <Link to={"/authorBooks/" + product.author}>
+                    {product.author}
+                  </Link></h6>
+					<p>
+					<b>Average Rating:</b>
+                  <StarRatingComponent
+                    name="rate1"
+                    starCount={5}
+                    editing={false}
+                    value={product.averageRating}/>
+					</p>
+
+                    <p><h6 className="card-text">Price: ${product.price}</h6></p>
+
+					<p ><button onClick={this.handleInputChange} onClick={this.increment}>+</button>&nbsp;&nbsp;Quantity: {product.quantity}&nbsp;&nbsp;<button onClick={this.handleInputChange} onClick={this.decrement}>-</button>
+							<div className="float-right"><Button className="ml-3" onClick={() => this.props.remove(product)} >Remove from cart</Button>&nbsp;&nbsp;
+							<Button onClick={this.saveCartItem} onChange={this.handleInputChange}>Save for Later</Button></div></p>
+
+					</div>
 
 				</Media>
 			</Media>
