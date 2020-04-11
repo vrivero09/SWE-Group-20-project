@@ -40,7 +40,7 @@ class bookDetails extends Component {
       dropDownOpen: false,
     };
     this.toggle = this.toggle.bind(this);
-    this.changeAvg = this.changeAvg.bind(this);
+    this.getBook = this.getBook.bind(this);
   }
 
   componentDidMount() {
@@ -55,27 +55,10 @@ class bookDetails extends Component {
       .then((res) => {
         var product = res.data;
         this.setState({ product: product});
-        this.changeAvg(product.allReviews);
       })
       .catch((err) => {
         console.log(err);
       });
-  }
-
-  changeAvg(reviews){
-    var avg = 0;
-    for(let i = 0 ; i < reviews.length; i++){
-      avg += reviews[i].starRating;
-    }
-
-    avg = avg / reviews.length;
-    var average = Number(avg.toFixed(1));
-    this.setState({
-      product: {                   
-        ...this.state.product,   
-        averageRating:average     
-      }
-    });
   }
 
   toggle() {
@@ -86,7 +69,7 @@ class bookDetails extends Component {
     let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
     let productId = this.state.product._id.toString();
     cart[productId] = (cart[productId] ? cart[productId] : 0);
-    let qty = cart[productId] + parseInt(this.state.quantity);
+    let qty = cart[productId] + 1 ;
     if (this.state.product.quantity < qty) {
         cart[productId] = this.state.product.quantity;
     } else {
@@ -141,7 +124,7 @@ class bookDetails extends Component {
                         </Col>
                     </Row>
           <h1><hr/>Comments and Rating<hr/></h1>
-          <Form ID_Of_Book={this.props.match.params.bookId}> </Form>
+          <Form ID_Of_Book={this.props.match.params.bookId} refreshBook={this.getBook}> </Form>
 
         </Container>
       </div>

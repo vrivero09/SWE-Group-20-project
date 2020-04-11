@@ -44,7 +44,7 @@ export default class Form extends React.Component {
       })
       .then((res) => {
         this.setState({reviewText:"", raw_data:res.data.reviews, checkBoxValue:false,rating:1});
-        this.props.changeAvg(res.data.reviews);
+        this.props.refreshBook();
       })
       .catch((err) => {
         console.log(err);
@@ -100,7 +100,7 @@ export default class Form extends React.Component {
         console.log(err);
       });
   }
-
+  
   getUsername = () => {
     const token = localStorage.getItem("userToken");
     if (token) {
