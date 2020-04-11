@@ -1,0 +1,36 @@
+.search-bar {
+    border: 2px solid black;
+    border-radius: 4px;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    background-color: white;
+    background-image: url(http://icons.iconarchive.com/icons/custom-icon-design/mono-general-2/16/search-icon.png);
+    background-position: 10px 10px;
+    padding-left: 40px;
+    background-repeat: no-repeat;
+}
+
+.search-button {
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.search-button:hover {
+    background-color: lightgray;
+    color: black;
+}
+
+.sort-bar {
+    border: 2px solid lightgray;
+    height: 30px;
+    font-size: 12px;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
