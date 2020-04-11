@@ -82,9 +82,20 @@ books.post("/addreview", (req, res) => {
       console.log("BOOK IS NOT NULL.");
       //if found a book with given id, push the new review to the allReviews array inside the book document
       book.allReviews.push(reviewData);
+
+      //edit the book rating average
+      var avg = 0;
+      for(let i = 0 ; i < book.allReviews.length; i++){
+        avg += book.allReviews[i].starRating;
+      }
+
+      avg = avg / book.allReviews.length;
+      var average = Number(avg.toFixed(1));
+
+      book.averageRating = average;
+
       //save and update in the database
       book.save();
-
       res.send({reviews:book.allReviews});
     }
   });
