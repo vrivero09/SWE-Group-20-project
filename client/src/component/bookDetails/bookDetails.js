@@ -47,6 +47,7 @@ class bookDetails extends Component {
     this.getBook();
     window.scrollTo(0, 0)
     console.log("From bookdetails: " + this.props.match.params.bookId);
+
   }
 
   getBook() {
