@@ -1,13 +1,15 @@
-import React from 'react'
+import React from 'react'  
 
 function SearchArea(props) {
+
     return (
         <div className="search-area">
-            <form onSubmit={props.searchBook} action="">
+            <form onSubmit={props.searchBook} action="" >
                 <input
                     className="search-bar"
                     onChange={props.handleSearch}
                     type="text"
+                    placeholder="Search..."
                 />
                 <button className="search-button" type="submit">
                     Search
