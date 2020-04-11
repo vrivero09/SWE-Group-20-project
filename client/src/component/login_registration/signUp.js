@@ -176,7 +176,7 @@ class  SignUp extends Component {
     }
 
     register(newUser){
-        return axios.post('users/signup',{
+        return axios.post('http://localhost:5000/users/signup',{
             firstName: newUser.firstName,
             lastName: newUser.lastName,
             nickname: newUser.nickname,

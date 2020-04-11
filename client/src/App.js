@@ -32,7 +32,7 @@ class App extends Component{
 
   getWishlists(){
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-    return axios.get('wishlist',{
+    return axios.get('http://localhost:5000/wishlist',{
     })
         .then(res=>{
           this.setState({wishlists:res.data.wishlists});

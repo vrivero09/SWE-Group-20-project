@@ -41,7 +41,7 @@ class  LoginCredentialsForm extends Component {
     }
 
     onSubmit(e){
-        axios.post('users/changePassword',{
+        axios.post('http://localhost:5000/users/changePassword',{
             password : this.state.password
         })
         .then(res=>{

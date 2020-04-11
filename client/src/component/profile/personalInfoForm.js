@@ -38,7 +38,7 @@ class  PersonalInfoForm extends Component {
     //get user information and set the state
     getInfo(){
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-        axios.get('users/profile')
+        axios.get('http://localhost:5000/users/profile')
         .then(res => {
             if(res.data.user){
                 if(res.data.user.homeAddress){
@@ -72,7 +72,7 @@ class  PersonalInfoForm extends Component {
     onClickSave(e,values){
         //e.preventDefault();
 
-        axios.post('users/changePersonalInfo',{
+        axios.post('http://localhost:5000/users/changePersonalInfo',{
             firstName : values.firstName,
             lastName: values.lastName,
             email:values.email,

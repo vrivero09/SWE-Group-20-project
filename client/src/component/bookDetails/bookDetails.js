@@ -40,7 +40,7 @@ class bookDetails extends Component {
       dropDownOpen: false,
     };
     this.toggle = this.toggle.bind(this);
-    this.changeAvg = this.changeAvg.bind(this);
+    this.getBook = this.getBook.bind(this);
   }
 
   componentDidMount() {
@@ -51,31 +51,14 @@ class bookDetails extends Component {
 
   getBook() {
     return axios
-      .get(`/api/book?id=${this.props.match.params.bookId}`)
+      .get(`http://localhost:5000/api/book?id=${this.props.match.params.bookId}`)
       .then((res) => {
         var product = res.data;
         this.setState({ product: product});
-        this.changeAvg(product.allReviews);
       })
       .catch((err) => {
         console.log(err);
       });
-  }
-
-  changeAvg(reviews){
-    var avg = 0;
-    for(let i = 0 ; i < reviews.length; i++){
-      avg += reviews[i].starRating;
-    }
-
-    avg = avg / reviews.length;
-    var average = Number(avg.toFixed(1));
-    this.setState({
-      product: {                   
-        ...this.state.product,   
-        averageRating:average     
-      }
-    });
   }
 
   toggle() {
@@ -141,7 +124,7 @@ class bookDetails extends Component {
                         </Col>
                     </Row>
           <h1><hr/>Comments and Rating<hr/></h1>
-          <Form ID_Of_Book={this.props.match.params.bookId}> </Form>
+          <Form ID_Of_Book={this.props.match.params.bookId} refreshBook={this.getBook}> </Form>
 
         </Container>
       </div>

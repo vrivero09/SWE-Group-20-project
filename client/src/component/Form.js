@@ -35,7 +35,7 @@ export default class Form extends React.Component {
     }
 
     axios
-      .post("/book/addreview", {
+      .post("http://localhost:5000/book/addreview", {
         //may be book/addreview instead
         reviewText: this.state.reviewText,
         showUsername: this.state.checkBoxValue,
@@ -43,7 +43,12 @@ export default class Form extends React.Component {
         _id: this.props.ID_Of_Book,
       })
       .then((res) => {
-        this.setState({reviewText:"", raw_data:res.data.reviews, checkBoxValue:false,rating:1});
+        this.setState({
+          reviewText: "",
+          raw_data: res.data.reviews,
+          checkBoxValue: false,
+          rating: 1,
+        });
         this.props.changeAvg(res.data.reviews);
       })
       .catch((err) => {
@@ -69,6 +74,10 @@ export default class Form extends React.Component {
 
   onStarClick(nextValue, prevValue, name) {
     this.setState({ rating: nextValue });
+  }
+
+  onStarClick_Disabled(nextValue, prevValue, name) {
+    this.setState({ rating: prevValue });
   }
 
   ownsBook = (bookID) => {
@@ -166,7 +175,7 @@ export default class Form extends React.Component {
     //must be for reading, not writing
 
     axios
-      .post("/book/getReviews", {
+      .post("http://localhost:5000/book/getReviews", {
         _id: this.props.ID_Of_Book,
       })
       .then((response) => {
@@ -184,6 +193,15 @@ export default class Form extends React.Component {
     return reviewInfo.map((currentReview, index) => (
       <div key={index}>
         <h3>{currentReview.reviewText}</h3>
+
+        <StarRatingComponent
+          name="rate1"
+          starCount={5}
+          onStarClick_Disabled={
+            (currentReview.starRating, currentReview.starRating, "Rating")
+          }
+          value={currentReview.starRating}
+        />
         <p>{String(currentReview.starRating)}</p>
       </div>
     ));
