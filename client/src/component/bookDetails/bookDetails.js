@@ -82,10 +82,6 @@ class bookDetails extends Component {
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
-  onStarClick_Disabled(nextValue, prevValue, name) {
-    this.setState({ rating: prevValue });
-  }
-
   render() {
     return (
       <div>
@@ -136,11 +132,7 @@ class bookDetails extends Component {
                   <StarRatingComponent
                     name="rate1"
                     starCount={5}
-                    onStarClick_Disabled={
-                      (this.state.product.averageRating,
-                      this.state.product.averageRating,
-                      "Average rating")
-                    }
+                    editing={false}
                     value={this.state.product.averageRating}
                   />
                 </p>

@@ -76,10 +76,6 @@ export default class Form extends React.Component {
     this.setState({ rating: nextValue });
   }
 
-  onStarClick_Disabled(nextValue, prevValue, name) {
-    this.setState({ rating: prevValue });
-  }
-
   ownsBook = (bookID) => {
     for (var i = 0; i < this.state.purchased_books.length; i++) {
       if (this.state.purchased_books[i] == bookID) {
@@ -197,9 +193,7 @@ export default class Form extends React.Component {
         <StarRatingComponent
           name="rate1"
           starCount={5}
-          onStarClick_Disabled={
-            (currentReview.starRating, currentReview.starRating, "Rating")
-          }
+          editing={false}
           value={currentReview.starRating}
         />
         <p>{String(currentReview.starRating)}</p>
