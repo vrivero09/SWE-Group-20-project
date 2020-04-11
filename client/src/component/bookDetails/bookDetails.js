@@ -69,7 +69,7 @@ class bookDetails extends Component {
     let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
     let productId = this.state.product._id.toString();
     cart[productId] = (cart[productId] ? cart[productId] : 0);
-    let qty = cart[productId] + parseInt(this.state.quantity);
+    let qty = cart[productId] + 1;
     if (this.state.product.quantity < qty) {
         cart[productId] = this.state.product.quantity;
     } else {
