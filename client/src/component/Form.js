@@ -217,27 +217,12 @@ export default class Form extends React.Component {
         {/* <List height={150} itemCount={1000} itemSize={35} width={300}>
           {Row}
         </List> */}
-
-        <div className="Review text">
-          Review text: {String(this.state.reviewText)}
-        </div>
-        <div className="Checkbox">
-          Checkbox: {String(this.state.checkBoxValue)}
-        </div>
-        <div className="Rating">Rating: {String(this.state.rating)}</div>
         <textarea
           name="reviewText"
           placeholder="Review text here."
           rows={window.innerHeight / 50}
           value={this.state.reviewText}
           onChange={(e) => this.change(e)}
-        />
-        <input
-          name="showUsername"
-          type="checkbox"
-          checked={this.state.checkBoxValue}
-          defaultChecked={this.state.checkBoxValue}
-          onChange={(e) => this.boxChange(e)}
         />
 
         <button
@@ -246,9 +231,15 @@ export default class Form extends React.Component {
         >
           Submit
         </button>
-
+        <div className="Checkbox label">Show Username:</div>
+        <input
+          name="showUsername"
+          type="checkbox"
+          checked={this.state.checkBoxValue}
+          defaultChecked={this.state.checkBoxValue}
+          onChange={(e) => this.boxChange(e)}
+        />
         <div>
-          <h2>Rating from state: {rating}</h2>
           <StarRatingComponent
             name="rate1"
             starCount={5}
