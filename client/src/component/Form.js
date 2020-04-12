@@ -49,7 +49,7 @@ export default class Form extends React.Component {
           checkBoxValue: false,
           rating: 1,
         });
-        this.props.changeAvg(res.data.reviews);
+        this.props.refreshBook();
       })
       .catch((err) => {
         console.log(err);
