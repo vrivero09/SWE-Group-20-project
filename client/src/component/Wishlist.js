@@ -2,6 +2,8 @@ import React, {Component, useState} from 'react';
 import { Button, Input, Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { Link } from "react-router-dom";
+
 
 
 function WishlistBookEntry(props) {
@@ -16,7 +18,7 @@ function WishlistBookEntry(props) {
 
     const removeBook = (book_id) => {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-        axios.post('wishlist/removebook', {
+        axios.post('http://localhost:5000/wishlist/removebook', {
             book_id: book_id,
             wishlist_id: wishlistId
         }).then(
@@ -38,7 +40,7 @@ function WishlistBookEntry(props) {
 
     const moveTo = (wishlist_id) => {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-        axios.post('wishlist/movebook', {
+        axios.post('http://localhost:5000/wishlist/movebook', {
             book_id: book._id,
             wishlist_id_from: wishlistId,
             wishlist_id_to: wishlist_id
@@ -62,9 +64,9 @@ function WishlistBookEntry(props) {
             <div className="text-left">
                 {book.bookTitle}
             </div>
-            <div className="align-items-around wishlist-entry-actions-container d-flex justify-content-around pb-3">
+            <div style={{marginTop: "10px"}}className="align-items-around wishlist-entry-actions-container d-flex justify-content-around pb-3">
                 <Button color="danger" size="sm" onClick={() => removeBook(book._id) }>Remove</Button>
-                <Button color="primary" size="sm" onClick={() => addToCart(book._id)}>Add to Cart</Button>
+                <Link className="btn btn-xs btn btn-info" to="/Cart" color="primary" size="sm" onClick={() => addToCart(book._id)}>Add to Cart</Link>
                 <Dropdown isOpen={dropdownOpen} toggle={toggle} size="sm">
                     <DropdownToggle caret>
                         Move to
@@ -87,7 +89,7 @@ function Wishlist(props) {
     let index = 0;
 
     const removeWishlist = () => {
-        axios.post('wishlist/remove', {
+        axios.post('http://localhost:5000/wishlist/remove', {
             wishlist_id: wishlist._id
         })
         .then(res => {
@@ -120,7 +122,7 @@ function Wishlists(props) {
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
     useEffect(() => {
         if (props.wishlists.length === 0) {
-            axios.get('wishlist')
+            axios.get('http://localhost:5000/wishlist')
             .then(res => {
                 if (res.data.result == 0) {
                     props.setWishlists(res.data.wishlists);
@@ -134,7 +136,7 @@ function Wishlists(props) {
             alert(`Wishlist name can't be empty.`);
             return;
         }
-        axios.post('wishlist/add',{
+        axios.post('http://localhost:5000/wishlist/add',{
             name: wishlistName
         })
         .then(res=>{
@@ -181,9 +183,9 @@ function Wishlists(props) {
       return(
       <div className="container page-container d-flex flex-column">
         <div  className ="example">
-            <h1>Wishlist Page</h1>
+            <h3><hr/>Wishlist Page<hr/></h3>
         </div>
-        <div className="d-flex w-100">
+        <div className="d-flex w-100" style={{margin: '20px'}}>
             <Input placeholder="wishlist name" className="w-25" value={wishlistName} onChange={(evt) => setWishlistName(evt.target.value)}/>
             <Button onClick={()=>{ addWishlist(props.setWishlists, wishlistName); }}>Add Wishlist</Button>
         </div>

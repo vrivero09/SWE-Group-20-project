@@ -28,7 +28,7 @@ class ShippingAddreses extends Component{
     //get shipping address list and set state
     getInfo(){
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-        axios.get('users/profile')
+        axios.get('http://localhost:5000/users/profile')
         .then(res => {
             if(res.data.user){
                 this.setState({addresses:res.data.user.shippingAddress});
@@ -138,7 +138,7 @@ class  ShippingAddrForm extends Component {
     onClickSave(e){
         //e.preventDefault();
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-        axios.post("/shippingAddresses/update",{
+        axios.post("http://localhost:5000/shippingAddresses/update",{
             street: this.state.item.street,
             state: this.state.item.state,
             city: this.state.item.city,
@@ -159,7 +159,7 @@ class  ShippingAddrForm extends Component {
         //e.preventDefault();
 
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-        axios.post("/shippingAddresses/add",{
+        axios.post("http://localhost:5000/shippingAddresses/add",{
             street: values.street,
             state: values.state,
             city: values.city,
@@ -186,7 +186,7 @@ class  ShippingAddrForm extends Component {
         e.preventDefault();
 
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-        axios.post("/shippingAddresses/remove",{
+        axios.post("http://localhost:5000/shippingAddresses/remove",{
             addr_id:this.state.item._id
         }).then(res=>{
             if(res.data.addresses){

@@ -8,10 +8,10 @@ import Wishlist from './component/Wishlist';
 import Landing from './component/login_registration/landing';
 import Form from './component/Form';
 import Profile from './component/profile/profile';
-import Books from './component/bookDetails/bookDetails';
+import Details from './component/bookDetails/bookDetails';
 import authorBooks from './component/bookDetails/authorBooks';
 import Cart from './component/shoppingCart/Cart';
-import Product from './component/shoppingCart/ProductList';
+import Books from './component/shoppingCart/ProductList';
 import Checkout from './component/shoppingCart/checkOut'
 import axios from "axios";
 
@@ -32,7 +32,7 @@ class App extends Component{
 
   getWishlists(){
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-    return axios.get('wishlist',{
+    return axios.get('http://localhost:5000/wishlist',{
     })
         .then(res=>{
           this.setState({wishlists:res.data.wishlists});
@@ -68,11 +68,11 @@ class App extends Component{
 
       <Route path ='/Home' component={Home} />
       
-      <Route path ='/bookDetails/:bookId' render={props => <Books {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists}/>} />
+      <Route path ='/bookDetails/:bookId' render={props => <Details {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists}/>} />
 
       <div className="container">
         <br/>
-        <Route exact path="/Products" render={props => <Product {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists}/>} />
+        <Route exact path="/Books" render={props => <Books {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists}/>} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
 

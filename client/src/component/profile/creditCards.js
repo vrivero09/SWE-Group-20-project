@@ -29,7 +29,7 @@ class CreditCards extends Component{
     //get credit cards list and set state
     getInfo(){
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-        axios.get('users/profile')
+        axios.get('http://localhost:5000/users/profile')
         .then(res => {
             if(res.data.user){
                 this.setState({cards:res.data.user.creditCards});
@@ -140,7 +140,7 @@ class  CreditCardForm extends Component {
         //e.preventDefault();
 
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-        axios.post("/creditCards/update",{
+        axios.post("http://localhost:5000/creditCards/update",{
             cardHolderName: this.state.item.cardHolderName,
             cardNumber: this.state.item.cardNumber,
             expirationMonth: this.state.item.expirationMonth,
@@ -163,7 +163,7 @@ class  CreditCardForm extends Component {
         //e.preventDefault();
 
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-        axios.post("/creditCards/addCard",{
+        axios.post("http://localhost:5000/creditCards/addCard",{
             cardHolderName: values.cardHolderName,
             cardNumber: values.cardNumber,
             expirationMonth: values.expirationMonth,
@@ -191,7 +191,7 @@ class  CreditCardForm extends Component {
         e.preventDefault();
 
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-        axios.post("/creditCards/remove",{
+        axios.post("http://localhost:5000/creditCards/remove",{
             card_id:this.state.item._id
         }).then(res=>{
             if(res.data.cards){

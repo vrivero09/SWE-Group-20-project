@@ -3,6 +3,7 @@ var cors = require('cors');
 const users = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const mongoose = require("mongoose");
 
 /*
   see https://mongoosejs.com/docs/models.html for querying, deleting, and updating documents
@@ -165,6 +166,50 @@ users.post("/changePersonalInfo",(req,res)=> {
             res.send("Saved successfully");
             
         }else{
+            res.send("User " + decoded.user_id+" does not exist");
+        }
+    })
+    .catch(err=>{
+        res.send("error: "+ err);
+    });
+});
+
+//Endpoint to add books to purchase history
+users.post("/purchaseBooks",(req,res)=> {
+    var decoded = jwt.verify(req.headers['authorization'], SECRET_KEY);
+    var cartBooks = req.body.cartBooks;
+    User.findOne({
+        _id:decoded._id,
+    })
+    .then(user => {
+        if(user){
+            for(let i = 0; i < cartBooks.length; i++){
+                let bookID = new mongoose.Types.ObjectId(cartBooks[i]._id);
+                user.purchasedBooks.addToSet(bookID);       
+            }
+            user.save();
+            res.send({status: 1, purchases: user.purchasedBooks});
+        }else{
+            console.log("no user");
+            res.send("User " + decoded.user_id+" does not exist");
+        }
+    })
+    .catch(err=>{
+        res.send("error: "+ err);
+    });
+});
+
+//Endpoint to get perchased history
+users.get("/getPurchases",(req,res)=> {
+    var decoded = jwt.verify(req.headers['authorization'], SECRET_KEY);
+    User.findOne({
+        _id:decoded._id,
+    })
+    .then(user => {
+        if(user){
+            res.send({purchases: user.purchasedBooks});
+        }else{
+            console.log("no user");
             res.send("User " + decoded.user_id+" does not exist");
         }
     })
