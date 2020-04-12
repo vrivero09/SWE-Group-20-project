@@ -33,7 +33,6 @@ export default class Cart extends React.Component {
 
 	removeFromCart = (product) => {
 		let cart = JSON.parse(localStorage.getItem('cart'));
-		console.log(product);
 		delete cart[product._id];
 		localStorage.setItem('cart', JSON.stringify(cart));
 		getCartProducts(localStorage.getItem('cart')).then((products) => {
@@ -46,8 +45,8 @@ export default class Cart extends React.Component {
 	};
 
 	clearCart = () => {
-		localStorage.removeItem('cart');
-		this.setState({products: []});
+	localStorage.removeItem('cart');
+	this.setState({products: []});
 	};
 
 	render() {
@@ -56,7 +55,7 @@ export default class Cart extends React.Component {
 			<Container>
 					<h3 className="card-title"><hr/>Your shopping cart<hr/></h3>
 					{
-						products.map((product, index) => <CartItem product={product} remove={() => this.removeFromCart(product)} key={index}  onChange={this.handleInputChange}/>)
+						products.map((product, index) => <CartItem product={product} key={index} remove={() => this.removeFromCart(product)} onChange={this.handleInputChange}/>)
 					}
 					<hr/>
 					{ products.length ? <div><h4><small>Total Amount: <b>${total}</b></small></h4><hr/></div>: ''}
@@ -64,12 +63,11 @@ export default class Cart extends React.Component {
 					{ !products.length ? <h3 style = {{marginBottom: "100px"}}>Empty cart</h3>: ''}
 
 					<Link to="/checkout"><button className="btn btn-success float-right">Checkout</button></Link>
-					<Link to="/Products" style = {{marginRight: '40%'}}><Button>Continue shopping</Button></Link>
+					<Link to="/Books" style = {{marginRight: '40%'}} className="float-left"><Button>Continue shopping</Button></Link>
 					<button className="btn btn-danger float-right" onClick={this.clearCart} style={{ marginRight: "10px" }}>Clear Cart</button>
 
 					<br/><br/><br/>
-
-					<h3><hr/>Saved items<hr/></h3>
+					
 						<Save />
 					<hr/>
 			</Container>

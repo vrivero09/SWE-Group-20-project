@@ -30,47 +30,23 @@ export default class ProductItem extends React.Component {
         localStorage.setItem('cart', JSON.stringify(cart));
     }
 
-    // //needs to be here DONT REMOVE
-    // //componentWillMount not needed
-    saveForLater = (bookId) => {
-        axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-        axios.post('wishlist/addbook', {
-            book_id: bookId,
-            wishlist_id: this.props.wishlist._id
-        })
-            .then(res => {
-                this.props.setWishlists(res.data.wishlists);
-            })
-            .catch(err => { });
-    };
     render() {
         const {product} = this.props;
         return (
-            <Media className="my-3">
-                <Media left href="">
-                    <img src={product.bookCoverAddress} width="120px" alt="image holder"/>
-                </Media>
-                <Media body>
-					<h3>{product.bookTitle}</h3>
-                    <p>{product.description}</p>
-                    <p>Author: {product.author}</p>
-                    <h5 className="card-text"><small>price: </small>${product.price}</h5>
-                    <p style={{marginTop: "10px"}}><Link to={`/bookDetails/${product._id}`} className="btn btn-outline-secondary">Book Details</Link></p>
-                    <span className="card-text"><small>Available Quantity: </small>{product.quantity}</span>
-                    {product.quantity > 0 ?
-                        <div className="d-flex justify-content-end">
-                            <input type="number" value={this.state.quantity} name="quantity"
-                                   onChange={this.handleInputChange} className="float-right"
-                                   style={{width: "60px", marginRight: "10px", borderRadius: "3px"}}/>
-                            <Link to="/Cart" className="btn btn-sm btn btn-info float-right mx-3" onClick={this.addToCart}
+                <div className="flex-wrap align-content-start-xs-2" style={{margin: '15px'}}>
+                <p style={{height:"60%"}}>
+                <Link onUpdate={window.scrollTo(0, 0)} to={`/bookDetails/${product._id}`} className="btn btn-link"><img src={product.bookCoverAddress} width="200px" alt="image holder"/></Link>
+                <h6>By: {product.author}</h6>
+
+                <p><ButtonAddToWishList productId={product._id} wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/></p>&nbsp;&nbsp;
+
+                <Link to="/Cart" className="btn btn-sm btn btn-info" onClick={this.addToCart}
                                     onChange={this.handleInputChange}><AddShoppingCartIcon/></Link>
-                                    
-                            <ButtonAddToWishList productId={product._id} wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/>
-                        </div> :
-                        <p className="text-danger"> Product is out of stock. </p>
-                    }
-                </Media>
-            </Media>
+
+
+                </p>
+            </div>
+
         )
     }
 }

@@ -16,7 +16,7 @@ class Home extends Component {
         <hr className="my-2" />
         <p style={{color:'white'}}><b>Every visitor is more than welcome to shop around as guest. Check out our sign up page for more info!</b></p>
         <p className="lead">
-          <Button href="/Products"color="primary"> <b>Start shopping! </b></Button>
+          <Button href="/Books"color="primary"> <b>Start shopping! </b></Button>
         </p>
       </Jumbotron>
     </div>
