@@ -1,6 +1,4 @@
 import React from 'react';
-import { Media } from 'reactstrap';
-import axios from "axios";
 import ButtonAddToWishList from "../common/ButtonAddToWishlist";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {Link} from "react-router-dom";
