@@ -15,6 +15,7 @@
     "jwt-decode": "^2.2.0",
     "material-design-icons": "^3.0.1",
     "material-ui-icons": "^1.0.0-beta.36",
+    "mdbreact": "^4.25.6",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-bootstrap-sidebar": "0.0.1",

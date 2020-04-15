@@ -1,9 +1,9 @@
 import React from 'react';
-import { Media } from 'reactstrap';
-import axios from "axios";
 import ButtonAddToWishList from "../common/ButtonAddToWishlist";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {Link} from "react-router-dom";
+import StarRatingComponent from "react-star-rating-component";
+
 
 export default class ProductItem extends React.Component {
 
@@ -37,6 +37,12 @@ export default class ProductItem extends React.Component {
                 <p style={{height:"60%"}}>
                 <Link onUpdate={window.scrollTo(0, 0)} to={`/bookDetails/${product._id}`} className="btn btn-link"><img src={product.bookCoverAddress} width="200px" alt="image holder"/></Link>
                 <h6>By: {product.author}</h6>
+                <StarRatingComponent
+                    name="rate1"
+                    starCount={5}
+                    editing={false}
+                    value={product.averageRating}/>
+                <p><b>Price: $ {product.price} </b></p>
 
                 <p><ButtonAddToWishList productId={product._id} wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/></p>&nbsp;&nbsp;
 
