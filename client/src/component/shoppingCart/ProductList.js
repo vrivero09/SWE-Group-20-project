@@ -2,8 +2,6 @@ import React from 'react';
 import ProductItem from './productITem';
 import {getProducts} from './repository';
 import { MDBInput, MDBCol } from "mdbreact";
-import Search from '../search/Search'
-import SortBar from '../search/Sortbar';
 
 export default class ProductList extends React.Component {
     constructor(props) {

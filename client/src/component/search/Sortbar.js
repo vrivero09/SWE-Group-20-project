@@ -13,10 +13,13 @@ function SortBar(props) {
                     <option value="publisher">Publisher</option>
                     <option value="price">Price</option>
                 </select>
+<<<<<<< HEAD
                 <select onChange={props.changeAsc}>
                     <option value="asc">Asc</option>
                     <option value="des">Des</option>
                 </select>
+=======
+>>>>>>> 17669669c32546a07231abc63e4695feda695661
             </div>
             <div>
                 Rating: &nbsp;
@@ -30,6 +33,7 @@ function SortBar(props) {
                 </select>
             </div>
             <div>
+<<<<<<< HEAD
                 Books per page: &nbsp;
                 <select onChange={props.bpp}>
                     <option value="10">10</option>
@@ -37,6 +41,8 @@ function SortBar(props) {
                 </select>
             </div>
             <div>
+=======
+>>>>>>> 17669669c32546a07231abc63e4695feda695661
                 Price: &nbsp;
                 <select id="price" onChange={props.sortBooks}>
                     <option value="null">-------</option>
@@ -47,6 +53,7 @@ function SortBar(props) {
                     <option value="20+">$20+</option>
                 </select>
             </div>
+<<<<<<< HEAD
             <div>
                 Filter By: &nbsp;
                 <select id="rating" onChange={props.filterBooks}>
@@ -58,6 +65,8 @@ function SortBar(props) {
                     <option value="Miscellaneous">Misc</option>
                 </select>
             </div>
+=======
+>>>>>>> 17669669c32546a07231abc63e4695feda695661
         </div>
     );
 }

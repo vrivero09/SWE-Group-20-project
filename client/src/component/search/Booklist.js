@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useReducer, useEffect, useContext } from 'react'
 import BookCard from './BookCard'
 import { useHistory } from 'react-router-dom'
@@ -229,3 +230,35 @@ const BookList = (props) => {
 }
 
 export default BookList
+=======
+// const BookList = props => {
+//     let history = useHistory()
+
+//     const handleOpenDetails = id => () => history.push(`/book-details/${id}`)
+
+//     return (
+//         <div className="list">
+//             {props.books.map((book, i) => {
+//                 if (book) {
+//                     console.log(book)
+
+//                     return (
+//                         <BookCard
+//                             openDetails={handleOpenDetails}
+//                             key={i}
+//                             image={book.volumeInfo.imageLinks.thumbnail}
+//                             title={book.volumeInfo.title}
+//                             author={book.volumeInfo.authors}
+//                             published={book.volumeInfo.publishedDate}
+//                             bookId={book.id}
+//                         />
+//                     )
+//                 }
+//                 return undefined
+//             })}
+//         </div>
+//     )
+// }
+
+// export default BookList
+>>>>>>> 17669669c32546a07231abc63e4695feda695661
