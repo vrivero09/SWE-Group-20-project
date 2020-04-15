@@ -217,17 +217,6 @@ export default class Form extends React.Component {
         {/* <List height={150} itemCount={1000} itemSize={35} width={300}>
           {Row}
         </List> */}
-<<<<<<< HEAD
-=======
-
-        <div className="Review text">
-          Review text: {String(this.state.reviewText)}
-        </div>
-        <div className="Checkbox">
-          Checkbox: {String(this.state.checkBoxValue)}
-        </div>
-        <div className="Rating">Rating: {String(this.state.rating)}</div>
->>>>>>> 17669669c32546a07231abc63e4695feda695661
         <textarea
           name="reviewText"
           placeholder="Review text here."
@@ -235,7 +224,6 @@ export default class Form extends React.Component {
           value={this.state.reviewText}
           onChange={(e) => this.change(e)}
         />
-<<<<<<< HEAD
 
         <button
           disabled={!this.state.userOwnsBook}
@@ -244,8 +232,6 @@ export default class Form extends React.Component {
           Submit
         </button>
         <div className="Checkbox label">Show Username:</div>
-=======
->>>>>>> 17669669c32546a07231abc63e4695feda695661
         <input
           name="showUsername"
           type="checkbox"
@@ -253,20 +239,7 @@ export default class Form extends React.Component {
           defaultChecked={this.state.checkBoxValue}
           onChange={(e) => this.boxChange(e)}
         />
-<<<<<<< HEAD
         <div>
-=======
-
-        <button
-          disabled={!this.state.userOwnsBook}
-          onClick={(e) => this.onClickSave(e)}
-        >
-          Submit
-        </button>
-
-        <div>
-          <h2>Rating from state: {rating}</h2>
->>>>>>> 17669669c32546a07231abc63e4695feda695661
           <StarRatingComponent
             name="rate1"
             starCount={5}
