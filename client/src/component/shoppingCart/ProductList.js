@@ -2,8 +2,6 @@ import React from 'react';
 import ProductItem from './productITem';
 import {getProducts} from './repository';
 import { MDBInput, MDBCol } from "mdbreact";
-import Search from '../search/Search'
-import SortBar from '../search/Sortbar';
 
 export default class ProductList extends React.Component {
     constructor(props) {
@@ -13,8 +11,8 @@ export default class ProductList extends React.Component {
         this.genre = props.match.params.genre;
         this.price = props.match.params.price;
         this.bookTitle = props.match.params.bookTitle;
-        this.top = props.match.params.top;
         this.averageRating = props.match.params.averageRating;
+        this.topSell = props.match.params.topSell;
 
         this.state = {
             products: [],
@@ -37,23 +35,23 @@ export default class ProductList extends React.Component {
         const {products, search} = this.state;
 
         const filteredBooks = products.filter((books) => {
+            console.log(books.topSell);
             if(books.bookTitle.toLowerCase().indexOf(search.toLowerCase()) !== -1  ){
                 return books;
             }  if (books.author.toLowerCase().indexOf(search.toLowerCase()) !== -1  ){
                 return books;
             } if (books.genre.toLowerCase().indexOf(search.toLowerCase()) !== -1  ){
                 return books;
-            } if (books.top.toLowerCase().indexOf(search.toLowerCase()) !== -1  ){
+            } if (books.genre.toLowerCase().indexOf(search.toLowerCase()) !== -1  ){
                 return books;
             }
-            console.log(books.bookTitle)
         })
 
         return (
                     <div>
                         <h3><hr/>Book List<hr/></h3>
                         
-                        <MDBCol md="4" alt="Search">
+                        <MDBCol md="10" alt="Search">
                         <MDBInput 
                             hint="Type author, title, or genre"
                             value={this.state.search}
