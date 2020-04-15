@@ -39,6 +39,7 @@ app.post('/api/products', async (req, res) => {
         quantity: cart[id],
         author: books[i].author,
         description: books[i].description,
+        top: books[i].top,
         bookTitle: books[i].bookTitle,
         bookCoverAddress: books[i].bookCoverAddress,
         price: books[i].price,
