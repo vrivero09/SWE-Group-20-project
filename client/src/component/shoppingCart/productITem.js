@@ -43,6 +43,7 @@ export default class ProductItem extends React.Component {
                     editing={false}
                     value={product.averageRating}/>
                 <p><b>Price: $ {product.price} </b></p>
+                <p>{product.top}</p>
 
                 <p><ButtonAddToWishList productId={product._id} wishlists={this.props.wishlists} setWishlists={this.props.setWishlists}/></p>&nbsp;&nbsp;
 

@@ -1,17 +1,24 @@
 import React from 'react';
 import ProductItem from './productITem';
 import {getProducts} from './repository';
-// import { MDBInput, MDBCol } from "mdbreact";
+import { MDBInput, MDBCol } from "mdbreact";
 import Search from '../search/Search'
 import SortBar from '../search/Sortbar';
 
 export default class ProductList extends React.Component {
     constructor(props) {
         super(props);
+
+        this.author = props.match.params.author;
+        this.genre = props.match.params.genre;
+        this.price = props.match.params.price;
+        this.bookTitle = props.match.params.bookTitle;
+        this.top = props.match.params.top;
+        this.averageRating = props.match.params.averageRating;
+
         this.state = {
             products: [],
-            save: [],
-            total: 0
+            search: ''
         }
     }
 
@@ -21,19 +28,45 @@ export default class ProductList extends React.Component {
         });
     }
 
+    onChange = (e) => {
+        console.log(e.target.value)
+        this.setState({search: e.target.value})
+    }
 
     render() {
-        const {products} = this.state;
+        const {products, search} = this.state;
+
+        const filteredBooks = products.filter((books) => {
+            if(books.bookTitle.toLowerCase().indexOf(search.toLowerCase()) !== -1  ){
+                return books;
+            }  if (books.author.toLowerCase().indexOf(search.toLowerCase()) !== -1  ){
+                return books;
+            } if (books.genre.toLowerCase().indexOf(search.toLowerCase()) !== -1  ){
+                return books;
+            } if (books.top.toLowerCase().indexOf(search.toLowerCase()) !== -1  ){
+                return books;
+            }
+            console.log(books.bookTitle)
+        })
+
         return (
                     <div>
                         <h3><hr/>Book List<hr/></h3>
+                        
+                        <MDBCol md="4" alt="Search">
+                        <MDBInput 
+                            hint="Type author, title, or genre"
+                            value={this.state.search}
+                            onChange={this.onChange}              
+                        />
+                        </MDBCol>
 
-                        <Search/>
-                        <SortBar/>
+
+                        {/* <SortBar/> */}
                     
                          <div height='1px' className="col d-flex align-content-start flex-wrap" style={{margin: '35px'}}>
                                                 {
-                            products.map((product, index) => <ProductItem wishlists={this.props.wishlists} setWishlists={this.props.setWishlists} product={product} key={index}/>)
+                            filteredBooks.map((product, index) => <ProductItem value={this.state.search} onChange={this.onChange} wishlists={this.props.wishlists} setWishlists={this.props.setWishlists} product={product} key={index}/>)
                         }
 
                         </div>

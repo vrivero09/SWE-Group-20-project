@@ -48,6 +48,10 @@ const BookSchema = new Schema({
   publisher: {
     type: String
   },
+  
+  top: {
+    type: String
+  },
 
   bookCoverAddress: {
     type: String
