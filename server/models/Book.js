@@ -49,7 +49,7 @@ const BookSchema = new Schema({
     type: String
   },
   
-  top: {
+  topSell: {
     type: String
   },
 
