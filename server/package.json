@@ -18,7 +18,7 @@
     "eslint-plugin-flowtype": "^3.13.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.4.0",
-    "mongoose": "^5.8.11"
+    "mongoose": "^5.10.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
