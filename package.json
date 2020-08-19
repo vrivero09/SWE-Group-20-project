@@ -2,8 +2,10 @@
   "name": "swe-group-20-project",
   "version": "1.0.0",
   "description": "deploying to heroku",
-  "main": "index.js",
-  "scripts": {
+  "main": "client/app.js",
+  "engines": {
+    "node": "14.x"
+  },  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
