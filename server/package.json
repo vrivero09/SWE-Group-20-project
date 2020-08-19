@@ -1,13 +1,11 @@
 {
   "name": "project",
   "version": "1.0.0",
-  "description": "Boilerplate react and express",
-  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "cd ../ && cd client && npm start && cd -",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Group project",

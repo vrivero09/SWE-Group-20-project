@@ -2,16 +2,9 @@
   "name": "swe-group-20-project",
   "version": "1.0.0",
   "description": "deploying to heroku",
-  "main": "client/app.js",
-  "engines": {
-    "node": "14.x"
-  },
+  "main": "index.js",
   "scripts": {
-    "start": "node server/server.js",
-    "server": "nodemon server/server.js",
-    "client": "npm start --prefix client",
-    "heroku-postbuild": "cd client && npm install && npm run build",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
