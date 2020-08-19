@@ -2,7 +2,10 @@
   "name": "swe-group-20-project",
   "version": "1.0.0",
   "description": "deploying to heroku",
-  "main": "index.js",
+  "main": "client/app.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "node server/server.js",
     "server": "nodemon server/server.js",
