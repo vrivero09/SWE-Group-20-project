@@ -2,7 +2,7 @@
   "name": "swe-group-20-project",
   "version": "1.0.0",
   "description": "Deploying to Heroku",
-  "main": "client/app.js",
+  "main": "client/src/app.js",
   "engines": {
     "node": "14.x"
   },
