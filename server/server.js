@@ -9,7 +9,7 @@ const middleware = require('./middleware');
 const ObjectID = require('mongodb').ObjectID;
 const Book = require("./models/Book");
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(cors());
 app.use(
