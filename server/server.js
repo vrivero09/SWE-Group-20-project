@@ -68,7 +68,7 @@ mongoose
 const connection = mongoose.connection;
 
 connection.once("open", function() {
-  console.log("MongoDB database conncetion established successfully");
+  console.log("MongoDB database connection established successfully");
 });
 
 //these two lines means that your book routes that are defined in /routes/Books.js can be used
@@ -97,7 +97,7 @@ if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
   //app.use(express.static('client/build'));
 
-  app.use('*', express.static(path.join(__dirname, "client", "build")))
+  app.use('*', express.static(path.join(__dirname, 'client/build')))
 
   //Express serve up index.html file if it doesn't recognize route
   app.get('/*', (req, res) => {
