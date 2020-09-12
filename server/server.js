@@ -64,7 +64,7 @@ const mongoURI = 'mongodb+srv://admin:admin123@cluster0-ywzdx.mongodb.net/test?r
 // const mongoURI = "mongodb://127.0.0.1:27017/test";
 
 mongoose
-  .connect(process.env.mongoURI, { useUnifiedTopology: true, useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI || mongoURI, { useUnifiedTopology: true, useNewUrlParser: true })
   .catch(err => console.log(err));
 
 const connection = mongoose.connection;
