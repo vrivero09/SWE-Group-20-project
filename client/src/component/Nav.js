@@ -15,7 +15,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
-import { Redirect, NavLink as RRNavLink} from 'react-router-dom'
+import { Redirect} from 'react-router-dom'
 //import {  BrowserRouter as Link } from 'react-router-dom';
 //import { isAuthenticated } from './shoppingCart/repository';
 
@@ -75,28 +75,28 @@ class Navigation extends Component{
 
      //if logged out and on landing page already, dont show the navigation
      if(!this.signedIn){
-       return null;
+      return <Redirect to='/' />
      }
 
     return (
       
       <div>
         <Navbar className = "navbar navbar-dark bg-dark"color="dark" light expand="md">
-          <NavbarBrand color="#000000" tag = {RRNavLink} exact to="/Home" activeClassName="active">Geek Text</NavbarBrand>
+          <NavbarBrand color="#000000" href="/Home">Geek Text</NavbarBrand>
           <NavbarToggler onClick={()=>this.onToggle()} />
           <Collapse isOpen={this.state.toggle} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink tag = {RRNavLink} exact to="/Books" activeClassName="active"><b>Books</b></NavLink>
+                <NavLink href ="/Books"><b>Books</b></NavLink>
               </NavItem>
             </Nav>
             
             <NavbarText className="test">
-              <NavLink tag = {RRNavLink} exact to="/Cart" activeClassName="active"><MaterialIcon icon="shopping_cart" size={25} />
+              <NavLink href ="/Cart"><MaterialIcon icon="shopping_cart" size={25} />
               </NavLink>
             </NavbarText>
             <NavbarText>
-              <NavLink tag = {RRNavLink} exact to="/Wishlist" activeClassName="active"><MaterialIcon icon="assignment" size={25} /><Badge>{wishlistItemCount}</Badge></NavLink>
+              <NavLink href ="/Wishlist"><MaterialIcon icon="assignment" size={25} /><Badge>{wishlistItemCount}</Badge></NavLink>
             </NavbarText>
             <Nav navbar>
               <UncontrolledDropdown nav inNavbar>
@@ -104,7 +104,7 @@ class Navigation extends Component{
                   {this.user_id}
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem tag = {RRNavLink} exact to="/Profile" activeClassName="active">
+                  <DropdownItem href="/Profile">
                     Profile
                   </DropdownItem>
                   <DropdownItem divider />
