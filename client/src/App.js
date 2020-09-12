@@ -64,26 +64,28 @@ class App extends Component{
     <BrowserRouter>
     <div className="App">
       <Navigation logOut={this.logOut} isAuth={this.state.isAuthenticated} wishlists={this.state.wishlists}/>
+      <Switch>
         <Route exact path ='/' render={(props) => <Landing {...props} logIn={this.logIn} isAuth={this.state.isAuthenticated} />}/>
-
-      <Route path ='/Home' component={Home} />
-      
-      <Route path ='/bookDetails/:bookId' render={props => <Details {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists}/>} />
+        <Route path ='/Home' component={Home} />
+        <Route path ='/bookDetails/:bookId' render={props => <Details {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists}/>} />
+      </Switch>
 
       <div className="container">
         <br/>
+      <Switch>
         <Route exact path="/Books" render={props => <Books {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists}/>} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
-
+      </Switch>
+      
       </div>
-
-
-      <Route path ='/Wishlist' render={props => <Wishlist {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists} />} />
-      <Route path ='/Ratings' component={Form} />
-      <Route path ='/Profile' component={Profile} />
-      {/* <Route path ='/bookDetails' component={Books} /> */}
-      <Route path ='/authorBooks/:authorName' component={authorBooks} />
+        <Switch>
+          <Route path ='/Wishlist' render={props => <Wishlist {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists} />} />
+          <Route path ='/Ratings' component={Form} />
+          <Route path ='/Profile' component={Profile} />
+          {/* <Route path ='/bookDetails' component={Books} /> */}
+          <Route path ='/authorBooks/:authorName' component={authorBooks} />
+        </Switch>
     </div>
     </BrowserRouter>
 
