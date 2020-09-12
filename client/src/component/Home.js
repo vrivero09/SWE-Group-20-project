@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Jumbotron, Button } from 'reactstrap';
 import styles from './Home.css';
+import { RRNavLink } from 'react-router-dom'
 
 
 class Home extends Component {
@@ -16,7 +17,7 @@ class Home extends Component {
         <hr className="my-2" />
         <p style={{color:'white'}}><b>Every visitor is more than welcome to shop around as guest. Check out our sign up page for more info!</b></p>
         <p className="lead">
-          <Button href="/Books"color="primary"> <b>Start shopping! </b></Button>
+          <Button tag = {RRNavLink} exact to="/Books" activeClassName="active"> <b>Start shopping! </b></Button>
         </p>
       </Jumbotron>
     </div>

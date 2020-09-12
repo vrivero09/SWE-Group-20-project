@@ -82,7 +82,7 @@ class Navigation extends Component{
       
       <div>
         <Navbar className = "navbar navbar-dark bg-dark"color="dark" light expand="md">
-          <NavbarBrand color="#000000" href="/Home">Geek Text</NavbarBrand>
+          <NavbarBrand color="#000000" tag = {RRNavLink} exact to="/Home" activeClassName="active">Geek Text</NavbarBrand>
           <NavbarToggler onClick={()=>this.onToggle()} />
           <Collapse isOpen={this.state.toggle} navbar>
             <Nav className="mr-auto" navbar>
