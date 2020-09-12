@@ -18,6 +18,8 @@ app.use(
   })
 );
 
+app.use('/', server);
+
 app.get('/api/products', async (req, res) => {
   return res.json(await Book.find());
 });
@@ -62,7 +64,7 @@ const mongoURI = 'mongodb+srv://admin:admin123@cluster0-ywzdx.mongodb.net/test?r
 // const mongoURI = "mongodb://127.0.0.1:27017/test";
 
 mongoose
-  .connect(mongoURI, { useUnifiedTopology: true, useNewUrlParser: true })
+  .connect(process.env.mongoURI, { useUnifiedTopology: true, useNewUrlParser: true })
   .catch(err => console.log(err));
 
 const connection = mongoose.connection;
@@ -90,6 +92,7 @@ var CreditCards = require("./routes/CreditCards");
 app.use("/creditCards", CreditCards);
 
 var ShippingAddresses = require('./routes/ShippingAddrs');
+const { Server } = require("http");
 app.use("/shippingAddresses",ShippingAddresses);
 
 //heroku
@@ -99,8 +102,8 @@ if (process.env.NODE_ENV === 'production') {
 
 
   //Express serve up index.html file if it doesn't recognize route
-  app.get('/*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client/build/index.html'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
   });
 }
 
