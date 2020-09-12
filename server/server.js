@@ -18,7 +18,6 @@ app.use(
   })
 );
 
-app.use('/', server);
 
 app.get('/api/products', async (req, res) => {
   return res.json(await Book.find());
