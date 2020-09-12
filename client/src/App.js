@@ -64,9 +64,7 @@ class App extends Component{
     <BrowserRouter>
     <div className="App">
       <Navigation logOut={this.logOut} isAuth={this.state.isAuthenticated} wishlists={this.state.wishlists}/>
-      <Switch>
         <Route exact path ='/' render={(props) => <Landing {...props} logIn={this.logIn} isAuth={this.state.isAuthenticated} />}/>
-      </Switch>
 
       <Route path ='/Home' component={Home} />
       
