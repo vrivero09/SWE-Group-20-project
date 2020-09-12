@@ -15,7 +15,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
-import { Redirect} from 'react-router-dom'
+import { Redirect, NavLink as RRNavLink} from 'react-router-dom'
 //import {  BrowserRouter as Link } from 'react-router-dom';
 //import { isAuthenticated } from './shoppingCart/repository';
 
@@ -87,16 +87,16 @@ class Navigation extends Component{
           <Collapse isOpen={this.state.toggle} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink href ="/Books"><b>Books</b></NavLink>
+                <NavLink tag = {RRNavLink} exact to="/Books" activeClassName="active"><b>Books</b></NavLink>
               </NavItem>
             </Nav>
             
             <NavbarText className="test">
-              <NavLink href ="/Cart"><MaterialIcon icon="shopping_cart" size={25} />
+              <NavLink tag = {RRNavLink} exact to="/Cart" activeClassName="active"><MaterialIcon icon="shopping_cart" size={25} />
               </NavLink>
             </NavbarText>
             <NavbarText>
-              <NavLink href ="/Wishlist"><MaterialIcon icon="assignment" size={25} /><Badge>{wishlistItemCount}</Badge></NavLink>
+              <NavLink tag = {RRNavLink} exact to="/Wishlist" activeClassName="active"><MaterialIcon icon="assignment" size={25} /><Badge>{wishlistItemCount}</Badge></NavLink>
             </NavbarText>
             <Nav navbar>
               <UncontrolledDropdown nav inNavbar>
@@ -104,7 +104,7 @@ class Navigation extends Component{
                   {this.user_id}
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem href="/Profile">
+                  <DropdownItem tag = {RRNavLink} exact to="/Profile" activeClassName="active">
                     Profile
                   </DropdownItem>
                   <DropdownItem divider />
