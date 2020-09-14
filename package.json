@@ -27,12 +27,16 @@
     "webpack": "^4.44.1",
     "wepack-cli": "0.0.1-security"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
+  },
   "scripts": {
     "start": "node server/server.js",
     "server": "nodemon server/server.js",
     "client": "npm start --prefix client",
     "heroku-postbuild": "cd client && npm install && npm run build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
@@ -44,5 +48,5 @@
   "bugs": {
     "url": "https://github.com/vrivero09/SWE-Group-20-project/issues"
   },
-  "homepage": "https://github.com/vrivero09/SWE-Group-20-project#readme"
+  "homepage": "http://vrivero09.github.io/SWE-Group-20-project"
 }
