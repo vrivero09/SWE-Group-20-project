@@ -95,13 +95,10 @@ const { Server } = require("http");
 app.use("/shippingAddresses",ShippingAddresses);
 
 //heroku
-if (process.env.NODE_ENV === 'production') {
-  // Express will serve up production assets
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
   app.use(express.static('client/build'));
-
-  //Express serve up index.html file if it doesn't recognize route
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
   });
 }
 
