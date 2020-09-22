@@ -32,13 +32,12 @@
     "gh-pages": "^3.1.0"
   },
   "scripts": {
+    "client-install":"npm install --prefix client",
     "start": "node server/server.js",
     "server": "nodemon server/server.js",
     "client": "npm start --prefix client",
-    "heroku-postbuild": "cd client && npm install && npm run build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=FALSE npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
