@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import {
-    Form, FormGroup, Label, Input,Button, FormFeedback,
-    Col
-} from 'reactstrap';
-import { AvForm, AvField } from 'availity-reactstrap-validation';
+import { Button } from 'reactstrap';
+// import { AvForm, AvField } from 'availity-reactstrap-validation';
 import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 
@@ -80,7 +77,7 @@ class  LoginCredentialsForm extends Component {
         return(
             
             <div>
-                <AvForm onValidSubmit={this.onSubmit} id="loginForm" ref={c => (this.form = c)}> 
+                {/* <AvForm onValidSubmit={this.onSubmit} id="loginForm" ref={c => (this.form = c)}> 
                     <div style={{margin:'30px'}} className="text-left">
                         <FormGroup row>
                             <Label sm={2} for="username">Username</Label>
@@ -113,7 +110,7 @@ class  LoginCredentialsForm extends Component {
                             </Col>
                         </FormGroup>
                     </div> 
-                </AvForm>
+                </AvForm> */}
                 
             </div>
         );

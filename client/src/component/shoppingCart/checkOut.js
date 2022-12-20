@@ -1,6 +1,6 @@
 import React from 'react';
 import { isAuthenticated, getCartProducts } from './repository';
-import {  Redirect, Link } from 'react-router-dom';
+import {  Navigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default class Checkout extends React.Component {

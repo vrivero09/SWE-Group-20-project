@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Jumbotron, Button } from 'reactstrap';
+// import { Jumbotron, Button } from 'reactstrap'; // doesnt work anymore
+import { Button } from 'reactstrap'
 import styles from './Home.css';
 
 
@@ -8,7 +9,7 @@ class Home extends Component {
     return(
       <div className={styles.Component} >
 
-      <Jumbotron>
+      <div class="jumbotron">
         <h1 className="display-3"><b>Welcome to the Geek Text book store!</b></h1>
 
         <p className="lead" style={{color:'white'}}><b>We are dedicated our time to deliver a seamless service.</b></p>
@@ -18,7 +19,7 @@ class Home extends Component {
         <p className="lead">
           <Button href="/Books"color="primary"> <b>Start shopping! </b></Button>
         </p>
-      </Jumbotron>
+      </div>
     </div>
     
  

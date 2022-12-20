@@ -6,11 +6,11 @@ import { MDBInput, MDBCol } from "mdbreact";
 export default class ProductList extends React.Component {
     constructor(props) {
         super(props);
-        this.author = props.match.params.author;
-        this.genre = props.match.params.genre;
-        this.price = props.match.params.price;
-        this.bookTitle = props.match.params.bookTitle;
-        this.averageRating = props.match.params.averageRating;
+        // this.author = props.match.params.author;
+        // this.genre = props.match.params.genre;
+        // this.price = props.match.params.price;
+        // this.bookTitle = props.match.params.bookTitle;
+        // this.averageRating = props.match.params.averageRating;
 
         this.state = {
             products: [],
@@ -40,7 +40,6 @@ export default class ProductList extends React.Component {
             } if (books.genre.toLowerCase().indexOf(search.toLowerCase()) !== -1  ){
                 return books;
             } 
-            console.log(books.bookTitle)
         })
 
         return (

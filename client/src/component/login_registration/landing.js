@@ -4,14 +4,14 @@ import {
     Card, CardImg, CardImgOverlay, CardText, CardTitle,
     Row,Col
 } from 'reactstrap';
-import {Redirect} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import SignUp from './signUp';
 import Login from './login'
 import Hero from '../../photos/Hero.jpg'
 
 const Landing = (props) =>{
     if(props.isAuth){
-        return <Redirect to='/Home' />
+        return <Navigate to='/Home' />
     }
 
     return(

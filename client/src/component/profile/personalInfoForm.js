@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import {
-    Form, FormGroup, Label, Input,Button, FormFeedback,
-    Col
-} from 'reactstrap';
+import { Button } from 'reactstrap';
 import jwt_decode from 'jwt-decode';
 import axios from 'axios';
-import {AvForm,AvField} from 'availity-reactstrap-validation';
+// import {AvForm,AvField} from 'availity-reactstrap-validation';
 
 class  PersonalInfoForm extends Component {
     constructor(){
@@ -121,7 +118,7 @@ class  PersonalInfoForm extends Component {
 
         return(
             <div>
-                <AvForm onValidSubmit={this.onClickSave} id="personalForm" > 
+                {/* <AvForm onValidSubmit={this.onClickSave} id="personalForm" > 
                     <div style={{margin:'30px'}} className="text-left">
                         <FormGroup row style={{marginBottom:'0'}}>
                             <Label sm={2} for="firstName">First Name</Label>
@@ -189,7 +186,7 @@ class  PersonalInfoForm extends Component {
                             </Col>
                         </FormGroup>
                     </div>
-                </AvForm>
+                </AvForm> */}
             </div>
         );
     }

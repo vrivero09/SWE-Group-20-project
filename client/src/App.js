@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './component/Nav';
 import Navigation from './component/Nav';
-import {BrowserRouter, Route} from 'react-router-dom'
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import Home from './component/Home';
 import Wishlist from './component/Wishlist';
 import Landing from './component/login_registration/landing';
@@ -26,25 +26,25 @@ class App extends Component{
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
-    this.getWishlists();
-    this.setWishList = this.setWishList.bind(this);
+    // this.getWishlists();
+    // this.setWishList = this.setWishList.bind(this);
   }
 
-  getWishlists(){
-    axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
-    return axios.get('http://localhost:5000/wishlist',{
-    })
-        .then(res=>{
-          this.setState({wishlists:res.data.wishlists});
-        })
-        .catch(err=>{
-          console.log(err);
-        });
-  }
+  // getWishlists(){
+  //   axios.defaults.headers.common['Authorization'] = localStorage.getItem('userToken');
+  //   return axios.get('http://localhost:5000/wishlist',{
+  //   })
+  //       .then(res=>{
+  //         this.setState({wishlists:res.data.wishlists});
+  //       })
+  //       .catch(err=>{
+  //         console.log(err);
+  //       });
+  // }
 
-  setWishList(newWishLists) {
-    this.setState({wishlists: newWishLists});
-  }
+  // setWishList(newWishLists) {
+  //   this.setState({wishlists: newWishLists});
+  // }
 
   logIn(){
     console.log("login");
@@ -60,32 +60,35 @@ class App extends Component{
   render() {
    
   return (
-    
     <BrowserRouter>
-    <div className="App">
-      <Navigation logOut={this.logOut} isAuth={this.state.isAuthenticated} wishlists={this.state.wishlists}/>
-      <Route exact path ='/' render={(props) => <Landing {...props} logIn={this.logIn} isAuth={this.state.isAuthenticated} />}/>
+        <Routes>
+    <Route className="App">
+      {/* <Route logOut={this.logOut} isAuth={this.state.isAuthenticated} wishlists={this.state.wishlists}/> */}
+      {/* <Route exact path ='/' element={(props) => <Landing {...props} logIn={this.logIn} isAuth={this.state.isAuthenticated} />}/> */}
+      <Route exact path ='/' element={<Landing />}/>
 
-      <Route path ='/Home' component={Home} />
+
+      <Route path ='/Home' element={<Home />} />
       
-      <Route path ='/bookDetails/:bookId' render={props => <Details {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists}/>} />
+      {/* <Route path ='/bookDetails/:bookId' element={props => <Details {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists}/>} /> */}
 
-      <div className="container">
-        <br/>
-        <Route exact path="/Books" render={props => <Books {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists}/>} />
-        <Route exact path="/cart" component={Cart} />
-        <Route exact path="/checkout" component={Checkout} />
+      <Route className="container">
+        <Route exact path="/Books" element={<Books />} />
+        <Route exact path="/cart" element={<Cart />} />
+        <Route exact path="/checkout" element={<Checkout />} />
 
-      </div>
+      </Route>
 
 
-      <Route path ='/Wishlist' render={props => <Wishlist {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists} />} />
-      <Route path ='/Ratings' component={Form} />
-      <Route path ='/Profile' component={Profile} />
-      {/* <Route path ='/bookDetails' component={Books} /> */}
-      <Route path ='/authorBooks/:authorName' component={authorBooks} />
-    </div>
+      {/* <Routes path ='/Wishlist' render={props => <Wishlist {...props} setWishlists={this.setWishList} wishlists={this.state.wishlists} />} /> */}
+      <Route path ='/Ratings' element={<Form />} />
+      <Route path ='/Profile' element={<Profile />} />
+      <Route path ='/bookDetails' element={<Books />} />
+      <Route path ='/authorBooks/:authorName' element={<authorBooks />} />
+    </Route>
+    </Routes>
     </BrowserRouter>
+
 
   
   );

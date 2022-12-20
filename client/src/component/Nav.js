@@ -15,7 +15,8 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
-import { Redirect} from 'react-router-dom'
+import { Navigate} from 'react-router-dom' 
+// import { Redirect} from 'react-router-dom' //doesnt work anymore
 //import {  BrowserRouter as Link } from 'react-router-dom';
 //import { isAuthenticated } from './shoppingCart/repository';
 
@@ -70,7 +71,7 @@ class Navigation extends Component{
     //if signed out
      if(!this.signedIn && this.toLanding === true){
        this.toLanding = false;
-       return <Redirect to='/' />
+       return <Navigate to='/' />
      }
 
      //if logged out and on landing page already, dont show the navigation

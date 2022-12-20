@@ -4,7 +4,7 @@ import {
     Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 import axios from 'axios';
-import {Redirect} from 'react-router-dom'
+import {Navigate} from 'react-router-dom'
 
 class  Login extends Component {
     constructor(){
@@ -128,7 +128,7 @@ class  Login extends Component {
 
     render(){
         if(this.state.toHome === true){
-            return <Redirect to='/Home' />
+            return <Navigate to='/Home' />
         }
         return(
             <div>

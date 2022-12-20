@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {
-    Form, FormGroup, Label, Input,Button, FormFeedback,
-    Col, Card, Row
+    Button, Card
 } from 'reactstrap';
-import jwt_decode from 'jwt-decode';
+// import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 import MaterialIcon from 'react-google-material-icons';
-import {AvForm,AvField} from 'availity-reactstrap-validation';
+// import {AvForm,AvField} from 'availity-reactstrap-validation';
 
 
 class CreditCards extends Component{
@@ -228,7 +227,7 @@ class  CreditCardForm extends Component {
         return(
             <div>
                 <Card style={{width:'600px'}}>
-                    <AvForm onValidSubmit={this.onSubmit} ref={c => (this.form = c)}> 
+                    {/* <AvForm onValidSubmit={this.onSubmit} ref={c => (this.form = c)}> 
                         <div style={{margin:'30px'}} className="text-left">
                             <FormGroup>
                                 <Label for="cardHolderName">Card Holder Name</Label>
@@ -295,7 +294,7 @@ class  CreditCardForm extends Component {
                                 </Col>
                             </FormGroup>
                         </div>
-                    </AvForm>
+                    </AvForm> */}
                 </Card>
                 
             </div>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import jwt_decode from 'jwt-decode';
+// import jwt_decode from 'jwt-decode';
 import Divider from '@material-ui/core/Divider';
 import LoginCrendentialsForm from "./loginCredentials";
 import PersonalInfoForm from './personalInfoForm';
