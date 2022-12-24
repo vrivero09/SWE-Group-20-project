@@ -65,7 +65,6 @@ class App extends Component {
 
       <><NavbarComponent />
       <BrowserRouter>
-        <Routes>
           <Route className="App">
             {/* <Route logOut={this.logOut} isAuth={this.state.isAuthenticated} wishlists={this.state.wishlists}/> */}
             {/* <Route exact path ='/' element={(props) => <Landing {...props} logIn={this.logIn} isAuth={this.state.isAuthenticated} />}/> */}
@@ -92,7 +91,6 @@ class App extends Component {
             <Route path='/bookDetails' element={<Books />} />
             <Route path='/authorBooks/:authorName' element={<authorBooks />} />
           </Route>
-        </Routes>
       </BrowserRouter></>
 
 
