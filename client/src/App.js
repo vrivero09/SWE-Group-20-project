@@ -15,6 +15,7 @@ import Cart from './component/shoppingCart/Cart';
 import Books from './component/bookList/bookList';
 import Checkout from './component/shoppingCart/checkOut'
 import axios from "axios";
+import { Switch } from '@material-ui/core';
 
 
 class App extends Component {
@@ -64,6 +65,7 @@ class App extends Component {
 
       <><NavbarComponent />
       <BrowserRouter>
+      <Switch>
         <Routes>
           <Route className="App">
             {/* <Route logOut={this.logOut} isAuth={this.state.isAuthenticated} wishlists={this.state.wishlists}/> */}
@@ -92,6 +94,7 @@ class App extends Component {
             <Route path='/authorBooks/:authorName' element={<authorBooks />} />
           </Route>
         </Routes>
+        </Switch>
       </BrowserRouter></>
 
 
