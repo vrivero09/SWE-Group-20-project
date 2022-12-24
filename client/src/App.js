@@ -65,7 +65,6 @@ class App extends Component {
 
       <><NavbarComponent />
       <BrowserRouter>
-      <Switch>
         <Routes>
           <Route className="App">
             {/* <Route logOut={this.logOut} isAuth={this.state.isAuthenticated} wishlists={this.state.wishlists}/> */}
@@ -94,7 +93,6 @@ class App extends Component {
             <Route path='/authorBooks/:authorName' element={<authorBooks />} />
           </Route>
         </Routes>
-        </Switch>
       </BrowserRouter></>
 
 
