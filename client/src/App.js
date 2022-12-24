@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import './component/Nav';
-import Navigation from './component/Nav';
+import NavbarComponent from './component/Nav';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './component/Home';
 import Wishlist from './component/Wishlist';
@@ -60,7 +60,9 @@ class App extends Component {
 
   render() {
 
-    return (
+    return  (
+
+      <><NavbarComponent />
       <BrowserRouter>
         <Routes>
           <Route className="App">
@@ -90,7 +92,7 @@ class App extends Component {
             <Route path='/authorBooks/:authorName' element={<authorBooks />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter></>
 
 
 

@@ -15,12 +15,12 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
-import { Navigate} from 'react-router-dom' 
+// import { Navigate} from 'react-router-dom' 
 // import { Redirect} from 'react-router-dom' //doesnt work anymore
 //import {  BrowserRouter as Link } from 'react-router-dom';
 //import { isAuthenticated } from './shoppingCart/repository';
 
-class Navigation extends Component{
+class NavbarComponent extends Component{
   constructor(props){
     super(props);
     this.state = {
@@ -31,13 +31,13 @@ class Navigation extends Component{
     this.user_id = "No user";
   }
 
-  componentDidMount(){
-    const token = localStorage.getItem("userToken");
-    if(token){
-        const decoded = jwt_decode(token);
-        this.user_id = decoded._id;
-    } 
-  }
+  // componentDidMount(){
+  //   const token = localStorage.getItem("userToken");
+  //   if(token){
+  //       const decoded = jwt_decode(token);
+  //       this.user_id = decoded._id;
+  //   } 
+  // }
   onToggle(){
     const opposite = !this.state.toggle;
     this.setState({toggle:opposite});
@@ -52,11 +52,11 @@ class Navigation extends Component{
 
   render(){
     //const auth = isAuthenticated();
-    let wishlistItemCount = 0;
-    console.log(this.props.wishlists);
-    this.props.wishlists.forEach(wishlist => {
-      wishlistItemCount += wishlist.books.length;
-    });
+    // let wishlistItemCount = 0;
+    // console.log(this.props.wishlists);
+    // this.props.wishlists.forEach(wishlist => {
+    //   wishlistItemCount += wishlist.books.length;
+    // });
     //check if signed in
     // TODO: Set up new sign in 
     // if(this.props.isAuth){
@@ -98,7 +98,7 @@ class Navigation extends Component{
               </NavLink>
             </NavbarText>
             <NavbarText>
-              <NavLink href ="/Wishlist"><MaterialIcon icon="assignment" size={25} /><Badge>{wishlistItemCount}</Badge></NavLink>
+              <NavLink href ="/Wishlist"><MaterialIcon icon="assignment" size={25} /><Badge>1</Badge></NavLink>
             </NavbarText>
             <Nav navbar>
               <UncontrolledDropdown nav inNavbar>
@@ -123,4 +123,4 @@ class Navigation extends Component{
   }
 }
 
-export default Navigation;
+export default NavbarComponent;

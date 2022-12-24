@@ -1,6 +1,6 @@
-.content{
+.content {
     position: fixed;
-    /* top: 0; */
+    /* top: 0%; */
     width: 100% !important;
     height: 100% !important;
     margin: 0 !important;
@@ -8,13 +8,22 @@
     padding-right: 40px; */
     background-image: url("https://i.pinimg.com/originals/67/18/22/671822c2f63dd5f65d8fd15c9710420b.jpg");
     background-size: cover;
-    }
+}
 
-.card-title{
+.card-title {
     padding-left: 40px;
     padding-right: 40px;
 }
 
-.Component{
+.text-center {
+    top: 10%;
+    width: 50%;
+    margin-left: 350px;
+    margin-right: 350px;
+
+
+}
+
+.Component {
     width: 100%;
 }
