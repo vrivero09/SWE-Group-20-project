@@ -58,32 +58,33 @@ class Navigation extends Component{
       wishlistItemCount += wishlist.books.length;
     });
     //check if signed in
-    if(this.props.isAuth){
-      this.signedIn = true;
-      const token = localStorage.getItem("userToken");
-      if(token){
-          const decoded = jwt_decode(token);
-          console.log(token);
-          this.user_id = decoded._id;
-      } 
-    }
+    // TODO: Set up new sign in 
+    // if(this.props.isAuth){
+    //   this.signedIn = true;
+    //   const token = localStorage.getItem("userToken");
+    //   if(token){
+    //       const decoded = jwt_decode(token);
+    //       console.log(token);
+    //       this.user_id = decoded._id;
+    //   } 
+    // }
 
     //if signed out
-     if(!this.signedIn && this.toLanding === true){
-       this.toLanding = false;
-       return <Navigate to='/' />
-     }
+    //  if(!this.signedIn && this.toLanding === true){
+    //    this.toLanding = false;
+    //    return <Navigate to='/' />
+    //  }
 
      //if logged out and on landing page already, dont show the navigation
-     if(!this.signedIn){
-       return null;
-     }
+    //  if(!this.signedIn){
+    //    return null;
+    //  }
 
     return (
       
       <div>
         <Navbar className = "navbar navbar-dark bg-dark"color="dark" light expand="md">
-          <NavbarBrand color="#000000" href="/Home">Geek Text</NavbarBrand>
+          <NavbarBrand color="#000000" href="/">Geek Text</NavbarBrand>
           <NavbarToggler onClick={()=>this.onToggle()} />
           <Collapse isOpen={this.state.toggle} navbar>
             <Nav className="mr-auto" navbar>

@@ -4,6 +4,8 @@ import {getProducts} from './repository';
 import { MDBInput, MDBCol } from "mdbreact";
 
 export default class ProductList extends React.Component {
+
+
     constructor(props) {
         super(props);
         // this.author = props.match.params.author;

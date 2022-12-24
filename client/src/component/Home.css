@@ -1,12 +1,20 @@
+.content{
+    position: fixed;
+    /* top: 0; */
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    /* padding-left: 40px;
+    padding-right: 40px; */
+    background-image: url("https://i.pinimg.com/originals/67/18/22/671822c2f63dd5f65d8fd15c9710420b.jpg");
+    background-size: cover;
+    }
 
-
-.jumbotron{
-
-background-image: url("https://i.pinimg.com/originals/67/18/22/671822c2f63dd5f65d8fd15c9710420b.jpg");
-background-size: cover;
-color: white;
-
+.card-title{
+    padding-left: 40px;
+    padding-right: 40px;
 }
+
 .Component{
-    background-color: black;
+    width: 100%;
 }
